@@ -67,6 +67,14 @@ All visual design (colours, type, layout, components, motion) comes from the `ui
 2. Approved source files are added here under `content-source/`, and `content/` is regenerated from them.
 3. Build, check at 390px and 1280px, push. Vercel deploys automatically.
 
+## Security
+
+- No secrets in the repo, ever. `.env*` is gitignored; v1 needs no keys at all.
+- Never render user input as HTML. Only reviewer-approved build-time content goes through `set:html`; anything from the browser (localStorage, URL, hash) is read as data and written with `textContent`.
+- Security headers live in `vercel.json`; keep them. The CSP allows inline scripts only by sha256 hash, so after changing an `is:inline` script, run `node scripts/check-security.mjs --hashes` and update `script-src`. `npm run check:security` fails on any mismatch, and `check:pages` enforces the CSP in the browser.
+- Before each release: `npm audit` (fix anything found), `npm run build`, `npm run check:security`.
+- Any future feature that adds login, a database or an API needs a security review before it's built.
+
 ## Working style for Claude in this repo
 
 - Be direct. Tell Vijay when he's wrong. One clear recommendation, not a menu.

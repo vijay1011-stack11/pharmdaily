@@ -2,6 +2,8 @@ node_modules/
 dist/
 .astro/
 .vercel/
+.env*
+!.env.example
 test-results/
 screenshots/
 .DS_Store

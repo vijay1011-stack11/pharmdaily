@@ -10,6 +10,7 @@ npm run content        # regenerate content/ from content-source/
 npm run dev            # local dev server
 npm run build          # static build into dist/
 npm run check:content  # every notes phrase is on the built page; card/MCQ counts match
+npm run check:security # CSP hashes match dist/, headers present, no source maps/source files/external loads
 npm run preview        # serve dist/ on :4321, then:
 npm run check:pages    # Playwright: 390px + 1280px, light + dark, overflow, tap targets, flashcard/MCQ flows
 ```
