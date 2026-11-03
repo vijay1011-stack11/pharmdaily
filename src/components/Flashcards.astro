@@ -86,7 +86,8 @@ const { cards, storeKey } = Astro.props;
       total.textContent = String(order.length);
       dots.forEach((d, i) => {
         d.hidden = !order.includes(i);
-        d.className = marks[ids[i]] ?? '';
+        const m = marks[ids[i]]; // from localStorage: use only known values
+        d.className = m === 'got' || m === 'again' ? m : '';
         if (!done && i === order[at]) d.classList.add('cur');
       });
       const got = ids.filter((id) => marks[id] === 'got').length;
