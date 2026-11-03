@@ -1,0 +1,22 @@
+---
+// Renders a topic's notes.html with its diagrams placed per src/lib/diagram-map.ts.
+import type { Segment } from '../lib/content';
+
+interface Props { segments: Segment[] }
+const { segments } = Astro.props;
+
+const modules = import.meta.glob('./diagrams/*.astro', { eager: true }) as Record<string, { default: unknown }>;
+const diagrams: Record<string, any> = {};
+for (const [path, mod] of Object.entries(modules)) diagrams[path.replace(/^.*\/(.*)\.astro$/, '$1')] = mod.default;
+
+for (const s of segments) {
+  if (s.kind === 'diagram' && !diagrams[s.name]) throw new Error(`No diagram component named ${s.name}`);
+}
+---
+<div class="notes">
+  {segments.map((s) => {
+    if (s.kind === 'html') return <Fragment set:html={s.html} />;
+    const D = diagrams[s.name];
+    return <D />;
+  })}
+</div>

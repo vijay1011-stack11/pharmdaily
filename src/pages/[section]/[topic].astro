@@ -1,0 +1,185 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import NotesBody from '../../components/NotesBody.astro';
+import Flashcards from '../../components/Flashcards.astro';
+import Mcq from '../../components/Mcq.astro';
+import { SECTIONS, isLive, sectionPath, topicPath, type Section, type Topic } from '../../lib/sections';
+import { getFlashcards, getMcqs, getNotes } from '../../lib/content';
+
+export function getStaticPaths() {
+  return SECTIONS.filter(isLive).flatMap((s) =>
+    s.topics.map((t) => ({ params: { section: `section-${s.n}`, topic: t.slug }, props: { s, t } })),
+  );
+}
+const { s, t } = Astro.props as { s: Section; t: Topic };
+const notes = getNotes(s.n, t.slug);
+const cards = getFlashcards(s.n, t.slug);
+const mcqs = getMcqs(s.n, t.slug);
+const idx = s.topics.indexOf(t);
+const next = s.topics[idx + 1];
+const storeKey = `pd:s${s.n}:${t.slug}`;
+---
+<BaseLayout title={`${t.title}: ${notes.hero.title}`} description={notes.hero.lede.replace(/<[^>]+>/g, '')}>
+  <script is:inline slot="head">
+    (function () {
+      var h = location.hash.slice(1);
+      document.documentElement.dataset.tab = h === 'flashcards' || h === 'mcqs' ? h : 'notes';
+    })();
+  </script>
+
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href="/">Home</a><span aria-hidden="true">/</span><a href={sectionPath(s)}>Section {s.n}</a><span aria-hidden="true">/</span><span aria-current="page">{t.short}</span>
+    </nav>
+    <nav class="switch" aria-label={`Section ${s.n} topics`}>
+      {s.topics.map((o) => (
+        <a class="press" href={topicPath(s, o)} aria-current={o === t ? 'page' : undefined}>{o.short}</a>
+      ))}
+    </nav>
+    <header class="topic-hero measure">
+      <p class="eyebrow">{notes.hero.eyebrow}</p>
+      <h1>{notes.hero.title}</h1>
+      <p class="lede" set:html={notes.hero.lede} />
+    </header>
+  </div>
+
+  <div class="tabbar">
+    <div class="wrap">
+      <div class="tabs" role="tablist" aria-label="Study mode">
+        <button role="tab" id="tab-notes" aria-controls="notes" data-tab="notes" class="press">Notes</button>
+        <button role="tab" id="tab-flashcards" aria-controls="flashcards" data-tab="flashcards" class="press">Flashcards <span class="n tabular">{cards.length}</span></button>
+        <button role="tab" id="tab-mcqs" aria-controls="mcqs" data-tab="mcqs" class="press">MCQs <span class="n tabular">{mcqs.length}</span></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <section id="notes" class="panel notes-layout" role="tabpanel" aria-labelledby="tab-notes" data-panel="notes">
+      <aside class="toc" aria-label="On this page">
+        <details class="toc-box" open>
+          <summary>On this page</summary>
+          <ol>
+            {notes.toc.map((h) => <li><a href={`#${h.id}`}>{h.text}</a></li>)}
+          </ol>
+        </details>
+      </aside>
+      <article class="measure">
+        <NotesBody segments={notes.segments} />
+        <div class="done">
+          <h2>Test yourself</h2>
+          <div class="done-btns">
+            <a class="btn primary press" href="#flashcards" data-goto="flashcards">{cards.length} flashcards</a>
+            <a class="btn press" href="#mcqs" data-goto="mcqs">{mcqs.length} MCQs</a>
+          </div>
+          {next && <p class="next">Next topic: <a href={topicPath(s, next)}>{next.title}</a></p>}
+        </div>
+      </article>
+    </section>
+
+    <section id="flashcards" class="panel measure" role="tabpanel" aria-labelledby="tab-flashcards" data-panel="flashcards">
+      <Flashcards cards={cards} storeKey={`${storeKey}:cards`} />
+    </section>
+
+    <section id="mcqs" class="panel measure" role="tabpanel" aria-labelledby="tab-mcqs" data-panel="mcqs">
+      <Mcq items={mcqs} storeKey={`${storeKey}:mcq`} />
+    </section>
+  </div>
+</BaseLayout>
+
+<script>
+  const root = document.documentElement;
+  const tabs = Array.from(document.querySelectorAll<HTMLButtonElement>('[role="tab"]'));
+  const bar = document.querySelector<HTMLElement>('.tabbar')!;
+  const MODES = ['notes', 'flashcards', 'mcqs'];
+
+  function show(mode: string, opts: { focus?: boolean; scroll?: boolean } = {}) {
+    root.dataset.tab = mode;
+    for (const t of tabs) {
+      const on = t.dataset.tab === mode;
+      t.setAttribute('aria-selected', String(on));
+      t.tabIndex = on ? 0 : -1;
+      if (on && opts.focus) t.focus();
+    }
+    if (opts.scroll) {
+      const top = bar.getBoundingClientRect().top + window.scrollY;
+      if (window.scrollY > top) window.scrollTo(0, top);
+    }
+  }
+  function set(mode: string, opts: { focus?: boolean } = {}) {
+    history.replaceState(null, '', mode === 'notes' ? location.pathname : `#${mode}`);
+    show(mode, { ...opts, scroll: true });
+  }
+
+  tabs.forEach((t, i) => {
+    t.addEventListener('click', () => set(t.dataset.tab!));
+    t.addEventListener('keydown', (e) => {
+      const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+      if (!d) return;
+      e.preventDefault();
+      set(tabs[(i + d + tabs.length) % tabs.length].dataset.tab!, { focus: true });
+    });
+  });
+  document.querySelectorAll<HTMLAnchorElement>('[data-goto]').forEach((a) =>
+    a.addEventListener('click', (e) => { e.preventDefault(); set(a.dataset.goto!); }),
+  );
+  // In-page heading links (#absorption etc.) belong to the notes tab.
+  window.addEventListener('hashchange', () => {
+    const h = location.hash.slice(1);
+    show(MODES.includes(h) && h !== 'notes' ? h : 'notes');
+  });
+  show(root.dataset.tab || 'notes');
+
+  // On phones the contents list starts closed so the notes come first.
+  const box = document.querySelector<HTMLDetailsElement>('.toc-box');
+  if (box && !window.matchMedia('(min-width: 1024px)').matches) box.open = false;
+</script>
+
+<style>
+  .crumbs { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding-top: 8px; font-size: 0.86rem; color: var(--muted); }
+  .crumbs a { color: var(--muted); display: inline-flex; min-height: 44px; align-items: center; }
+  .switch { display: flex; gap: 6px; margin-top: 2px; }
+  .switch a { flex: 1 1 0; max-width: 150px; display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 12px; border-radius: 999px; border: 1px solid var(--line-strong); color: var(--fg); text-decoration: none; font-size: 0.9rem; font-weight: 600; background: var(--surface); }
+  .switch a[aria-current='page'] { background: var(--heading); border-color: var(--heading); color: var(--bg); }
+  .topic-hero { padding: 22px 0 18px; }
+  .topic-hero h1 { font-size: clamp(1.9rem, 7vw, 2.7rem); font-weight: 800; letter-spacing: -0.035em; line-height: 1.08; margin-top: 8px; }
+  .lede { color: var(--muted); font-size: 1.04rem; margin-top: 10px; }
+
+  .tabbar { position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); padding: 8px 0; padding-top: max(8px, env(safe-area-inset-top)); }
+  .tabs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; padding: 4px; border-radius: 999px; background: var(--surface-2); max-width: 520px; }
+  .tabs button { min-height: 44px; border: 0; border-radius: 999px; background: transparent; color: var(--muted); font-weight: 650; font-size: 0.92rem; cursor: pointer; white-space: nowrap; user-select: none; -webkit-user-select: none; }
+  .tabs button[aria-selected='true'] { background: var(--surface); color: var(--heading); box-shadow: 0 1px 2px rgb(0 0 0 / 0.12), 0 0 0 1px var(--line); }
+  .tabs .n { font-size: 0.78rem; color: var(--faint); margin-left: 2px; }
+
+  /* Which panel shows is decided by html[data-tab], set before first paint. */
+  :global(html.js) .panel { display: none; }
+  :global(html.js[data-tab='notes']) #notes,
+  :global(html.js[data-tab='flashcards']) #flashcards,
+  :global(html.js[data-tab='mcqs']) #mcqs { display: block; }
+  :global(html.js[data-tab='notes']) #notes.notes-layout { display: grid; }
+  .panel { padding-top: 20px; }
+
+  .notes-layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0 48px; }
+  @media (min-width: 1024px) { .notes-layout { grid-template-columns: 220px minmax(0, 720px); } }
+  .toc { min-width: 0; }
+  @media (min-width: 1024px) { .toc-box { position: sticky; top: 84px; } }
+  .toc-box { border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); margin-bottom: 8px; }
+  @media (min-width: 1024px) { .toc-box { border: 0; background: none; } }
+  .toc summary { list-style: none; }
+  .toc summary::-webkit-details-marker { display: none; }
+  .toc summary::after { content: ''; width: 8px; height: 8px; margin-left: auto; border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted); transform: rotate(45deg) translateY(-2px); }
+  .toc details[open] summary::after { transform: rotate(-135deg) translateY(-2px); }
+  @media (min-width: 1024px) { .toc summary::after { display: none; } }
+  .toc summary { min-height: 48px; display: flex; align-items: center; padding: 0 16px; font-weight: 650; font-size: 0.92rem; cursor: pointer; color: var(--heading); }
+  @media (min-width: 1024px) { .toc summary { padding: 0; min-height: 32px; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); pointer-events: none; list-style: none; } .toc summary::-webkit-details-marker { display: none; } }
+  .toc ol { list-style: none; margin: 0; padding: 0 8px 8px; }
+  @media (min-width: 1024px) { .toc ol { padding: 0; border-left: 1px solid var(--line); } }
+  .toc a { display: flex; align-items: center; min-height: 44px; padding: 4px 8px; color: var(--fg); text-decoration: none; font-size: 0.92rem; line-height: 1.3; border-radius: 8px; }
+  @media (min-width: 1024px) { .toc a { min-height: 34px; padding: 4px 12px; font-size: 0.88rem; color: var(--muted); } }
+  @media (hover: hover) and (pointer: fine) { .toc a:hover { color: var(--primary-ink); } }
+
+  .done { margin-top: 48px; padding: 20px; border-radius: var(--radius); background: var(--primary-soft); border: 1px solid var(--primary-line); }
+  .done h2 { font-size: 1.2rem; }
+  .done-btns { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+  .next { margin: 16px 0 0; font-size: 0.95rem; }
+  .next a { font-weight: 650; display: inline-flex; min-height: 44px; align-items: center; }
+</style>

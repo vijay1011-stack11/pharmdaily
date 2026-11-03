@@ -1,0 +1,176 @@
+---
+import type { Flashcard } from '../lib/content';
+interface Props { cards: Flashcard[]; storeKey: string }
+const { cards, storeKey } = Astro.props;
+---
+<div class="fc" data-flashcards data-key={storeKey}>
+  <div class="fc-top">
+    <h2 class="fc-h">Flashcards</h2>
+    <p class="fc-count tabular" aria-live="polite"><span data-pos>1</span> / <span data-total>{cards.length}</span></p>
+  </div>
+  <ol class="fc-dots" aria-hidden="true">
+    {cards.map(() => <li />)}
+  </ol>
+  <p class="fc-tally tabular" data-tally></p>
+
+  <ol class="fc-deck">
+    {cards.map((c, i) => (
+      <li class="fc-card" data-card data-i={i}>
+        <button type="button" class="fc-face press" aria-expanded="false">
+          <span class="lab">Question</span>
+          <span class="q">{c.q}</span>
+          <span class="ans">
+            <span class="lab">Answer</span>
+            <span class="a">{c.a}</span>
+          </span>
+          <span class="hint" aria-hidden="true">Tap to reveal</span>
+        </button>
+      </li>
+    ))}
+  </ol>
+
+  <div class="fc-end" data-end hidden>
+    <h3>Round done</h3>
+    <p class="tabular" data-summary></p>
+    <div class="fc-end-btns">
+      <button type="button" class="btn primary press" data-act="again-only">Practise the "Again" cards</button>
+      <button type="button" class="btn press" data-act="restart">Start over</button>
+    </div>
+  </div>
+
+  <div class="fc-btns" data-controls>
+    <button type="button" class="btn press" data-act="again">Again</button>
+    <button type="button" class="btn primary press" data-act="got">Got it</button>
+  </div>
+  <div class="fc-more">
+    <button type="button" class="btn quiet press" data-act="prev">Previous</button>
+    <button type="button" class="btn quiet press" data-act="shuffle">Shuffle</button>
+    <button type="button" class="btn quiet press" data-act="reset">Clear progress</button>
+  </div>
+  <noscript><p class="fc-noscript">Flashcards need JavaScript. All questions and answers are listed above.</p></noscript>
+</div>
+
+<script>
+  import { load, save, idOf } from '../scripts/store';
+
+  type Mark = 'got' | 'again';
+  for (const root of document.querySelectorAll<HTMLElement>('[data-flashcards]')) {
+    const key = root.dataset.key!;
+    const cards = Array.from(root.querySelectorAll<HTMLElement>('[data-card]'));
+    const ids = cards.map((c) => idOf(c.querySelector('.q')!.textContent!));
+    const dots = Array.from(root.querySelectorAll<HTMLElement>('.fc-dots li'));
+    const pos = root.querySelector('[data-pos]')!;
+    const total = root.querySelector('[data-total]')!;
+    const tally = root.querySelector('[data-tally]')!;
+    const end = root.querySelector<HTMLElement>('[data-end]')!;
+    const controls = root.querySelector<HTMLElement>('[data-controls]')!;
+    let marks: Record<string, Mark> = load(key, {});
+    let order = cards.map((_, i) => i);
+    let at = 0;
+
+    root.classList.add('ready');
+
+    function render() {
+      const done = at >= order.length;
+      end.hidden = !done;
+      controls.hidden = done;
+      cards.forEach((c, i) => {
+        const on = !done && i === order[at];
+        c.classList.toggle('on', on);
+        if (!on) {
+          c.classList.remove('open');
+          c.querySelector('button')!.setAttribute('aria-expanded', 'false');
+        }
+      });
+      pos.textContent = String(Math.min(at + 1, order.length));
+      total.textContent = String(order.length);
+      dots.forEach((d, i) => {
+        d.hidden = !order.includes(i);
+        d.className = marks[ids[i]] ?? '';
+        if (!done && i === order[at]) d.classList.add('cur');
+      });
+      const got = ids.filter((id) => marks[id] === 'got').length;
+      const again = ids.filter((id) => marks[id] === 'again').length;
+      tally.textContent = got || again ? `${got} got it · ${again} again · ${cards.length - got - again} not tried` : '';
+      if (done) {
+        root.querySelector('[data-summary]')!.textContent = `You marked ${got} of ${cards.length} as "Got it".`;
+        root.querySelector<HTMLButtonElement>('[data-act="again-only"]')!.hidden = again === 0;
+      }
+    }
+
+    function mark(m: Mark) {
+      marks[ids[order[at]]] = m;
+      save(key, marks);
+      at++;
+      render();
+    }
+
+    root.addEventListener('click', (e) => {
+      const target = e.target as HTMLElement;
+      const face = target.closest<HTMLButtonElement>('.fc-face');
+      if (face) {
+        const card = face.closest('[data-card]')!;
+        const open = card.classList.toggle('open');
+        face.setAttribute('aria-expanded', String(open));
+        return;
+      }
+      const act = target.closest<HTMLElement>('[data-act]')?.dataset.act;
+      if (!act) return;
+      if (act === 'got' || act === 'again') mark(act);
+      if (act === 'prev') at = Math.max(0, at - 1);
+      if (act === 'shuffle') {
+        for (let i = order.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [order[i], order[j]] = [order[j], order[i]];
+        }
+        at = 0;
+      }
+      if (act === 'restart') { order = cards.map((_, i) => i); at = 0; }
+      if (act === 'again-only') { order = order.filter((i) => marks[ids[i]] === 'again'); if (!order.length) order = cards.map((_, i) => i); at = 0; }
+      if (act === 'reset') { marks = {}; save(key, marks); order = cards.map((_, i) => i); at = 0; }
+      render();
+    });
+
+    render();
+  }
+</script>
+
+<style>
+  .fc-top { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+  .fc-h { font-size: 1.35rem; font-weight: 750; }
+  .fc-count { margin: 0; font-weight: 700; color: var(--primary-ink); }
+  .fc-dots { list-style: none; display: flex; gap: 3px; margin: 12px 0 0; padding: 0; }
+  .fc-dots li { flex: 1; height: 5px; border-radius: 3px; background: var(--line-strong); }
+  .fc-dots li.got { background: var(--good); }
+  .fc-dots li.again { background: var(--bad); }
+  .fc-dots li.cur { background: var(--primary); }
+  .fc-tally { margin: 8px 0 0; min-height: 1.4em; font-size: 0.85rem; color: var(--muted); }
+
+  .fc-deck { list-style: none; margin: 12px 0 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+  .fc-face {
+    width: 100%; min-height: 300px; display: flex; flex-direction: column; gap: 10px; text-align: left;
+    padding: 22px 20px; border-radius: 20px; border: 1px solid var(--line-strong); background: var(--surface);
+    cursor: pointer; user-select: none; -webkit-user-select: none;
+  }
+  .lab { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); }
+  .q { font-size: 1.4rem; line-height: 1.3; font-weight: 700; letter-spacing: -0.015em; color: var(--heading); text-wrap: pretty; }
+  .ans { display: flex; flex-direction: column; gap: 6px; margin-top: 8px; padding-top: 14px; border-top: 1px dashed var(--line-strong); }
+  .a { font-size: 1.12rem; line-height: 1.5; font-weight: 550; color: var(--fg); }
+  .hint { margin-top: auto; font-size: 0.85rem; color: var(--primary-ink); font-weight: 600; }
+
+  /* With JS: one card at a time, answer hidden until tapped. Without JS: a plain Q&A list. */
+  .fc.ready .fc-card:not(.on) { display: none; }
+  .fc.ready .fc-card:not(.open) .ans { display: none; }
+  .fc.ready .fc-card.open .hint { display: none; }
+  .fc.ready .fc-card.open .fc-face { border-color: var(--primary-line); background: var(--primary-soft); }
+  .fc:not(.ready) .hint, .fc:not(.ready) .fc-btns, .fc:not(.ready) .fc-more, .fc:not(.ready) .fc-dots, .fc:not(.ready) .fc-count { display: none; }
+  .fc:not(.ready) .fc-face { min-height: 0; cursor: default; }
+
+  .fc-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
+  .fc-btns .btn { min-height: 52px; font-size: 1rem; }
+  .fc-more { display: flex; justify-content: space-between; flex-wrap: wrap; margin-top: 6px; }
+  .fc-end { margin-top: 12px; padding: 22px 20px; border-radius: 20px; background: var(--good-soft); border: 1px solid color-mix(in srgb, var(--good) 40%, transparent); }
+  .fc-end h3 { font-size: 1.2rem; }
+  .fc-end-btns { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+  .fc-noscript { color: var(--muted); font-size: 0.9rem; }
+</style>
