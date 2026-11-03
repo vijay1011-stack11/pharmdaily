@@ -7,7 +7,13 @@
 // a flashcard reveal and an MCQ answer.
 
 import { chromium } from 'playwright';
-import { mkdirSync } from 'node:fs';
+import { mkdirSync, readFileSync } from 'node:fs';
+
+// `astro preview` doesn't apply vercel.json, so add its headers to every response here.
+// That way the Content-Security-Policy is enforced and any violation fails the run.
+const VERCEL_HEADERS = Object.fromEntries(
+  JSON.parse(readFileSync('vercel.json', 'utf8')).headers.find((h) => h.source === '/(.*)').headers.map((h) => [h.key, h.value]),
+);
 
 const BASE = process.env.BASE ?? 'http://localhost:4321';
 const PAGES = ['/', '/section-1/', '/section-1/routes-of-administration/', '/section-1/pharmacokinetics/', '/section-1/pharmacodynamics/', '/about/', '/privacy/', '/404'];
@@ -21,14 +27,25 @@ const say = (ok, msg) => { if (!ok) problems++; console.log(`${ok ? '✓' : '✗
 for (const scheme of ['light', 'dark']) {
   for (const size of SIZES) {
     const ctx = await browser.newContext({ viewport: { width: size.width, height: size.height }, colorScheme: scheme, deviceScaleFactor: 1, hasTouch: size.name === 'phone' });
+    await ctx.route('**/*', async (route) => {
+      // Vercel serves the analytics script only in production; stand in for it so its load is still CSP-checked.
+      if (new URL(route.request().url()).pathname.startsWith('/_vercel/insights/')) {
+        return route.fulfill({ status: 200, contentType: 'text/javascript', body: '', headers: VERCEL_HEADERS });
+      }
+      const res = await route.fetch();
+      await route.fulfill({ response: res, headers: { ...res.headers(), ...VERCEL_HEADERS } });
+    });
+    await ctx.addInitScript(() => {
+      document.addEventListener('securitypolicyviolation', (e) => console.error(`CSP blocked ${e.violatedDirective}: ${e.blockedURI || 'inline'}`));
+    });
     const page = await ctx.newPage();
     const errors = [];
     page.on('pageerror', (e) => errors.push(e.message));
     page.on('console', (m) => m.type() === 'error' && !m.text().startsWith('Failed to load resource') && errors.push(m.text()));
-    // Vercel serves the analytics script only in production; the /404 page is meant to 404.
+    // The /404 page is meant to 404.
     page.on('response', (r) => {
       const u = new URL(r.url());
-      if (r.status() >= 400 && u.pathname !== '/_vercel/insights/script.js' && u.pathname !== '/404') errors.push(`${r.status()} ${u.pathname}`);
+      if (r.status() >= 400 && u.pathname !== '/404') errors.push(`${r.status()} ${u.pathname}`);
     });
 
     for (const path of PAGES) {
