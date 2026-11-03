@@ -1,0 +1,13 @@
+---
+// A diagram: an inline SVG (default slot) plus optional caption / legend slots.
+// viewBox widths are ~340 so text stays readable at 390px without shrinking.
+interface Props { viewBox: string; label: string; maxWidth?: number; class?: string }
+const { viewBox, label, maxWidth, class: cls } = Astro.props;
+---
+<figure class:list={['fig', cls]}>
+  <svg class="dg" viewBox={viewBox} role="img" aria-label={label} style={maxWidth ? `max-width:${maxWidth}px` : undefined}>
+    <slot />
+  </svg>
+  <slot name="after" />
+  {Astro.slots.has('caption') && <figcaption><slot name="caption" /></figcaption>}
+</figure>

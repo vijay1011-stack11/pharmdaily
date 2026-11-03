@@ -1,0 +1,24 @@
+---
+import Figure from '../Figure.astro';
+const boxes = [
+  { x: 6, y: 14, t: 'Receptors', s: '' },
+  { x: 224, y: 14, t: 'Enzymes', s: 'mostly inhibited' },
+  { x: 6, y: 170, t: 'Ion channels', s: 'blocked or opened' },
+  { x: 224, y: 170, t: 'Transporters', s: 'blocked' },
+];
+---
+<Figure viewBox="0 0 340 230" maxWidth={460} label="A drug binds one of four protein targets: receptors, enzymes, ion channels or transporters">
+  <circle class="sec" cx="170" cy="115" r="34" />
+  <text class="ton tl" x="170" y="120" text-anchor="middle">Drug</text>
+  <g class="ln">
+    <line x1="144" y1="94" x2="104" y2="64" marker-end="url(#ah)" /><line x1="196" y1="94" x2="236" y2="64" marker-end="url(#ah)" />
+    <line x1="144" y1="136" x2="104" y2="166" marker-end="url(#ah)" /><line x1="196" y1="136" x2="236" y2="166" marker-end="url(#ah)" />
+  </g>
+  {boxes.map((b) => (
+    <g>
+      <rect class="pri-soft" x={b.x} y={b.y} width="110" height="46" rx="12" />
+      <text class="ts" x={b.x + 55} y={b.y + (b.s ? 21 : 28)} text-anchor="middle">{b.t}</text>
+      {b.s && <text class="tm" x={b.x + 55} y={b.y + 36} text-anchor="middle" style="font-size:10px">{b.s}</text>}
+    </g>
+  ))}
+</Figure>

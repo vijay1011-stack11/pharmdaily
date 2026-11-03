@@ -1,0 +1,31 @@
+---
+import Figure from '../Figure.astro';
+const W = 150;
+const cols = [
+  { x: 8, title: 'Swallowed', steps: ['Gut', 'Portal vein'], liver: 'Liver takes a share', note: 'slower, less drug', win: false },
+  { x: 182, title: 'Under the tongue', steps: ['Mouth lining', 'Jugular veins'], liver: 'Liver skipped', note: 'in minutes', win: true },
+];
+---
+<Figure viewBox="0 0 340 298" maxWidth={460} label="Swallowed drug goes gut, portal vein, liver, body: slower and less drug. Under the tongue: mouth lining, jugular veins, liver skipped, body in minutes.">
+  {cols.map((c) => (
+    <g>
+      <text class={c.win ? 'ts tp' : 'ts'} x={c.x + W / 2} y="18" text-anchor="middle">{c.title}</text>
+      {c.steps.map((s, i) => (
+        <g>
+          <rect class={c.win ? 'pri-soft' : 'plain'} x={c.x} y={30 + i * 56} width={W} height="34" rx="9" />
+          <text class="ts" x={c.x + W / 2} y={52 + i * 56} text-anchor="middle">{s}</text>
+          <line class="ln" x1={c.x + W / 2} y1={64 + i * 56} x2={c.x + W / 2} y2={84 + i * 56} marker-end="url(#ah)" />
+        </g>
+      ))}
+      <rect class={c.win ? 'good-soft' : 'bad-soft'} x={c.x} y="142" width={W} height="34" rx="9" stroke-dasharray={c.win ? '5 4' : undefined} />
+      <text class={c.win ? 'ts tg' : 'ts tb'} x={c.x + W / 2} y="164" text-anchor="middle">{c.liver}</text>
+      <line class="ln" x1={c.x + W / 2} y1="176" x2={c.x + W / 2} y2="196" marker-end="url(#ah)" />
+      <rect class="plain" x={c.x} y="198" width={W} height="34" rx="9" />
+      <text class="ts" x={c.x + W / 2} y="220" text-anchor="middle">Body</text>
+      <rect x={c.x + 15} y="246" width={W - 30} height="10" rx="5" style="fill:var(--surface-2)" />
+      <rect class="pri" x={c.x + 15} y="246" width={c.win ? W - 30 : (W - 30) * 0.45} height="10" rx="5" />
+      <text class="tm" x={c.x + W / 2} y="274" text-anchor="middle">{c.note}</text>
+    </g>
+  ))}
+  <text class="tm" x="170" y="294" text-anchor="middle" style="font-size:10px">bar: how much of the dose reaches the body</text>
+</Figure>

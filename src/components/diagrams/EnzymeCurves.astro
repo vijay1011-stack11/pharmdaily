@@ -1,0 +1,19 @@
+---
+import Figure from '../Figure.astro';
+import Curves from '../Curves.astro';
+---
+<Figure viewBox="0 0 340 210" maxWidth={520} label="Reaction velocity against substrate: with a competitive inhibitor the same Vmax is reached at higher substrate; with a non-competitive inhibitor Vmax is lower">
+  <Curves
+    x={[0, 12]}
+    xLabel="Substrate concentration"
+    yLabel="Velocity"
+    ticks={[[0, '0'], [3, '3'], [6, '6'], [9, '9'], [12, '12']]}
+    hlines={[[100, 'ln-faint'], [55, 'ln-bad']]}
+    series={[
+      { f: (s) => (100 * s) / (1 + s), cls: 'ln-pri', label: 'no inhibitor', lx: 7.2, ly: 96, tcls: 'ts tp' },
+      { f: (s) => (100 * s) / (3 + s), cls: 'ln-sec', label: 'competitive', lx: 6.4, ly: 58, tcls: 'ts tsec' },
+      { f: (s) => (55 * s) / (1 + s), cls: 'ln-bad', label: 'non-competitive', lx: 5.5, ly: 39, tcls: 'ts tb' },
+    ]}
+  />
+  <Fragment slot="caption"><b>Competitive:</b> Km rises, Vmax is unchanged. <b>Non-competitive:</b> Km is unchanged, Vmax falls.</Fragment>
+</Figure>

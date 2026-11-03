@@ -1,0 +1,24 @@
+---
+import Figure from '../Figure.astro';
+import Curves from '../Curves.astro';
+const sig = (e50: number, max: number, n = 1.6) => (lg: number) => max / (1 + Math.pow(10, (e50 - lg) * n));
+const log = [[-2, '0.01'], [-1, '0.1'], [0, '1'], [1, '10'], [2, '100'], [3, '1000']] as [number, string][];
+---
+<div class="fig-row two">
+  <Figure viewBox="0 0 340 210" label="Competitive antagonist shifts the agonist curve right in parallel with the same maximum">
+    <Curves x={[-2, 3]} xLabel="Agonist dose (log)" yLabel="Response" ticks={log}
+      series={[
+        { f: sig(0, 100), cls: 'ln-pri', label: 'agonist', lx: -1.9, ly: 86, tcls: 'ts tp' },
+        { f: sig(1.2, 100), cls: 'ln-sec', dash: '6 4', label: '+ antagonist', lx: 1.5, ly: 38, tcls: 'ts tsec' },
+      ]} />
+    <Fragment slot="caption"><b>Competitive:</b> parallel right shift, same Emax.</Fragment>
+  </Figure>
+  <Figure viewBox="0 0 340 210" label="Non-competitive antagonist flattens the agonist curve and lowers the maximum">
+    <Curves x={[-2, 3]} xLabel="Agonist dose (log)" yLabel="Response" ticks={log}
+      series={[
+        { f: sig(0, 100), cls: 'ln-pri', label: 'agonist', lx: -1.9, ly: 86, tcls: 'ts tp' },
+        { f: sig(0, 50), cls: 'ln-sec', dash: '6 4', label: '+ antagonist', lx: 0.9, ly: 58, tcls: 'ts tsec' },
+      ]} />
+    <Fragment slot="caption"><b>Non-competitive:</b> flattens the curve, lower Emax.</Fragment>
+  </Figure>
+</div>

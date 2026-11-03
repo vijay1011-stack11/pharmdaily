@@ -1,0 +1,34 @@
+---
+import Figure from '../Figure.astro';
+const layers = [
+  { y: 46, h: 14, name: 'Epidermis', fill: 'var(--surface-2)' },
+  { y: 60, h: 40, name: 'Dermis', fill: 'color-mix(in srgb, var(--sec) 10%, var(--surface))' },
+  { y: 100, h: 52, name: 'Subcutaneous tissue', fill: 'color-mix(in srgb, var(--primary) 7%, var(--surface))' },
+  { y: 152, h: 58, name: 'Muscle', fill: 'color-mix(in srgb, var(--bad) 8%, var(--surface))' },
+];
+const needles = [
+  { label: 'Intradermal', lx: 58, ly: 30, x1: 44, y1: 38, x2: 100, y2: 72 },
+  { label: 'Subcutaneous', lx: 134, ly: 22, x1: 122, y1: 30, x2: 160, y2: 124 },
+  { label: 'Intramuscular', lx: 214, ly: 14, x1: 214, y1: 22, x2: 214, y2: 184 },
+  { label: 'Intravenous', lx: 290, ly: 22, x1: 268, y1: 30, x2: 296, y2: 116 },
+];
+---
+<Figure viewBox="0 0 340 214" maxWidth={520} label="Depth of each injection: intradermal into the dermis, subcutaneous under the skin, intramuscular into muscle, intravenous into a vein">
+  {layers.map((l) => (
+    <g>
+      <rect x="0" y={l.y} width="340" height={l.h} style={`fill:${l.fill}`} />
+      <line class="ln-faint" x1="0" x2="340" y1={l.y} y2={l.y} />
+      <text class="tm" x="6" y={l.y + (l.h > 20 ? 16 : 11)} style="font-size:10px">{l.name}</text>
+    </g>
+  ))}
+  <rect class="bad-soft" x="246" y="108" width="94" height="16" rx="8" />
+  <text class="tm" x="334" y="140" text-anchor="end" style="font-size:10px">vein</text>
+  {needles.map((n) => (
+    <g>
+      <line class="ln-ink" x1={n.x1} y1={n.y1} x2={n.x2} y2={n.y2} stroke-width="2.4" stroke-linecap="round" />
+      <circle class="pri" cx={n.x2} cy={n.y2} r="4.5" />
+      <text class="ts" x={n.lx} y={n.ly} text-anchor="middle" style="font-size:11px">{n.label}</text>
+    </g>
+  ))}
+  <Fragment slot="caption">Where each injection is placed. The dot marks where the drug ends up.</Fragment>
+</Figure>

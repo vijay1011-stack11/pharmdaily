@@ -1,0 +1,29 @@
+---
+import Figure from '../Figure.astro';
+const layers = [
+  { name: 'Backing film', sub: 'outside', y: 14, h: 16, cls: 'ink', ly: 22 },
+  { name: 'Drug reservoir', sub: 'the dose', y: 30, h: 46, cls: 'pri-soft', ly: 58 },
+  { name: 'Micropore membrane', sub: 'sets the rate', y: 76, h: 12, cls: 'plain', ly: 94 },
+  { name: 'Adhesive + priming dose', sub: 'starts it', y: 88, h: 18, cls: 'sec-soft', ly: 130 },
+  { name: 'Skin, capillaries', sub: 'into blood', y: 118, h: 72, cls: 'plain', ly: 166 },
+];
+const dots = [[24, 44], [44, 60], [64, 40], [84, 56], [104, 46], [124, 62], [34, 66], [94, 36], [114, 68], [54, 50], [136, 42]];
+---
+<Figure viewBox="0 0 340 198" maxWidth={520} label="Skin patch layers from outside to skin: backing film, drug reservoir, micropore membrane, adhesive with priming dose, then skin and capillaries">
+  {layers.map((l, i) => (
+    <g>
+      <rect class={l.cls} x="10" y={l.y} width="140" height={l.h} rx={i === 0 ? 6 : 0} />
+      <path class="ln-faint" d={`M150 ${l.y + l.h / 2} H158 L168 ${l.ly - 4} H172`} />
+      <text class="ts" x="174" y={l.ly} style="font-size:11.5px">{l.name}</text>
+      <text class="tm" x="174" y={l.ly + 14}>{l.sub}</text>
+    </g>
+  ))}
+  {Array.from({ length: 9 }, (_, i) => <rect style="fill:var(--surface)" x={18 + i * 15} y="78" width="5" height="8" />)}
+  {dots.map(([x, y]) => <circle class="pri" cx={x} cy={y} r="3" />)}
+  <path class="ln-bad" d="M14 172 q16 -18 32 0 t32 0 t32 0 t32 0" stroke-width="2" />
+  <g class="ln-pri" stroke-width="1.6">
+    <line x1="40" y1="94" x2="40" y2="160" marker-end="url(#ah-pri)" />
+    <line x1="80" y1="94" x2="80" y2="160" marker-end="url(#ah-pri)" />
+    <line x1="120" y1="94" x2="120" y2="160" marker-end="url(#ah-pri)" />
+  </g>
+</Figure>

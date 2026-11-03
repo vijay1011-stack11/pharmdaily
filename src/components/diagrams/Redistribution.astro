@@ -1,0 +1,26 @@
+---
+import Figure from '../Figure.astro';
+---
+<Figure viewBox="0 0 340 198" maxWidth={520} label="Thiopentone given IV reaches the brain in seconds and the patient sleeps; within minutes it shifts to muscle, then fat, and the patient wakes with the drug still in the body">
+  <rect class="ink" x="8" y="8" width="120" height="34" rx="17" />
+  <text x="68" y="30" text-anchor="middle" style="fill:var(--bg);font-weight:700"><tspan>Thiopentone</tspan> <tspan style="font-weight:500">IV</tspan></text>
+
+  <line class="ln" x1="68" y1="42" x2="68" y2="78" marker-end="url(#ah)" />
+  <text class="tm" x="76" y="64">seconds</text>
+
+  <rect class="pri-soft" x="8" y="80" width="120" height="96" rx="14" />
+  <path class="ln-pri" d="M44 112 c-14 0 -16 -20 0 -20 c4 -10 24 -10 28 0 c16 0 16 20 2 20 z" stroke-width="1.8" />
+  <text class="tp" x="90" y="100" style="font-size:11px;font-weight:700">z z</text>
+  <text class="ts" y="140" text-anchor="middle"><tspan x="68">Brain: patient</tspan><tspan x="68" dy="15">sleeps</tspan></text>
+
+  <line class="ln" x1="128" y1="128" x2="170" y2="128" marker-end="url(#ah)" />
+  <text class="tm" x="149" y="120" text-anchor="middle">minutes</text>
+
+  <rect class="good-soft" x="172" y="80" width="160" height="96" rx="14" />
+  <rect class="plain" x="186" y="92" width="58" height="22" rx="6" /><text class="tm" x="215" y="107" text-anchor="middle" style="font-size:10px">muscle</text>
+  <line class="ln" x1="246" y1="103" x2="256" y2="103" marker-end="url(#ah)" />
+  <rect class="plain" x="260" y="92" width="58" height="22" rx="6" /><text class="tm" x="289" y="107" text-anchor="middle" style="font-size:10px">fat</text>
+  <text class="ts tg" y="134" text-anchor="middle" style="font-size:11.5px">
+    <tspan x="252">Muscle, then fat:</tspan><tspan x="252" dy="14">patient wakes,</tspan><tspan x="252" dy="14">drug still in body</tspan>
+  </text>
+</Figure>

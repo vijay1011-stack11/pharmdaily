@@ -1,0 +1,31 @@
+---
+import Figure from '../Figure.astro';
+// Replaces the intrinsic-activity scale; carries its labels: +1 Full agonist, 0 – 1 Partial, 0 Antagonist, 0 to −1 Inverse agonist.
+const Z = 186, U = 140; // zero line, length of 1 unit
+---
+<Figure viewBox="0 0 340 232" maxWidth={520} label="Intrinsic activity from minus 1 to plus 1: full agonist plus 1, partial agonist 0 to 1, antagonist 0, inverse agonist 0 to minus 1">
+  <line class="ln-ink" x1={Z} y1="8" x2={Z} y2="200" stroke-width="1.5" style="stroke-opacity:.6" />
+  <text class="tm" x={Z} y="220" text-anchor="middle">0 · no response</text>
+  <text class="tg" x={Z + U} y="220" text-anchor="end" style="font-weight:700">+1</text>
+  <text class="tb" x={Z - U} y="220" style="font-weight:700">−1</text>
+
+  <text class="ts" x="6" y="24">Full agonist</text>
+  <text class="tg" x="6" y="39" style="font-weight:700">+1</text>
+  <rect class="good" x={Z} y="14" width={U} height="18" rx="4" />
+  <text class="tm" x={Z + 6} y="48">adrenaline, morphine</text>
+
+  <text class="ts" x="6" y="72">Partial</text>
+  <text class="tg" x="6" y="87" style="font-weight:700">0 – 1</text>
+  <rect class="good" x={Z} y="62" width={U * 0.5} height="18" rx="4" style="fill-opacity:.55" />
+  <text class="tm" x={Z + 6} y="96">pindolol, buprenorphine</text>
+
+  <text class="ts" x="6" y="120">Antagonist</text>
+  <text class="ts" x="6" y="135">0</text>
+  <rect class="ink" x={Z - 3} y="110" width="6" height="18" rx="2" />
+  <text class="tm" x={Z + 10} y="124">atropine, naloxone</text>
+
+  <text class="ts" x="6" y="168">Inverse agonist</text>
+  <text class="tb" x="6" y="183" style="font-weight:700">0 to −1</text>
+  <rect class="bad" x={Z - U * 0.6} y="158" width={U * 0.6} height="18" rx="4" />
+  <text class="tm" x={Z + 6} y="172">benzodiazepine receptor</text>
+</Figure>

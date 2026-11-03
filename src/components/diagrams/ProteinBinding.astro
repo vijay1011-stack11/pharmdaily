@@ -1,0 +1,31 @@
+---
+import Figure from '../Figure.astro';
+---
+<Figure viewBox="0 0 340 214" maxWidth={520} label="In plasma, acidic drugs bind albumin and basic drugs bind alpha-1 acid glycoprotein. Bound drug is inactive and stays in plasma; free drug leaves to act on tissues.">
+  <rect class="bad-soft" x="6" y="6" width="236" height="200" rx="18" style="stroke-opacity:.45" />
+  <text class="tm" x="20" y="26">plasma</text>
+
+  <!-- albumin with acidic drugs -->
+  <ellipse class="pri-soft" cx="68" cy="70" rx="44" ry="26" />
+  <text class="ts tp" x="68" y="74" text-anchor="middle" style="font-size:11px">albumin</text>
+  <circle class="ink" cx="104" cy="52" r="6" /><circle class="ink" cx="30" cy="54" r="6" /><circle class="ink" cx="96" cy="92" r="6" />
+  <text class="tm" x="68" y="114" text-anchor="middle">acidic drugs</text>
+
+  <!-- AGP with basic drugs -->
+  <ellipse class="sec-soft" cx="172" cy="70" rx="56" ry="26" />
+  <text class="ts tsec" y="68" text-anchor="middle" style="font-size:10.5px"><tspan x="172">α1-acid</tspan><tspan x="172" dy="12">glycoprotein</tspan></text>
+  <rect class="ink" x="216" y="46" width="11" height="11" rx="2" /><rect class="ink" x="122" y="88" width="11" height="11" rx="2" />
+  <text class="tm" x="172" y="114" text-anchor="middle">basic drugs</text>
+
+  <line class="ln-faint" x1="20" x2="228" y1="128" y2="128" stroke-dasharray="3 3" />
+  <text class="ts" x="20" y="150" style="font-size:11.5px">bound: inactive, stays in plasma</text>
+  <text class="tm" x="20" y="166">a temporary store</text>
+
+  <!-- free drug leaves -->
+  <circle class="ink" cx="200" cy="186" r="6" />
+  <line class="ln-good" x1="210" y1="186" x2="262" y2="186" stroke-width="2" marker-end="url(#ah-good)" />
+  <text class="tm" x="20" y="190">free drug</text>
+  <rect class="good-soft" x="266" y="160" width="68" height="46" rx="12" />
+  <text class="ts tg" x="300" y="181" text-anchor="middle" style="font-size:11px">tissues</text>
+  <text class="tg" x="300" y="196" text-anchor="middle" style="font-size:10px">acts</text>
+</Figure>

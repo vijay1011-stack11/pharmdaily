@@ -1,0 +1,23 @@
+---
+import Figure from '../Figure.astro';
+---
+<Figure viewBox="0 0 340 236" maxWidth={480} label="Metabolism: a lipid-soluble drug goes through Phase I, functionalisation, then Phase II, conjugation, and becomes water-soluble so the kidney can excrete it">
+  <rect class="plain" x="70" y="6" width="200" height="38" rx="12" />
+  <text class="ts" x="170" y="22" text-anchor="middle">Drug</text>
+  <text class="tm" x="170" y="37" text-anchor="middle">lipid-soluble</text>
+  <line class="ln" x1="170" y1="44" x2="170" y2="60" marker-end="url(#ah)" />
+
+  <rect class="pri-soft" x="20" y="62" width="300" height="48" rx="12" />
+  <text class="ts tp" x="170" y="81" text-anchor="middle">Phase I · functionalisation</text>
+  <text class="tm" x="170" y="98" text-anchor="middle">Adds or exposes a reactive group</text>
+  <line class="ln" x1="170" y1="110" x2="170" y2="126" marker-end="url(#ah)" />
+
+  <rect class="sec-soft" x="20" y="128" width="300" height="48" rx="12" />
+  <text class="ts tsec" x="170" y="147" text-anchor="middle">Phase II · conjugation</text>
+  <text class="tm" x="170" y="164" text-anchor="middle">joins a body substance</text>
+  <line class="ln" x1="170" y1="176" x2="170" y2="192" marker-end="url(#ah)" />
+
+  <rect class="good-soft" x="70" y="194" width="200" height="38" rx="12" />
+  <text class="ts tg" x="170" y="210" text-anchor="middle">water-soluble</text>
+  <text class="tg" x="170" y="225" text-anchor="middle" style="font-size:10.5px">kidney excretes it</text>
+</Figure>

@@ -1,0 +1,17 @@
+---
+import Figure from '../Figure.astro';
+---
+<Figure viewBox="0 0 340 200" maxWidth={520} label="Seven-segment receptor crosses the membrane; the agonist binds outside; inside, the G-protein takes up GTP in place of GDP and its alpha subunit acts on an effector">
+  <text class="tm" x="6" y="16">outside</text><text class="tm" x="6" y="194">inside</text>
+  <rect class="lipid" x="0" y="62" width="340" height="56" />
+  <line class="ln-faint" x1="0" y1="62" x2="340" y2="62" /><line class="ln-faint" x1="0" y1="118" x2="340" y2="118" />
+  <path class="ln-pri" d="M30 40 Q42 40 42 58 V122 Q52 136 62 122 V58 Q72 44 82 58 V122 Q92 136 102 122 V58 Q112 44 122 58 V122 Q132 136 142 122 V58 Q152 44 162 58 V122 Q172 136 182 122 V58 Q182 40 196 40" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />
+  <circle class="sec" cx="112" cy="26" r="11" /><text class="tsec" x="130" y="30" style="font-weight:700">agonist</text>
+  <text class="tp" x="112" y="152" text-anchor="middle">7 segments</text>
+  <circle class="pri" cx="222" cy="150" r="15" /><text class="ton" x="222" y="155" text-anchor="middle">α</text>
+  <circle class="pri-soft" cx="252" cy="142" r="11" /><text class="tp" x="252" y="146" text-anchor="middle" style="font-size:11px">β</text>
+  <circle class="pri-soft" cx="270" cy="160" r="9" /><text class="tp" x="270" y="164" text-anchor="middle" style="font-size:10px">γ</text>
+  <text class="tm" x="222" y="186" text-anchor="middle">GDP → GTP</text>
+  <line class="ln" x1="236" y1="138" x2="286" y2="102" marker-end="url(#ah)" />
+  <rect class="good-soft" x="278" y="70" width="58" height="28" rx="8" /><text class="tg" x="307" y="89" text-anchor="middle" style="font-size:11px;font-weight:700">effector</text>
+</Figure>

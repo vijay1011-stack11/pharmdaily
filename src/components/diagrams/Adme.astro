@@ -1,0 +1,29 @@
+---
+import Figure from '../Figure.astro';
+const boxes = [
+  { n: 1, x: 8, y: 8, title: 'Absorption', lines: ['site of administration', '→ blood'] },
+  { n: 2, x: 176, y: 8, title: 'Distribution', lines: ['blood → tissues'] },
+  { n: 3, x: 8, y: 168, title: 'Metabolism', lines: ['mostly in the liver'] },
+  { n: 4, x: 176, y: 168, title: 'Excretion', lines: ['out, mostly in urine'] },
+];
+---
+<Figure viewBox="0 0 340 238" maxWidth={520} label="ADME: absorption from the site of administration into blood, distribution from blood to tissues, metabolism mostly in the liver, excretion mostly in urine">
+  <rect class="bad-soft" x="0" y="104" width="340" height="30" rx="15" style="stroke-opacity:.5" />
+  <text class="tm" x="170" y="123" text-anchor="middle">blood</text>
+  {[[70, 70, 102], [270, 104, 72]].map(([x, a, b]) => <line class="ln" x1={x} y1={a} x2={x} y2={b} marker-end="url(#ah)" />)}
+  <line class="ln" x1="252" y1="72" x2="252" y2="100" marker-end="url(#ah)" />
+  <line class="ln" x1="70" y1="134" x2="70" y2="164" marker-end="url(#ah)" />
+  <line class="ln" x1="270" y1="134" x2="270" y2="164" marker-end="url(#ah)" />
+  <line class="ln" x1="164" y1="200" x2="174" y2="200" marker-end="url(#ah)" />
+  {boxes.map((b) => (
+    <g>
+      <rect class="pri-soft" x={b.x} y={b.y} width="156" height="62" rx="12" />
+      <circle class="pri" cx={b.x + 18} cy={b.y + 20} r="10" />
+      <text class="ton" x={b.x + 18} y={b.y + 24} text-anchor="middle" style="font-size:11px">{b.n}</text>
+      <text class="ts" x={b.x + 34} y={b.y + 25}>{b.title}</text>
+      <text class="tm" y={b.y + 44}>
+        {b.lines.map((l, i) => <tspan x={b.x + 12} dy={i ? 13 : 0}>{l}</tspan>)}
+      </text>
+    </g>
+  ))}
+</Figure>

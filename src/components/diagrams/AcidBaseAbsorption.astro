@@ -1,0 +1,29 @@
+---
+import Figure from '../Figure.astro';
+const tick = (x: number, y: number) => `M${x - 8} ${y} l6 6 l11 -12`;
+---
+<Figure viewBox="0 0 340 196" maxWidth={520} label="Acidic drugs are absorbed from the stomach. Basic drugs are ionised in the stomach and absorbed once they reach the duodenum.">
+  <rect class="bad-soft" x="128" y="8" width="96" height="36" rx="10" style="stroke-opacity:.5" />
+  <text class="ts" x="176" y="24" text-anchor="middle">Stomach</text>
+  <text class="tm" x="176" y="38" text-anchor="middle" style="font-size:10px">acid</text>
+  <rect class="plain" x="236" y="8" width="96" height="36" rx="10" />
+  <text class="ts" x="284" y="31" text-anchor="middle">Duodenum</text>
+  <line class="ln" x1="224" y1="26" x2="234" y2="26" marker-end="url(#ah)" />
+
+  <text class="ts" x="8" y="80">Acidic drugs</text>
+  <text class="tm" x="8" y="96">salicylates,</text>
+  <text class="tm" x="8" y="109">barbiturates</text>
+  <rect class="good-soft" x="128" y="62" width="96" height="48" rx="10" />
+  <path class="ln-good" d={tick(176, 82)} stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+  <text class="tg" x="176" y="104" text-anchor="middle" style="font-size:10.5px">absorbed</text>
+
+  <text class="ts" x="8" y="146">Basic drugs</text>
+  <text class="tm" x="8" y="162">morphine,</text>
+  <text class="tm" x="8" y="175">quinine</text>
+  <rect class="bad-soft" x="128" y="128" width="96" height="48" rx="10" />
+  <path class="ln-bad" d="M168 140 l16 16 M184 140 l-16 16" stroke-width="3" stroke-linecap="round" />
+  <text class="tb" x="176" y="170" text-anchor="middle" style="font-size:10.5px">ionised</text>
+  <rect class="good-soft" x="236" y="128" width="96" height="48" rx="10" />
+  <path class="ln-good" d={tick(284, 148)} stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+  <text class="tg" x="284" y="170" text-anchor="middle" style="font-size:10.5px">absorbed</text>
+</Figure>

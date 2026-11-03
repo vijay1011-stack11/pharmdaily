@@ -1,0 +1,19 @@
+---
+import Figure from '../Figure.astro';
+const rec = (x: number) => `M${x - 6} 56 L${x} 66 L${x + 6} 56 M${x} 66 V86`;
+const groups = [
+  { cx: 58, xs: [34, 58, 82], title: 'Normal', tcls: 'ts', lines: [] as string[] },
+  { cx: 170, xs: [131, 147, 163, 179, 195, 211], title: 'Up-regulated', tcls: 'ts tg', lines: ['lack of agonist', '→ supersensitive'] },
+  { cx: 282, xs: [282], title: 'Down-regulated', tcls: 'ts tb', lines: ['continued agonist', '→ less responsive'] },
+];
+---
+<Figure viewBox="0 0 340 140" maxWidth={520} label="Normal membrane has a few receptors; lack of agonist raises the number (up-regulation, supersensitive); continued agonist lowers it (down-regulation)">
+  {groups.map((g) => (
+    <g>
+      <text class={g.tcls} x={g.cx} y="28" text-anchor="middle">{g.title}</text>
+      <line class="ln-faint" x1={g.cx - 52} y1="80" x2={g.cx + 52} y2="80" stroke-width="3" />
+      {g.xs.map((x) => <path class="ln-pri" d={rec(x)} stroke-width="3.5" stroke-linecap="round" />)}
+      {g.lines.map((l, i) => <text class="tm" x={g.cx} y={110 + i * 15} text-anchor="middle">{l}</text>)}
+    </g>
+  ))}
+</Figure>

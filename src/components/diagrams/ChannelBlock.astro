@@ -1,0 +1,18 @@
+---
+import Figure from '../Figure.astro';
+---
+<Figure viewBox="0 0 340 180" maxWidth={520} label="An open ion channel lets ions cross the membrane; a drug in the pore blocks them">
+  <text class="tm" x="8" y="16">outside</text><text class="tm" x="8" y="174">inside</text>
+  <rect class="lipid" x="0" y="62" width="340" height="52" />
+  <line class="ln-faint" x1="0" y1="62" x2="340" y2="62" /><line class="ln-faint" x1="0" y1="114" x2="340" y2="114" />
+  <rect class="pri" x="66" y="50" width="26" height="76" rx="9" /><rect class="pri" x="104" y="50" width="26" height="76" rx="9" />
+  <circle class="good" cx="98" cy="22" r="6" /><circle class="good" cx="98" cy="150" r="6" />
+  <line class="ln-good" x1="98" y1="32" x2="98" y2="138" stroke-width="2" marker-end="url(#ah-good)" />
+  <text class="tg" x="148" y="92">ions flow</text>
+  <rect class="pri" x="216" y="50" width="26" height="76" rx="9" /><rect class="pri" x="254" y="50" width="26" height="76" rx="9" />
+  <rect class="sec" x="240" y="56" width="16" height="26" rx="6" />
+  <circle class="good" cx="248" cy="22" r="6" /><line class="ln-good" x1="248" y1="32" x2="248" y2="48" stroke-width="2" />
+  <g class="ln-bad" stroke-width="2.4"><line x1="238" y1="36" x2="258" y2="50" /><line x1="258" y1="36" x2="238" y2="50" /></g>
+  <text class="tsec" x="288" y="74" style="font-weight:700">drug</text><text class="tm" x="288" y="88">in the pore</text>
+  <text class="tb" x="248" y="150" text-anchor="middle">blocked</text>
+</Figure>

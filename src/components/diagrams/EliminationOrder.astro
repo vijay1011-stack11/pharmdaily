@@ -1,0 +1,23 @@
+---
+import Figure from '../Figure.astro';
+// Schematic shapes only: plasma level against time.
+const W = 140, H = 96, T = 30;
+const first = (x0: number) => {
+  let d = '';
+  for (let i = 0; i <= 40; i++) { const t = i / 40; d += `${i ? 'L' : 'M'}${(x0 + t * W).toFixed(1)} ${(T + H - H * Math.pow(0.5, t * 4)).toFixed(1)}`; }
+  return d;
+};
+---
+<Figure viewBox="0 0 340 172" maxWidth={520} label="First-order elimination: plasma level falls by a constant fraction, so the curve flattens. Zero-order: falls by a constant amount, a straight line.">
+  {[{ x: 26, title: 'First-order', sub: 'constant fraction per unit time', d: first(26), cls: 'ln-pri' },
+    { x: 192, title: 'Zero-order', sub: 'constant amount per unit time', d: `M192 ${T} L${192 + W * 0.85} ${T + H}`, cls: 'ln-sec' }].map((p) => (
+    <g>
+      <text class="ts" x={p.x} y="14">{p.title}</text>
+      <path class="axis" d={`M${p.x} ${T - 6} V${T + H} H${p.x + W}`} fill="none" />
+      <path class={p.cls} d={p.d} stroke-width="2.6" stroke-linecap="round" />
+      <text class="tm" x={p.x + W} y={T + H + 14} text-anchor="end" style="font-size:10px">time</text>
+      <text class="tm" x={p.x} y={T + H + 32} style="font-size:10.5px">{p.sub}</text>
+    </g>
+  ))}
+  <text class="tm" x="12" y={T + H / 2} text-anchor="middle" transform={`rotate(-90 12 ${T + H / 2})`} style="font-size:10px">plasma level</text>
+</Figure>

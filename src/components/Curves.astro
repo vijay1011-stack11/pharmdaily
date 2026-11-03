@@ -1,0 +1,57 @@
+---
+// Response curves, computed at build time (no client JS).
+export interface Series {
+  f: (x: number) => number; // x in axis units -> y in % (0-100)
+  cls: string;              // stroke class, e.g. ln-pri
+  dash?: string;
+  label?: string;
+  lx?: number; ly?: number; // label position in axis units
+  anchor?: 'start' | 'middle' | 'end';
+  tcls?: string;            // label text class
+}
+interface Props {
+  x: [number, number];
+  ticks?: [number, string][];
+  xLabel: string;
+  yLabel: string;
+  series: Series[];
+  marks?: [number, string][];    // dashed vertical marker from 50% to axis
+  hlines?: [number, string][];   // dashed horizontal line at y%, stroke class
+  band?: [number, number];       // shaded x range
+  yTicks?: number[];
+}
+const { x, ticks = [], xLabel, yLabel, series, marks = [], hlines = [], band, yTicks = [0, 50, 100] } = Astro.props;
+const L = 52, R = 332, T = 12, B = 168;
+const X = (v: number) => L + ((v - x[0]) / (x[1] - x[0])) * (R - L);
+const Y = (p: number) => B - (p / 100) * (B - T);
+const path = (f: (v: number) => number) => {
+  let d = '';
+  const step = (x[1] - x[0]) / 140;
+  for (let v = x[0]; v <= x[1] + 1e-9; v += step) d += `${d ? 'L' : 'M'}${X(v).toFixed(1)} ${Y(f(v)).toFixed(1)}`;
+  return d;
+};
+---
+<g>
+  {band && <rect class="band" x={X(band[0])} y={T} width={X(band[1]) - X(band[0])} height={B - T} />}
+  {yTicks.map((p) => (
+    <>
+      <line class="grid" x1={L} x2={R} y1={Y(p)} y2={Y(p)} />
+      <text class="tm" x={L - 6} y={Y(p) + 4} text-anchor="end">{p}%</text>
+    </>
+  ))}
+  <line class="axis" x1={L} x2={R} y1={B} y2={B} />
+  {ticks.map(([v, t]) => <text class="tm" x={X(v)} y={B + 15} text-anchor="middle">{t}</text>)}
+  <text class="tm" x={(L + R) / 2} y={B + 32} text-anchor="middle">{xLabel}</text>
+  <text class="tm" x={9} y={(T + B) / 2} text-anchor="middle" transform={`rotate(-90 9 ${(T + B) / 2})`}>{yLabel}</text>
+  {hlines.map(([p, cls]) => <line class={cls} x1={L} x2={R} y1={Y(p)} y2={Y(p)} stroke-dasharray="4 4" />)}
+  {series.map((s) => <path class={s.cls} d={path(s.f)} stroke-width="2.6" stroke-linecap="round" stroke-dasharray={s.dash} />)}
+  {marks.map(([v, t]) => (
+    <>
+      <line class="ln-faint" x1={X(v)} x2={X(v)} y1={Y(50)} y2={B} stroke-dasharray="3 3" />
+      <text class="tm" x={X(v) + 4} y={B - 6}>{t}</text>
+    </>
+  ))}
+  {series.filter((s) => s.label).map((s) => (
+    <text class={s.tcls ?? 'ts'} x={X(s.lx!)} y={Y(s.ly!)} text-anchor={s.anchor ?? 'start'}>{s.label}</text>
+  ))}
+</g>

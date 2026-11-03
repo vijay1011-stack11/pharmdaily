@@ -1,0 +1,14 @@
+---
+import Figure from '../Figure.astro';
+---
+<Figure viewBox="0 0 340 170" maxWidth={520} label="Agonist binds the alpha subunits of a channel receptor and the channel within the receptor opens">
+  <rect class="lipid" x="0" y="58" width="340" height="52" />
+  <line class="ln-faint" x1="0" y1="58" x2="340" y2="58" /><line class="ln-faint" x1="0" y1="110" x2="340" y2="110" />
+  <rect class="pri" x="40" y="40" width="34" height="90" rx="12" /><rect class="pri" x="90" y="40" width="34" height="90" rx="12" />
+  <circle class="sec" cx="57" cy="32" r="9" /><circle class="sec" cx="107" cy="32" r="9" />
+  <text class="ton" x="57" y="90" text-anchor="middle">α</text><text class="ton" x="107" y="90" text-anchor="middle">α</text>
+  <line class="ln-good" x1="82" y1="14" x2="82" y2="150" stroke-width="2" marker-end="url(#ah-good)" />
+  <text class="tsec" x="148" y="36" style="font-weight:700">1 agonist binds α subunits</text>
+  <text class="ts" x="148" y="88">2 channel in the receptor opens</text>
+  <text class="tg" x="148" y="140" style="font-weight:700">3 Na⁺, K⁺, Ca²⁺ or Cl⁻ moves</text>
+</Figure>

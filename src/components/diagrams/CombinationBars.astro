@@ -1,0 +1,15 @@
+---
+import Figure from '../Figure.astro';
+---
+<Figure viewBox="0 0 340 186" maxWidth={520} label="Additive: the combined effect equals the sum. Supra-additive: it exceeds the sum. Antagonism: it is less than the sum.">
+  <text class="tm" x="6" y="14">dashed box = A alone + B alone</text>
+  <text class="ts" x="6" y="50">Additive</text><text class="tm" x="6" y="65">A + B = A + B</text>
+  <rect class="pri" x="118" y="38" width="80" height="22" rx="4" /><rect class="sec" x="198" y="38" width="80" height="22" rx="4" />
+  <rect class="ln-ink" x="118" y="38" width="160" height="22" rx="4" stroke-dasharray="4 3" />
+  <text class="ts" x="6" y="102">Supra-additive</text><text class="tm" x="6" y="117">A + B &gt; A + B</text>
+  <rect class="good" x="118" y="90" width="216" height="22" rx="4" />
+  <rect class="ln-ink" x="118" y="90" width="160" height="22" rx="4" stroke-dasharray="4 3" />
+  <text class="ts" x="6" y="154">Antagonism</text><text class="tm" x="6" y="169">A + B &lt; A + B</text>
+  <rect class="bad" x="118" y="142" width="40" height="22" rx="4" />
+  <rect class="ln-ink" x="118" y="142" width="160" height="22" rx="4" stroke-dasharray="4 3" />
+</Figure>

@@ -1,0 +1,26 @@
+---
+import Figure from '../Figure.astro';
+---
+<Figure viewBox="0 0 260 214" maxWidth={340} label="Nephron: 1 glomerular filtration, 2 tubular reabsorption back to blood, 3 tubular secretion into urine">
+  <circle class="pri-soft" cx="36" cy="44" r="22" />
+  <text class="tm" x="36" y="82" text-anchor="middle" style="font-size:10px">glomerulus</text>
+  <path class="ln-pri" d="M58 44 H100 V170 Q100 196 124 196 Q148 196 148 170 V64 Q148 44 170 44 H222" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" style="stroke-opacity:.35" />
+  <line class="ln" x1="226" y1="44" x2="254" y2="44" marker-end="url(#ah)" />
+  <text class="tm" x="240" y="34" text-anchor="middle" style="font-size:10px">urine</text>
+  <!-- 2: back to blood, 3: into urine -->
+  <line class="ln-good" x1="100" y1="120" x2="62" y2="120" stroke-width="2" marker-end="url(#ah-good)" />
+  <text class="tg" x="40" y="124" text-anchor="middle" style="font-size:10px">blood</text>
+  <line class="ln-sec" x1="208" y1="94" x2="170" y2="94" stroke-width="2" marker-end="url(#ah-sec)" />
+  <text class="tsec" x="226" y="98" text-anchor="middle" style="font-size:10px">pump</text>
+  {([[36, 44, 1, 'pri'], [100, 148, 2, 'good'], [160, 64, 3, 'sec']] as const).map(([x, y, n, c]) => (
+    <g>
+      <circle class={c} cx={x} cy={y} r="11" />
+      <text class="ton" x={x} y={y + 4} text-anchor="middle" style="font-size:11px">{n}</text>
+    </g>
+  ))}
+  <ol slot="after" class="legend">
+    <li><span class="num">1</span><span><b>Glomerular filtration</b>: unbound drug is filtered</span></li>
+    <li><span class="num good">2</span><span><b>Tubular reabsorption</b>: lipid-soluble drug returns to blood</span></li>
+    <li><span class="num sec">3</span><span><b>Tubular secretion</b>: pumps add drug to urine</span></li>
+  </ol>
+</Figure>

@@ -1,0 +1,24 @@
+---
+import Figure from '../Figure.astro';
+// Remaining drug after each half-life, from the notes: 50%, 75%, 87.5% gone.
+const rows = [
+  { label: '1 t½ → 50% gone', left: 50 },
+  { label: '2 t½ → 75% gone', left: 25 },
+  { label: '3 t½ → 87.5% gone', left: 12.5 },
+  { label: '4–5 t½ → nearly all gone.', left: 4, ok: true },
+];
+const BX = 168, BW = 166;
+---
+<Figure viewBox="0 0 340 168" maxWidth={520} label="Half-lives: after 1 half-life 50% is gone, after 2 75%, after 3 87.5%, after 4 to 5 nearly all">
+  <text class="tm" x={BX} y="14">drug left in the body</text>
+  <text class="ts" x="8" y="40">Dose given</text>
+  <rect class="pri" x={BX} y="28" width={BW} height="16" rx="4" />
+  {rows.map((r, i) => (
+    <g>
+      <rect x={BX} y={60 + i * 26} width={BW} height="16" rx="4" style="fill:var(--surface-2)" />
+      <rect class={r.ok ? 'good' : 'pri'} x={BX} y={60 + i * 26} width={(BW * r.left) / 100} height="16" rx="4" />
+      <text class={r.ok ? 'ts tg' : 'ts'} x="8" y={72 + i * 26} style="font-size:11px">{r.label}</text>
+    </g>
+  ))}
+  <Fragment slot="caption">Repeated dosing also reaches steady state in <span style="white-space:nowrap">4–5 t½.</span></Fragment>
+</Figure>

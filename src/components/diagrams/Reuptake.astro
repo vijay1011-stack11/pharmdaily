@@ -1,0 +1,30 @@
+---
+import Figure from '../Figure.astro';
+const slots = [
+  { x: 54, t: 'NET', m: 'noradrenaline', d: ['desipramine', 'cocaine'] },
+  { x: 134, t: 'SERT', m: '5-HT', d: ['fluoxetine', '(SSRIs)'] },
+  { x: 214, t: 'DAT', m: 'dopamine', d: ['amphetamines'] },
+  { x: 294, t: 'GAT1', m: 'GABA', d: ['tiagabine'] },
+];
+---
+<Figure viewBox="0 0 340 226" maxWidth={520} label="Transmitters are taken back into the nerve ending by NET, SERT, DAT and GAT1, and into vesicles by VMAT-2; each is blocked by a drug">
+  <rect class="pri-soft" x="6" y="6" width="328" height="112" rx="28" style="stroke-opacity:.5" />
+  <text class="tm" x="26" y="28">nerve ending</text>
+  <circle class="ln-sec" cx="64" cy="72" r="22" stroke-width="1.5" />
+  <g class="sec"><circle cx="57" cy="68" r="3" /><circle cx="69" cy="64" r="3" /><circle cx="64" cy="78" r="3" /><circle cx="73" cy="77" r="3" /></g>
+  <rect class="pri" x="80" y="60" width="14" height="10" rx="3" />
+  <text class="ts" x="102" y="62" style="font-size:11.5px">VMAT-2 into vesicle</text>
+  <text class="tsec" x="102" y="77" style="font-weight:700">reserpine blocks</text>
+  <text class="tm" x="102" y="91">noradrenaline, 5-HT</text>
+  {slots.map((s) => (
+    <g>
+      <rect class="pri" x={s.x - 20} y="110" width="40" height="16" rx="4" />
+      <text class="ton" x={s.x} y="122" text-anchor="middle" style="font-size:10px">{s.t}</text>
+      <line class="ln-good" x1={s.x} y1="166" x2={s.x} y2="132" stroke-width="1.8" marker-end="url(#ah-good)" />
+      <g class="ln-bad" stroke-width="2.4"><line x1={s.x - 8} y1="142" x2={s.x + 8} y2="156" /><line x1={s.x + 8} y1="142" x2={s.x - 8} y2="156" /></g>
+      <text class="tm" x={s.x} y="184" text-anchor="middle">{s.m}</text>
+      {s.d.map((d, i) => <text class="tsec" x={s.x} y={201 + i * 14} text-anchor="middle" style="font-weight:700;font-size:11px">{d}</text>)}
+    </g>
+  ))}
+  <Fragment slot="caption">Green arrows: normal reuptake into the neuron. Each red cross is the drug that blocks it.</Fragment>
+</Figure>

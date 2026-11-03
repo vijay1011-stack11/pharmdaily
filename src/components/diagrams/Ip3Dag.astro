@@ -1,0 +1,19 @@
+---
+import Figure from '../Figure.astro';
+---
+<Figure viewBox="0 0 340 290" maxWidth={480} label="Gq activates phospholipase C beta, which splits PIP2 into IP3 and DAG; IP3 releases calcium from the ER; DAG with calcium activates protein kinase C">
+  <rect class="pri-soft" x="100" y="6" width="140" height="30" rx="10" /><text class="ts" x="170" y="26" text-anchor="middle">Gq → PLCβ</text>
+  <line class="ln" x1="170" y1="36" x2="170" y2="58" marker-end="url(#ah)" /><text class="tm" x="180" y="52">splits</text>
+  <rect class="plain" x="130" y="62" width="80" height="30" rx="10" /><text class="ts" x="170" y="82" text-anchor="middle">PIP₂</text>
+  <line class="ln" x1="150" y1="92" x2="88" y2="124" marker-end="url(#ah)" /><line class="ln" x1="190" y1="92" x2="252" y2="124" marker-end="url(#ah)" />
+  <rect class="sec-soft" x="36" y="128" width="96" height="30" rx="10" /><text class="ts tsec" x="84" y="148" text-anchor="middle">IP₃</text>
+  <rect class="sec-soft" x="208" y="128" width="96" height="30" rx="10" /><text class="ts tsec" x="256" y="148" text-anchor="middle">DAG</text>
+  <text class="tm" x="84" y="174" text-anchor="middle">water-soluble → cytosol</text><text class="tm" x="256" y="174" text-anchor="middle">stays in membrane</text>
+  <line class="ln" x1="84" y1="180" x2="84" y2="198" marker-end="url(#ah)" /><line class="ln" x1="256" y1="180" x2="256" y2="198" marker-end="url(#ah)" />
+  <rect class="good-soft" x="10" y="202" width="148" height="30" rx="10" /><text class="ts tg" x="84" y="222" text-anchor="middle">Ca²⁺ from ER</text>
+  <rect class="good-soft" x="208" y="202" width="96" height="30" rx="10" /><text class="ts tg" x="256" y="222" text-anchor="middle">PKC</text>
+  <line class="ln-good" x1="158" y1="217" x2="204" y2="217" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#ah-good)" /><text class="tm" x="181" y="210" text-anchor="middle">with</text>
+  <line class="ln" x1="84" y1="232" x2="84" y2="252" marker-end="url(#ah)" /><line class="ln" x1="256" y1="232" x2="256" y2="252" marker-end="url(#ah)" />
+  <text class="ts" x="84" y="268" text-anchor="middle" style="font-size:11px">+ calmodulin → MLCK</text><text class="tm" x="84" y="283" text-anchor="middle">smooth muscle contraction</text>
+  <text class="ts" x="256" y="268" text-anchor="middle" style="font-size:11px">phosphorylates</text><text class="tm" x="256" y="283" text-anchor="middle">intracellular proteins</text>
+</Figure>

@@ -1,0 +1,46 @@
+---
+import Figure from '../Figure.astro';
+const cols = [
+  { x: 34, n: 1, lines: ['Passive', 'diffusion'] },
+  { x: 102, n: 2, lines: ['Filtration'] },
+  { x: 170, n: 3, lines: ['Active', 'transport'] },
+  { x: 238, n: 4, lines: ['Facilitated', 'diffusion'] },
+  { x: 306, n: 5, lines: ['Endocytosis'] },
+];
+---
+<Figure viewBox="0 0 340 214" maxWidth={560} label="Five ways a drug crosses a membrane: passive diffusion, filtration through pores, active transport using energy, facilitated diffusion by a carrier, endocytosis">
+  <rect class="lipid" x="0" y="64" width="340" height="44" />
+  <line class="ln-faint" x1="0" x2="340" y1="64" y2="64" />
+  <line class="ln-faint" x1="0" x2="340" y1="108" y2="108" />
+  <!-- 1 passive: drug goes straight through the lipid -->
+  <circle class="pri" cx="34" cy="30" r="5" /><circle class="pri" cx="24" cy="44" r="5" /><circle class="pri" cx="44" cy="44" r="5" />
+  <line class="ln-pri" x1="34" y1="52" x2="34" y2="128" stroke-width="2" marker-end="url(#ah-pri)" />
+  <circle class="pri" cx="34" cy="140" r="5" />
+  <!-- 2 filtration: a pore -->
+  <rect style="fill:var(--surface)" x="94" y="64" width="16" height="44" />
+  <line class="ln-faint" x1="94" x2="94" y1="64" y2="108" /><line class="ln-faint" x1="110" x2="110" y1="64" y2="108" />
+  <line class="ln-sec" x1="102" y1="40" x2="102" y2="128" stroke-width="2" marker-end="url(#ah-sec)" />
+  <text class="tm" x="102" y="32" text-anchor="middle" style="font-size:10px">water</text>
+  <!-- 3 active: carrier pumps upward with ATP -->
+  <rect class="pri" x="158" y="60" width="24" height="52" rx="8" />
+  <line class="ln-pri" x1="170" y1="136" x2="170" y2="42" stroke-width="2" marker-end="url(#ah-pri)" />
+  <text class="tb" x="190" y="130" style="font-size:10.5px;font-weight:700">ATP</text>
+  <!-- 4 facilitated: carrier, downhill -->
+  <rect class="pri-soft" x="226" y="60" width="24" height="52" rx="8" />
+  <line class="ln-pri" x1="238" y1="40" x2="238" y2="132" stroke-width="2" marker-end="url(#ah-pri)" />
+  <!-- 5 endocytosis: membrane folds in around the drug -->
+  <path class="ln-faint" d="M282 64 Q306 64 306 92 Q306 64 330 64" />
+  <circle class="pri-soft" cx="306" cy="128" r="14" />
+  <circle class="pri" cx="306" cy="128" r="5" />
+  <line class="ln" x1="306" y1="100" x2="306" y2="110" marker-end="url(#ah)" />
+  {cols.map((c) => (
+    <g>
+      <circle class="ink" cx={c.x} cy="166" r="9" />
+      <text x={c.x} y="170" text-anchor="middle" style="fill:var(--bg);font-size:10px;font-weight:700">{c.n}</text>
+      <text class="ts" y="190" text-anchor="middle" style="font-size:10px">
+        {c.lines.map((l, i) => <tspan x={c.x} dy={i ? 12 : 0}>{l}</tspan>)}
+      </text>
+    </g>
+  ))}
+  <Fragment slot="caption">Arrows show which way the drug moves. Only active transport goes uphill, against the gradient, and it uses energy (ATP).</Fragment>
+</Figure>

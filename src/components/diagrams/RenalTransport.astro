@@ -1,0 +1,18 @@
+---
+import Figure from '../Figure.astro';
+---
+<Figure viewBox="0 0 240 236" maxWidth={320} label="Nephron with three drug sites: renal tubule organic anion transporter (probenecid), ascending limb of the loop of Henle (furosemide), early distal tubule (hydrochlorothiazide)">
+  <circle class="pri-soft" cx="30" cy="40" r="18" />
+  <path class="ln-pri" d="M48 40 H90 V196 Q90 222 112 222 Q134 222 134 196 V62 Q134 40 156 40 H204" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" style="stroke-opacity:.35" />
+  <line class="ln" x1="206" y1="40" x2="234" y2="40" marker-end="url(#ah)" />
+  {[[68, 40, 1], [134, 140, 2], [176, 40, 3]].map(([x, y, n]) => (
+    <g><circle class="sec" cx={x} cy={y} r="11" /><text class="ton" x={x} y={y + 4} text-anchor="middle" style="font-size:11px">{n}</text></g>
+  ))}
+  <text class="tm" x="30" y="74" text-anchor="middle" style="font-size:10px">glomerulus</text>
+  <text class="tm" x="112" y="234" text-anchor="middle" style="font-size:10px">loop of Henle</text>
+  <ol slot="after" class="legend">
+    <li><span class="num sec">1</span><span><b>Renal tubules · organic anion transporter (OAT).</b> Probenecid</span></li>
+    <li><span class="num sec">2</span><span><b>Ascending limb of the loop of Henle · Na⁺K⁺2Cl⁻ cotransporter.</b> Furosemide</span></li>
+    <li><span class="num sec">3</span><span><b>Early distal tubule · Na⁺Cl⁻ symporter.</b> Hydrochlorothiazide</span></li>
+  </ol>
+</Figure>

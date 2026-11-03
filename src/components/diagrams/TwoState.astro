@@ -1,0 +1,26 @@
+---
+import Figure from '../Figure.astro';
+// Replaces the Ri ⇌ Ra block; carries its labels.
+const rows = [
+  { y: 82, x: 304, cls: 'good', t: 'Full agonist: binds Ra preferentially' },
+  { y: 122, x: 216, cls: 'good', op: 0.55, t: 'Partial agonist: only slightly prefers Ra' },
+  { y: 162, x: 170, cls: 'ink', t: 'Competitive antagonist: equal affinity' },
+  { y: 202, x: 36, cls: 'bad', t: 'Inverse agonist: prefers Ri' },
+];
+---
+<Figure viewBox="0 0 340 214" maxWidth={520} label="Receptor flips between inactive Ri and active Ra; each kind of drug shifts the balance a different way">
+  <rect class="bad-soft" x="4" y="6" width="64" height="40" rx="12" />
+  <text class="ts tb" x="36" y="24" text-anchor="middle">Ri</text>
+  <text class="tb" x="36" y="39" text-anchor="middle" style="font-size:10px">inactive</text>
+  <rect class="good-soft" x="272" y="6" width="64" height="40" rx="12" />
+  <text class="ts tg" x="304" y="24" text-anchor="middle">Ra</text>
+  <text class="tg" x="304" y="39" text-anchor="middle" style="font-size:10px">active</text>
+  <text class="tm" x="170" y="31" text-anchor="middle" style="font-size:18px">⇌</text>
+  {rows.map((r) => (
+    <g>
+      <line class="ln-faint" x1="36" y1={r.y} x2="304" y2={r.y} stroke-width="2" />
+      <circle class={r.cls} cx={r.x} cy={r.y} r="8" style={r.op ? `fill-opacity:${r.op}` : undefined} />
+      <text class="ts" x="170" y={r.y - 14} text-anchor="middle" style="font-size:11px">{r.t}</text>
+    </g>
+  ))}
+</Figure>

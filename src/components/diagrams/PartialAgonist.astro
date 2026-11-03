@@ -1,0 +1,18 @@
+---
+import Figure from '../Figure.astro';
+import Curves from '../Curves.astro';
+const sig = (e50: number, max: number, n = 1.6) => (lg: number) => max / (1 + Math.pow(10, (e50 - lg) * n));
+---
+<Figure viewBox="0 0 340 210" maxWidth={520} label="Buprenorphine's curve sits left of morphine's (more potent) but tops out lower (partial agonist)">
+  <Curves
+    x={[-3, 2]}
+    xLabel="Dose (log scale)"
+    yLabel="Pain relief"
+    ticks={[[-3, '0.001'], [-2, '0.01'], [-1, '0.1'], [0, '1'], [1, '10'], [2, '100']]}
+    series={[
+      { f: sig(0, 100), cls: 'ln-pri', label: 'morphine (full)', lx: 0.4, ly: 74, tcls: 'ts tp' },
+      { f: sig(-1.4, 55), cls: 'ln-sec', label: 'buprenorphine (partial)', lx: -2.9, ly: 64, tcls: 'ts tsec' },
+    ]}
+  />
+  <Fragment slot="caption">Further left: more potent. Lower top: lower ceiling.</Fragment>
+</Figure>

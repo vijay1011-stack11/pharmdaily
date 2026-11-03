@@ -1,0 +1,18 @@
+---
+import Figure from '../Figure.astro';
+---
+<Figure viewBox="0 0 340 122" maxWidth={560} label="Speed of response: ligand-gated ion channels milliseconds, GPCR seconds, enzyme-linked and JAK-STAT minutes to hours, nuclear receptors hours">
+  <line class="ln-ink" x1="16" y1="60" x2="326" y2="60" stroke-width="2" style="stroke-opacity:.35" />
+  <line class="ln" x1="300" y1="60" x2="330" y2="60" marker-end="url(#ah)" />
+  <g class="sec"><circle cx="30" cy="60" r="7" /><circle cx="118" cy="60" r="7" /><circle cx="222" cy="60" r="7" /><circle cx="252" cy="60" r="7" /><circle cx="312" cy="60" r="7" /></g>
+  <text class="ts" x="16" y="40" style="font-size:11.5px">Ligand-gated</text>
+  <text class="ts" x="118" y="88" text-anchor="middle" style="font-size:11.5px">GPCR</text>
+  <text class="ts" x="216" y="40" text-anchor="middle" style="font-size:11.5px">Enzyme-linked</text>
+  <text class="ts" x="254" y="88" text-anchor="middle" style="font-size:11.5px">JAK-STAT</text>
+  <text class="ts" x="330" y="40" text-anchor="end" style="font-size:11.5px">Nuclear</text>
+  <text class="tsec" x="30" y="112" text-anchor="middle" style="font-weight:700">ms</text>
+  <text class="tsec" x="118" y="112" text-anchor="middle" style="font-weight:700">seconds</text>
+  <text class="tsec" x="237" y="112" text-anchor="middle" style="font-weight:700">min–hours</text>
+  <text class="tsec" x="312" y="112" text-anchor="middle" style="font-weight:700">hours</text>
+  <Fragment slot="caption">Fastest: <b>ligand-gated ion channels</b>. Slowest: <b>nuclear receptors</b>.</Fragment>
+</Figure>
