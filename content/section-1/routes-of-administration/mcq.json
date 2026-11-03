@@ -1,0 +1,112 @@
+[
+  {
+    "q": "Which drug is given sublingually?",
+    "options": [
+      "Insulin",
+      "Glyceryl trinitrate",
+      "Penicillin G",
+      "Heparin"
+    ],
+    "answer": 1,
+    "explanation": "GTN is absorbed under the tongue and skips first-pass metabolism, relieving angina in minutes."
+  },
+  {
+    "q": "Which route avoids first-pass metabolism?",
+    "options": [
+      "Oral tablet",
+      "Sublingual",
+      "Enteric-coated capsule",
+      "Oral syrup"
+    ],
+    "answer": 1,
+    "explanation": "Sublingual blood drains into the jugular veins, not the portal vein."
+  },
+  {
+    "q": "Which drug is given only as an IV infusion?",
+    "options": [
+      "Ciprofloxacin",
+      "Dopamine",
+      "Ranitidine",
+      "Calcium gluconate"
+    ],
+    "answer": 1,
+    "explanation": "Dopamine, dobutamine and nitroprusside act briefly and need a controlled infusion."
+  },
+  {
+    "q": "The Mantoux test is given by which route?",
+    "options": [
+      "Subcutaneous",
+      "Intramuscular",
+      "Intradermal",
+      "Intravenous"
+    ],
+    "answer": 2,
+    "explanation": "BCG, the Mantoux test and allergen test doses are intradermal."
+  },
+  {
+    "q": "Crocin is the ____ name of paracetamol.",
+    "options": [
+      "Chemical",
+      "Code",
+      "Generic",
+      "Brand"
+    ],
+    "answer": 3,
+    "explanation": "Crocin, Calpol and Metacin are brand (proprietary) names."
+  },
+  {
+    "q": "Essential medicines are those that:",
+    "options": [
+      "Save lives",
+      "Satisfy the priority healthcare needs of the population",
+      "Are in a doctor's emergency bag",
+      "Are listed in the pharmacopoeia"
+    ],
+    "answer": 1,
+    "explanation": "The WHO definition, in KD Tripathi chapter 1."
+  },
+  {
+    "q": "Which drug is given into joints?",
+    "options": [
+      "Thiotepa",
+      "Hydrocortisone",
+      "Phentolamine",
+      "Bleomycin"
+    ],
+    "answer": 1,
+    "explanation": "Glucocorticoids such as hydrocortisone and methylprednisolone are intra-articular."
+  },
+  {
+    "q": "Which is NOT available as a skin patch?",
+    "options": [
+      "Fentanyl",
+      "Clonidine",
+      "Hyoscine",
+      "Insulin"
+    ],
+    "answer": 3,
+    "explanation": "Insulin is given subcutaneously."
+  },
+  {
+    "q": "Which drug is given into the bladder?",
+    "options": [
+      "Thiotepa",
+      "Methotrexate",
+      "Morphine",
+      "Phentolamine"
+    ],
+    "answer": 0,
+    "explanation": "Thiotepa is given intravesically."
+  },
+  {
+    "q": "Which route bypasses the liver only partly (about half)?",
+    "options": [
+      "Sublingual",
+      "Rectal",
+      "Transdermal",
+      "Intravenous"
+    ],
+    "answer": 1,
+    "explanation": "Drug absorbed into the external haemorrhoidal veins skips the liver; that into the internal veins doesn't."
+  }
+]

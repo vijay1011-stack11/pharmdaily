@@ -1,0 +1,735 @@
+<title>PharmDaily Dynamics Diagrams</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+/* Diagram edition. Same PharmDaily night world (deliberately single-theme). Phone-first single column; every concept leads with a figure, text is caption-length. indigo = drug/primary path, amber = inhibitor/drug acting, green = response up, red = blocked/down. */
+:root{
+  color-scheme:dark;
+  --bg:#0B0C1A; --surface:#10122A; --glass:rgba(255,255,255,.045); --glass-2:rgba(255,255,255,.07);
+  --line:rgba(255,255,255,.09); --line-2:rgba(255,255,255,.16);
+  --ink:#E6E8F5; --ink-strong:#FFFFFF; --muted:#A7ABC8; --faint:#8C90AE;
+  --indigo:#6D7CFF; --indigo-ink:#C9CEFF; --indigo-soft:rgba(109,124,255,.14);
+  --amber:#FFB86B; --amber-ink:#FFCF94; --amber-soft:rgba(255,184,107,.12);
+  --good:#7CE2B0; --good-soft:rgba(124,226,176,.10); --bad:#FF9B9B; --bad-soft:rgba(255,155,155,.09);
+  --lipid:rgba(255,207,148,.10);
+  --font:"Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono:"JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+*{box-sizing:border-box}
+html{background:var(--bg);-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
+body{background:var(--surface);color:var(--ink);font-family:var(--font);font-size:16.5px;line-height:1.6;overflow-x:clip}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.gut{padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.col{max-width:720px;margin:0 auto}
+h1,h2,h3{margin:0;color:var(--ink-strong);text-wrap:balance;letter-spacing:-.02em}
+h2{font-size:1.55rem;font-weight:800;margin-top:3rem}
+h3{font-size:1.08rem;font-weight:700;margin-top:2rem}
+p{margin:.5rem 0}
+b{color:var(--ink-strong)}
+a{color:var(--indigo-ink)}
+:focus-visible{outline:2px solid var(--indigo-ink);outline-offset:3px;border-radius:8px}
+button{font:inherit;color:inherit}
+
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:6;background:rgba(11,12,26,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.bar{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-block:12px 2px}
+.brand{font-weight:800;font-size:1.15rem;color:var(--ink-strong)}
+.sec{font-size:.8rem;color:var(--muted)}
+.nav{display:flex;gap:6px;overflow-x:auto;padding-block:8px 10px;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.nav a{flex:none;min-height:38px;display:inline-flex;align-items:center;padding:0 14px;border-radius:19px;border:1px solid var(--line-2);color:var(--ink);text-decoration:none;font-size:.84rem;font-weight:700;white-space:nowrap}
+.nav a:active{transform:scale(.97)}
+section{scroll-margin-top:120px}
+
+.hero{position:relative;padding-block:30px 4px}
+.hero::before{content:"";position:absolute;left:-20px;top:-40px;width:calc(100% + 40px);height:320px;background:radial-gradient(closest-side,rgba(109,124,255,.22),rgba(16,18,42,0));pointer-events:none}
+.hero>*{position:relative}
+.eyebrow{font-size:.82rem;color:var(--muted)}
+.hero h1{font-size:2.2rem;line-height:1.06;font-weight:800;letter-spacing:-.035em;margin-top:6px}
+.lede{color:#B5B9D3}
+
+/* figures */
+.fig{margin:14px 0 0;padding:14px 12px 12px;border-radius:20px;background:var(--glass);border:1px solid var(--line)}
+.fig svg{display:block;width:100%;height:auto;color:var(--ink)}
+.fig svg text{fill:var(--ink);font-family:var(--font);font-size:12px;font-weight:600}
+.fig svg .m{fill:var(--muted);font-weight:500;font-size:11px}
+.fig svg .s{fill:var(--ink-strong);font-weight:800}
+.fig svg .am{fill:var(--amber-ink)} .fig svg .gd{fill:var(--good)} .fig svg .bd{fill:var(--bad)} .fig svg .in{fill:var(--indigo-ink)}
+.fig figcaption{font-size:.86rem;color:var(--muted);margin-top:8px;padding:0 4px}
+.fig figcaption b{color:var(--ink)}
+.trio{display:grid;grid-template-columns:1fr;gap:10px;margin-top:14px}
+@media (min-width:620px){.trio{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.trio .fig{margin:0}
+.duo{display:grid;grid-template-columns:1fr;gap:10px;margin-top:14px}
+@media (min-width:560px){.duo{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.duo>*{min-width:0;margin:0}
+
+.def{background:var(--indigo-soft);border:1px solid rgba(109,124,255,.35);border-radius:18px;padding:14px 16px;margin-top:12px}
+.def .t{display:block;font-weight:800;color:var(--indigo-ink);font-size:.8rem;margin-bottom:2px}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.bdg{font-family:var(--mono);font-size:.78rem;font-weight:700;padding:3px 9px;border-radius:8px;border:1px solid var(--line-2)}
+.bdg.up{color:var(--bad);border-color:rgba(255,155,155,.4)} .bdg.same{color:var(--good);border-color:rgba(124,226,176,.4)} .bdg.down{color:var(--bad);border-color:rgba(255,155,155,.4);background:var(--bad-soft)}
+.mech h4{margin:6px 4px 0;font-size:.95rem;color:var(--ink-strong)}
+.mech p{font-size:.86rem;color:var(--muted);margin:4px 4px 0}
+.mech .badges{margin:8px 4px 0}
+
+/* match list: target → drugs */
+.match{margin-top:10px;display:grid;grid-template-columns:minmax(0,1fr);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.mrow{display:grid;grid-template-columns:minmax(0,.95fr) 18px minmax(0,1.2fr);align-items:center;gap:8px;padding:10px 14px;font-size:.9rem}
+.mrow+.mrow{border-top:1px solid rgba(255,255,255,.07)}
+.mrow .tg{font-weight:700;color:var(--indigo-ink)}
+.mrow .ar{color:var(--faint);text-align:center}
+.mrow .dr{color:var(--amber-ink);font-weight:700}
+.mrow small{display:block;color:var(--muted);font-weight:500;font-size:.78rem}
+
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.chip{display:inline-flex;align-items:center;min-height:30px;padding:3px 12px;border-radius:15px;border:1px solid var(--line-2);font-size:.82rem;font-weight:600;background:rgba(255,255,255,.02)}
+.chip.am{border-color:rgba(255,184,107,.45);color:var(--amber-ink)}
+
+/* ion board */
+.board{display:grid;grid-template-columns:1fr;gap:10px;margin-top:12px}
+@media (min-width:620px){.board{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.ion{border-radius:18px;border:1px solid var(--line);background:var(--glass);overflow:hidden}
+.ion .hd{display:flex;align-items:baseline;gap:8px;padding:10px 14px;background:var(--indigo-soft);border-bottom:1px solid var(--line)}
+.ion .hd b{font-size:1.25rem;font-family:var(--mono)}
+.ion .hd span{font-size:.78rem;color:var(--muted)}
+.it{padding:10px 14px;display:flex;flex-direction:column;gap:2px}
+.it+.it{border-top:1px solid rgba(255,255,255,.07)}
+.it .d{font-weight:800;color:var(--ink-strong);font-size:.92rem}
+.act{align-self:flex-start;font-size:.7rem;font-weight:800;padding:2px 8px;border-radius:999px}
+.act.blk{background:var(--bad-soft);color:var(--bad);border:1px solid rgba(255,155,155,.4)}
+.act.opn{background:var(--good-soft);color:var(--good);border:1px solid rgba(124,226,176,.4)}
+.act.mod{background:var(--amber-soft);color:var(--amber-ink);border:1px solid rgba(255,184,107,.4)}
+.it small{color:var(--muted);font-size:.8rem}
+
+.legend{margin-top:10px;display:flex;flex-direction:column;gap:8px}
+.lg{display:grid;grid-template-columns:28px minmax(0,1fr);gap:10px;align-items:start;font-size:.9rem}
+.num{width:26px;height:26px;border-radius:50%;background:var(--amber);color:var(--bg);font-weight:800;display:grid;place-items:center;font-size:.8rem}
+
+.terms{display:grid;grid-template-columns:1fr;gap:8px;margin-top:12px}
+@media (min-width:560px){.terms{grid-template-columns:1fr 1fr}}
+.term{border:1px solid var(--line);border-radius:16px;padding:12px 14px;background:rgba(255,255,255,.025)}
+.term b{display:block;color:var(--indigo-ink)}
+.term span{font-size:.9rem}
+
+.card{background:var(--glass);border:1px solid var(--line);border-radius:18px;padding:14px 16px;margin-top:12px}
+.card>b:first-child{display:block;margin-bottom:4px}
+ul{margin:.3rem 0;padding-left:1.1rem} li{margin:.2rem 0} li::marker{color:var(--faint)}
+
+.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:4px;border-radius:22px;background:var(--glass-2);margin-top:12px}
+.tabs button{min-height:40px;border:0;border-radius:18px;background:transparent;color:var(--muted);font-weight:700;font-size:.85rem;cursor:pointer;touch-action:manipulation}
+.tabs button[aria-selected="true"]{background:var(--ink-strong);color:var(--bg)}
+.chain{display:flex;flex-direction:column;margin-top:12px}
+.lnk{background:var(--glass);border:1px solid var(--line);border-radius:14px;padding:10px 14px;font-size:.92rem}
+.lnk.ok{background:var(--good-soft);border-color:rgba(124,226,176,.4)}
+.dn{align-self:center;color:var(--faint);line-height:1;padding:4px 0}
+
+.fam{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.speed{font-family:var(--mono);font-size:.74rem;font-weight:700;color:var(--amber-ink);border:1px solid rgba(255,184,107,.4);border-radius:8px;padding:2px 8px}
+
+.src{display:inline-flex;font-size:.68rem;font-weight:800;padding:1px 7px;border-radius:999px;border:1px solid rgba(201,206,255,.4);color:var(--indigo-ink);vertical-align:middle;margin-left:6px}
+.note{color:var(--muted);font-size:.88rem}
+footer{color:var(--faint);font-size:.82rem;border-top:1px solid var(--line);padding-block:20px 34px;background:var(--bg);margin-top:48px}
+main{padding-block:0 20px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#A7ABC8"/></marker>
+<marker id="ahA" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#FFB86B"/></marker>
+<marker id="ahG" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#7CE2B0"/></marker>
+<pattern id="lip" width="8" height="8" patternUnits="userSpaceOnUse"><circle cx="4" cy="4" r="1.6" fill="#FFCF94" opacity=".35"/></pattern>
+</defs></svg>
+
+<header>
+  <div class="gut"><div class="col">
+    <div class="bar"><span class="brand">PharmDaily</span><span class="sec">Chapter 4 · Pharmacodynamics · diagram edition</span></div>
+    <nav class="nav" aria-label="Jump to">
+      <a href="#targets">Targets</a><a href="#enzymes">Enzymes</a><a href="#channels">Ion channels</a><a href="#transporters">Transporters</a><a href="#receptors">Receptors</a><a href="#families">Receptor families</a><a href="#regulation">Regulation</a><a href="#dose">Dose–response</a><a href="#combos">Combinations</a>
+    </nav>
+  </div></div>
+</header>
+
+<main class="gut"><div class="col">
+
+<div class="hero">
+  <div class="eyebrow">Chapter 4 · Pharmacodynamics</div>
+  <h1>What the drug does to the body</h1>
+  <p class="lede">Drugs don't give cells new jobs. They speed up or slow down what cells already do. Every idea below starts with a picture.</p>
+</div>
+
+<!-- ============ TARGETS ============ -->
+<section id="targets">
+  <h2>Ways drugs act</h2>
+  <figure class="fig">
+    <svg viewBox="0 0 360 250" role="img" aria-label="A drug acts by binding one of four protein targets: receptors, enzymes, ion channels or transporters">
+      <circle cx="180" cy="125" r="34" fill="#FFB86B"/><text x="180" y="130" text-anchor="middle" class="s" style="fill:#0B0C1A">Drug</text>
+      <g stroke="#A7ABC8" stroke-width="1.5" fill="none">
+        <line x1="152" y1="106" x2="102" y2="70" marker-end="url(#ah)"/><line x1="208" y1="106" x2="258" y2="70" marker-end="url(#ah)"/>
+        <line x1="152" y1="144" x2="102" y2="180" marker-end="url(#ah)"/><line x1="208" y1="144" x2="258" y2="180" marker-end="url(#ah)"/>
+      </g>
+      <rect x="10" y="22" width="110" height="46" rx="14" fill="rgba(109,124,255,.18)" stroke="#6D7CFF"/><text x="65" y="44" text-anchor="middle" class="s">Receptors</text><text x="65" y="59" text-anchor="middle" class="m">most drugs</text>
+      <rect x="240" y="22" width="110" height="46" rx="14" fill="rgba(109,124,255,.18)" stroke="#6D7CFF"/><text x="295" y="44" text-anchor="middle" class="s">Enzymes</text><text x="295" y="59" text-anchor="middle" class="m">inhibited</text>
+      <rect x="10" y="182" width="110" height="46" rx="14" fill="rgba(109,124,255,.18)" stroke="#6D7CFF"/><text x="65" y="204" text-anchor="middle" class="s">Ion channels</text><text x="65" y="219" text-anchor="middle" class="m">blocked or opened</text>
+      <rect x="240" y="182" width="110" height="46" rx="14" fill="rgba(109,124,255,.18)" stroke="#6D7CFF"/><text x="295" y="204" text-anchor="middle" class="s">Transporters</text><text x="295" y="219" text-anchor="middle" class="m">blocked</text>
+    </svg>
+    <figcaption>Most drugs bind a <b>protein target</b>, which is what makes them selective.</figcaption>
+  </figure>
+  <div class="match">
+    <div class="mrow"><span class="tg">Stimulation</span><span class="ar">→</span><span class="dr">Adrenaline (heart), pilocarpine (salivary glands)<small>Too much can tip into depression: picrotoxin, convulsions then coma</small></span></div>
+    <div class="mrow"><span class="tg">Depression</span><span class="ar">→</span><span class="dr">Barbiturates (CNS), quinidine (heart), omeprazole (acid)</span></div>
+    <div class="mrow"><span class="tg">Irritation</span><span class="ar">→</span><span class="dr">Non-selective, often harmful<small>On less specialised cells</small></span></div>
+    <div class="mrow"><span class="tg">Replacement</span><span class="ar">→</span><span class="dr">Levodopa, insulin, iron<small>Parkinsonism, diabetes, anaemia</small></span></div>
+    <div class="mrow"><span class="tg">Anti-infective</span><span class="ar">→</span><span class="dr">Kills or stops microbes</span></div>
+    <div class="mrow"><span class="tg">Cytotoxic</span><span class="ar">→</span><span class="dr">Kills cancer cells</span></div>
+    <div class="mrow"><span class="tg">Immune modification <span class="src">KDT</span></span><span class="ar">→</span><span class="dr">Vaccines, cyclosporine</span></div>
+  </div>
+  <p class="note" style="margin-top:12px">A few act by a physical or chemical property, with no protein target:</p>
+  <div class="chips"><span class="chip">Ispaghula · bulk</span><span class="chip">Petroleum jelly · lubricant</span><span class="chip">Activated charcoal · adsorbs</span><span class="chip">Mannitol · osmosis</span><span class="chip">Antacids · neutralise</span><span class="chip">EDTA, dimercaprol · chelate</span><span class="chip">Cholestyramine · binds bile acids</span></div>
+</section>
+
+<!-- ============ ENZYMES ============ -->
+<section id="enzymes">
+  <h2>Enzymes <span class="src">KDT</span></h2>
+  <p>An inhibitor either takes the enzyme's catalytic site, or binds next to it and bends the enzyme out of shape.</p>
+  <div class="trio">
+    <figure class="fig mech">
+      <svg viewBox="0 0 200 150" role="img" aria-label="Competitive inhibitor sits in the catalytic site; substrate competes for it">
+        <path d="M20 70 H80 A20 20 0 0 0 120 70 H180 V138 H20 Z" fill="rgba(109,124,255,.18)" stroke="#6D7CFF" stroke-width="1.5"/>
+        <circle cx="100" cy="70" r="17" fill="#FFB86B"/><text x="100" y="75" text-anchor="middle" class="s" style="fill:#0B0C1A">I</text>
+        <circle cx="38" cy="28" r="14" fill="none" stroke="#C9CEFF" stroke-width="1.5" stroke-dasharray="4 3"/><text x="38" y="33" text-anchor="middle" class="in">S</text>
+        <path d="M54 34 Q70 44 78 54" fill="none" stroke="#A7ABC8" stroke-width="1.4" marker-end="url(#ah)"/>
+        <text x="140" y="34" text-anchor="middle" class="m">both fit the site</text>
+        <text x="100" y="118" text-anchor="middle" class="m">enzyme</text>
+      </svg>
+      <h4>Competitive (equilibrium type)</h4>
+      <p>Looks like the substrate and competes for the catalytic site. No product, or a useless one. Enough substrate pushes the inhibitor off.</p>
+      <div class="badges"><span class="bdg up">Km ↑</span><span class="bdg same">Vmax =</span></div>
+    </figure>
+    <figure class="fig mech">
+      <svg viewBox="0 0 200 150" role="img" aria-label="Non-equilibrium inhibitor locked into the catalytic site by a covalent bond">
+        <path d="M20 70 H80 A20 20 0 0 0 120 70 H180 V138 H20 Z" fill="rgba(109,124,255,.18)" stroke="#6D7CFF" stroke-width="1.5"/>
+        <circle cx="100" cy="70" r="17" fill="#FFB86B"/><text x="100" y="75" text-anchor="middle" class="s" style="fill:#0B0C1A">I</text>
+        <g stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round"><line x1="93" y1="88" x2="93" y2="98"/><line x1="100" y1="89" x2="100" y2="99"/><line x1="107" y1="88" x2="107" y2="98"/></g>
+        <circle cx="38" cy="28" r="14" fill="none" stroke="#C9CEFF" stroke-width="1.5" stroke-dasharray="4 3"/><text x="38" y="33" text-anchor="middle" class="in">S</text>
+        <line x1="60" y1="20" x2="72" y2="36" stroke="#FF9B9B" stroke-width="2"/><line x1="72" y1="20" x2="60" y2="36" stroke="#FF9B9B" stroke-width="2"/>
+        <text x="140" y="34" text-anchor="middle" class="m">can't displace</text>
+        <text x="100" y="118" text-anchor="middle" class="m">covalent bond</text>
+      </svg>
+      <h4>Non-equilibrium</h4>
+      <p>Same site, but a covalent bond or very high affinity: substrate can't push it off. Organophosphates on cholinesterase; methotrexate binds DHFR 50,000× more than DHFA.</p>
+      <div class="badges"><span class="bdg up">Km ↑</span><span class="bdg down">Vmax ↓</span></div>
+    </figure>
+    <figure class="fig mech">
+      <svg viewBox="0 0 200 150" role="img" aria-label="Non-competitive inhibitor binds an adjacent site and distorts the catalytic site">
+        <path d="M20 70 H90 A10 10 0 0 0 110 70 H180 V92 A11 11 0 0 0 180 114 V138 H20 Z" fill="rgba(109,124,255,.18)" stroke="#6D7CFF" stroke-width="1.5"/>
+        <circle cx="181" cy="103" r="10" fill="#FFB86B"/><text x="181" y="107" text-anchor="middle" class="s" style="fill:#0B0C1A;font-size:10px">I</text>
+        <circle cx="100" cy="46" r="15" fill="none" stroke="#C9CEFF" stroke-width="1.5" stroke-dasharray="4 3"/><text x="100" y="51" text-anchor="middle" class="in">S</text>
+        <text x="46" y="34" text-anchor="middle" class="m">site too small</text>
+        <text x="100" y="118" text-anchor="middle" class="m">adjacent site</text>
+      </svg>
+      <h4>Non-competitive</h4>
+      <p>Binds an adjacent site, not the catalytic site, and changes the enzyme so it loses its catalytic property.</p>
+      <div class="badges"><span class="bdg same">Km =</span><span class="bdg down">Vmax ↓</span></div>
+    </figure>
+  </div>
+  <figure class="fig">
+    <svg id="mm" viewBox="0 0 340 210" role="img" aria-label="Reaction velocity against substrate: competitive reaches the same Vmax later; non-competitive has a lower Vmax"></svg>
+    <figcaption><b>Read the curves:</b> competitive needs more substrate for half-maximal velocity (Km ↑) but still reaches the top. Non-competitive never reaches it (Vmax ↓).</figcaption>
+  </figure>
+
+  <h3>Competitive inhibitors</h3>
+  <div class="match">
+    <div class="mrow"><span class="tg">Cholinesterase</span><span class="ar">→</span><span class="dr">Physostigmine, neostigmine</span></div>
+    <div class="mrow"><span class="tg">MAO-A</span><span class="ar">→</span><span class="dr">Moclobemide</span></div>
+    <div class="mrow"><span class="tg">Dopa decarboxylase</span><span class="ar">→</span><span class="dr">Carbidopa, benserazide</span></div>
+    <div class="mrow"><span class="tg">Xanthine oxidase</span><span class="ar">→</span><span class="dr">Allopurinol</span></div>
+    <div class="mrow"><span class="tg">ACE</span><span class="ar">→</span><span class="dr">Captopril, enalapril, ramipril</span></div>
+    <div class="mrow"><span class="tg">5α-reductase</span><span class="ar">→</span><span class="dr">Finasteride</span></div>
+    <div class="mrow"><span class="tg">Aromatase</span><span class="ar">→</span><span class="dr">Letrozole, anastrozole</span></div>
+    <div class="mrow"><span class="tg">Bacterial folate synthase</span><span class="ar">→</span><span class="dr">Sulfadiazine</span></div>
+  </div>
+  <h3>Non-competitive inhibitors</h3>
+  <div class="match">
+    <div class="mrow"><span class="tg">Carbonic anhydrase</span><span class="ar">→</span><span class="dr">Acetazolamide</span></div>
+    <div class="mrow"><span class="tg">Cyclooxygenase</span><span class="ar">→</span><span class="dr">Aspirin, indomethacin</span></div>
+    <div class="mrow"><span class="tg">Aldehyde dehydrogenase</span><span class="ar">→</span><span class="dr">Disulfiram</span></div>
+    <div class="mrow"><span class="tg">H⁺K⁺ ATPase</span><span class="ar">→</span><span class="dr">Omeprazole</span></div>
+    <div class="mrow"><span class="tg">Na⁺K⁺ ATPase</span><span class="ar">→</span><span class="dr">Digoxin</span></div>
+    <div class="mrow"><span class="tg">Phosphodiesterase</span><span class="ar">→</span><span class="dr">Theophylline</span></div>
+    <div class="mrow"><span class="tg">Thyroid peroxidase</span><span class="ar">→</span><span class="dr">Propylthiouracil</span></div>
+    <div class="mrow"><span class="tg">HMG-CoA reductase</span><span class="ar">→</span><span class="dr">Lovastatin</span></div>
+    <div class="mrow"><span class="tg">Phosphodiesterase-5</span><span class="ar">→</span><span class="dr">Sildenafil</span></div>
+  </div>
+</section>
+
+<!-- ============ ION CHANNELS ============ -->
+<section id="channels">
+  <h2>Ion channels <span class="src">KDT</span></h2>
+  <figure class="fig">
+    <svg viewBox="0 0 360 180" role="img" aria-label="An open ion channel lets ions cross the membrane; a drug plugging the pore blocks them">
+      <text x="10" y="18" class="m">outside</text><text x="10" y="172" class="m">inside</text>
+      <rect x="0" y="62" width="360" height="52" fill="url(#lip)"/><line x1="0" y1="62" x2="360" y2="62" stroke="#FFCF94" stroke-opacity=".4"/><line x1="0" y1="114" x2="360" y2="114" stroke="#FFCF94" stroke-opacity=".4"/>
+      <rect x="66" y="50" width="26" height="76" rx="9" fill="#6D7CFF"/><rect x="104" y="50" width="26" height="76" rx="9" fill="#6D7CFF"/>
+      <g fill="#7CE2B0"><circle cx="98" cy="22" r="6"/><circle cx="98" cy="150" r="6"/></g>
+      <line x1="98" y1="32" x2="98" y2="138" stroke="#7CE2B0" stroke-width="2" marker-end="url(#ahG)"/>
+      <text x="98" y="174" text-anchor="middle" class="gd">ions flow</text>
+      <rect x="226" y="50" width="26" height="76" rx="9" fill="#6D7CFF"/><rect x="264" y="50" width="26" height="76" rx="9" fill="#6D7CFF"/>
+      <rect x="250" y="56" width="16" height="26" rx="6" fill="#FFB86B"/>
+      <circle cx="258" cy="22" r="6" fill="#7CE2B0"/><line x1="258" y1="32" x2="258" y2="50" stroke="#7CE2B0" stroke-width="2"/>
+      <line x1="248" y1="36" x2="268" y2="50" stroke="#FF9B9B" stroke-width="2.4"/><line x1="268" y1="36" x2="248" y2="50" stroke="#FF9B9B" stroke-width="2.4"/>
+      <text x="298" y="74" class="am">drug</text><text x="298" y="88" class="am">plugs it</text>
+      <text x="258" y="150" text-anchor="middle" class="bd">blocked</text>
+    </svg>
+    <figcaption><b>Ion channels</b> are proteins that act as ion-selective channels. They take part in signalling across the membrane and set the ionic composition inside the cell, which makes them a common drug target.</figcaption>
+  </figure>
+  <div class="terms">
+    <div class="term"><b>Ligand-gated</b><span>Opened directly by a signal molecule. These are receptors themselves, e.g. nicotinic.</span></div>
+    <div class="term"><b>G-protein regulated</b><span>Opened through a G-protein, e.g. the Ca²⁺ channel activated by the cardiac β receptor.</span></div>
+    <div class="term"><b>Voltage-operated, stretch-sensitive</b><span>Drugs bind the channel directly and change ion flow, e.g. local anaesthetics.</span></div>
+  </div>
+  <h3>Sorted by ion</h3>
+  <div class="board">
+    <div class="ion"><div class="hd"><b>Na⁺</b><span>sodium channels</span></div>
+      <div class="it"><span class="d">Local anaesthetics</span><span class="act blk">blocks</span><small>Voltage-sensitive Na⁺ channels in nerves</small></div>
+      <div class="it"><span class="d">Quinidine</span><span class="act blk">blocks</span><small>Myocardial Na⁺ channels</small></div>
+      <div class="it"><span class="d">Amiloride</span><span class="act blk">blocks</span><small>Renal epithelial Na⁺ channels</small></div>
+      <div class="it"><span class="d">Phenytoin</span><span class="act mod">prolongs inactivated state</span><small>Voltage-sensitive neuronal Na⁺ channels</small></div>
+    </div>
+    <div class="ion"><div class="hd"><b>K⁺</b><span>potassium channels</span></div>
+      <div class="it"><span class="d">Dofetilide, amiodarone</span><span class="act blk">blocks</span><small>Myocardial delayed rectifier K⁺ channel</small></div>
+      <div class="it"><span class="d">Nicorandil</span><span class="act opn">opens</span><small>ATP-sensitive K⁺ channels</small></div>
+      <div class="it"><span class="d">Sulfonylureas</span><span class="act blk">blocks</span><small>Pancreatic ATP-sensitive K⁺ channels</small></div>
+    </div>
+    <div class="ion"><div class="hd"><b>Ca²⁺</b><span>calcium channels</span></div>
+      <div class="it"><span class="d">Nifedipine</span><span class="act blk">blocks</span><small>L-type voltage-sensitive Ca²⁺ channel</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TRANSPORTERS ============ -->
+<section id="transporters">
+  <h2>Transporters <span class="src">KDT</span></h2>
+  <div class="def"><span class="t">Definition</span>Carrier proteins that move substrates across membranes: by facilitated diffusion down the gradient, or by pumping against it with metabolic energy. Many drugs bind the solute carrier (SLC) class and block the normal transport of a metabolite or ion.</div>
+  <h3>In the nerve ending: reuptake blockers</h3>
+  <figure class="fig">
+    <svg viewBox="0 0 360 230" role="img" aria-label="Transmitters are taken back into the nerve ending by NET, SERT, DAT and GAT1, and into vesicles by VMAT-2; each is blocked by a drug">
+      <rect x="10" y="8" width="340" height="112" rx="28" fill="rgba(109,124,255,.10)" stroke="#6D7CFF" stroke-opacity=".5"/>
+      <text x="30" y="30" class="m">nerve ending</text>
+      <circle cx="70" cy="74" r="22" fill="none" stroke="#FFB86B" stroke-width="1.5"/><g fill="#FFCF94"><circle cx="63" cy="70" r="3"/><circle cx="75" cy="66" r="3"/><circle cx="70" cy="80" r="3"/><circle cx="79" cy="79" r="3"/></g>
+      <rect x="86" y="62" width="14" height="10" rx="3" fill="#6D7CFF"/>
+      <text x="108" y="64" class="s" style="font-size:11.5px">VMAT-2 into vesicle</text><text x="108" y="79" class="am">reserpine blocks</text><text x="108" y="93" class="m">noradrenaline, 5-HT</text>
+      <g class="slots">
+        <rect x="42" y="112" width="40" height="16" rx="4" fill="#6D7CFF"/><text x="62" y="124" text-anchor="middle" class="s" style="fill:#0B0C1A;font-size:10px">NET</text>
+        <rect x="122" y="112" width="40" height="16" rx="4" fill="#6D7CFF"/><text x="142" y="124" text-anchor="middle" class="s" style="fill:#0B0C1A;font-size:10px">SERT</text>
+        <rect x="202" y="112" width="40" height="16" rx="4" fill="#6D7CFF"/><text x="222" y="124" text-anchor="middle" class="s" style="fill:#0B0C1A;font-size:10px">DAT</text>
+        <rect x="282" y="112" width="40" height="16" rx="4" fill="#6D7CFF"/><text x="302" y="124" text-anchor="middle" class="s" style="fill:#0B0C1A;font-size:10px">GAT1</text>
+      </g>
+      <g stroke="#7CE2B0" stroke-width="1.8">
+        <line x1="62" y1="168" x2="62" y2="134" marker-end="url(#ahG)"/><line x1="142" y1="168" x2="142" y2="134" marker-end="url(#ahG)"/><line x1="222" y1="168" x2="222" y2="134" marker-end="url(#ahG)"/><line x1="302" y1="168" x2="302" y2="134" marker-end="url(#ahG)"/>
+      </g>
+      <g stroke="#FF9B9B" stroke-width="2.4"><line x1="54" y1="144" x2="70" y2="158"/><line x1="70" y1="144" x2="54" y2="158"/><line x1="134" y1="144" x2="150" y2="158"/><line x1="150" y1="144" x2="134" y2="158"/><line x1="214" y1="144" x2="230" y2="158"/><line x1="230" y1="144" x2="214" y2="158"/><line x1="294" y1="144" x2="310" y2="158"/><line x1="310" y1="144" x2="294" y2="158"/></g>
+      <text x="62" y="186" text-anchor="middle" class="m">noradrenaline</text><text x="142" y="186" text-anchor="middle" class="m">5-HT</text><text x="222" y="186" text-anchor="middle" class="m">dopamine</text><text x="302" y="186" text-anchor="middle" class="m">GABA</text>
+      <text x="62" y="203" text-anchor="middle" class="am">desipramine</text><text x="62" y="217" text-anchor="middle" class="am">cocaine</text>
+      <text x="142" y="203" text-anchor="middle" class="am">fluoxetine</text><text x="142" y="217" text-anchor="middle" class="am">(SSRIs)</text>
+      <text x="222" y="203" text-anchor="middle" class="am">amphetamines</text>
+      <text x="302" y="203" text-anchor="middle" class="am">tiagabine</text>
+    </svg>
+    <figcaption>Green arrows are normal reuptake into the neuron; each red cross is the drug that blocks it.</figcaption>
+  </figure>
+  <h3>In the kidney: diuretics and probenecid</h3>
+  <figure class="fig">
+    <svg viewBox="0 0 230 250" role="img" aria-label="Nephron with three numbered drug sites: proximal tubule, thick ascending limb, early distal tubule" style="max-width:300px;margin:0 auto">
+      <circle cx="30" cy="40" r="18" fill="rgba(109,124,255,.18)" stroke="#6D7CFF"/>
+      <path d="M48 40 H90 V200 Q90 228 112 228 Q134 228 134 200 V62 Q134 40 156 40 H196" fill="none" stroke="#C9CEFF" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" opacity=".85"/>
+      <line x1="196" y1="40" x2="222" y2="40" stroke="#A7ABC8" stroke-width="1.5" marker-end="url(#ah)"/>
+      <circle cx="68" cy="40" r="11" fill="#FFB86B"/><text x="68" y="44.5" text-anchor="middle" class="s" style="fill:#0B0C1A">1</text>
+      <circle cx="134" cy="140" r="11" fill="#FFB86B"/><text x="134" y="144.5" text-anchor="middle" class="s" style="fill:#0B0C1A">2</text>
+      <circle cx="172" cy="40" r="11" fill="#FFB86B"/><text x="172" y="44.5" text-anchor="middle" class="s" style="fill:#0B0C1A">3</text>
+      <text x="30" y="76" text-anchor="middle" class="m">glomerulus</text><text x="90" y="246" text-anchor="middle" class="m">loop of Henle</text>
+    </svg>
+    <div class="legend">
+      <div class="lg"><span class="num">1</span><span><b>Renal tubule · organic anion transporter (OAT).</b> Probenecid blocks active transport of organic acids (uric acid, penicillin).</span></div>
+      <div class="lg"><span class="num">2</span><span><b>Ascending limb of loop of Henle · Na⁺K⁺2Cl⁻ cotransporter.</b> Furosemide blocks it.</span></div>
+      <div class="lg"><span class="num">3</span><span><b>Early distal tubule · Na⁺Cl⁻ symporter.</b> Hydrochlorothiazide blocks it.</span></div>
+    </div>
+  </figure>
+</section>
+
+<!-- ============ RECEPTORS ============ -->
+<section id="receptors">
+  <h2>Receptors</h2>
+  <div class="def"><span class="t">Definition <span class="src">KDT</span></span><b>Receptor:</b> a macromolecule, or a binding site on it, located on the surface or inside the effector cell. It recognises the signal molecule or drug and starts the response, but has no other function of its own.</div>
+  <p class="note">Most drugs don't bind effectors (enzymes, channels, transporters, structural proteins) directly. They act through the regulatory macromolecules that control them: the receptors.</p>
+
+  <h3>Receptor occupation theory <span class="src">KDT</span></h3>
+  <figure class="fig">
+    <svg viewBox="0 0 360 200" role="img" aria-label="Clark: D plus R forms DR which gives effect. Ariëns and Stephenson: DR must also produce a stimulus before the effect">
+      <text x="10" y="22" class="m">Clark, 1937 · law of mass action</text>
+      <g font-size="20"><text x="30" y="62" class="s" style="font-size:20px">D + R</text><text x="104" y="62" class="m" style="font-size:20px">⇌</text><text x="136" y="62" class="s" style="font-size:20px">DR</text><text x="176" y="62" class="m" style="font-size:20px">→</text><text x="206" y="62" class="gd" style="font-size:20px;font-weight:800">E</text></g>
+      <text x="232" y="60" class="m">effect = direct function of DR</text>
+      <line x1="10" y1="88" x2="350" y2="88" stroke="rgba(255,255,255,.1)"/>
+      <text x="10" y="112" class="m">Ariëns and Stephenson · occupation is not enough</text>
+      <text x="30" y="150" class="s" style="font-size:20px">D + R</text><text x="104" y="150" class="m" style="font-size:20px">⇌</text><text x="136" y="150" class="s" style="font-size:20px">DR</text><text x="176" y="150" class="m" style="font-size:20px">→</text><text x="206" y="150" class="am" style="font-size:20px;font-weight:800">S</text><text x="230" y="150" class="m" style="font-size:20px">→</text><text x="262" y="150" class="gd" style="font-size:20px;font-weight:800">E</text>
+      <path d="M100 160 Q112 172 124 160" fill="none" stroke="#C9CEFF" stroke-width="1.5"/><text x="112" y="188" text-anchor="middle" class="in">affinity</text>
+      <path d="M170 160 Q192 176 214 160" fill="none" stroke="#FFCF94" stroke-width="1.5"/><text x="212" y="188" text-anchor="middle" class="am">intrinsic activity</text>
+    </svg>
+    <figcaption>The drug must also cause a <b>conformational change</b> in the receptor. That change produces a stimulus (S), stronger or weaker depending on the agonist.</figcaption>
+  </figure>
+  <div class="duo">
+    <div class="def" style="margin:0"><span class="t">Affinity</span>The ability to bind the receptor. It sets the concentration of drug needed to form a given number of drug–receptor complexes. Higher affinity: the same number forms at a lower concentration.</div>
+    <div class="def" style="margin:0;background:var(--amber-soft);border-color:rgba(255,184,107,.4)"><span class="t" style="color:var(--amber-ink)">Intrinsic activity (efficacy)</span>The capacity to cause a functional change in the receptor, from 0 (nil) to 1 (maximal). Independent of affinity.</div>
+  </div>
+
+  <h3>Key terms, by the response they give</h3>
+  <figure class="fig">
+    <svg viewBox="0 0 360 250" role="img" aria-label="Response bars: agonist full positive, partial agonist half, antagonist zero, inverse agonist negative">
+      <line x1="180" y1="10" x2="180" y2="214" stroke="#FFFFFF" stroke-opacity=".5" stroke-width="1.5"/>
+      <text x="180" y="232" text-anchor="middle" class="m">0 · no response</text><text x="350" y="232" text-anchor="end" class="gd">+1</text><text x="10" y="232" class="bd">−1</text>
+      <text x="10" y="30" class="s">Agonist</text><rect x="180" y="18" width="160" height="18" rx="4" fill="#7CE2B0"/><text x="10" y="46" class="m">IA = 1 · adrenaline, morphine</text>
+      <text x="10" y="80" class="s">Partial agonist</text><rect x="180" y="68" width="78" height="18" rx="4" fill="#7CE2B0" fill-opacity=".6"/><text x="10" y="96" class="m">IA 0 to 1 · pindolol, buprenorphine</text>
+      <text x="10" y="130" class="s">Antagonist</text><rect x="176" y="118" width="8" height="18" rx="2" fill="#FFFFFF"/><text x="192" y="132" class="m">blocks the agonist</text><text x="10" y="146" class="m">IA = 0 · atropine, naloxone</text>
+      <text x="350" y="180" text-anchor="end" class="s">Inverse agonist</text><rect x="70" y="168" width="110" height="18" rx="4" fill="#FF9B9B"/><text x="350" y="196" text-anchor="end" class="m">IA 0 to −1 · DMCM</text>
+    </svg>
+    <figcaption>All four bind the receptor (they are all <b>ligands</b>). They differ only in what binding does.</figcaption>
+  </figure>
+  <div class="terms">
+    <div class="term"><b>Ligand</b><span>Any molecule that attaches selectively to a particular receptor or site. Means only affinity, regardless of functional change. Agonists and competitive antagonists are both ligands of the same receptor.</span></div>
+    <div class="term"><b>Agonist</b><span>Activates a receptor to produce an effect similar to that of the physiological signal molecule.</span></div>
+    <div class="term"><b>Partial agonist</b><span>Activates a receptor to produce a submaximal effect, but antagonises the action of a full agonist.</span></div>
+    <div class="term"><b>Antagonist</b><span>Prevents the action of an agonist on a receptor, or the response that follows, but has no effect of its own.</span></div>
+    <div class="term"><b>Inverse agonist</b><span>Activates a receptor to produce an effect opposite to that of the agonist. Seen only with constitutively active receptors, e.g. the benzodiazepine receptor.</span></div>
+  </div>
+
+  <h3>Two-state model <span class="src">KDT</span></h3>
+  <figure class="fig">
+    <svg viewBox="0 0 360 200" role="img" aria-label="Receptor flips between inactive Ri and active Ra; each drug type pulls the balance a different way">
+      <rect x="10" y="10" width="64" height="28" rx="14" fill="rgba(255,155,155,.16)" stroke="#FF9B9B"/><text x="42" y="29" text-anchor="middle" class="bd" style="font-weight:800">Ri</text>
+      <rect x="286" y="10" width="64" height="28" rx="14" fill="rgba(124,226,176,.16)" stroke="#7CE2B0"/><text x="318" y="29" text-anchor="middle" class="gd" style="font-weight:800">Ra</text>
+      <text x="180" y="29" text-anchor="middle" class="m">inactive ⇌ active</text>
+      <g stroke="rgba(255,255,255,.18)" stroke-width="2"><line x1="42" y1="62" x2="318" y2="62"/><line x1="42" y1="98" x2="318" y2="98"/><line x1="42" y1="134" x2="318" y2="134"/><line x1="42" y1="170" x2="318" y2="170"/></g>
+      <circle cx="318" cy="62" r="9" fill="#7CE2B0"/><text x="180" y="56" text-anchor="middle" class="s" style="font-size:11.5px">Full agonist: prefers Ra</text>
+      <circle cx="225" cy="98" r="9" fill="#7CE2B0" fill-opacity=".6"/><text x="180" y="92" text-anchor="middle" class="s" style="font-size:11.5px">Partial agonist: slightly Ra</text>
+      <circle cx="180" cy="134" r="9" fill="#FFFFFF"/><text x="180" y="122" text-anchor="middle" class="s" style="font-size:11.5px">Antagonist: equal, no shift</text>
+      <circle cx="42" cy="170" r="9" fill="#FF9B9B"/><text x="180" y="164" text-anchor="middle" class="s" style="font-size:11.5px">Inverse agonist: prefers Ri</text>
+    </svg>
+    <figcaption>Full agonist: adrenaline, histamine, morphine. Partial: pentazocine. Antagonist: atropine, propranolol, naloxone. Inverse: chlorpheniramine (H1), DMCM.</figcaption>
+  </figure>
+
+  <h3>Why a partial agonist has a lower ceiling <span class="src">KDT</span></h3>
+  <figure class="fig">
+    <svg id="partial" viewBox="0 0 340 210" role="img" aria-label="Buprenorphine curve sits left of morphine (more potent) but tops out lower (partial agonist)"></svg>
+    <figcaption>Buprenorphine is <b>25× more potent</b> than morphine (curve further left) but can't relieve very severe pain or deeply depress respiration (lower top). The lower ceiling is not due to low affinity.</figcaption>
+  </figure>
+  <div class="card"><b>It also blocks the full agonist</b>It occupies many receptors while giving a small response, leaving fewer for morphine. So buprenorphine <b>precipitates withdrawal</b> in a highly morphine-dependent person, but can substitute at lower levels of dependence.</div>
+  <div class="duo">
+    <div class="card" style="margin:0"><b>Spare receptors <span class="src">KDT</span></b>Many full agonists give a maximal response while occupying under 1% of receptors. The rest are a reserve.</div>
+    <div class="card" style="margin:0"><b>Silent receptors <span class="src">KDT</span></b>Sites that bind a drug but give no response, like plasma proteins. Better called drug acceptors or "sites of loss".</div>
+  </div>
+</section>
+
+<!-- ============ FAMILIES ============ -->
+<section id="families">
+  <h2>Receptor families</h2>
+  <p>Your notes list four; KD Tripathi splits enzyme-linked into two, giving five. Speed is the exam favourite.</p>
+  <figure class="fig">
+    <svg viewBox="0 0 360 120" role="img" aria-label="Speed of response: ligand-gated milliseconds, GPCR seconds, enzyme-linked and JAK-STAT minutes to hours, nuclear hours">
+      <line x1="20" y1="62" x2="340" y2="62" stroke="#FFFFFF" stroke-opacity=".35" stroke-width="2"/>
+      <g fill="#FFB86B"><circle cx="40" cy="62" r="7"/><circle cx="130" cy="62" r="7"/><circle cx="238" cy="62" r="7"/><circle cx="266" cy="62" r="7"/><circle cx="326" cy="62" r="7"/></g>
+      <text x="22" y="40" class="s">Ligand-gated</text>
+      <text x="130" y="92" text-anchor="middle" class="s">GPCR</text>
+      <text x="232" y="40" text-anchor="middle" class="s">Enzyme-linked</text>
+      <text x="268" y="92" text-anchor="middle" class="s">JAK-STAT</text>
+      <text x="340" y="40" text-anchor="end" class="s">Nuclear</text>
+      <text x="40" y="112" text-anchor="middle" class="am">ms</text><text x="130" y="112" text-anchor="middle" class="am">seconds</text><text x="252" y="112" text-anchor="middle" class="am">min–hours</text><text x="326" y="112" text-anchor="middle" class="am">hours</text>
+    </svg>
+    <figcaption>Fastest: <b>ligand-gated ion channels</b> (no second messenger). Slowest: <b>nuclear receptors</b> (new protein must be made).</figcaption>
+  </figure>
+
+  <!-- 1 GPCR -->
+  <div class="fam"><h3>1 · G-protein coupled (GPCR) <span class="src">KDT</span></h3><span class="speed">seconds</span></div>
+  <figure class="fig">
+    <svg viewBox="0 0 360 200" role="img" aria-label="Seven-segment receptor crosses the membrane; agonist binds outside; G-protein inside swaps GDP for GTP and its alpha subunit acts on an effector">
+      <text x="10" y="18" class="m">outside</text><text x="10" y="194" class="m">inside</text>
+      <rect x="0" y="62" width="360" height="56" fill="url(#lip)"/><line x1="0" y1="62" x2="360" y2="62" stroke="#FFCF94" stroke-opacity=".4"/><line x1="0" y1="118" x2="360" y2="118" stroke="#FFCF94" stroke-opacity=".4"/>
+      <path d="M40 40 Q52 40 52 58 V122 Q62 136 72 122 V58 Q82 44 92 58 V122 Q102 136 112 122 V58 Q122 44 132 58 V122 Q142 136 152 122 V58 Q162 44 172 58 V122 Q182 136 192 122 V58 Q192 40 206 40" fill="none" stroke="#6D7CFF" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="122" cy="26" r="11" fill="#FFB86B"/><text x="140" y="30" class="am">agonist</text>
+      <text x="122" y="152" text-anchor="middle" class="in">7 segments</text>
+      <circle cx="232" cy="150" r="15" fill="#6D7CFF"/><text x="232" y="155" text-anchor="middle" class="s" style="fill:#0B0C1A">α</text>
+      <circle cx="262" cy="142" r="11" fill="#C9CEFF"/><text x="262" y="146" text-anchor="middle" class="s" style="fill:#0B0C1A;font-size:11px">β</text>
+      <circle cx="280" cy="160" r="9" fill="#C9CEFF"/><text x="280" y="164" text-anchor="middle" class="s" style="fill:#0B0C1A;font-size:10px">γ</text>
+      <text x="232" y="186" text-anchor="middle" class="m">GDP → GTP</text>
+      <line x1="248" y1="138" x2="300" y2="100" stroke="#A7ABC8" stroke-width="1.5" marker-end="url(#ah)"/>
+      <rect x="292" y="70" width="62" height="28" rx="8" fill="rgba(124,226,176,.16)" stroke="#7CE2B0"/><text x="323" y="89" text-anchor="middle" class="gd" style="font-size:11px;font-weight:800">effector</text>
+    </svg>
+    <figcaption>The agonist changes the receptor's shape. The G-protein takes up GTP in place of GDP, and its <b>α subunit separates from βγ</b> to act on an effector. The largest receptor family.</figcaption>
+  </figure>
+  <div class="chips"><span class="chip">Adrenergic</span><span class="chip">Muscarinic</span><span class="chip">Histamine</span><span class="chip">Dopamine</span><span class="chip">Opioid</span></div>
+  <div class="tabs" role="tablist" aria-label="GPCR pathways">
+    <button role="tab" id="tab-a" aria-selected="true" aria-controls="pw-a">(a) cAMP</button>
+    <button role="tab" id="tab-b" aria-selected="false" aria-controls="pw-b">(b) IP₃–DAG</button>
+    <button role="tab" id="tab-c" aria-selected="false" aria-controls="pw-c">(c) Channels</button>
+  </div>
+  <div id="pw-a" role="tabpanel" aria-labelledby="tab-a">
+    <div class="chain">
+      <div class="lnk"><b>Adrenaline</b> binds the β-adrenergic receptor</div><div class="dn">↓</div>
+      <div class="lnk"><b>Gs</b> binds GTP; Gsα-GTP separates</div><div class="dn">↓</div>
+      <div class="lnk">Gsα activates <b>adenylyl cyclase</b></div><div class="dn">↓</div>
+      <div class="lnk">ATP → <b>cAMP</b> (second messenger)</div><div class="dn">↓</div>
+      <div class="lnk">cAMP activates <b>protein kinase A</b></div><div class="dn">↓</div>
+      <div class="lnk ok">Phosphorylates <b>troponin</b> (stronger contraction) and <b>phospholamban</b> (faster Ca²⁺ uptake into SR: faster relaxation)</div>
+    </div>
+    <div class="duo">
+      <div class="card" style="margin:0"><b>Also via cAMP</b>PKA activates phosphorylase kinase, then phosphorylase: glycogen breaks down for energy. Ca²⁺ also enters through membrane channels activated by Gsα and PKA.</div>
+      <div class="card" style="margin:0;background:var(--bad-soft);border-color:rgba(255,155,155,.3)"><b>Opposite: Gi</b>ACh on the M₂ receptor activates Gi. Giα <b>inhibits</b> adenylyl cyclase; its βγ opens K⁺ channels: hyperpolarisation, slower impulses.</div>
+    </div>
+  </div>
+  <div id="pw-b" role="tabpanel" aria-labelledby="tab-b" hidden>
+    <figure class="fig">
+      <svg viewBox="0 0 360 290" role="img" aria-label="Gq activates phospholipase C beta which splits PIP2 into IP3 and DAG; IP3 releases calcium, DAG with calcium activates protein kinase C">
+        <rect x="110" y="6" width="140" height="30" rx="10" fill="rgba(109,124,255,.18)" stroke="#6D7CFF"/><text x="180" y="26" text-anchor="middle" class="s">Gq → PLCβ</text>
+        <line x1="180" y1="36" x2="180" y2="58" stroke="#A7ABC8" stroke-width="1.5" marker-end="url(#ah)"/><text x="190" y="52" class="m">splits</text>
+        <rect x="140" y="62" width="80" height="30" rx="10" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.3)"/><text x="180" y="82" text-anchor="middle" class="s">PIP₂</text>
+        <line x1="160" y1="92" x2="92" y2="124" stroke="#A7ABC8" stroke-width="1.5" marker-end="url(#ah)"/><line x1="200" y1="92" x2="268" y2="124" stroke="#A7ABC8" stroke-width="1.5" marker-end="url(#ah)"/>
+        <rect x="40" y="128" width="96" height="30" rx="10" fill="rgba(255,184,107,.16)" stroke="#FFB86B"/><text x="88" y="148" text-anchor="middle" class="am" style="font-weight:800">IP₃</text>
+        <rect x="224" y="128" width="96" height="30" rx="10" fill="rgba(255,184,107,.16)" stroke="#FFB86B"/><text x="272" y="148" text-anchor="middle" class="am" style="font-weight:800">DAG</text>
+        <text x="88" y="174" text-anchor="middle" class="m">water-soluble → cytosol</text><text x="272" y="174" text-anchor="middle" class="m">stays in membrane</text>
+        <line x1="88" y1="180" x2="88" y2="198" stroke="#A7ABC8" stroke-width="1.5" marker-end="url(#ah)"/><line x1="272" y1="180" x2="272" y2="198" stroke="#A7ABC8" stroke-width="1.5" marker-end="url(#ah)"/>
+        <rect x="14" y="202" width="148" height="30" rx="10" fill="rgba(124,226,176,.14)" stroke="#7CE2B0"/><text x="88" y="222" text-anchor="middle" class="gd" style="font-weight:800">Ca²⁺ from ER</text>
+        <rect x="224" y="202" width="96" height="30" rx="10" fill="rgba(124,226,176,.14)" stroke="#7CE2B0"/><text x="272" y="222" text-anchor="middle" class="gd" style="font-weight:800">PKC</text>
+        <line x1="162" y1="217" x2="220" y2="217" stroke="#7CE2B0" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#ahG)"/><text x="191" y="210" text-anchor="middle" class="m">helps</text>
+        <line x1="88" y1="232" x2="88" y2="252" stroke="#A7ABC8" stroke-width="1.5" marker-end="url(#ah)"/><line x1="272" y1="232" x2="272" y2="252" stroke="#A7ABC8" stroke-width="1.5" marker-end="url(#ah)"/>
+        <text x="88" y="270" text-anchor="middle" class="s" style="font-size:11.5px">+ calmodulin → MLCK</text><text x="88" y="285" text-anchor="middle" class="m">smooth muscle contraction</text>
+        <text x="272" y="270" text-anchor="middle" class="s" style="font-size:11.5px">phosphorylates</text><text x="272" y="285" text-anchor="middle" class="m">many proteins</text>
+      </svg>
+      <figcaption>Example agonist: <b>histamine on H₁</b>. Ca²⁺ is the <b>third messenger</b>: with calmodulin it also activates CCPK, and it drives secretion, transmitter release, eicosanoid synthesis and cell proliferation.</figcaption>
+    </figure>
+    <div class="card"><b>How the signal ends</b>IP₃ is dephosphorylated to inositol (reused to make PIP₂). DAG goes back to phospholipid or is deacylated to arachidonic acid. Cytosolic Ca²⁺ is kept at about 100 nM by pumps into the ER and out of the cell.</div>
+  </div>
+  <div id="pw-c" role="tabpanel" aria-labelledby="tab-c" hidden>
+    <p>Activated G-proteins open or close Ca²⁺ and K⁺ channels <b>with no second messenger</b>, mostly through the βγ dimer.</p>
+    <div class="match">
+      <div class="mrow"><span class="tg">Gs</span><span class="ar">→</span><span class="dr">Opens Ca²⁺ channels<small>Myocardium, skeletal muscle</small></span></div>
+      <div class="mrow"><span class="tg">Gi, Go</span><span class="ar">→</span><span class="dr">Open K⁺ channels<small>Heart, smooth muscle</small></span></div>
+      <div class="mrow"><span class="tg">Gi, Go</span><span class="ar">→</span><span class="dr">Inhibit Ca²⁺ channels<small>Neurons</small></span></div>
+    </div>
+    <p class="note">Results: changes in inotropy, chronotropy, transmitter release, neuronal activity and smooth muscle relaxation.</p>
+  </div>
+
+  <!-- 2 Ligand-gated -->
+  <div class="fam"><h3>2 · Ion channel receptors (ligand-gated) <span class="src">KDT</span></h3><span class="speed">milliseconds</span></div>
+  <figure class="fig">
+    <svg viewBox="0 0 360 170" role="img" aria-label="Agonist binds the alpha subunits of a channel receptor and the pore inside the receptor opens">
+      <rect x="0" y="58" width="360" height="52" fill="url(#lip)"/><line x1="0" y1="58" x2="360" y2="58" stroke="#FFCF94" stroke-opacity=".4"/><line x1="0" y1="110" x2="360" y2="110" stroke="#FFCF94" stroke-opacity=".4"/>
+      <rect x="50" y="40" width="34" height="90" rx="12" fill="#6D7CFF"/><rect x="100" y="40" width="34" height="90" rx="12" fill="#6D7CFF"/>
+      <circle cx="67" cy="32" r="9" fill="#FFB86B"/><circle cx="117" cy="32" r="9" fill="#FFB86B"/>
+      <text x="67" y="90" text-anchor="middle" class="s" style="fill:#0B0C1A">α</text><text x="117" y="90" text-anchor="middle" class="s" style="fill:#0B0C1A">α</text>
+      <line x1="92" y1="14" x2="92" y2="150" stroke="#7CE2B0" stroke-width="2" marker-end="url(#ahG)"/>
+      <text x="160" y="36" class="am">1 agonist binds α subunits</text>
+      <text x="160" y="84" class="s">2 pore inside the receptor opens</text>
+      <text x="160" y="140" class="gd">3 Na⁺, K⁺, Ca²⁺ or Cl⁻ flows</text>
+    </svg>
+    <figcaption>The channel is <b>part of the receptor molecule</b>: no coupling protein, no second messenger. That's why it is the fastest.</figcaption>
+  </figure>
+  <div class="chips"><span class="chip">Nicotinic cholinergic</span><span class="chip">GABA-A</span><span class="chip">Glycine · inhibitory</span><span class="chip">Glutamate · excitatory</span><span class="chip">5-HT₃</span></div>
+  <ul class="note" style="margin-top:10px"><li>Nicotinic receptor: a pentamer, subunits arranged like a rosette around the channel</li><li>Allosteric sites: the benzodiazepine receptor modulates the GABA-A gated Cl⁻ channel</li></ul>
+
+  <!-- 3 Enzyme-linked -->
+  <div class="fam"><h3>3 · Transmembrane enzyme-linked <span class="src">KDT</span></h3><span class="speed">minutes–hours</span></div>
+  <figure class="fig">
+    <svg viewBox="0 0 360 200" role="img" aria-label="Two single-pass receptor monomers come together when the hormone binds and phosphorylate each other's tyrosines">
+      <rect x="0" y="58" width="360" height="44" fill="url(#lip)"/><line x1="0" y1="58" x2="360" y2="58" stroke="#FFCF94" stroke-opacity=".4"/><line x1="0" y1="102" x2="360" y2="102" stroke="#FFCF94" stroke-opacity=".4"/>
+      <g stroke="#6D7CFF" stroke-width="5" stroke-linecap="round" fill="none">
+        <path d="M40 22 L52 44 L64 22 M52 44 V128"/><path d="M100 22 L112 44 L124 22 M112 44 V128"/>
+        <path d="M236 22 L248 44 L260 22 M248 44 V128"/><path d="M266 22 L278 44 L290 22 M278 44 V128"/>
+      </g>
+      <g fill="rgba(109,124,255,.25)" stroke="#6D7CFF"><rect x="38" y="128" width="28" height="22" rx="6"/><rect x="98" y="128" width="28" height="22" rx="6"/><rect x="234" y="128" width="28" height="22" rx="6"/><rect x="264" y="128" width="28" height="22" rx="6"/></g>
+      <text x="82" y="176" text-anchor="middle" class="m">inactive monomers</text>
+      <circle cx="263" cy="16" r="10" fill="#FFB86B"/><text x="300" y="20" class="am">hormone</text>
+      <circle cx="228" cy="160" r="8" fill="#7CE2B0"/><text x="228" y="164" text-anchor="middle" class="s" style="fill:#0B0C1A;font-size:10px">P</text>
+      <circle cx="298" cy="160" r="8" fill="#7CE2B0"/><text x="298" y="164" text-anchor="middle" class="s" style="fill:#0B0C1A;font-size:10px">P</text>
+      <text x="263" y="192" text-anchor="middle" class="gd">dimer · tyrosines phosphorylated</text>
+      <line x1="146" y1="80" x2="214" y2="80" stroke="#A7ABC8" stroke-width="1.5" marker-end="url(#ah)"/><text x="180" y="72" text-anchor="middle" class="m">binds</text>
+    </svg>
+    <figcaption>Used mainly by <b>peptide hormones</b>. A large outside binding domain joins, through a <b>single transmembrane helix</b>, to an inside subunit with enzyme activity. Phosphorylated tyrosines bind <b>SH₂-domain proteins</b>, which carry a cascade: metabolism, growth, differentiation.</figcaption>
+  </figure>
+  <div class="match">
+    <div class="mrow"><span class="tg">Tyrosine kinase (RTK)</span><span class="ar">→</span><span class="dr">Insulin, EGF, NGF<small>Many growth factors</small></span></div>
+    <div class="mrow"><span class="tg">Serine/threonine kinase</span><span class="ar">→</span><span class="dr">TGF receptor</span></div>
+    <div class="mrow"><span class="tg">Guanylyl cyclase</span><span class="ar">→</span><span class="dr">ANP<small>cGMP → protein kinase G</small></span></div>
+  </div>
+  <p class="note">Dimerisation also promotes internalisation, breakdown and down-regulation of the receptor.</p>
+
+  <!-- 4 JAK-STAT -->
+  <div class="fam"><h3>4 · JAK-STAT binding <span class="src">KDT</span></h3><span class="speed">minutes–hours</span></div>
+  <figure class="fig">
+    <svg viewBox="0 0 360 210" role="img" aria-label="Receptor with no enzyme of its own recruits JAK; JAK phosphorylates STAT; STAT dimer goes to the nucleus">
+      <rect x="0" y="50" width="360" height="40" fill="url(#lip)"/><line x1="0" y1="50" x2="360" y2="50" stroke="#FFCF94" stroke-opacity=".4"/><line x1="0" y1="90" x2="360" y2="90" stroke="#FFCF94" stroke-opacity=".4"/>
+      <circle cx="68" cy="14" r="10" fill="#FFB86B"/><text x="84" y="18" class="am">cytokine</text>
+      <g stroke="#6D7CFF" stroke-width="5" stroke-linecap="round" fill="none"><path d="M44 18 L56 36 V120"/><path d="M92 18 L80 36 V120"/></g>
+      <ellipse cx="48" cy="128" rx="16" ry="11" fill="rgba(255,184,107,.2)" stroke="#FFB86B"/><text x="48" y="132" text-anchor="middle" class="am" style="font-size:10px;font-weight:800">JAK</text>
+      <ellipse cx="88" cy="128" rx="16" ry="11" fill="rgba(255,184,107,.2)" stroke="#FFB86B"/><text x="88" y="132" text-anchor="middle" class="am" style="font-size:10px;font-weight:800">JAK</text>
+      <rect x="120" y="140" width="46" height="24" rx="12" fill="rgba(109,124,255,.25)" stroke="#6D7CFF"/><text x="143" y="156" text-anchor="middle" class="in" style="font-size:10.5px;font-weight:800">STAT</text>
+      <circle cx="168" cy="140" r="7" fill="#7CE2B0"/><text x="168" y="143.5" text-anchor="middle" class="s" style="fill:#0B0C1A;font-size:9px">P</text>
+      <line x1="104" y1="134" x2="118" y2="146" stroke="#A7ABC8" stroke-width="1.5" marker-end="url(#ah)"/>
+      <line x1="176" y1="152" x2="200" y2="152" stroke="#A7ABC8" stroke-width="1.5" marker-end="url(#ah)"/>
+      <rect x="204" y="140" width="40" height="24" rx="12" fill="rgba(109,124,255,.25)" stroke="#6D7CFF"/><rect x="204" y="166" width="40" height="24" rx="12" fill="rgba(109,124,255,.25)" stroke="#6D7CFF"/>
+      <text x="224" y="134" text-anchor="middle" class="m">dimer</text>
+      <path d="M300 104 A64 64 0 0 1 300 232" fill="rgba(124,226,176,.08)" stroke="#7CE2B0"/>
+      <line x1="248" y1="165" x2="290" y2="165" stroke="#7CE2B0" stroke-width="1.5" marker-end="url(#ahG)"/>
+      <text x="320" y="160" text-anchor="middle" class="gd">nucleus</text><text x="320" y="176" text-anchor="middle" class="m">genes</text>
+    </svg>
+    <figcaption>Unlike RTKs, these have <b>no enzyme domain of their own</b>. After dimerising, the inside domain binds the cytosolic tyrosine kinase <b>JAK</b>. JAK phosphorylates the receptor, <b>STAT</b> binds and is phosphorylated, and the STAT dimer moves to the nucleus to regulate gene transcription.</figcaption>
+  </figure>
+  <div class="chips"><span class="chip">Cytokines</span><span class="chip">Growth hormone</span><span class="chip">Prolactin</span><span class="chip">Interferons</span></div>
+
+  <!-- 5 Nuclear -->
+  <div class="fam"><h3>5 · Nuclear receptors (regulate gene expression) <span class="src">KDT</span></h3><span class="speed">hours</span></div>
+  <figure class="fig">
+    <svg viewBox="0 0 360 250" role="img" aria-label="Steroid enters the cell, frees its receptor from HSP-90, the receptor dimer binds DNA in the nucleus, mRNA leaves and protein is made">
+      <rect x="6" y="26" width="348" height="218" rx="30" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.25)"/>
+      <circle cx="40" cy="12" r="8" fill="#FFB86B"/><line x1="40" y1="22" x2="56" y2="56" stroke="#FFB86B" stroke-width="1.6" marker-end="url(#ahA)"/>
+      <text x="56" y="16" class="am">steroid hormone (lipid-soluble)</text>
+      <rect x="44" y="62" width="44" height="22" rx="8" fill="rgba(109,124,255,.25)" stroke="#6D7CFF"/><text x="66" y="77" text-anchor="middle" class="in" style="font-size:10.5px;font-weight:800">GR</text>
+      <circle cx="96" cy="64" r="7" fill="#A7ABC8"/><circle cx="96" cy="82" r="7" fill="#A7ABC8"/><text x="108" y="77" class="m">HSP-90</text>
+      <line x1="66" y1="88" x2="66" y2="116" stroke="#A7ABC8" stroke-width="1.5" marker-end="url(#ah)"/><text x="74" y="106" class="m">HSP-90 leaves</text>
+      <rect x="44" y="120" width="44" height="18" rx="7" fill="rgba(109,124,255,.25)" stroke="#6D7CFF"/><rect x="44" y="140" width="44" height="18" rx="7" fill="rgba(109,124,255,.25)" stroke="#6D7CFF"/><text x="66" y="174" text-anchor="middle" class="m">dimer</text>
+      <ellipse cx="250" cy="132" rx="92" ry="74" fill="rgba(124,226,176,.06)" stroke="#7CE2B0" stroke-opacity=".6"/><text x="250" y="78" text-anchor="middle" class="gd">nucleus</text>
+      <line x1="92" y1="140" x2="182" y2="140" stroke="#A7ABC8" stroke-width="1.5" marker-end="url(#ah)"/>
+      <path d="M180 156 Q195 146 210 156 T240 156 T270 156 T300 156 T330 156" fill="none" stroke="#C9CEFF" stroke-width="2"/><path d="M180 164 Q195 174 210 164 T240 164 T270 164 T300 164 T330 164" fill="none" stroke="#C9CEFF" stroke-width="2"/>
+      <rect x="226" y="132" width="30" height="16" rx="6" fill="#6D7CFF"/><rect x="258" y="132" width="30" height="16" rx="6" fill="#6D7CFF"/>
+      <text x="257" y="124" text-anchor="middle" class="s" style="font-size:11px">binds GRE on DNA</text>
+      <path d="M250 182 Q230 196 210 186 T170 190" fill="none" stroke="#FFB86B" stroke-width="2" marker-end="url(#ahA)"/><text x="262" y="196" class="am">mRNA</text>
+      <ellipse cx="128" cy="208" rx="24" ry="12" fill="rgba(124,226,176,.16)" stroke="#7CE2B0"/><text x="128" y="212" text-anchor="middle" class="gd" style="font-size:10px;font-weight:800">ribosome</text>
+      <text x="40" y="236" class="s" style="font-size:11px">→ new protein → cell function changes</text>
+    </svg>
+    <figcaption><b>Intracellular soluble proteins</b> that respond to lipid-soluble messengers entering the cell. Freed from HSP-90, the receptor dimerises, moves to the nucleus with co-activators or co-repressors, and binds <b>hormone response elements</b> to promote or repress genes.</figcaption>
+  </figure>
+  <div class="chips"><span class="chip">Glucocorticoids</span><span class="chip">Mineralocorticoids</span><span class="chip">Androgens</span><span class="chip">Estrogens</span><span class="chip">Progesterone</span><span class="chip">Thyroxine</span><span class="chip">Vitamin D</span><span class="chip">Vitamin A</span></div>
+  <div class="duo">
+    <div class="card" style="margin:0"><b>GR structure</b>Steroid-binding domain near the carboxy terminus; DNA-binding domain in the middle with two <b>zinc fingers</b>; joined by a hinge region.</div>
+    <div class="card" style="margin:0"><b>Why slowest</b>New protein must be made first (hours). Effects <b>outlast the hormone</b> because these proteins turn over slowly. SERMs (tamoxifen, raloxifene) act differently in different tissues.</div>
+  </div>
+</section>
+
+<!-- ============ REGULATION ============ -->
+<section id="regulation">
+  <h2>Regulation of receptors <span class="src">KDT</span></h2>
+  <figure class="fig">
+    <svg viewBox="0 0 360 150" role="img" aria-label="Normal membrane has three receptors; agonist deprivation raises it to six (up-regulation); continued agonist lowers it to one (down-regulation)">
+      <g id="mem"><line x1="10" y1="80" x2="110" y2="80" stroke="#FFCF94" stroke-opacity=".6" stroke-width="3"/><line x1="130" y1="80" x2="230" y2="80" stroke="#FFCF94" stroke-opacity=".6" stroke-width="3"/><line x1="250" y1="80" x2="350" y2="80" stroke="#FFCF94" stroke-opacity=".6" stroke-width="3"/></g>
+      <g stroke="#6D7CFF" stroke-width="3.5" stroke-linecap="round" fill="none">
+        <path d="M30 56 L36 66 L42 56 M36 66 V86"/><path d="M54 56 L60 66 L66 56 M60 66 V86"/><path d="M78 56 L84 66 L90 56 M84 66 V86"/>
+        <path d="M136 56 L142 66 L148 56 M142 66 V86"/><path d="M151 56 L157 66 L163 56 M157 66 V86"/><path d="M166 56 L172 66 L178 56 M172 66 V86"/><path d="M181 56 L187 66 L193 56 M187 66 V86"/><path d="M196 56 L202 66 L208 56 M202 66 V86"/><path d="M211 56 L217 66 L223 56 M217 66 V86"/>
+        <path d="M294 56 L300 66 L306 56 M300 66 V86"/>
+      </g>
+      <text x="60" y="30" text-anchor="middle" class="s">Normal</text>
+      <text x="180" y="30" text-anchor="middle" class="gd" style="font-weight:800">Up-regulated</text>
+      <text x="300" y="30" text-anchor="middle" class="bd" style="font-weight:800">Down-regulated</text>
+      <text x="180" y="112" text-anchor="middle" class="m">agonist deprived</text><text x="180" y="127" text-anchor="middle" class="m">→ supersensitive</text>
+      <text x="300" y="112" text-anchor="middle" class="m">continued agonist</text><text x="300" y="127" text-anchor="middle" class="m">→ less responsive</text>
+    </svg>
+    <figcaption>Receptors are dynamic: their <b>density and efficacy</b> follow the level of activity, feedback from their own signal, and other influences.</figcaption>
+  </figure>
+  <div class="match">
+    <div class="mrow"><span class="tg">Supersensitivity (up-regulation)</span><span class="ar">→</span><span class="dr" style="color:var(--ink);font-weight:500">Prolonged lack of agonist: denervation, or an antagonist or a drug that reduces input. Unmasking or proliferation of receptors, or more amplification.</span></div>
+    <div class="mrow"><span class="tg">Clinical</span><span class="ar">→</span><span class="dr">Clonidine, CNS depressant, opioid withdrawal; stopping propranolol suddenly in angina</span></div>
+    <div class="mrow"><span class="tg">Desensitisation</span><span class="ar">→</span><span class="dr" style="color:var(--ink);font-weight:500">Continued agonist: masking or internalisation (fast, fades fast) or decreased synthesis, i.e. down-regulation (slow, over weeks)</span></div>
+    <div class="mrow"><span class="tg">Physiological</span><span class="ar">→</span><span class="dr" style="color:var(--ink);font-weight:500">Estrogens raise oxytocin receptors on the myometrium, so the uterus grows more sensitive in the third trimester, especially near term</span></div>
+  </div>
+</section>
+
+<!-- ============ DOSE ============ -->
+<section id="dose">
+  <h2>Dose and response</h2>
+  <figure class="fig">
+    <svg id="drc" viewBox="0 0 340 210" role="img" aria-label="Log dose response curves: B is right of A (less potent, same efficacy); C is lower (less efficacy)"></svg>
+    <figcaption><b>Potency</b> = position (further right is less potent; compared by EC50, depends on affinity). <b>Efficacy (Emax)</b> = height; clinically matters more.</figcaption>
+  </figure>
+  <div class="match">
+    <div class="mrow"><span class="tg">Pethidine vs morphine</span><span class="ar">→</span><span class="dr">Less potent, equally efficacious</span></div>
+    <div class="mrow"><span class="tg">Aspirin vs morphine</span><span class="ar">→</span><span class="dr">Less potent, less efficacious</span></div>
+    <div class="mrow"><span class="tg">Furosemide vs metolazone</span><span class="ar">→</span><span class="dr">Less potent, more efficacious</span></div>
+    <div class="mrow"><span class="tg">Diazepam vs pentobarbitone</span><span class="ar">→</span><span class="dr">More potent, less efficacious<small>So diazepam is safer in overdose</small></span></div>
+  </div>
+  <h3>Therapeutic index and window <span class="src">KDT</span></h3>
+  <figure class="fig">
+    <svg id="ti" viewBox="0 0 340 210" role="img" aria-label="Therapeutic effect curve and toxic effect curve, with the therapeutic window between them"></svg>
+    <figcaption><b>Therapeutic index = LD50 / ED50</b>, an estimate of safety from animal studies. In patients the useful idea is the <b>therapeutic window</b>: between the lowest effective dose and the highest dose with acceptable side effects. Steep curve: doses need individualising (hydralazine). Flat: standard doses suit most (hydrochlorothiazide).</figcaption>
+  </figure>
+</section>
+
+<!-- ============ COMBOS ============ -->
+<section id="combos">
+  <h2>Combinations</h2>
+  <figure class="fig">
+    <svg viewBox="0 0 360 190" role="img" aria-label="Additive equals the sum, supra-additive exceeds it, antagonism is less than one drug alone">
+      <text x="10" y="18" class="m">dashed box = A alone + B alone</text>
+      <text x="10" y="54" class="s">Additive</text><text x="10" y="69" class="m">A + B = A + B</text>
+      <rect x="120" y="40" width="80" height="22" rx="4" fill="#6D7CFF"/><rect x="200" y="40" width="80" height="22" rx="4" fill="#FFB86B"/><rect x="120" y="40" width="160" height="22" rx="4" fill="none" stroke="#FFFFFF" stroke-dasharray="4 3"/>
+      <text x="10" y="106" class="s">Supra-additive</text><text x="10" y="121" class="m">A + B &gt; A + B</text>
+      <rect x="120" y="92" width="232" height="22" rx="4" fill="#7CE2B0"/><rect x="120" y="92" width="160" height="22" rx="4" fill="none" stroke="#FFFFFF" stroke-dasharray="4 3"/>
+      <text x="10" y="158" class="s">Antagonism</text><text x="10" y="173" class="m">A + B &lt; A + B</text>
+      <rect x="120" y="144" width="30" height="22" rx="4" fill="#FF9B9B"/><rect x="120" y="144" width="160" height="22" rx="4" fill="none" stroke="#FFFFFF" stroke-dasharray="4 3"/>
+    </svg>
+  </figure>
+  <div class="duo">
+    <div class="card" style="margin:0"><b>Additive</b><ul><li>Aspirin + paracetamol</li><li>Nitrous oxide + halothane</li><li>Amlodipine + atenolol</li><li>Glibenclamide + metformin</li><li>Ephedrine + theophylline</li></ul></div>
+    <div class="card" style="margin:0"><b>Supra-additive <span class="src">KDT</span></b><ul><li>ACh + physostigmine (blocks breakdown)</li><li>Levodopa + carbidopa (blocks peripheral metabolism)</li><li>Adrenaline + cocaine or desipramine (blocks uptake)</li><li>Sulfamethoxazole + trimethoprim (sequential folate block)</li><li>Enalapril + hydrochlorothiazide</li><li>Tyramine + MAO inhibitors</li></ul></div>
+  </div>
+  <h3>Kinds of antagonism</h3>
+  <div class="match">
+    <div class="mrow"><span class="tg">Physical</span><span class="ar">→</span><span class="dr">Activated charcoal adsorbs alkaloids</span></div>
+    <div class="mrow"><span class="tg">Chemical</span><span class="ar">→</span><span class="dr">KMnO₄, tannins, chelators (BAL, Ca disodium edetate), nitrites in cyanide poisoning<small>Same-syringe reactions: thiopentone or penicillin G with succinylcholine; heparin with penicillin</small></span></div>
+    <div class="mrow"><span class="tg">Physiological <span class="src">KDT</span></span><span class="ar">→</span><span class="dr">Histamine vs adrenaline; insulin vs glucagon<small>Opposite actions through different receptors; also hydrochlorothiazide vs triamterene on K⁺</small></span></div>
+    <div class="mrow"><span class="tg">Pharmacological</span><span class="ar">→</span><span class="dr">At the same receptor: competitive or non-competitive</span></div>
+  </div>
+  <div class="duo">
+    <figure class="fig"><svg id="compA" viewBox="0 0 340 210" role="img" aria-label="Competitive antagonist shifts the curve right in parallel with the same maximum"></svg><figcaption><b>Competitive:</b> same site, resembles agonist. Parallel right shift, <b>same Emax</b>. ACh vs atropine, morphine vs naloxone.</figcaption></figure>
+    <figure class="fig"><svg id="compB" viewBox="0 0 340 210" role="img" aria-label="Non-competitive antagonist flattens the curve and lowers the maximum"></svg><figcaption><b>Non-competitive:</b> allosteric site, doesn't resemble agonist. <b>Lower Emax</b>. Diazepam vs bicuculline. Not used clinically.</figcaption></figure>
+  </div>
+  <div class="card"><b>Non-equilibrium (irreversible)</b>Binds the same receptor so tightly (covalent bond) that the agonist can't displace it. Curve shifts right and Emax falls. KD Tripathi counts it as a type of non-competitive antagonism. Example: <b>phenoxybenzamine</b> against adrenaline at α receptors.</div>
+</section>
+
+</div></main>
+<footer class="gut"><div class="col">PharmDaily · Dynamics, diagram edition (review copy). Same content as the Section 1 notes, redrawn. Written from college notes and checked against KD Tripathi's <i>Essentials of Medical Pharmacology</i> (7th edition, chapter 4).</div></footer>
+
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function chart(id,o){
+  var svg=document.getElementById(id); if(!svg)return;
+  var L=40,R=328,T=14,B=168,x0=o.x[0],x1=o.x[1];
+  function X(v){return L+(v-x0)/(x1-x0)*(R-L)} function Y(p){return B-p/100*(B-T)}
+  function el(n,a,t){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);if(t!=null)e.textContent=t;svg.appendChild(e);return e}
+  (o.y||[0,50,100]).forEach(function(p){el('line',{x1:L,x2:R,y1:Y(p),y2:Y(p),stroke:'rgba(255,255,255,.08)'});el('text',{x:L-6,y:Y(p)+4,'text-anchor':'end','class':'m'},p+'%')});
+  el('line',{x1:L,x2:R,y1:B,y2:B,stroke:'#E6E8F5','stroke-width':1.2});
+  (o.ticks||[]).forEach(function(t){el('text',{x:X(t[0]),y:B+15,'text-anchor':'middle','class':'m'},t[1])});
+  el('text',{x:(L+R)/2,y:B+32,'text-anchor':'middle','class':'m'},o.xl);
+  el('text',{x:12,y:(T+B)/2,'text-anchor':'middle','class':'m',transform:'rotate(-90 12 '+((T+B)/2)+')'},o.yl);
+  (o.hl||[]).forEach(function(h){el('line',{x1:L,x2:R,y1:Y(h[0]),y2:Y(h[0]),stroke:h[1],'stroke-dasharray':'4 4','stroke-opacity':.7})});
+  (o.band||[]).forEach(function(b){el('rect',{x:X(b[0]),y:T,width:X(b[1])-X(b[0]),height:B-T,fill:b[2]})});
+  o.s.forEach(function(s){var d='';for(var v=x0;v<=x1+1e-9;v+=(x1-x0)/120){d+=(d?'L':'M')+X(v).toFixed(1)+' '+Y(s.f(v)).toFixed(1)}
+    el('path',{d:d,fill:'none',stroke:s.c,'stroke-width':2.6,'stroke-linecap':'round','stroke-dasharray':s.dash||''});
+    if(s.lab)el('text',{x:X(s.lx),y:Y(s.ly),'text-anchor':s.anchor||'start',fill:s.c,'font-weight':800},s.lab)});
+  (o.marks||[]).forEach(function(m){el('line',{x1:X(m[0]),x2:X(m[0]),y1:Y(50),y2:B,stroke:'#8C90AE','stroke-dasharray':'3 3'});el('text',{x:X(m[0])+4,y:B-6,'class':'m'},m[1])});
+}
+function sig(e50,max,n){n=n||1.6;return function(lg){return max/(1+Math.pow(10,(e50-lg)*n))}}
+var IND='#6D7CFF',AMB='#FFB86B',BAD='#FF9B9B',GD='#7CE2B0';
+var logT=[[-2,'0.01'],[-1,'0.1'],[0,'1'],[1,'10'],[2,'100'],[3,'1000']];
+chart('mm',{x:[0,12],xl:'Substrate concentration',yl:'Velocity',ticks:[[0,'0'],[3,'3'],[6,'6'],[9,'9'],[12,'12']],hl:[[100,'#E6E8F5'],[55,BAD]],
+  s:[{f:function(s){return 100*s/(1+s)},c:IND,lab:'normal',lx:7.4,ly:96},{f:function(s){return 100*s/(3+s)},c:AMB,lab:'competitive',lx:6.6,ly:58},{f:function(s){return 55*s/(1+s)},c:BAD,lab:'non-competitive',lx:4.4,ly:41}]});
+chart('partial',{x:[-3,2],xl:'Dose (log scale)',yl:'Pain relief',ticks:[[-3,'0.001'],[-2,'0.01'],[-1,'0.1'],[0,'1'],[1,'10'],[2,'100']],
+  s:[{f:sig(0,100),c:IND,lab:'morphine (full)',lx:0.45,ly:76},{f:sig(-1.4,55),c:AMB,lab:'buprenorphine (partial)',lx:-2.9,ly:64}]});
+chart('drc',{x:[-2,3],xl:'Dose (log scale)',yl:'Response',ticks:logT,marks:[[0,'EC50 of A']],
+  s:[{f:sig(0,100),c:IND,lab:'A',lx:-0.9,ly:62,anchor:'end'},{f:sig(1,100),c:AMB,lab:'B · less potent',lx:1.35,ly:48},{f:sig(0,60),c:BAD,lab:'C · less efficacy',lx:0.9,ly:66}]});
+chart('ti',{x:[-2,3],xl:'Dose (log scale)',yl:'% of subjects',ticks:logT,band:[[0.6,1.0,'rgba(124,226,176,.14)']],
+  s:[{f:sig(0,100,2),c:GD,lab:'therapeutic effect',lx:-1.95,ly:88},{f:sig(1.8,100,2),c:BAD,lab:'toxic effect',lx:2.05,ly:30}],marks:[[0,'ED50'],[1.8,'LD50']]});
+chart('compA',{x:[-2,3],xl:'Agonist dose (log)',yl:'Response',ticks:logT,s:[{f:sig(0,100),c:IND,lab:'agonist',lx:-1.9,ly:88},{f:sig(1.2,100),c:AMB,dash:'6 4',lab:'+ antagonist',lx:1.5,ly:40}]});
+chart('compB',{x:[-2,3],xl:'Agonist dose (log)',yl:'Response',ticks:logT,s:[{f:sig(0,100),c:IND,lab:'agonist',lx:-1.9,ly:88},{f:sig(0,50),c:AMB,dash:'6 4',lab:'+ antagonist',lx:0.9,ly:58}]});
+// tabs
+var tabs=[].slice.call(document.querySelectorAll('[role=tab]'));
+tabs.forEach(function(t){t.addEventListener('click',function(){tabs.forEach(function(o){var on=o===t;o.setAttribute('aria-selected',on);document.getElementById(o.getAttribute('aria-controls')).hidden=!on})})});
+})();
+</script>

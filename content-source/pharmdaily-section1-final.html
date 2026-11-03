@@ -1,0 +1,1155 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>PharmDaily Section 1</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap">
+<style>
+/* Night direction: one dark navy-violet world. Phone-first single column; sticky glass header; diagrams are stacking blocks; indigo = enteral/primary, amber = parenteral/secondary. Deliberately single-theme. */
+:root{
+  color-scheme:dark;
+  --bg:#0B0C1A; --surface:#10122A; --glass:rgba(255,255,255,.045); --glass-2:rgba(255,255,255,.07);
+  --line:rgba(255,255,255,.09); --line-2:rgba(255,255,255,.16);
+  --ink:#E6E8F5; --ink-strong:#FFFFFF; --muted:#A7ABC8; --faint:#8C90AE;
+  --indigo:#6D7CFF; --indigo-ink:#C9CEFF; --indigo-soft:rgba(109,124,255,.14);
+  --amber:#FFB86B; --amber-ink:#FFCF94; --amber-soft:rgba(255,184,107,.12);
+  --good:#7CE2B0; --good-soft:rgba(124,226,176,.09); --bad:#FF9B9B; --bad-soft:rgba(255,155,155,.08);
+  --font:"Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --ease-out:cubic-bezier(.23,1,.32,1); --ease-in-out:cubic-bezier(.77,0,.175,1);
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{-webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:100%;background:var(--bg)}
+body{overflow-x:clip;background:var(--surface);color:var(--ink);font-family:var(--font);font-size:16.5px;line-height:1.6}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+button,a,[role="button"]{touch-action:manipulation}
+button,.pills a,.seg button,.fc,.flag,.src{user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+button{font:inherit;color:inherit}
+input,textarea{font-size:16px}
+:focus-visible{outline:2px solid var(--indigo-ink);outline-offset:3px;border-radius:10px}
+a{color:var(--indigo-ink)}
+.gut{padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.col{max-width:680px;margin:0 auto}
+h1,h2,h3{text-wrap:balance;margin:0;color:var(--ink-strong);letter-spacing:-.02em}
+h2{font-size:1.4rem;font-weight:700;margin-top:2.6rem}
+h3{font-size:1.08rem;font-weight:700;margin-top:1.8rem}
+p{margin:.55rem 0}
+b{color:var(--ink-strong)}
+
+/* header */
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:6;background:rgba(11,12,26,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:12px 4px}
+.brand{font-weight:800;font-size:1.15rem;letter-spacing:-.02em;color:var(--ink-strong)}
+.sec{font-size:.8rem;color:var(--muted)}
+.pills{display:flex;gap:6px;padding-block:8px}
+.pills a{flex:1 1 auto;min-width:0;display:inline-flex;align-items:center;justify-content:center;gap:4px;min-height:42px;padding:0 8px;border-radius:21px;border:1px solid var(--line-2);color:var(--ink);text-decoration:none;font-size:.84rem;font-weight:600;white-space:nowrap}
+.pills a[aria-current="page"]{background:var(--ink-strong);border-color:var(--ink-strong);color:var(--bg);font-weight:800}
+.pills a.rev{color:var(--amber-ink);border-color:rgba(255,184,107,.45)}
+.pills a.rev[aria-current="page"]{background:var(--amber);border-color:var(--amber);color:var(--bg)}
+.seg{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:4px;margin-bottom:10px;border-radius:24px;background:var(--glass-2)}
+.seg button{min-height:40px;border:0;border-radius:20px;background:transparent;color:var(--muted);font-weight:700;font-size:.9rem;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--ink-strong);color:var(--bg)}
+
+/* motion: press feedback only (emil-design-eng) */
+.btn,.opt,.choice button,.seg button,.pills a,.go{transition:transform 140ms var(--ease-out),background-color 150ms ease,border-color 150ms ease,color 150ms ease}
+.btn:active,.opt:not([disabled]):active,.choice button:active,.seg button:active,.pills a:active,.go:active{transform:scale(.97)}
+@media (hover:hover) and (pointer:fine){
+  .btn:hover,.opt:not([disabled]):hover,.choice button:hover{border-color:var(--muted)}
+  .pills a:not([aria-current]):hover{border-color:var(--ink)}
+}
+
+/* topic hero */
+.hero{position:relative;padding-block:30px 6px}
+.hero::before{content:"";position:absolute;left:-20px;top:-40px;width:calc(100% + 40px);height:340px;background:radial-gradient(closest-side,rgba(109,124,255,.22),rgba(16,18,42,0));pointer-events:none;z-index:0}
+.hero>*{position:relative}
+.eyebrow{font-size:.82rem;color:var(--muted)}
+.hero h1{font-size:2.15rem;line-height:1.08;font-weight:700;letter-spacing:-.035em;margin-top:6px}
+.lede{color:#B5B9D3;font-size:1.02rem}
+.legend{margin-top:16px;display:flex;flex-direction:column;gap:8px;padding:14px 16px;border-radius:16px;background:var(--glass);border:1px solid var(--line);font-size:.88rem;color:var(--muted)}
+.legend div{display:flex;gap:10px;align-items:flex-start}
+
+/* tags */
+.src{display:inline-flex;align-items:center;font-size:.7rem;font-weight:800;padding:2px 8px;border-radius:999px;border:1px solid rgba(201,206,255,.4);color:var(--indigo-ink);vertical-align:middle;margin-left:6px;white-space:nowrap;letter-spacing:.01em}
+.flag{position:relative;display:inline-flex;align-items:center;font-size:.72rem;font-weight:800;padding:3px 9px;border-radius:999px;background:var(--amber);color:var(--bg);text-decoration:none;vertical-align:middle;margin-left:6px;white-space:nowrap}
+.flag::after{content:"";position:absolute;inset:-10px -4px}
+.dental{display:inline-flex;font-size:.7rem;font-weight:800;padding:2px 8px;border-radius:999px;border:1px solid rgba(255,207,148,.45);color:var(--amber-ink);vertical-align:middle;margin-left:6px}
+
+/* capsule chips */
+.drugs{display:flex;flex-wrap:wrap;gap:7px;margin:.5rem 0}
+.rx{display:inline-flex;align-items:center;min-height:30px;border-radius:15px;overflow:hidden;border:1px solid var(--line-2);font-size:.82rem;font-weight:600;color:var(--ink);background:rgba(255,255,255,.02)}
+.rx::before{content:"";width:11px;align-self:stretch;background:var(--indigo)}
+.rx span{padding:3px 11px 3px 9px}
+.par .rx::before{background:var(--amber)}
+
+/* surfaces */
+.card{background:var(--glass);border:1px solid var(--line);border-radius:18px;padding:16px;margin-top:12px}
+.card>b:first-child,.card>.ct{display:block;color:var(--ink-strong);font-weight:800;margin-bottom:4px}
+.def{background:var(--indigo-soft);border:1px solid rgba(109,124,255,.35);border-radius:18px;padding:14px 16px;margin-top:12px}
+.split{display:grid;grid-template-columns:1fr;gap:10px;margin-top:12px}
+@media (min-width:560px){.split{grid-template-columns:1fr 1fr}}
+.split>*{min-width:0;margin-top:0}
+.pro,.con{border-radius:18px;padding:14px 16px}
+.pro{background:var(--good-soft);border:1px solid rgba(124,226,176,.28)}
+.con{background:var(--bad-soft);border:1px solid rgba(255,155,155,.26)}
+.pro h4,.con h4{margin:0 0 4px;font-size:.92rem;font-weight:800}
+.pro h4{color:var(--good)} .con h4{color:var(--bad)}
+ul{margin:.3rem 0;padding-left:1.1rem} li{margin:.2rem 0}
+li::marker{color:var(--faint)}
+
+/* stacked label/value list */
+.rows{margin-top:12px;border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.025);overflow:hidden}
+.row{padding:13px 16px;display:flex;flex-direction:column;gap:3px}
+.row+.row{border-top:1px solid rgba(255,255,255,.07)}
+.row>*{min-width:0}
+.row .k{font-size:.82rem;font-weight:800;color:var(--indigo-ink)}
+.par .row .k{color:var(--amber-ink)}
+.row .k small{font-weight:600;color:var(--faint);margin-left:6px}
+.row .drugs{margin:2px 0 0}
+
+/* metro map */
+.metro{margin-top:12px;padding:18px 14px;border-radius:20px;background:var(--glass);border:1px solid var(--line);display:flex;flex-direction:column;align-items:center}
+.metro .root{padding:8px 18px;border-radius:20px;background:var(--ink-strong);color:var(--bg);font-weight:800}
+.metro .stem{width:2px;height:16px;background:rgba(255,255,255,.3)}
+.metro .bridge{width:50%;height:2px;background:rgba(255,255,255,.3)}
+.lines{width:100%;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.line{display:flex;flex-direction:column;align-items:center;--c:var(--indigo)}
+.line.amb{--c:var(--amber)}
+.line .head{width:100%;text-align:center;padding:10px 6px;border-radius:14px;background:var(--c);color:var(--bg)}
+.line .head b{display:block;color:var(--bg);font-weight:800}
+.line .head span{font-size:.75rem;font-weight:700}
+.stops{position:relative;width:100%;list-style:none;margin:0;padding:14px 0 0 24px;display:flex;flex-direction:column;gap:14px}
+.stops::before{content:"";position:absolute;left:10px;top:0;bottom:12px;width:2px;background:var(--c)}
+.stops li{position:relative;margin:0;font-size:.88rem;font-weight:700;color:var(--ink-strong);line-height:1.3}
+.stops li::before{content:"";position:absolute;left:-19px;top:3px;width:10px;height:10px;border-radius:50%;background:var(--surface);border:2px solid var(--c)}
+.stops small{display:block;font-weight:500;color:var(--muted);font-size:.75rem}
+
+/* vertical flow */
+.flow{display:flex;flex-direction:column;align-items:stretch;margin-top:12px}
+.step{background:var(--glass);border:1px solid var(--line);border-radius:14px;padding:11px 14px}
+.step b{color:var(--ink-strong)}
+.arrow{align-self:center;color:var(--faint);font-size:1rem;line-height:1;padding:5px 0;text-align:center}
+.arrow small{display:block;font-size:.75rem;margin-top:2px}
+.step.hit{background:var(--bad-soft);border:1px dashed rgba(255,155,155,.55);color:var(--bad)}
+.step.ok{background:var(--good-soft);border-color:rgba(124,226,176,.4);color:var(--good)}
+
+/* side-by-side paths */
+.paths{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}
+.path{padding:14px 10px;border-radius:18px;background:var(--glass);border:1px solid var(--line);display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;font-size:.86rem;font-weight:700;color:var(--ink-strong)}
+.path.win{background:var(--indigo-soft);border-color:rgba(109,124,255,.4)}
+.path .t{font-size:.75rem;color:var(--muted)} .path.win .t{color:var(--indigo-ink)}
+.path .ar{color:var(--faint);font-weight:400}
+.path .hit{color:var(--bad);border:1px dashed rgba(255,155,155,.6);border-radius:10px;padding:3px 9px}
+.path .ok{color:var(--good);border:1px solid rgba(124,226,176,.5);border-radius:10px;padding:3px 9px}
+.path .note{font-size:.75rem;font-weight:500;color:var(--muted)}
+
+/* patch layers */
+.layers{margin-top:12px;display:flex;flex-direction:column;gap:4px}
+.layer{display:flex;justify-content:space-between;gap:10px;padding:11px 14px;border-radius:4px;font-size:.88rem;font-weight:700}
+.layer span{font-weight:500;opacity:.85;text-align:right}
+.l1{background:#2B2F55;color:#fff;border-radius:12px 12px 4px 4px}
+.l2{background:var(--indigo);color:var(--bg);padding-block:15px}
+.l3{border:1px dashed var(--indigo-ink);color:var(--indigo-ink)}
+.l4{background:var(--amber-soft);color:var(--amber-ink)}
+.l5{background:rgba(255,155,155,.13);color:#FFB3B3;border-radius:4px 4px 12px 12px}
+
+/* cause → effect */
+.cause{display:grid;grid-template-columns:1fr auto;align-items:center;gap:10px;padding:10px 0;font-size:.92rem}
+.cause+.cause{border-top:1px solid rgba(255,255,255,.07)}
+.up{color:var(--good);font-weight:800;white-space:nowrap} .down{color:var(--bad);font-weight:800;white-space:nowrap}
+
+/* IA scale */
+.scale{margin-top:16px;padding:0 6px}
+.track{height:10px;border-radius:999px;background:linear-gradient(90deg,var(--bad),rgba(255,255,255,.2) 50%,var(--good))}
+.ticks{position:relative;height:74px}
+.tick{position:absolute;top:6px;transform:translateX(-50%);text-align:center;font-size:.72rem;line-height:1.25;width:78px;color:var(--muted)}
+.tick b{display:block;font-size:.95rem}
+.tick::before{content:"";display:block;width:2px;height:10px;background:var(--ink-strong);margin:-16px auto 8px}
+
+.rgrid{display:grid;grid-template-columns:1fr;gap:10px;margin-top:12px}
+@media (min-width:560px){.rgrid{grid-template-columns:1fr 1fr}}
+.rcard{background:var(--glass);border:1px solid var(--line);border-radius:18px;padding:14px 16px;display:flex;flex-direction:column;gap:4px}
+.rcard h4{margin:0;font-size:1rem;color:var(--ink-strong)}
+.speed{font-size:.78rem;font-weight:800;color:var(--amber-ink)}
+.rcard p{margin:0;font-size:.9rem}
+
+.chart{margin-top:12px;background:var(--glass);border:1px solid var(--line);border-radius:18px;padding:10px}
+.chart svg{display:block;width:100%;height:auto}
+.legend2{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.82rem;padding:6px 4px 2px;color:var(--muted)}
+.legend2 i{display:inline-block;width:14px;height:3px;vertical-align:middle;margin-right:6px;border-radius:2px}
+
+.clinic{margin-top:14px;display:flex;gap:12px;padding:14px 16px;border-radius:18px;background:var(--amber-soft);border:1px solid rgba(255,184,107,.35)}
+.clinic svg{flex:none}
+.clinic b{display:block;color:var(--amber-ink)}
+
+.next{display:flex;gap:10px;margin-top:36px}
+.go{flex:1;min-height:52px;border-radius:26px;border:1px solid var(--line-2);background:var(--glass-2);color:var(--ink-strong);font-weight:700;cursor:pointer}
+.go.main{background:var(--ink-strong);color:var(--bg);border-color:var(--ink-strong);font-weight:800}
+
+/* flashcards */
+.fc-top{display:flex;justify-content:space-between;align-items:center;margin-top:22px}
+.count{font-variant-numeric:tabular-nums;color:var(--indigo-ink);font-weight:800}
+.dots{display:flex;gap:4px;margin-top:10px}
+.dots i{flex:1;height:4px;border-radius:2px;background:rgba(255,255,255,.16)}
+.dots i.cur{background:#fff} .dots i.got{background:var(--good)} .dots i.again{background:var(--amber)}
+.fc{perspective:1200px;height:380px;margin-top:20px;cursor:pointer;display:block;width:100%;border:0;background:none;padding:0;text-align:left}
+.fc-inner{position:relative;width:100%;height:100%;transition:transform 280ms var(--ease-in-out);transform-style:preserve-3d}
+.fc.flip .fc-inner{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:28px;padding:26px 24px;display:flex;flex-direction:column;gap:14px;overflow:auto}
+.front{background:rgba(26,29,58,.85);border:1px solid var(--line-2);box-shadow:0 30px 60px rgba(20,24,80,.45)}
+.back{background:var(--indigo);color:var(--bg);transform:rotateY(180deg)}
+.face .lab{font-size:.8rem;font-weight:800;color:var(--muted)}
+.back .lab{color:rgba(11,12,26,.7)}
+.face .q{font-size:1.55rem;line-height:1.22;font-weight:700;letter-spacing:-.02em;color:var(--ink-strong)}
+.face .a{font-size:1.2rem;line-height:1.45;font-weight:600}
+.face .hint{margin-top:auto;font-size:.8rem;color:var(--muted)}
+.back .hint{color:rgba(11,12,26,.7)}
+.fc-btns{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+.btn{min-height:52px;border-radius:26px;border:1px solid var(--line-2);background:var(--glass-2);color:var(--ink-strong);font-weight:700;cursor:pointer;padding:0 18px}
+.btn.primary{background:var(--ink-strong);color:var(--bg);border-color:var(--ink-strong);font-weight:800}
+.btn.quiet{min-height:44px;background:none;border:0;color:var(--indigo-ink);margin-top:6px}
+@media (prefers-reduced-motion:reduce){.fc-inner{transition:none}.btn:active,.opt:active,.choice button:active,.seg button:active,.pills a:active,.go:active{transform:none}}
+
+/* mcq */
+.mcq-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:22px}
+.q-card{background:var(--glass);border:1px solid var(--line);border-radius:20px;padding:16px;margin-top:12px}
+.qn{font-size:.78rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.qt{font-weight:700;color:var(--ink-strong);margin:3px 0 10px;font-size:1.02rem;line-height:1.4}
+.opt{display:block;width:100%;min-height:48px;text-align:left;border:1px solid var(--line-2);background:rgba(255,255,255,.03);border-radius:14px;padding:11px 14px;margin-top:7px;cursor:pointer;font-size:.95rem}
+.opt[disabled]{cursor:default}
+.opt.right{background:var(--good-soft);border-color:var(--good);color:var(--good);font-weight:800}
+.opt.wrong{background:var(--bad-soft);border-color:var(--bad);color:var(--bad)}
+.expl{margin-top:10px;font-size:.9rem;color:var(--muted);transition:opacity 200ms var(--ease-out),transform 200ms var(--ease-out)}
+@starting-style{.expl{opacity:0;transform:translateY(4px)}}
+
+/* review */
+.ri{background:var(--glass);border:1px solid var(--line);border-radius:20px;padding:16px;margin-top:12px;scroll-margin-top:190px}
+.ri .where{font-size:.78rem;color:var(--amber-ink);font-weight:800}
+.ri b{display:block;margin-top:2px}
+.ri p{margin:.3rem 0 .7rem;color:var(--muted);font-size:.93rem}
+.choice{display:flex;gap:8px;flex-wrap:wrap}
+.choice button{min-height:44px;border:1px solid var(--line-2);background:rgba(255,255,255,.03);border-radius:22px;padding:0 18px;cursor:pointer;font-size:.92rem;font-weight:700}
+.choice button[aria-pressed="true"].ok{background:var(--good);border-color:var(--good);color:var(--bg)}
+.choice button[aria-pressed="true"].fix{background:var(--bad);border-color:var(--bad);color:var(--bg)}
+textarea{width:100%;margin-top:10px;font-family:inherit;border:1px solid var(--line-2);border-radius:14px;padding:12px;background:rgba(255,255,255,.03);color:var(--ink);min-height:76px}
+textarea::placeholder{color:var(--faint)}
+.copybox{position:sticky;bottom:0;background:var(--bg);border-top:1px solid var(--line);padding-block:12px calc(12px + env(safe-area-inset-bottom,0px));margin-top:18px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.copybox .status{font-size:.85rem;color:var(--muted)}
+pre.fallback{white-space:pre-wrap;font-family:inherit;font-size:.85rem;background:var(--glass);border:1px solid var(--line);border-radius:14px;padding:12px;margin-top:12px}
+
+main{padding-block:0 72px}
+footer{color:var(--faint);font-size:.82rem;border-top:1px solid var(--line);padding-block:20px 30px;background:var(--bg)}
+</style>
+
+<header>
+  <div class="gut"><div class="col">
+    <div class="bar"><span class="brand">PharmDaily</span><span class="sec">Section 1 · General Pharmacology</span></div>
+    <nav class="pills" aria-label="Topics">
+      <a href="#routes" data-t="routes">Routes</a>
+      <a href="#pk" data-t="pk">Kinetics</a>
+      <a href="#pd" data-t="pd">Dynamics</a>
+      <a href="#review" data-t="review" class="rev" hidden>Review <span id="flagCount" style="font-variant-numeric:tabular-nums"></span></a>
+    </nav>
+    <div class="seg" id="modes" role="group" aria-label="Study mode">
+      <button data-m="notes" aria-pressed="true">Notes</button>
+      <button data-m="cards" aria-pressed="false">Flashcards</button>
+      <button data-m="mcq" aria-pressed="false">MCQs</button>
+    </div>
+  </div></div>
+</header>
+
+<main class="gut"><div class="col">
+
+<!-- ===================== ROUTES ===================== -->
+<section data-topic="routes" data-mode="notes">
+  <div class="hero">
+    <div class="eyebrow">Chapter 1 · Introduction and routes</div>
+    <h1>How a drug gets in</h1>
+    <p class="lede">Where drugs come from, what they're called, and the routes into the body. Every route trades speed against safety and convenience.</p>
+  </div>
+
+  <h2>Sources of drugs</h2>
+  <div class="rows">
+    <div class="row"><div class="k">Synthetic</div><div class="drugs">Paracetamol, Ibuprofen, Prednisolone</div></div>
+    <div class="row"><div class="k">Microorganisms</div><div class="drugs">Penicillin, Erythromycin, Streptomycin, Amphotericin B</div></div>
+    <div class="row"><div class="k">Plants</div><div class="drugs">Morphine, Digoxin, Atropine, Pilocarpine, Physostigmine</div></div>
+    <div class="row"><div class="k">Minerals</div><div class="drugs">Iron, Calcium, Magnesium, Selenium</div></div>
+    <div class="row"><div class="k">Animals</div><div class="drugs">Heparin</div></div>
+    <div class="row"><div class="k">Genetic engineering<small>recombinant DNA</small></div><div class="drugs">Insulin, Interferons, Alteplase, Reteplase</div></div>
+  </div>
+
+  <h2>Drug names</h2>
+  <p>One drug, several names. Exams use the generic name; patients know the brand. KD Tripathi groups them as three: chemical (the code name is a lab label used before approval), non-proprietary and proprietary.</p>
+  <div class="flow">
+    <div class="step"><b>Chemical name</b><br>Describes the molecule. Aspirin is acetylsalicylic acid.</div>
+    <div class="arrow">↓</div>
+    <div class="step"><b>Code name</b><br>A lab code given while the drug is being developed.</div>
+    <div class="arrow">↓</div>
+    <div class="step"><b>Non-proprietary (generic) name</b><br>The official approved name: paracetamol, prednisolone.</div>
+    <div class="arrow">↓</div>
+    <div class="step"><b>Proprietary (brand) name</b><br>The company's name. Paracetamol: Crocin, Metacin, Calpol. Prednisolone: Wysolone.</div>
+  </div>
+  <div class="split">
+    <div class="card"><b>Prescription drugs</b>Dispensed only on a doctor's prescription.</div>
+    <div class="card"><b>Over-the-counter (OTC)</b>Can be bought without a prescription.</div>
+  </div>
+
+  <h2>The route map</h2>
+  <div class="metro" role="img" aria-label="Routes split into enteral: oral, sublingual and buccal, rectal; and parenteral: injections, inhalation, topical, transdermal">
+    <div class="root">Drug</div><div class="stem"></div><div class="bridge"></div>
+    <div class="lines">
+      <div class="line"><div class="stem"></div><div class="head"><b>Enteral</b><span>through the gut</span></div>
+        <ul class="stops"><li>Oral<small>swallowed</small></li><li>Sublingual, buccal<small>tongue, cheek</small></li><li>Rectal<small>enema, suppository</small></li></ul></div>
+      <div class="line amb"><div class="stem"></div><div class="head"><b>Parenteral</b><span>skips the gut</span></div>
+        <ul class="stops"><li>Injections</li><li>Inhalation</li><li>Topical</li><li>Transdermal<small>patch (TTS)</small></li></ul></div>
+    </div>
+  </div>
+
+  <h3>Oral</h3>
+  <div class="split">
+    <div class="pro"><h4>Why it's the default</h4><ul><li>Safe and convenient</li><li>Cheap, needs no trained person</li><li>Painless, self-administered</li></ul></div>
+    <div class="con"><h4>Where it fails</h4><ul><li>Slow onset: not for emergencies</li><li>Unconscious, uncooperative or vomiting patients</li><li>Some aren't absorbed (streptomycin)</li><li>Destroyed by gut juices: penicillin G, insulin</li><li>Destroyed in the liver: GTN, testosterone, lidocaine</li><li>Bad taste (chloramphenicol), nausea (emetine)</li></ul></div>
+  </div>
+  <div class="rows">
+    <div class="row"><div class="k">Local effect in the gut<small>not absorbed</small></div><div class="drugs">Antacids, Activated charcoal, Neomycin</div></div>
+    <div class="row"><div class="k">Systemic effect</div><div>Most tablets and capsules: absorbed, then act elsewhere.</div></div>
+  </div>
+
+  <h3>Why sublingual is fast</h3>
+  <p><b>Bypassing First-Pass Metabolism:</b> When a substance is swallowed, it must pass through the hostile environment of the stomach and intestines, and then travel via the portal vein directly to the liver. The liver heavily filters and deactivates a large portion of the compound before it ever reaches the rest of the body—a process known as the <b>first-pass effect</b>. Sublingual delivery completely bypasses this loop, draining directly into the internal jugular and facial veins to provide an immediate effect.</p>
+  <div class="paths">
+    <div class="path"><span class="t">Swallowed</span>Gut<span class="ar">↓</span>Portal vein<span class="ar">↓</span><span class="hit">Liver takes a share</span><span class="ar">↓</span>Body<span class="note">slower, less drug</span></div>
+    <div class="path win"><span class="t">Under the tongue</span>Mouth lining<span class="ar">↓</span>Jugular veins<span class="ar">↓</span><span class="ok">Liver skipped</span><span class="ar">↓</span>Body<span class="note">in minutes</span></div>
+  </div>
+  <div class="rows">
+    <div class="row"><div class="k">Sublingual</div><div class="drugs">Glyceryl trinitrate, Isosorbide dinitrate, Buprenorphine, Nifedipine, Ergotamine, DOCA, Desamino-oxytocin</div></div>
+    <div class="row"><div class="k">Buccal</div><div class="drugs">Glyceryl trinitrate, Nifedipine</div></div>
+  </div>
+
+  <h3>Rectal</h3>
+  <div class="rows">
+    <div class="row"><div class="k">Evacuant enema</div><div class="drugs">Soap and water, Glycerine</div></div>
+    <div class="row"><div class="k">Diagnostic enema</div><div class="drugs">Barium sulphate</div></div>
+    <div class="row"><div class="k">Retention enema</div><div class="drugs">Hydrocortisone, Sulfasalazine, Diazepam, Aminophylline</div></div>
+    <div class="row"><div class="k">Suppository</div><div class="drugs">Paracetamol, Diclofenac, Indomethacin, Morphine, Tramadol, Ergotamine</div></div>
+  </div>
+  <div class="card"><b>Worth knowing</b>Only about half of a rectal dose skips the liver (the part absorbed into the external haemorrhoidal veins). Absorption is slow and irregular, but diazepam solution and paracetamol suppositories absorb reliably in children.</div>
+
+  <h3>Injections</h3>
+  <div class="split">
+    <div class="pro"><h4>Advantages of parenteral routes</h4><ul><li>Acts faster</li><li>Useful in emergencies</li><li>Works when the patient is unconscious, uncooperative, vomiting or has diarrhoea</li><li>No first-pass metabolism</li><li>Digestive juices can't destroy the drug</li><li>Bad-tasting drugs can be given</li><li>Drugs that aren't absorbed orally can be given</li><li>No food–drug interactions</li></ul></div>
+    <div class="con"><h4>Disadvantages of parenteral routes</h4><ul><li>The drug has to be sterile</li><li>Aseptic precautions are needed</li><li>Sterilising and injecting add to the cost</li><li>Invasive and painful</li><li>A trained person has to give it</li><li>Can irritate or injure tissue at the site</li><li>Hard to reverse once given, especially IV</li></ul></div>
+  </div>
+  <div class="rows par">
+    <div class="row"><div class="k">Intramuscular</div><div>Aqueous or oily (depot) solutions. Faster than subcutaneous. Avoid in patients on anticoagulants: haematoma.</div></div>
+    <div class="row"><div class="k">Intravenous</div><div>Immediate effect, 100% bioavailability, dose can be titrated. Aqueous solutions only (never suspensions). Riskiest route: thrombophlebitis, air embolism.<p style="margin:.5rem 0 0"><b>Advantages</b></p><ul><li>Fastest onset</li><li>Useful in emergencies</li><li>Irritant drugs can be given</li><li>100% bioavailability</li><li>An infusion holds a steady-state level</li></ul></div></div>
+    <div class="row"><div class="k">IV, slow bolus</div><div class="drugs">Calcium, Ranitidine</div></div>
+    <div class="row"><div class="k">IV infusion</div><div class="drugs">Ciprofloxacin, Metronidazole</div></div>
+    <div class="row"><div class="k">IV infusion only</div><div class="drugs">Dopamine, Dobutamine, Nitroprusside</div></div>
+    <div class="row"><div class="k">Subcutaneous</div><div><div class="drugs">Insulin</div>Also depots and implants: hormonal pellets (contraceptives, DOCA, testosterone), biodegradable or not. Slower than IM; avoid in shock. Dermojet: needle-free, for mass vaccination.</div></div>
+    <div class="row"><div class="k">Intradermal</div><div class="drugs">BCG vaccine, Mantoux test, Allergen test dose</div></div>
+    <div class="row"><div class="k">Intrathecal</div><div class="drugs">Local anaesthetics, Methotrexate</div></div>
+    <div class="row"><div class="k">Epidural</div><div class="drugs">Local anaesthetics, Morphine</div></div>
+    <div class="row"><div class="k">Intra-articular</div><div class="drugs">Hydrocortisone, Methylprednisolone</div></div>
+    <div class="row"><div class="k">Intrapleural</div><div class="drugs">Mechlorethamine, Cyclophosphamide</div></div>
+    <div class="row"><div class="k">Intraperitoneal</div><div><div class="drugs">Cyclophosphamide</div>Also peritoneal dialysis</div></div>
+    <div class="row"><div class="k">Intra-arterial</div><div class="drugs">Contrast dyes, Bleomycin</div></div>
+    <div class="row"><div class="k">Intravesical</div><div class="drugs">Thiotepa</div></div>
+    <div class="row"><div class="k">Intralesional</div><div class="drugs">Glucocorticoids (triamcinolone)</div></div>
+    <div class="row"><div class="k">Intracavernous</div><div class="drugs">Phentolamine</div></div>
+  </div>
+
+  <h3>Inhalation and nasal</h3>
+  <div class="rows par">
+    <div class="row"><div class="k">Inhalation</div><div><div class="drugs">General anaesthetics, Salbutamol, Glucocorticoids, Ipratropium, Cromolyn sodium</div>Huge alveolar surface: very fast. Stop inhaling and the drug leaves in breath, so control is minute-to-minute.</div></div>
+    <div class="row"><div class="k">Nasal spray</div><div><div class="drugs">Desmopressin, GnRH agonists, Azelastine, Fluticasone, Cromolyn sodium</div>Skips gut and liver. KDT names desmopressin and GnRH agonists for systemic use.</div></div>
+  </div>
+  <div class="split">
+    <div class="pro"><h4>Metered dose inhalers: advantages</h4><ul><li>Small and easy to carry</li><li>Acts quickly and is easy to use</li><li>Contents can't get contaminated</li><li>Dose can be controlled</li><li>Smaller dose, so milder systemic side effects</li></ul></div>
+    <div class="con"><h4>Metered dose inhalers: disadvantages</h4><ul><li>Fairly costly</li><li>Can irritate the airway locally</li><li>Pressing and breathing in must be timed together; poor timing means too little drug reaches the lungs</li><li>Much of the dose is wasted, settling on the mouth and throat lining</li><li>Contains a propellant</li></ul></div>
+  </div>
+
+  <h3>Topical</h3>
+  <p>For a <b>local effect</b> on skin or mucous membranes: mouth, eye, ear, nasopharynx, oropharynx, anal canal, bladder, urethra, vagina.</p>
+  <div class="card"><b>Dosage forms</b><div class="drugs">Mouthwash, Dental gel, Paste, Ointment, Cream, Lotion, Powder, Gel, Liniment, Shampoo, Suppository, Pessary</div></div>
+  <div class="clinic">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFCF94" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3c-2 0-3 2-3 4 0 3 1 5 2 8 .6 2 1 5 2.5 5 1.4 0 1.5-3 2.2-5 .3-.9.6-1.3 1.3-1.3s1 .4 1.3 1.3c.7 2 .8 5 2.2 5 1.5 0 1.9-3 2.5-5 1-3 2-5 2-8 0-2-1-4-3-4-1.8 0-2.6 1-5 1S8.8 3 7 3z"/></svg>
+    <div><b>For your clinic</b>Mouthwashes, dental gels and pastes are the topical forms you'll prescribe every week.</div>
+  </div>
+
+  <h3>Inside a skin patch (TTS)</h3>
+  <p>A patch releases drug through the skin at a steady rate for a <b>systemic</b> effect.</p>
+  <div class="layers" role="img" aria-label="Patch layers from outside to skin">
+    <div class="layer l1">Backing film <span>outside</span></div>
+    <div class="layer l2">Drug reservoir <span>the dose</span></div>
+    <div class="layer l3">Micropore membrane <span>sets the rate</span></div>
+    <div class="layer l4">Adhesive + priming dose <span>starts it</span></div>
+    <div class="layer l5">Skin, capillaries <span>into blood</span></div>
+  </div>
+  <div class="drugs">Glyceryl trinitrate, Fentanyl, Nicotine, Estradiol, Hyoscine, Clonidine, Isosorbide dinitrate</div>
+  <p style="color:var(--muted);font-size:.9rem">Lasts 1–3 days. Smooth blood levels, little first-pass loss, better compliance. Rotate the site to limit skin irritation.</p>
+  <div class="split">
+    <div class="pro"><h4>Transdermal: advantages</h4><ul><li>Patients stick to treatment more easily</li><li>Skips first-pass metabolism</li><li>Easy to use; the patient applies it</li><li>Effect stops when the patch is removed</li><li>Releases drug at a steady rate</li><li>Milder systemic side effects</li></ul></div>
+    <div class="con"><h4>Transdermal: disadvantages</h4><ul><li>Costly</li><li>Local skin reactions: itching, dermatitis, sensitisation</li><li>A carelessly thrown-away patch can harm a child who sticks it on</li></ul></div>
+  </div>
+
+  <h2>New drug delivery systems</h2>
+  <div class="def"><b>Aim:</b> get the drug to its target at the right rate and concentration, for the most benefit and the fewest adverse effects.</div>
+  <div class="split">
+    <div class="pro"><h4>Why use them</h4><ul><li>Safer, fewer ADRs</li><li>Drug goes to the site of action (tumour cells)</li><li>Better bioavailability</li><li>Peptides and proteins arrive intact</li><li>Better compliance</li><li>Old drugs re-patented in new forms</li></ul></div>
+    <div class="con"><h4>Drawback</h4><ul><li>Very expensive</li></ul></div>
+  </div>
+  <div class="card"><b>Examples</b><div class="drugs">Liposomes, Prodrugs, Transdermal patches, Sustained release, Aerosols, Insulin pumps, PCA morphine, IUD, Ocusert, Monoclonal antibodies, RBCs as carriers, Microspheres, Gene therapy, PUVA</div></div>
+
+  <div class="next"><button class="go main" data-jump="cards">Flip 13 flashcards</button><button class="go" data-jump="mcq">10 MCQs</button></div>
+</section>
+<section data-topic="routes" data-mode="cards" hidden></section>
+<section data-topic="routes" data-mode="mcq" hidden></section>
+
+<!-- ===================== PHARMACOKINETICS ===================== -->
+<section data-topic="pk" data-mode="notes" hidden>
+  <div class="hero">
+    <div class="eyebrow">Chapters 2–3 · Pharmacokinetics</div>
+    <h1>What the body does to the drug</h1>
+    <p class="lede">Four steps, in order. Most exam questions sit inside one of them.</p>
+  </div>
+  <div class="flow">
+    <div class="step"><b>Absorption</b>: site of administration → blood</div><div class="arrow">↓</div>
+    <div class="step"><b>Distribution</b>: blood → tissues</div><div class="arrow">↓</div>
+    <div class="step"><b>Metabolism</b>: mostly in the liver</div><div class="arrow">↓</div>
+    <div class="step"><b>Excretion</b>: out, mostly in urine</div>
+  </div>
+
+  <h2>Crossing membranes</h2>
+  <div class="rows">
+    <div class="row"><div class="k">Passive diffusion</div><div>Down the concentration gradient. How most drugs move.</div></div>
+    <div class="row"><div class="k">Filtration, bulk flow</div><div>Through pores, along with water</div></div>
+    <div class="row"><div class="k">Active transport</div><div><div class="drugs">Levodopa, Methyldopa, Iron</div>Uses energy; works against the gradient. P-glycoprotein is a pump that pushes drugs back out.</div></div>
+    <div class="row"><div class="k">Facilitated diffusion</div><div><div class="drugs">Glucose (GLUT-4)</div>Carrier-mediated, no energy</div></div>
+    <div class="row"><div class="k">Endocytosis</div><div>Phagocytosis, pinocytosis. Vitamin B12 enters by pinocytosis after binding intrinsic factor.</div></div>
+  </div>
+
+  <h2>Absorption</h2>
+  <div class="def">Movement of an unchanged drug from its site of administration into the circulation.</div>
+  <div class="metro">
+    <div class="root">Absorption depends on</div><div class="stem"></div>
+    <div class="rows" style="width:100%;margin-top:0">
+      <div class="row"><div class="k">Physicochemical</div><div>Physical state, solubility, concentration, route</div></div>
+      <div class="row"><div class="k">Physiological</div><div>Surface area, blood flow, pH, gut motility and contents</div></div>
+      <div class="row"><div class="k">Pharmaceutical</div><div>Particle size, disintegration, formulation</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="cause"><span>Solution vs solid</span><span class="up">solution faster</span></div>
+    <div class="cause"><span>Concentrated vs dilute</span><span class="up">concentrated faster</span></div>
+    <div class="cause"><span>Larger surface area</span><span class="up">↑ absorption</span></div>
+    <div class="cause"><span>More blood flow</span><span class="up">↑ absorption</span></div>
+    <div class="cause"><span>Gut motility ↑</span><span class="down">↓ absorption</span></div>
+    <div class="cause"><span>Gut motility ↓</span><span class="up">↑ absorption</span></div>
+    <div class="cause"><span>Food, in general</span><span class="down">↓ absorption</span></div>
+    <div class="cause"><span>Food + carbamazepine</span><span class="up">↑ absorption</span></div>
+    <div class="cause"><span>Food + ampicillin</span><span class="down">↓ absorption</span></div>
+    <div class="cause"><span>Crohn's + trimethoprim</span><span class="down">↓ absorption</span></div>
+    <div class="cause"><span>Coeliac + erythromycin</span><span class="up">↑ absorption</span></div>
+  </div>
+  <div class="split">
+    <div class="card"><b>Acidic drugs</b>Better absorbed from the stomach<div class="drugs">Salicylates, Barbiturates</div></div>
+    <div class="card"><b>Basic drugs</b>Ionised in the stomach; absorbed once they reach the duodenum<div class="drugs">Morphine, Quinine</div></div>
+  </div>
+  <p style="color:var(--muted);font-size:.9rem">Poorly soluble drugs: dissolution rate sets absorption rate (aspirin, griseofulvin). Most drugs still absorb mainly in the small intestine because of its huge surface; faster gastric emptying speeds absorption. Most drugs do best on an empty stomach; fatty food boosts lumefantrine.</p>
+
+  <h3>Interactions at absorption</h3>
+  <div class="rows">
+    <div class="row"><div class="k">Food</div><div class="drugs">Tetracyclines</div></div>
+    <div class="row"><div class="k">Chelation<small>absorption falls</small></div><div>Tetracyclines and iron with calcium salts or antacids. Phenytoin with sucralfate.</div></div>
+    <div class="row"><div class="k">Slow gastric emptying</div><div class="drugs">Anticholinergics, Tricyclic antidepressants, Opioids</div></div>
+    <div class="row"><div class="k">Fast gastric emptying</div><div class="drugs">Metoclopramide</div></div>
+    <div class="row"><div class="k">P-gp efflux pump<small>gut wall</small></div><div>Pumps digoxin and cyclosporine back into the gut. Inhibited by quinidine, verapamil, erythromycin. Induced by rifampin, phenobarbitone.</div></div>
+    <div class="row"><div class="k">Destroyed in the gut</div><div>Penicillin G by acid, insulin by enzymes</div></div>
+  </div>
+  <div class="clinic">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFCF94" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3c-2 0-3 2-3 4 0 3 1 5 2 8 .6 2 1 5 2.5 5 1.4 0 1.5-3 2.2-5 .3-.9.6-1.3 1.3-1.3s1 .4 1.3 1.3c.7 2 .8 5 2.2 5 1.5 0 1.9-3 2.5-5 1-3 2-5 2-8 0-2-1-4-3-4-1.8 0-2.6 1-5 1S8.8 3 7 3z"/></svg>
+    <div><b>For your clinic</b>Tell patients on tetracyclines not to take them with milk or antacids.</div>
+  </div>
+
+  <h3>First-pass metabolism</h3>
+  <div class="def">Metabolism of a drug on its way from the site of absorption to the systemic circulation.</div>
+  <div class="flow">
+    <div class="step">Oral dose</div><div class="arrow">↓<small>gut wall: GTN, isoprenaline lost</small></div>
+    <div class="step">Portal vein</div><div class="arrow">↓<small>liver: lignocaine lost</small></div>
+    <div class="step ok">Systemic circulation: only what's left</div>
+  </div>
+  <div class="card"><b>Consequences</b><ul><li>Oral dose much higher than sublingual or injected dose</li><li>Big variation between people</li><li>Oral bioavailability rises in severe liver disease</li><li>Two drugs competing for first-pass raise each other's levels (chlorpromazine + propranolol)</li></ul>Avoided by sublingual, transdermal or injected routes. Enterohepatic circulation (morphine) recycles drug from bile back to the gut.</div>
+  <div class="rows">
+    <div class="row"><div class="k">High first-pass, not given orally</div><div class="drugs">Isoprenaline, Lidocaine, Hydrocortisone, Testosterone</div></div>
+    <div class="row"><div class="k">High first-pass, high oral dose</div><div class="drugs">Propranolol, Verapamil, Salbutamol, Glyceryl trinitrate, Morphine, Pethidine</div></div>
+  </div>
+  <div class="def"><b>Bioavailability:</b> the rate and extent to which a dose reaches the systemic circulation unchanged. <b>IV = 100%.</b> Same amount of drug but different blood levels = <i>bioinequivalent</i>. Matters most for narrow-margin drugs (digoxin) and those needing precise dosing (oral anticoagulants, hypoglycaemics).</div>
+
+  <h2>Distribution</h2>
+  <p>Depends on lipid solubility, pH, plasma protein binding, tissue transporters and regional blood flow. Limited by the blood–brain, blood–CSF and placental barriers. Only lipid-soluble drugs enter the brain; dopamine can't, but levodopa can.</p>
+  <div class="def"><b>Apparent volume of distribution (V)</b> = IV dose ÷ plasma concentration.<br>Low V: drug held in plasma (warfarin, diclofenac ~0.15 L/kg). High V: drug stored in tissues (digoxin 6 L/kg), so haemodialysis can't remove it in poisoning.</div>
+  <div class="split">
+    <div class="card"><b>Acidic drugs bind albumin</b><div class="drugs">Barbiturates, Benzodiazepines, NSAIDs, Penicillins, Tetracyclines, Warfarin, Phenytoin, Sulfonamides</div></div>
+    <div class="card"><b>Basic drugs bind α1-acid glycoprotein</b><div class="drugs">β-blockers, Lidocaine, Bupivacaine, Prazosin, Verapamil, Methadone, Imipramine, Quinidine</div></div>
+  </div>
+  <div class="card"><b>Why protein binding matters</b><ul><li>Bound drug is inactive and stays in plasma: a temporary store</li><li>Highly bound drugs usually act longer and aren't removed by dialysis</li><li>One drug can displace another from albumin</li></ul>
+    <div class="rows" style="margin-top:8px">
+      <div class="row"><div class="k">Aspirin displaces sulfonylureas</div><div>Hypoglycaemia</div></div>
+      <div class="row"><div class="k">Sulfonamides, vitamin K displace bilirubin</div><div>Kernicterus in newborns</div></div>
+      <div class="row"><div class="k">Indomethacin, phenytoin displace warfarin</div><div>Bleeding risk</div></div>
+      <div class="row"><div class="k">Aspirin displaces methotrexate</div><div>Methotrexate toxicity</div></div>
+    </div></div>
+  <div class="clinic">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFCF94" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3c-2 0-3 2-3 4 0 3 1 5 2 8 .6 2 1 5 2.5 5 1.4 0 1.5-3 2.2-5 .3-.9.6-1.3 1.3-1.3s1 .4 1.3 1.3c.7 2 .8 5 2.2 5 1.5 0 1.9-3 2.5-5 1-3 2-5 2-8 0-2-1-4-3-4-1.8 0-2.6 1-5 1S8.8 3 7 3z"/></svg>
+    <div><b>For your clinic</b>A diabetic on glibenclamide who takes aspirin for toothache can go hypoglycaemic: sweating, palpitations, confusion. Paracetamol is the safer analgesic for them.</div>
+  </div>
+  <h3>Tissue storage</h3>
+  <div class="rows">
+    <div class="row"><div class="k">Bone and teeth <span class="dental">Dental</span></div><div class="drugs">Tetracyclines, Heavy metals, Bisphosphonates</div></div>
+    <div class="row"><div class="k">Liver</div><div class="drugs">Chloroquine, Tetracyclines, Emetine, Digoxin</div></div>
+    <div class="row"><div class="k">Kidney</div><div class="drugs">Digoxin, Chloroquine, Emetine</div></div>
+    <div class="row"><div class="k">Thyroid</div><div class="drugs">Iodine</div></div>
+    <div class="row"><div class="k">Skeletal muscle</div><div class="drugs">Digoxin</div></div>
+    <div class="row"><div class="k">Fat</div><div class="drugs">Thiopentone, Ether, Minocycline, Phenoxybenzamine, DDT</div></div>
+    <div class="row"><div class="k">Brain</div><div class="drugs">Chlorpromazine, Acetazolamide, Isoniazid</div></div>
+    <div class="row"><div class="k">Retina</div><div class="drugs">Chloroquine</div></div>
+    <div class="row"><div class="k">Iris</div><div class="drugs">Atropine, Ephedrine</div></div>
+  </div>
+  <h3>Redistribution</h3>
+  <p>Highly lipid-soluble drugs first reach well-perfused organs (brain, heart, kidney), then shift to bulky muscle and fat. That ends their action fast. The same explains why oral diazepam works as a short hypnotic despite a half-life over 30 hours. Repeated doses fill the fat stores and the drug becomes long-acting.</p>
+  <div class="flow">
+    <div class="step"><b>Thiopentone</b> IV</div><div class="arrow">↓<small>seconds</small></div>
+    <div class="step">Brain: patient sleeps</div><div class="arrow">↓<small>minutes</small></div>
+    <div class="step ok">Muscle, then fat: patient wakes, drug still in body</div>
+  </div>
+  <div class="split">
+    <div class="card"><b>Loading dose</b>One or a few quick doses at the start to reach the target level fast.</div>
+    <div class="card"><b>Maintenance dose</b>Repeated at set intervals to hold the target level.</div>
+  </div>
+
+  <h2>Metabolism (Biotransformation)</h2>
+  <p>Turns lipid-soluble drugs into water-soluble ones so the kidney can excrete them. Mainly in the liver; also kidney, gut, lungs and plasma. Hydrophilic drugs (streptomycin, neostigmine) are excreted mostly unchanged.</p>
+  <h3>Four outcomes</h3>
+  <div class="rows">
+    <div class="row"><div class="k">Active → inactive</div><div class="drugs">Paracetamol, Chloramphenicol, Lidocaine, Ibuprofen</div></div>
+    <div class="row"><div class="k">Active → active</div><div>Diazepam → oxazepam · Propranolol → 4-hydroxypropranolol · Morphine → morphine-6-glucuronide · Codeine, heroin → morphine · Amitriptyline → nortriptyline · Imipramine → desipramine · Cefotaxime → desacetylcefotaxime · Losartan → E-3174</div></div>
+    <div class="row"><div class="k">Prodrug → active</div><div>Enalapril → enalaprilat · Prednisone → prednisolone · Cortisone → hydrocortisone · Levodopa → dopamine · Bacampicillin → ampicillin · Azathioprine → mercaptopurine · Dipivefrine → epinephrine · Zidovudine, acyclovir → triphosphates</div></div>
+    <div class="row"><div class="k">Active → toxic</div><div>Paracetamol → NAPQI · Cyclophosphamide → acrolein · Halothane → trifluoroacetic acid · Methanol → formic acid</div></div>
+    <div class="row"><div class="k">More from KDT</div><div>Active → active: chloral hydrate → trichloroethanol · allopurinol → alloxanthine · primidone → phenobarbitone · digitoxin → digoxin · spironolactone → canrenone · procainamide → N-acetylprocainamide<br>Prodrugs: α-methyldopa → α-methylnorepinephrine · sulindac → sulfide · proguanil → cycloguanil · sulfasalazine → 5-aminosalicylic acid · mercaptopurine, fluorouracil → their nucleotides</div></div>
+  </div>
+  <h3>Phase I and Phase II</h3>
+  <div class="split">
+    <div class="card"><b>Phase I · functionalisation</b>Adds or exposes a reactive group.<ul>
+      <li><b>Oxidation, CYP450:</b> hydroxylation (warfarin, phenytoin, ibuprofen), dealkylation (morphine, codeine), deamination (diazepam), desulfuration (thiopentone), N-oxidation (paracetamol)</li>
+      <li><b>Oxidation, non-CYP:</b> MAO (dopamine, adrenaline), xanthine oxidase (6-mercaptopurine)</li>
+      <li><b>Reduction:</b> chloramphenicol, clonazepam, methadone; KDT adds chloral hydrate, halothane, warfarin</li>
+      <li><b>Hydrolysis:</b> esters (procaine, succinylcholine), amides (lidocaine, procainamide); also aspirin, pethidine, oxytocin</li>
+      <li><b>Cyclisation:</b> a straight-chain compound closes into a ring. Proguanil → cycloguanil</li>
+      <li>Decyclisation: barbiturates, phenytoin</li></ul></div>
+    <div class="card"><b>Phase II · conjugation</b>Joins a body substance so the drug becomes water-soluble. Products are mostly inactive; exceptions are morphine glucuronide and minoxidil sulphate.<ul>
+      <li><b>Glucuronide (the most important):</b> chloramphenicol, morphine, lorazepam, diazepam, aspirin, paracetamol, metronidazole, digoxin</li>
+      <li><b>Sulphate:</b> paracetamol, warfarin, methyldopa, chloramphenicol, steroids</li>
+      <li><b>Glutathione:</b> paracetamol (fails in overdose → liver damage)</li>
+      <li><b>Glycine:</b> salicylic acid</li>
+      <li><b>Acetylation:</b> isoniazid, dapsone, hydralazine, sulfonamides, procainamide (slow and fast acetylators)</li>
+      <li><b>Methylation:</b> adrenaline, dopamine, histamine, methyldopa, captopril</li></ul></div>
+  </div>
+  <div class="clinic">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFCF94" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3c-2 0-3 2-3 4 0 3 1 5 2 8 .6 2 1 5 2.5 5 1.4 0 1.5-3 2.2-5 .3-.9.6-1.3 1.3-1.3s1 .4 1.3 1.3c.7 2 .8 5 2.2 5 1.5 0 1.9-3 2.5-5 1-3 2-5 2-8 0-2-1-4-3-4-1.8 0-2.6 1-5 1S8.8 3 7 3z"/></svg>
+    <div><b>For your clinic</b>Ester local anaesthetics (procaine) are broken down by plasma esterases; amides (lidocaine) by the liver.</div>
+  </div>
+
+  <h3>Enzyme inhibition</h3>
+  <p>Inhibition is fast (within hours). Induction is slow: it peaks in 4–14 days and fades over 1–3 weeks.</p>
+  <div class="rows">
+    <div class="row"><div class="k">Erythromycin, clarithromycin</div><div>Raise benzodiazepines, warfarin, theophylline, carbamazepine</div></div>
+    <div class="row"><div class="k">Ciprofloxacin</div><div>Theophylline</div></div>
+    <div class="row"><div class="k">Chloramphenicol</div><div>Phenytoin, warfarin</div></div>
+    <div class="row"><div class="k">Isoniazid</div><div>Phenytoin. (It also induces CYP2E1, see below.)</div></div>
+    <div class="row"><div class="k">Sodium valproate</div><div>Phenytoin, phenobarbitone</div></div>
+    <div class="row"><div class="k">Erythromycin, ketoconazole, itraconazole</div><div>Astemizole, terfenadine, cisapride</div></div>
+    <div class="row"><div class="k">Disulfiram, metronidazole</div><div>Block aldehyde dehydrogenase: alcohol reaction. Metronidazole also raises warfarin, phenytoin.</div></div>
+    <div class="row"><div class="k">MAO inhibitors</div><div>Opioid analgesics, barbiturates</div></div>
+    <div class="row"><div class="k">Allopurinol</div><div>Blocks xanthine oxidase: 6-mercaptopurine, methotrexate</div></div>
+    <div class="row"><div class="k">Quinidine</div><div>Blocks CYP2D6, so codeine isn't converted to morphine and stops working</div></div>
+    <div class="row"><div class="k">Other inhibitors</div><div>Omeprazole, cimetidine, sulfonamides, fluoxetine, amiodarone, verapamil, diltiazem, ritonavir, grapefruit juice</div></div>
+  </div>
+  <h3>Enzyme induction</h3>
+  <div class="drugs">Phenobarbitone, Phenytoin, Carbamazepine, Rifampin, Griseofulvin, Glucocorticoids, Isoniazid, Phenylbutazone</div>
+  <p style="color:var(--muted);font-size:.9rem">Isoniazid and chronic alcohol induce CYP2E1. Cigarette smoke and charcoal-broiled meat induce CYP1A.</p>
+  <div class="split">
+    <div class="card"><b>Consequences</b><ul><li>Other drugs act less, or for less time (rifampin → oral contraceptive failure)</li><li>Drugs activated by metabolism act more (paracetamol toxicity at lower doses)</li><li>Tolerance through self-induction (carbamazepine, rifampin)</li><li>Body substances broken down faster</li><li>Can precipitate acute intermittent porphyria</li><li>Doses need adjusting</li></ul></div>
+    <div class="card"><b>Uses</b><ul><li>Congenital non-haemolytic jaundice</li><li>Cushing's syndrome</li><li>Chronic poisonings</li><li>Liver disease</li></ul></div>
+  </div>
+
+  <h2>Excretion</h2>
+  <div class="rows">
+    <div class="row"><div class="k">Urine</div><div class="drugs">Phenobarbitone, Aspirin, Propranolol</div></div>
+    <div class="row"><div class="k">Faeces, bile</div><div class="drugs">Erythromycin, Ampicillin, Rifampin, Tetracycline, Oral contraceptives</div></div>
+    <div class="row"><div class="k">Exhaled air</div><div class="drugs">General anaesthetics, Alcohol</div></div>
+    <div class="row"><div class="k">Saliva, sweat</div><div class="drugs">Rifampin, Lithium, Potassium iodide, Heavy metals</div></div>
+    <div class="row"><div class="k">Milk</div><div class="drugs">Buprenorphine, Domperidone</div></div>
+  </div>
+  <h3>In the kidney</h3>
+  <div class="flow">
+    <div class="step"><b>Glomerular filtration</b>: unbound drug is filtered</div><div class="arrow">↓</div>
+    <div class="step"><b>Tubular reabsorption</b>: lipid-soluble drug returns to blood</div><div class="arrow">↓</div>
+    <div class="step"><b>Tubular secretion</b>: pumps add drug to urine</div>
+  </div>
+  <div class="split">
+    <div class="card"><b>Organic acid pump</b><div class="drugs">Penicillin, Probenecid, Uric acid, Salicylates, Indomethacin, Methotrexate</div></div>
+    <div class="card"><b>Organic base pump</b><div class="drugs">Thiazides, Furosemide, Amiloride, Quinine, Procainamide, Cimetidine</div></div>
+  </div>
+  <div class="card"><b>Urine pH and competition</b><ul><li>Weak acids leave faster in alkaline urine: alkalinise urine in barbiturate and salicylate poisoning</li><li>Probenecid competes with penicillin for the acid pump, so penicillin lasts longer</li><li>Renal function falls after 50; tubular pumps are immature in newborns</li></ul></div>
+  <h2>Kinetics of elimination</h2>
+  <div class="def"><b>Clearance (CL):</b> the volume of plasma completely cleared of drug per unit time.</div>
+  <div class="def"><b>Plasma half-life (t½):</b> time for plasma concentration to fall to half.</div>
+  <div class="split">
+    <div class="card"><b>First-order</b>A constant <i>fraction</i> is removed per unit time. Most drugs. t½ stays the same at any dose.</div>
+    <div class="card"><b>Zero-order</b>A constant <i>amount</i> is removed per unit time (alcohol). Phenytoin, theophylline, warfarin switch to it at higher doses, so levels jump out of proportion.</div>
+  </div>
+  <div class="flow">
+    <div class="step">1 t½ → 50% gone</div><div class="arrow">↓</div>
+    <div class="step">2 t½ → 75% gone</div><div class="arrow">↓</div>
+    <div class="step">3 t½ → 87.5% gone</div><div class="arrow">↓</div>
+    <div class="step ok">4–5 t½ → nearly all gone. Repeated dosing also reaches steady state in 4–5 t½.</div>
+  </div>
+  <div class="card"><b>Doses and monitoring</b><ul><li>Loading dose depends on volume of distribution; maintenance dose on clearance</li><li>Loading then maintenance: digoxin, chloroquine, doxycycline, amiodarone, IV lidocaine</li><li>Therapeutic drug monitoring helps for narrow-margin drugs: digoxin, lithium, anticonvulsants, aminoglycosides, theophylline</li><li>No use when the effect is easy to measure (antihypertensives), for drugs activated in the body (levodopa), or "hit and run" drugs (omeprazole, MAO inhibitors)</li></ul></div>
+  <div class="card"><b>Prolonging drug action</b><ul><li>Slow absorption: sustained-release tablets, depot injections (benzathine penicillin), implants, patches</li><li>More protein binding: sulfadoxine</li><li>Slower metabolism: ethinyl group on estradiol; allopurinol with 6-mercaptopurine</li><li>Slower renal excretion: probenecid with penicillin</li></ul>Targeted delivery: liposomal amphotericin B (kala-azar), drug-releasing implants (IUCD), drug-coated stents.</div>
+  <div class="clinic">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFCF94" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3c-2 0-3 2-3 4 0 3 1 5 2 8 .6 2 1 5 2.5 5 1.4 0 1.5-3 2.2-5 .3-.9.6-1.3 1.3-1.3s1 .4 1.3 1.3c.7 2 .8 5 2.2 5 1.5 0 1.9-3 2.5-5 1-3 2-5 2-8 0-2-1-4-3-4-1.8 0-2.6 1-5 1S8.8 3 7 3z"/></svg>
+    <div><b>For your clinic</b>Adrenaline in a local anaesthetic narrows nearby vessels, so the anaesthetic is absorbed slowly: longer numbness, less in the blood.</div>
+  </div>
+
+  <div class="next"><button class="go main" data-jump="cards">Flip 16 flashcards</button><button class="go" data-jump="mcq">10 MCQs</button></div>
+</section>
+<section data-topic="pk" data-mode="cards" hidden></section>
+<section data-topic="pk" data-mode="mcq" hidden></section>
+
+<!-- ===================== PHARMACODYNAMICS ===================== -->
+<section data-topic="pd" data-mode="notes" hidden>
+  <div class="hero">
+    <div class="eyebrow">Chapter 4 · Pharmacodynamics</div>
+    <h1>What the drug does to the body</h1>
+    <p class="lede">Drugs don't give cells new jobs. They speed up or slow down what cells already do (gene-based drugs are the exception).</p>
+  </div>
+
+  <h2>Ways drugs act</h2>
+  <div class="rows">
+    <div class="row"><div class="k">Stimulation</div><div>Adrenaline on the heart, pilocarpine on salivary glands. Too much can tip into depression (picrotoxin: convulsions, then coma).</div></div>
+    <div class="row"><div class="k">Depression</div><div>Barbiturates on CNS, quinidine on heart, omeprazole on acid secretion</div></div>
+    <div class="row"><div class="k">Irritation</div><div>Non-selective, often harmful, on less specialised cells</div></div>
+    <div class="row"><div class="k">Replacement</div><div>Natural metabolites or hormones in deficiency: levodopa in parkinsonism, insulin in diabetes, iron in anaemia</div></div>
+    <div class="row"><div class="k">Anti-infective</div><div>Kills or stops microbes</div></div>
+    <div class="row"><div class="k">Cytotoxic</div><div>Kills cancer cells</div></div>
+    <div class="row"><div class="k">Immune modification</div><div>Vaccines, immunosuppressants such as cyclosporine</div></div>
+  </div>
+  <p>A few act by a physical or chemical property: ispaghula (bulk), petroleum jelly (lubricant), activated charcoal (adsorption), mannitol (osmosis), antacids (neutralise acid), chelators like EDTA and dimercaprol (bind metals), cholestyramine (binds bile acids). Most bind a protein target, which is what makes them selective.</p>
+  <div class="drugs">Receptors, Enzymes, Ion channels, Transporters</div>
+
+  <h3>Enzymes</h3>
+  <p>Most drugs that act on enzymes inhibit them. The inhibition is either competitive or non-competitive.</p>
+  <div class="def"><b>Competitive (equilibrium type):</b> the drug is structurally similar to the normal substrate and competes with it for the enzyme's catalytic site. No product forms, or a non-functional one does. A new equilibrium is reached with the drug present. <b>Km rises, Vmax is unchanged</b>: more substrate is needed for half-maximal velocity, but enough substrate displaces the inhibitor and the same maximum velocity is reached.</div>
+  <div class="rows">
+    <div class="row"><div class="k">Cholinesterase</div><div class="drugs">Physostigmine, Neostigmine</div></div>
+    <div class="row"><div class="k">MAO-A</div><div class="drugs">Moclobemide</div></div>
+    <div class="row"><div class="k">Dopa decarboxylase</div><div class="drugs">Carbidopa, Benserazide</div></div>
+    <div class="row"><div class="k">Xanthine oxidase</div><div class="drugs">Allopurinol</div></div>
+    <div class="row"><div class="k">Angiotensin converting enzyme (ACE)</div><div class="drugs">Captopril, Enalapril, Ramipril</div></div>
+    <div class="row"><div class="k">5α-reductase</div><div class="drugs">Finasteride</div></div>
+    <div class="row"><div class="k">Aromatase</div><div class="drugs">Letrozole, Anastrozole</div></div>
+    <div class="row"><div class="k">Bacterial folate synthase</div><div class="drugs">Sulfadiazine</div></div>
+  </div>
+  <div class="def"><b>Non-equilibrium type:</b> the drug binds the same catalytic site but forms a strong covalent bond, or binds so tightly, that the normal substrate cannot displace it. <b>Km rises and Vmax falls.</b><ul><li>Organophosphates bind covalently to the esteratic site of cholinesterase</li><li>Methotrexate has 50,000 times more affinity for dihydrofolate reductase than its normal substrate, DHFA</li></ul></div>
+  <div class="def"><b>Non-competitive:</b> the inhibitor binds an adjacent site, not the catalytic site, and changes the enzyme so that it loses its catalytic property. <b>Km is unchanged, Vmax falls.</b></div>
+  <div class="rows">
+    <div class="row"><div class="k">Carbonic anhydrase</div><div class="drugs">Acetazolamide</div></div>
+    <div class="row"><div class="k">Cyclooxygenase</div><div class="drugs">Aspirin, Indomethacin</div></div>
+    <div class="row"><div class="k">Aldehyde dehydrogenase</div><div class="drugs">Disulfiram</div></div>
+    <div class="row"><div class="k">H⁺K⁺ ATPase</div><div class="drugs">Omeprazole</div></div>
+    <div class="row"><div class="k">Na⁺K⁺ ATPase</div><div class="drugs">Digoxin</div></div>
+    <div class="row"><div class="k">Phosphodiesterase</div><div class="drugs">Theophylline</div></div>
+    <div class="row"><div class="k">Thyroid peroxidase</div><div class="drugs">Propylthiouracil</div></div>
+    <div class="row"><div class="k">HMG-CoA reductase</div><div class="drugs">Lovastatin</div></div>
+    <div class="row"><div class="k">Phosphodiesterase-5</div><div class="drugs">Sildenafil</div></div>
+  </div>
+
+  <h3>Ion channels</h3>
+  <div class="def"><b>Ion channels</b> are proteins that act as ion-selective channels. They take part in signalling across the membrane and regulate the ionic composition inside the cell, which makes them a common drug target.</div>
+  <div class="rows">
+    <div class="row"><div class="k">Ligand-gated</div><div>Opened directly by a signal molecule. These are receptors themselves, e.g. the nicotinic receptor.</div></div>
+    <div class="row"><div class="k">G-protein regulated</div><div>Opened through a G-protein, e.g. the Ca²⁺ channel activated by the cardiac β-adrenergic receptor</div></div>
+    <div class="row"><div class="k">Voltage-operated, stretch-sensitive</div><div>Drugs bind the channel directly and change ion movement through it, e.g. local anaesthetics block voltage-sensitive Na⁺ channels</div></div>
+  </div>
+  <p>Drugs that modulate opening and closing of channels:</p>
+  <div class="rows">
+    <div class="row"><div class="k">Quinidine</div><div>Blocks myocardial Na⁺ channels</div></div>
+    <div class="row"><div class="k">Dofetilide, amiodarone</div><div>Block the myocardial delayed rectifier K⁺ channel</div></div>
+    <div class="row"><div class="k">Nifedipine</div><div>Blocks the L-type voltage-sensitive Ca²⁺ channel</div></div>
+    <div class="row"><div class="k">Nicorandil</div><div>Opens ATP-sensitive K⁺ channels</div></div>
+    <div class="row"><div class="k">Sulfonylureas</div><div>Block pancreatic ATP-sensitive K⁺ channels</div></div>
+    <div class="row"><div class="k">Amiloride</div><div>Blocks renal epithelial Na⁺ channels</div></div>
+    <div class="row"><div class="k">Phenytoin</div><div>Prolongs the inactivated state of voltage-sensitive neuronal Na⁺ channels</div></div>
+  </div>
+
+  <h3>Transporters</h3>
+  <div class="def"><b>Transporters (carriers)</b> are membrane proteins that move substrates across membranes. They either allow facilitated diffusion down the concentration gradient or pump a metabolite or ion against the gradient using metabolic energy. Many drugs bind the solute carrier (SLC) class of transporters and block the normal transport of a metabolite or ion.</div>
+  <div class="rows">
+    <div class="row"><div class="k">Desipramine, cocaine</div><div>Block neuronal reuptake of noradrenaline via the norepinephrine transporter (NET)</div></div>
+    <div class="row"><div class="k">Fluoxetine and other SSRIs</div><div>Block neuronal reuptake of 5-HT via the serotonin transporter (SERT)</div></div>
+    <div class="row"><div class="k">Amphetamines</div><div>Block dopamine reuptake in brain neurons via the dopamine transporter (DAT)</div></div>
+    <div class="row"><div class="k">Reserpine</div><div>Blocks vesicular uptake of noradrenaline and 5-HT via the vesicular monoamine transporter (VMAT-2)</div></div>
+    <div class="row"><div class="k">Tiagabine</div><div>Blocks GABA reuptake into brain neurons via the GABA transporter (GAT1)</div></div>
+    <div class="row"><div class="k">Furosemide</div><div>Blocks the Na⁺K⁺2Cl⁻ cotransporter in the ascending limb of the loop of Henle</div></div>
+    <div class="row"><div class="k">Hydrochlorothiazide</div><div>Blocks the Na⁺Cl⁻ symporter in the early distal tubule</div></div>
+    <div class="row"><div class="k">Probenecid</div><div>Blocks active transport of organic acids (uric acid, penicillin) in renal tubules via the organic anion transporter (OAT)</div></div>
+  </div>
+
+  <h2>Receptors</h2>
+  <div class="def"><b>Receptor:</b> a macromolecule, or a binding site on it, located on the surface or inside the effector cell. It recognises the signal molecule or drug and starts the response, but has no other function of its own.</div>
+  <p>Most drugs don't bind the effectors (enzymes, channels, transporters, structural proteins) directly. They act through specific regulatory macromolecules that control these effectors. Those macromolecules, or the sites on them that bind the drug, are the receptors.</p>
+
+  <h3>Key terms</h3>
+  <div class="rows">
+    <div class="row"><div class="k">Ligand</div><div>Any molecule that attaches selectively to a particular receptor or site. The term only means affinity (ability to bind), regardless of any functional change. Agonists and competitive antagonists are both ligands of the same receptor.</div></div>
+    <div class="row"><div class="k">Agonist</div><div>Activates a receptor to produce an effect similar to that of the physiological signal molecule</div></div>
+    <div class="row"><div class="k">Inverse agonist</div><div>Activates a receptor to produce an effect opposite to that of the agonist</div></div>
+    <div class="row"><div class="k">Partial agonist</div><div>Activates a receptor to produce a submaximal effect, but antagonises the action of a full agonist</div></div>
+    <div class="row"><div class="k">Antagonist</div><div>Prevents the action of an agonist on a receptor, or the response that follows, but has no effect of its own</div></div>
+  </div>
+
+  <h3>Receptor occupation theory</h3>
+  <p><b>Clark (1937):</b> drug (D) and receptor (R) interact by the law of mass action, and the effect (E) is a direct function of the drug–receptor complex (DR) formed.</p>
+  <div class="paths" style="grid-template-columns:1fr"><div class="path win" style="font-size:1.05rem">D + R ⇌ DR → E</div></div>
+  <p><b>Ariëns and Stephenson:</b> occupying the receptor is essential but not enough. The agonist must also cause a conformational change in the receptor. A stimulus (S), stronger or weaker depending on the agonist, comes between the complex and the effect.</p>
+  <div class="paths" style="grid-template-columns:1fr"><div class="path win" style="font-size:1.05rem">D + R ⇌ DR → S → E</div></div>
+
+  <h3>Two-state model</h3>
+  <p>A receptor flips between <b>inactive (Ri)</b> and <b>active (Ra)</b>. A drug shifts the balance by which state it prefers.</p>
+  <div class="paths" style="grid-template-columns:1fr auto 1fr;align-items:center">
+    <div class="path" style="font-size:1.1rem">Ri<span class="note">inactive</span></div>
+    <div style="color:var(--muted);font-size:1.4rem;text-align:center">⇌</div>
+    <div class="path win" style="font-size:1.1rem">Ra<span class="note">active</span></div>
+  </div>
+  <div class="rows">
+    <div class="row"><div class="k">Full agonist</div><div>Binds Ra preferentially → Ra dominates → full response. Adrenaline, histamine, morphine.</div></div>
+    <div class="row"><div class="k">Partial agonist</div><div>Only slightly prefers Ra → submaximal response, and it blocks a full agonist. Pentazocine, pindolol (β receptors), buprenorphine (μ opioid receptors).</div></div>
+    <div class="row"><div class="k">Competitive antagonist</div><div>Equal affinity for both → no shift; blocks the agonist. Atropine, propranolol, naloxone.</div></div>
+    <div class="row"><div class="k">Inverse agonist</div><div>Prefers Ri → opposite effect, seen where receptors are active at rest. Chlorpheniramine (H1), DMCM (benzodiazepine receptor).</div></div>
+  </div>
+
+  <h3>Affinity and intrinsic activity</h3>
+  <div class="split">
+    <div class="card"><b>Affinity</b>The ability of a drug to bind the receptor. It sets the concentration of drug needed around the receptor to form a given number of drug–receptor complexes. Higher affinity: the same number of complexes forms at a lower concentration.</div>
+    <div class="card"><b>Intrinsic activity (IA) or efficacy</b>The capacity of a drug to cause a functional change in the receptor. It ranges from 0 (nil) to 1 (maximal). Affinity and intrinsic activity are independent properties.</div>
+  </div>
+  <div class="scale" role="img" aria-label="Intrinsic activity from minus 1 to plus 1">
+    <div class="track"></div>
+    <div class="ticks">
+      <div class="tick" style="left:12%"><b style="color:var(--bad)">0 to −1</b>Inverse agonist</div>
+      <div class="tick" style="left:50%"><b>0</b>Antagonist</div>
+      <div class="tick" style="left:74%"><b>0 – 1</b>Partial</div>
+      <div class="tick" style="left:92%"><b style="color:var(--good)">+1</b>Full agonist</div>
+    </div>
+  </div>
+  <div class="rows">
+    <div class="row"><div class="k">Agonist · IA = 1</div><div>Affinity and maximal intrinsic activity. Adrenaline (adrenergic receptors), morphine (μ opioid receptors).</div></div>
+    <div class="row"><div class="k">Competitive antagonist · IA = 0</div><div>Affinity but no intrinsic activity. Atropine (muscarinic receptors), naloxone (μ opioid receptors).</div></div>
+    <div class="row"><div class="k">Partial agonist · IA 0 to 1</div><div>Affinity and submaximal intrinsic activity. Pindolol (β receptors), buprenorphine (μ opioid receptors).</div></div>
+    <div class="row"><div class="k">Inverse agonist · IA 0 to −1</div><div>Affinity but intrinsic activity with a minus sign. Seen only with receptors showing constitutive activation: partly active even with no agonist (tonically active), e.g. the benzodiazepine receptor.</div></div>
+  </div>
+  <div class="card"><b>Why a partial agonist has a lower ceiling</b><ul><li>Not because of low affinity. Some partial agonists bind more strongly and are more potent dose-for-dose than the full agonist.</li><li>Buprenorphine is 25 times more potent than morphine (full μ agonist), but as a partial agonist it can't relieve very severe pain or deeply depress respiration.</li><li>It antagonises a full agonist: it occupies many receptors while giving a small response, leaving fewer for the full agonist.</li><li>So buprenorphine precipitates withdrawal in a highly morphine-dependent person, but can substitute for morphine at lower levels of dependence.</li></ul></div>
+  <div class="split">
+    <div class="card"><b>Spare receptors</b>Many full agonists give a maximum response while occupying under 1% of receptors. The rest are a reserve.</div>
+    <div class="card"><b>Silent receptors</b>Sites that bind a drug but give no response, like plasma proteins. Better called drug acceptors or "sites of loss".</div>
+  </div>
+
+  <h3>Receptor families</h3>
+  <p>Your notes list four; KD Tripathi splits enzyme-linked into two, giving five.</p>
+  <div class="rgrid">
+    <div class="rcard"><h4>Ligand-gated ion channels</h4><span class="speed">Milliseconds: the fastest</span><p>Binding opens a channel in the receptor itself. No second messenger.</p><div class="drugs">Nicotinic, GABA-A, Glycine, Glutamate (NMDA), 5-HT3</div></div>
+    <div class="rcard"><h4>G-protein coupled (GPCR)</h4><span class="speed">Seconds</span><p>Seven membrane-spanning loops. Acts through cAMP, IP3–DAG or ion channels. The largest family.</p><div class="drugs">Adrenergic, Muscarinic, Histamine, Dopamine, Opioid</div></div>
+    <div class="rcard"><h4>Enzyme-linked (tyrosine kinase)</h4><span class="speed">Minutes to hours</span><p>Binding causes dimerisation and switches on a kinase inside the cell.</p><div class="drugs">Insulin, EGF, NGF, ANP (guanylyl cyclase)</div></div>
+    <div class="rcard"><h4>JAK-STAT linked</h4><span class="speed">Minutes to hours</span><p>No enzyme of its own; borrows JAK kinase, and STAT carries the signal to the nucleus.</p><div class="drugs">Cytokines, Growth hormone, Prolactin, Interferons</div></div>
+    <div class="rcard"><h4>Intracellular (nuclear)</h4><span class="speed">Hours: the slowest</span><p>Lipid-soluble ligand enters the cell and changes gene transcription. Effects outlast the hormone.</p><div class="drugs">Steroids, Thyroxine, Vitamin D, Vitamin A</div></div>
+  </div>
+
+  <h3>1. G-protein coupled receptors (GPCR)</h3>
+  <p>The agonist binds the receptor on the cell surface and changes its shape, so the G-protein can bind. The G-protein takes up GTP in place of GDP, and its α subunit separates from the βγ dimer to act on an effector. There are three main pathways.</p>
+  <h3>(a) Adenylyl cyclase: cAMP pathway</h3>
+  <div class="flow">
+    <div class="step"><b>Adrenaline</b> binds the β-adrenergic receptor</div><div class="arrow">↓</div>
+    <div class="step">Stimulatory G-protein (<b>Gs</b>) binds GTP; Gsα-GTP separates</div><div class="arrow">↓</div>
+    <div class="step">Gsα activates <b>adenylyl cyclase</b> (inner side of the membrane)</div><div class="arrow">↓</div>
+    <div class="step">ATP → <b>cAMP</b> (second messenger)</div><div class="arrow">↓</div>
+    <div class="step">cAMP activates <b>protein kinase A (PKA)</b></div><div class="arrow">↓</div>
+    <div class="step ok">PKA phosphorylates <b>troponin</b> (stronger contraction) and <b>phospholamban</b> (faster Ca²⁺ uptake into SR, so faster relaxation)</div>
+  </div>
+  <div class="split">
+    <div class="card"><b>Also via cAMP</b>PKA phosphorylates phosphorylase kinase, which activates phosphorylase: glycogen breaks down for energy. Ca²⁺ also enters through membrane Ca²⁺ channels activated by Gsα and PKA.</div>
+    <div class="card"><b>Opposite: inhibitory Gi</b>ACh on the muscarinic M₂ receptor activates Gi. Giα <i>inhibits</i> adenylyl cyclase. The βγ dimer of Gi opens K⁺ channels: hyperpolarisation, slower impulse generation.</div>
+  </div>
+  <h3>(b) Phospholipase C: IP₃–DAG pathway</h3>
+  <div class="flow">
+    <div class="step">Agonist (e.g. <b>histamine</b> on H₁) activates <b>Gq</b></div><div class="arrow">↓</div>
+    <div class="step">Gqα-GTP activates <b>phospholipase Cβ (PLCβ)</b></div><div class="arrow">↓</div>
+    <div class="step">PLCβ splits membrane PIP₂ into <b>IP₃</b> + <b>DAG</b></div>
+  </div>
+  <div class="split">
+    <div class="card"><b>IP₃</b>Water-soluble. Moves into the cytosol and releases Ca²⁺ from the endoplasmic reticulum.</div>
+    <div class="card"><b>DAG</b>Lipophilic, stays in the membrane. With Ca²⁺, it activates <b>protein kinase C (PKC)</b>, which phosphorylates many intracellular proteins.</div>
+  </div>
+  <div class="card"><b>Ca²⁺: the third messenger</b><ul><li>With calmodulin (CAM), activates myosin light chain kinase (MLCK): smooth muscle contraction</li><li>Also activates calcium-calmodulin protein kinase (CCPK) and other effectors</li><li>Mediates contraction, glandular secretion, transmitter release, eicosanoid synthesis, neuronal excitability, cell proliferation</li><li>Cytosolic Ca²⁺ is kept very low (~100 nM) by pumps; it is taken back into the ER and pumped out of the cell</li></ul><b style="margin-top:8px">Signal ends when</b>IP₃ is dephosphorylated to inositol (reused to make PIP₂); DAG is converted back to phospholipid or deacylated to arachidonic acid.</div>
+  <h3>(c) Direct channel regulation</h3>
+  <p>Activated G-proteins (Gs, Gi, Go) can open or close Ca²⁺ and K⁺ channels <b>without any second messenger</b>, causing hyperpolarisation, depolarisation or a change in cell Ca²⁺. This is mostly done by the βγ dimer.</p>
+  <div class="rows">
+    <div class="row"><div class="k">Gs</div><div>Opens Ca²⁺ channels in myocardium and skeletal muscle</div></div>
+    <div class="row"><div class="k">Gi, Go</div><div>Open K⁺ channels in heart and smooth muscle; inhibit neuronal Ca²⁺ channels</div></div>
+  </div>
+
+  <h3>2. Ion channel receptors (ligand-gated)</h3>
+  <div class="def">Cell-surface receptors that enclose an ion-selective channel (for Na⁺, K⁺, Ca²⁺ or Cl⁻) <b>within their own molecule</b>. Agonist binding opens the channel and causes depolarisation, hyperpolarisation or a change in ionic composition, depending on the ion.</div>
+  <div class="drugs">Nicotinic cholinergic, GABA-A, Glycine (inhibitory), Glutamate (excitatory), 5-HT₃</div>
+  <ul><li>The nicotinic receptor is a pentamer: subunits arranged like a rosette around the channel; the α subunits carry the agonist binding sites</li><li>Some have secondary (allosteric) sites: the benzodiazepine receptor modulates the GABA-A gated Cl⁻ channel</li><li>No coupling protein or second messenger, so onset and offset are the <b>fastest (milliseconds)</b></li></ul>
+
+  <h3>3. Transmembrane enzyme-linked receptors</h3>
+  <div class="def">Used mainly by <b>peptide hormones</b>. A large extracellular ligand-binding domain is connected, through a <b>single transmembrane helix</b>, to an intracellular subunit with enzyme activity: usually a protein kinase, sometimes guanylyl cyclase.</div>
+  <div class="flow">
+    <div class="step">Peptide hormone binds the extracellular domain</div><div class="arrow">↓</div>
+    <div class="step">Receptor monomers move together and <b>dimerise</b></div><div class="arrow">↓</div>
+    <div class="step">Kinase activated: receptors phosphorylate each other’s <b>tyrosine</b> residues</div><div class="arrow">↓</div>
+    <div class="step">Substrate proteins with <b>SH₂ domains</b> bind and are phosphorylated</div><div class="arrow">↓</div>
+    <div class="step ok">Phosphorylation cascade: metabolism, cell growth, differentiation</div>
+  </div>
+  <div class="rows">
+    <div class="row"><div class="k">Receptor tyrosine kinases (RTKs)</div><div>Insulin, EGF, NGF, many growth factors</div></div>
+    <div class="row"><div class="k">Serine/threonine kinase</div><div>Transforming growth factor (TGF) receptor</div></div>
+    <div class="row"><div class="k">Guanylyl cyclase</div><div>Atrial natriuretic peptide (ANP): cGMP → cGMP-dependent protein kinase (PKG)</div></div>
+  </div>
+  <p style="color:var(--muted);font-size:.9rem">Responses take minutes to a few hours. Dimerisation also promotes internalisation, breakdown and down-regulation of the receptor.</p>
+
+  <h3>4. Transmembrane JAK-STAT binding receptors</h3>
+  <div class="def">Unlike RTKs, these have <b>no enzyme (catalytic) domain of their own</b>. Agonist-induced dimerisation makes the intracellular domain bind a free-moving cytosolic tyrosine kinase, <b>JAK (Janus kinase)</b>.</div>
+  <div class="flow">
+    <div class="step">Cytokine or hormone binds; receptor <b>dimerises</b></div><div class="arrow">↓</div>
+    <div class="step">Intracellular domain binds <b>JAK</b>; JAK phosphorylates receptor tyrosines</div><div class="arrow">↓</div>
+    <div class="step"><b>STAT</b> (signal transducer and activator of transcription) binds and is phosphorylated by JAK</div><div class="arrow">↓</div>
+    <div class="step">Phosphorylated STAT dimerises and moves to the <b>nucleus</b></div><div class="arrow">↓</div>
+    <div class="step ok">Regulates gene transcription: the biological response</div>
+  </div>
+  <div class="drugs">Cytokines, Growth hormone, Prolactin, Interferons</div>
+
+  <h3>5. Receptors regulating gene expression (nuclear receptors)</h3>
+  <div class="def">Intracellular (cytoplasmic or nuclear) <b>soluble proteins</b> that respond to lipid-soluble chemical messengers entering the cell. Each binds specific genes once activated.</div>
+  <div class="flow">
+    <div class="step">Lipid-soluble hormone crosses the cell membrane</div><div class="arrow">↓</div>
+    <div class="step">Binds its receptor, which is held inactive by <b>HSP-90</b></div><div class="arrow">↓</div>
+    <div class="step">HSP-90 is released; the receptor <b>dimerises</b> and its DNA-binding region folds into an active shape</div><div class="arrow">↓</div>
+    <div class="step">Dimer moves to the nucleus and binds <b>co-activator or co-repressor</b> proteins</div><div class="arrow">↓</div>
+    <div class="step">Attaches to <b>hormone response elements</b> on DNA (GREs for glucocorticoids)</div><div class="arrow">↓</div>
+    <div class="step ok">Gene expression promoted or repressed → mRNA → ribosome → specific proteins → cell function changes</div>
+  </div>
+  <div class="drugs">Glucocorticoids, Mineralocorticoids, Androgens, Estrogens, Progesterone, Thyroxine, Vitamin D, Vitamin A</div>
+  <div class="card"><b>Glucocorticoid receptor (GR) structure</b><ul><li>Steroid-binding domain near the carboxy terminus</li><li>DNA-binding domain in the middle, with two <b>zinc fingers</b></li><li>The two are joined by a hinge region</li></ul></div>
+  <ul><li>Each steroid hormone binds its own receptor and directs a unique pattern of protein synthesis, so each acts on different target cells</li><li>Different ligands of the same receptor can act differently in different tissues: SERMs (tamoxifen, raloxifene) on estrogen target organs</li><li><b>Slowest mechanism (hours)</b>: new protein must be made first. Effects outlast the hormone because these proteins turn over slowly.</li></ul>
+
+  <h2>Regulation of receptors</h2>
+  <p>Receptors are dynamic. Their number (density) and efficacy change with the level of ongoing activity, feedback from their own signal output, and other physiological or disease influences.</p>
+  <div class="rows">
+    <div class="row"><div class="k">Physiological example</div><div>Estrogens increase oxytocin receptors on the myometrium, so the uterus becomes progressively more sensitive to oxytocin in the third trimester, especially near term</div></div>
+    <div class="row"><div class="k">Supersensitivity (up-regulation)</div><div>Prolonged lack of agonist (denervation, or continued use of an antagonist or a drug that reduces input) makes the receptor and effector system supersensitive. Mechanism: unmasking or proliferation of receptors, or more signal amplification.</div></div>
+    <div class="row"><div class="k">Clinical relevance</div><div>Withdrawal syndromes after clonidine, CNS depressants or opioids; sudden stopping of propranolol in angina pectoris</div></div>
+    <div class="row"><div class="k">Desensitisation (refractoriness)</div><div>Continued agonist stimulation makes the receptor less responsive. Either masking or internalisation of the receptor (develops and fades quickly), or decreased receptor synthesis, i.e. down-regulation (develops slowly, over weeks).</div></div>
+  </div>
+
+  <h2>Dose and response</h2>
+  <p>Response rises with dose, then levels off. On a log-dose scale it becomes an S-curve.</p>
+  <div class="chart">
+    <svg id="drc" viewBox="0 0 340 220" role="img" aria-label="Log dose response curves for three drugs"></svg>
+    <div class="legend2"><span><i style="background:var(--indigo)"></i>A: reference</span><span><i style="background:var(--amber)"></i>B: less potent, same efficacy</span><span><i style="background:var(--bad)"></i>C: same potency, less efficacy</span></div>
+  </div>
+  <div class="split">
+    <div class="card"><b>Potency</b>How much drug you need for an effect. Curve position: further right = less potent. Compared by EC50; depends on affinity.</div>
+    <div class="card"><b>Efficacy (Emax)</b>The maximum response possible. Curve height. Clinically matters more than potency.</div>
+  </div>
+  <div class="rows">
+    <div class="row"><div class="k">Pethidine vs morphine</div><div>Less potent, equally efficacious analgesic</div></div>
+    <div class="row"><div class="k">Aspirin vs morphine</div><div>Less potent and less efficacious</div></div>
+    <div class="row"><div class="k">Furosemide vs metolazone</div><div>Less potent but more efficacious diuretic</div></div>
+    <div class="row"><div class="k">Diazepam vs pentobarbitone</div><div>More potent but less efficacious, which makes diazepam safer in overdose</div></div>
+  </div>
+  <div class="def"><b>Therapeutic index = LD50 / ED50.</b> An estimate of safety from animal studies. In patients, the useful idea is the <b>therapeutic window</b>: between the lowest effective dose and the highest dose with acceptable side effects.</div>
+  <p style="color:var(--muted);font-size:.9rem">A steep curve means doses need individualising (hydralazine); a flat one means standard doses suit most people (hydrochlorothiazide).</p>
+
+  <h2>Combinations</h2>
+  <h3>Synergism</h3>
+  <p>One drug increases the action of the other.</p>
+  <div class="split">
+    <div class="card"><b>Additive: A + B = A + B</b><ul><li>Aspirin + paracetamol (analgesic)</li><li>Nitrous oxide + halothane (anaesthetic)</li><li>Amlodipine + atenolol (antihypertensive)</li><li>Glibenclamide + metformin (hypoglycaemic)</li><li>Ephedrine + theophylline (bronchodilator)</li></ul></div>
+    <div class="card"><b>Supra-additive: A + B &gt; A + B</b><ul><li>ACh + physostigmine (blocks breakdown)</li><li>Levodopa + carbidopa (blocks peripheral metabolism)</li><li>Adrenaline + cocaine or desipramine (blocks neuronal uptake)</li><li>Sulfamethoxazole + trimethoprim (sequential folate block)</li><li>Enalapril + hydrochlorothiazide (two causes of high BP)</li><li>Tyramine + MAO inhibitors</li></ul></div>
+  </div>
+  <div class="clinic">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFCF94" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3c-2 0-3 2-3 4 0 3 1 5 2 8 .6 2 1 5 2.5 5 1.4 0 1.5-3 2.2-5 .3-.9.6-1.3 1.3-1.3s1 .4 1.3 1.3c.7 2 .8 5 2.2 5 1.5 0 1.9-3 2.5-5 1-3 2-5 2-8 0-2-1-4-3-4-1.8 0-2.6 1-5 1S8.8 3 7 3z"/></svg>
+    <div><b>For your clinic</b>Local anaesthetics work by blocking Na⁺ channels in nerves, so the pain signal never fires. That's drug action on an ion channel, not a receptor.</div>
+  </div>
+
+  <h3>Antagonism</h3>
+  <p>One drug reduces or abolishes the other: A + B &lt; A + B.</p>
+  <div class="rows">
+    <div class="row"><div class="k">Physical</div><div>Activated charcoal adsorbs alkaloids in poisoning</div></div>
+    <div class="row"><div class="k">Chemical</div><div>KMnO₄ oxidises alkaloids (gastric lavage). Tannins precipitate alkaloids. Chelators (BAL, calcium disodium edetate) bind arsenic, lead. Nitrites in cyanide poisoning. Some drugs react in the same syringe: thiopentone or penicillin G with succinylcholine; heparin with penicillin.</div></div>
+    <div class="row"><div class="k">Physiological</div><div>Opposite actions via different receptors: histamine vs adrenaline on bronchi and BP; hydrochlorothiazide vs triamterene on urinary K⁺; insulin vs glucagon on blood sugar</div></div>
+    <div class="row"><div class="k">Pharmacological</div><div>At the same receptor: competitive or non-competitive</div></div>
+  </div>
+  <div class="split">
+    <div class="card"><b>Competitive</b><ul><li>Same site as the agonist</li><li>Resembles the agonist</li><li>Parallel right shift of the curve</li><li>Same Emax: more agonist overcomes it</li><li>Response depends on both concentrations</li><li>ACh vs atropine, morphine vs naloxone</li></ul></div>
+    <div class="card"><b>Non-competitive</b><ul><li>Another (allosteric) site</li><li>Doesn't resemble the agonist</li><li>Flattens the curve</li><li>Lower Emax: more agonist doesn't help</li><li>Diazepam vs bicuculline</li><li>Not used clinically</li></ul></div>
+  </div>
+  <div class="card"><b>Non-equilibrium (irreversible)</b>Binds the same receptor so tightly (covalent bond) that agonist can't displace it. Curve shifts right and Emax falls. KD Tripathi calls this a type of non-competitive antagonism. Example: phenoxybenzamine against adrenaline at α receptors.</div>
+
+  <div class="next"><button class="go main" data-jump="cards">Flip 28 flashcards</button><button class="go" data-jump="mcq">20 MCQs</button></div>
+</section>
+<section data-topic="pd" data-mode="cards" hidden></section>
+<section data-topic="pd" data-mode="mcq" hidden></section>
+
+<!-- ===================== REVIEW ===================== -->
+<section data-topic="review" hidden>
+  <div class="hero">
+    <div class="eyebrow">For the reviewer</div>
+    <h1>Your review</h1>
+    <p class="lede">Round 2. All 5 points from your last review are done: the 3 removals below, plus vitamin B12 and phenoxybenzamine kept as you agreed. Confirm each change, then tap Copy feedback and paste it in WhatsApp.</p>
+  </div>
+  <div id="reviewList"></div>
+  <h3>Anything else?</h3>
+  <textarea id="generalNote" placeholder="Wrong facts, missing topics, anything hard to read on your phone"></textarea>
+  <div class="copybox"><span class="status" id="copyStatus">0 of 3 checked</span><button class="btn primary" id="copyBtn">Copy feedback</button></div>
+  <pre class="fallback" id="copyFallback" hidden></pre>
+</section>
+
+</div></main>
+
+
+<script>
+(function(){
+[['(prefers-color-scheme: light)','#0B0C1A'],['(prefers-color-scheme: dark)','#0B0C1A']].forEach(function(t){
+  var m=document.createElement('meta');m.name='theme-color';m.media=t[0];m.content=t[1];document.head.appendChild(m)});
+
+document.querySelectorAll('.drugs').forEach(function(el){
+  if(el.children.length) return;
+  var items=el.textContent.split(',').map(function(s){return s.trim()}).filter(Boolean);
+  el.textContent='';
+  items.forEach(function(t){var s=document.createElement('span');s.className='rx';var i=document.createElement('span');i.textContent=t;s.appendChild(i);el.appendChild(s)});
+});
+
+var CARDS={
+routes:[
+["What are the four kinds of drug name?","Chemical, code, non-proprietary (generic) and proprietary (brand)."],
+["Give three brand names of paracetamol.","Crocin, Calpol, Metacin."],
+["Name drugs made by genetic engineering.","Insulin, interferons, alteplase, reteplase."],
+["Why is glyceryl trinitrate given under the tongue?","It acts in minutes and skips first-pass metabolism in the liver."],
+["Antacids, activated charcoal and neomycin taken orally act where?","Locally in the gut. They aren't absorbed."],
+["Which drugs are given only as an IV infusion?","Dopamine, dobutamine, nitroprusside."],
+["Give examples of the intradermal route.","BCG vaccine, Mantoux test, allergen test dose."],
+["What is given intrathecally?","Local anaesthetics (spinal anaesthesia) and methotrexate."],
+["Layers of a skin patch, from outside in?","Backing film, drug reservoir, micropore membrane, adhesive with priming dose."],
+["Name four drugs that come as skin patches.","Glyceryl trinitrate, hyoscine, clonidine, fentanyl."],
+["What is the aim of a new drug delivery system?","Deliver the drug to its target at a rate and concentration that gives the most benefit and fewest adverse effects."],
+["Give examples of retention enemas.","Hydrocortisone, sulfasalazine, diazepam, aminophylline."],
+["Which topical forms do dentists use most?","Mouthwash, dental gel, paste."]
+],
+pk:[
+["What does ADME stand for?","Absorption, distribution, metabolism, excretion."],
+["Define absorption.","Movement of an unchanged drug from its site of administration into the circulation."],
+["Define bioavailability.","The fraction of a dose reaching the systemic circulation unchanged. IV is 100%."],
+["What is first-pass metabolism? Examples?","Metabolism before the drug reaches systemic circulation. Gut wall: GTN, isoprenaline. Liver: lignocaine."],
+["Acidic drugs bind which protein? Basic drugs?","Acidic: albumin. Basic: α1-acid glycoprotein."],
+["Which drugs are stored in bone and teeth?","Tetracyclines, heavy metals, bisphosphonates. Tetracyclines stain developing teeth."],
+["Why is thiopentone so short-acting?","Redistribution: it moves from brain to muscle and fat."],
+["Loading vs maintenance dose?","Loading: quick doses at the start to reach the target level. Maintenance: repeated doses to hold it."],
+["Give three prodrugs and their active forms.","Enalapril → enalaprilat, levodopa → dopamine, prednisone → prednisolone."],
+["Paracetamol's toxic metabolite?","N-acetyl-p-benzoquinone imine (NAPQI)."],
+["Phase I vs Phase II?","Phase I: functionalisation (oxidation, reduction, hydrolysis). Phase II: conjugation (glucuronide, sulphate, acetylation…)."],
+["Name enzyme inducers.","Phenobarbitone, phenytoin, carbamazepine, rifampin, griseofulvin, glucocorticoids."],
+["Disulfiram inhibits which enzyme?","Aldehyde dehydrogenase, so alcohol causes a disulfiram reaction."],
+["How many half-lives to eliminate a drug, or reach steady state?","4–5 half-lives."],
+["What does apparent volume of distribution tell you?","Where the drug sits. Low V: held in plasma (warfarin). High V: stored in tissues (digoxin), not removable by dialysis."],
+["Aspirin in a patient on glibenclamide: what can happen?","Aspirin displaces the sulfonylurea from albumin, so hypoglycaemia can occur."]
+],
+pd:[
+["Define pharmacodynamics.","What the drug does to the body: its effects and mechanism of action."],
+["Affinity vs intrinsic activity?","Affinity: how strongly a drug binds. Intrinsic activity: how much response it produces once bound."],
+["Intrinsic activity values?","Full agonist 1, partial agonist 0 to 1, competitive antagonist 0, inverse agonist 0 to −1."],
+["Name the receptor families.","Ligand-gated ion channels, GPCRs, enzyme-linked (tyrosine kinase), JAK-STAT linked, intracellular (nuclear)."],
+["Most common drug target?","G-protein coupled receptors."],
+["Fastest and slowest receptor types?","Fastest: ion channels (milliseconds). Slowest: nuclear receptors (hours)."],
+["Potency vs efficacy?","Potency: dose needed for an effect (curve position). Efficacy: maximum response (curve height)."],
+["Therapeutic index formula?","LD50 / ED50."],
+["Give an additive combination.","Aspirin + paracetamol."],
+["Give supra-additive combinations.","Levodopa + carbidopa, sulfamethoxazole + trimethoprim, ACh + physostigmine."],
+["Competitive antagonist on the dose–response curve?","Parallel shift right. Emax unchanged (surmountable)."],
+["Non-competitive antagonist?","Flattens the curve. Emax falls (unsurmountable)."],
+["Example of physical antagonism?","Activated charcoal adsorbing alkaloids in poisoning."],
+["Pethidine vs morphine: potency and efficacy?","Pethidine is less potent but equally efficacious as an analgesic."],
+["Competitive enzyme inhibition: what happens to Km and Vmax?", "Km rises, Vmax is unchanged. Enough substrate displaces the inhibitor."],
+["Non-competitive enzyme inhibition: what happens to Km and Vmax?", "Km is unchanged, Vmax falls. The inhibitor binds an adjacent site, not the catalytic site."],
+["Give two non-equilibrium enzyme inhibitors.", "Organophosphates (covalent bond with cholinesterase) and methotrexate (50,000× more affinity for dihydrofolate reductase than DHFA)."],
+["Which drug blocks the Na⁺K⁺2Cl⁻ cotransporter, and where?", "Furosemide, in the ascending limb of the loop of Henle."],
+["Reserpine acts on which transporter?", "VMAT-2 (vesicular monoamine transporter): blocks vesicular uptake of noradrenaline and 5-HT."],
+["Define a receptor.", "A macromolecule or binding site on the surface or inside the effector cell that recognises the signal molecule or drug and starts the response, but has no other function of its own."],
+["Define a partial agonist.", "Activates a receptor to produce a submaximal effect, but antagonises the action of a full agonist."],
+["What did Ariëns and Stephenson add to Clark's occupation theory?", "Occupation is essential but not enough: the agonist must also cause a conformational change in the receptor. D + R ⇌ DR → S → E."],
+["Why does buprenorphine precipitate withdrawal in a morphine-dependent person?", "As a partial agonist it occupies many receptors while giving a small response, leaving fewer receptors for morphine."],
+["What are the second messengers of the phospholipase C pathway?", "IP₃ (releases Ca²⁺ from the ER) and DAG (with Ca²⁺, activates protein kinase C)."],
+["How do JAK-STAT receptors differ from receptor tyrosine kinases?", "They have no enzyme (catalytic) domain of their own; after dimerising they recruit the cytosolic tyrosine kinase JAK."],
+["What holds a nuclear (steroid) receptor inactive in the cytoplasm?", "Heat shock protein 90 (HSP-90)."],
+["Name ligands that act through JAK-STAT receptors.", "Cytokines, growth hormone, prolactin, interferons."],
+["Clinical relevance of receptor up-regulation (supersensitivity)?", "Withdrawal syndromes after clonidine, CNS depressants or opioids; sudden stopping of propranolol in angina pectoris."]
+]};
+
+var MCQ={
+routes:[
+["Which drug is given sublingually?",["Insulin","Glyceryl trinitrate","Penicillin G","Heparin"],1,"GTN is absorbed under the tongue and skips first-pass metabolism, relieving angina in minutes."],
+["Which route avoids first-pass metabolism?",["Oral tablet","Sublingual","Enteric-coated capsule","Oral syrup"],1,"Sublingual blood drains into the jugular veins, not the portal vein."],
+["Which drug is given only as an IV infusion?",["Ciprofloxacin","Dopamine","Ranitidine","Calcium gluconate"],1,"Dopamine, dobutamine and nitroprusside act briefly and need a controlled infusion."],
+["The Mantoux test is given by which route?",["Subcutaneous","Intramuscular","Intradermal","Intravenous"],2,"BCG, the Mantoux test and allergen test doses are intradermal."],
+["Crocin is the ____ name of paracetamol.",["Chemical","Code","Generic","Brand"],3,"Crocin, Calpol and Metacin are brand (proprietary) names."],
+["Essential medicines are those that:",["Save lives","Satisfy the priority healthcare needs of the population","Are in a doctor's emergency bag","Are listed in the pharmacopoeia"],1,"The WHO definition, in KD Tripathi chapter 1."],
+["Which drug is given into joints?",["Thiotepa","Hydrocortisone","Phentolamine","Bleomycin"],1,"Glucocorticoids such as hydrocortisone and methylprednisolone are intra-articular."],
+["Which is NOT available as a skin patch?",["Fentanyl","Clonidine","Hyoscine","Insulin"],3,"Insulin is given subcutaneously."],
+["Which drug is given into the bladder?",["Thiotepa","Methotrexate","Morphine","Phentolamine"],0,"Thiotepa is given intravesically."],
+["Which route bypasses the liver only partly (about half)?",["Sublingual","Rectal","Transdermal","Intravenous"],1,"Drug absorbed into the external haemorrhoidal veins skips the liver; that into the internal veins doesn't."]
+],
+pk:[
+["Which drug is better absorbed from the stomach?",["Morphine","Quinine","Salicylate","All of these"],2,"Acidic drugs stay un-ionised in acid, so they cross the stomach lining."],
+["Basic drugs mainly bind to:",["Albumin","α1-acid glycoprotein","Globulin","Haemoglobin"],1,"Lidocaine and bupivacaine bind α1-acid glycoprotein."],
+["Tetracyclines are deposited in:",["Fat","Retina","Bone and teeth","Thyroid"],2,"They bind calcium and discolour developing teeth."],
+["Which is a prodrug?",["Paracetamol","Enalapril","Ibuprofen","Lidocaine"],1,"Enalapril becomes active enalaprilat."],
+["Paracetamol's toxic metabolite is:",["Acrolein","Formic acid","NAPQI","Trifluoroacetic acid"],2,"Glutathione detoxifies NAPQI; in overdose it runs out."],
+["Which is an enzyme inducer?",["Erythromycin","Ketoconazole","Rifampin","Allopurinol"],2,"Rifampin induces; the others inhibit."],
+["Which is a Phase II reaction?",["Oxidation","Hydrolysis","Glucuronidation","Reduction"],2,"Conjugations are Phase II."],
+["Thiopentone acts briefly because of:",["Rapid excretion","Redistribution","First-pass metabolism","Protein binding"],1,"It shifts from brain to muscle and fat."],
+["Procaine is metabolised by:",["Ester hydrolysis","Amide hydrolysis","Acetylation","Oxidation"],0,"Ester local anaesthetics are broken down by plasma esterases."],
+["Thiazides and furosemide are secreted in the kidney by:",["Organic acid transport","Organic base transport","Passive diffusion","Pinocytosis"],1,"KD Tripathi lists them under organic base transport, with quinine, procainamide and cimetidine."]
+],
+pd:[
+["The most common drug target is:",["Ion channel","GPCR","Nuclear receptor","Enzyme-linked receptor"],1,"Adrenergic and muscarinic receptors are GPCRs."],
+["Intrinsic activity of a pure antagonist:",["+1","0","−1","0.5"],1,"It binds but produces no response."],
+["An inverse agonist has intrinsic activity of:",["1","0","Between 0 and 1","Between 0 and −1"],3,"It prefers the inactive state and gives the opposite effect."],
+["The nicotinic receptor is a:",["GPCR","Ligand-gated ion channel","Enzyme-linked receptor","Nuclear receptor"],1,"It opens an ion channel in milliseconds."],
+["Steroid hormones act on:",["Membrane receptors","Ion channels","Intracellular receptors","G-proteins"],2,"Lipid-soluble; they change gene transcription."],
+["A competitive antagonist causes:",["Parallel right shift, same Emax","Lower Emax","Left shift","No change"],0,"More agonist overcomes it."],
+["Therapeutic index is:",["ED50 / LD50","LD50 / ED50","LD50 × ED50","LD50 − ED50"],1,"A higher value means a wider safety margin."],
+["Aspirin + paracetamol is:",["Potentiation","Additive synergism","Antagonism","Tolerance"],1,"Same direction; effects simply add."],
+["Activated charcoal in alkaloid poisoning is:",["Chemical antagonism","Physical antagonism","Physiological antagonism","Competitive antagonism"],1,"It adsorbs the poison."],
+["Potency refers to:",["Maximum effect","Amount of drug needed for an effect","Duration of action","Safety"],1,"Position of the curve on the dose axis."],
+["A competitive enzyme inhibitor:", ["Raises Km, Vmax unchanged", "Km unchanged, lowers Vmax", "Raises Km, lowers Vmax", "Lowers Km, raises Vmax"], 0, "Enough substrate displaces it, so the same maximum velocity is still reached."],
+["Which is a non-competitive enzyme inhibitor?", ["Allopurinol", "Captopril", "Omeprazole", "Carbidopa"], 2, "Omeprazole non-competitively inhibits H⁺K⁺ ATPase. The others are competitive."],
+["Methotrexate inhibits dihydrofolate reductase by:", ["Competitive (equilibrium) inhibition", "Non-equilibrium inhibition", "Allosteric non-competitive inhibition", "Enzyme induction"], 1, "Its affinity is 50,000 times higher than the normal substrate, so DHFA can't displace it."],
+["Nifedipine blocks:", ["L-type voltage-sensitive Ca²⁺ channels", "ATP-sensitive K⁺ channels", "Myocardial Na⁺ channels", "Renal epithelial Na⁺ channels"], 0, "Sulfonylureas block ATP-sensitive K⁺, quinidine myocardial Na⁺, amiloride renal epithelial Na⁺."],
+["Hydrochlorothiazide inhibits the:", ["Na⁺K⁺2Cl⁻ cotransporter", "Na⁺Cl⁻ symporter in the early distal tubule", "Organic anion transporter", "Norepinephrine transporter"], 1, "Furosemide blocks the Na⁺K⁺2Cl⁻ cotransporter; probenecid the organic anion transporter."],
+["Buprenorphine at μ opioid receptors is a:", ["Full agonist", "Partial agonist", "Competitive antagonist", "Inverse agonist"], 1, "25 times more potent than morphine but with a lower ceiling."],
+["IP₃ acts by:", ["Activating protein kinase C", "Releasing Ca²⁺ from the endoplasmic reticulum", "Activating adenylyl cyclase", "Opening K⁺ channels directly"], 1, "DAG, with Ca²⁺, is what activates protein kinase C."],
+["ACh on the M₂ receptor activates Gi, which:", ["Stimulates adenylyl cyclase", "Inhibits adenylyl cyclase", "Activates phospholipase Cβ", "Phosphorylates STAT"], 1, "Giα inhibits adenylyl cyclase; its βγ dimer opens K⁺ channels."],
+["The insulin receptor is a:", ["G-protein coupled receptor", "Ligand-gated ion channel", "Receptor tyrosine kinase", "Nuclear receptor"], 2, "EGF and NGF receptors are also receptor tyrosine kinases."],
+["Prolonged use of an antagonist leads to:", ["Down-regulation", "Supersensitivity (up-regulation)", "No change", "Enzyme induction"], 1, "Lack of agonist makes the receptor supersensitive: the basis of withdrawal after sudden stopping of propranolol."]
+]};
+
+var FLAGS=[
+["f1","Routes","Intralesional: cyclosporine removed","Now lists only glucocorticoids (triamcinolone). Is this right?"],
+["f2","Routes","Nasal spray: tobramycin and felypressin removed","Now lists desmopressin, GnRH agonists, azelastine, fluticasone, cromolyn sodium. Is this right?"],
+["f3","Kinetics","Absorption: food, Crohn's and coeliac drug examples removed","Carbamazepine, ampicillin, trimethoprim and erythromycin rows are gone. The general rule (food usually lowers absorption) stays. Is this right?"]
+];
+
+function buildCards(topic){
+  var sec=document.querySelector('[data-topic="'+topic+'"][data-mode="cards"]');
+  var list=CARDS[topic].slice(), i=0, marks=[];
+  sec.innerHTML='<div class="fc-top"><b style="color:var(--ink-strong)">Flashcards</b><span class="count"></span></div><div class="dots"></div>'+
+    '<button class="fc" aria-label="Flip card"><div class="fc-inner"><div class="face front"><span class="lab">Question</span><div class="q"></div><span class="hint">Tap to reveal</span></div><div class="face back"><span class="lab">Answer</span><div class="a"></div><span class="hint">Tap to flip back</span></div></div></button>'+
+    '<div class="fc-btns"><button class="btn" data-a="again">Again</button><button class="btn primary" data-a="got">Got it</button></div>'+
+    '<div style="display:flex;justify-content:space-between"><button class="btn quiet" data-a="prev">Previous</button><button class="btn quiet" data-a="shuffle">Shuffle</button></div>';
+  var fc=sec.querySelector('.fc'),q=sec.querySelector('.q'),a=sec.querySelector('.a'),c=sec.querySelector('.count'),dots=sec.querySelector('.dots');
+  function show(){fc.classList.remove('flip');q.textContent=list[i][0];a.textContent=list[i][1];c.textContent=(i+1)+' / '+list.length;
+    dots.innerHTML='';list.forEach(function(_,k){var d=document.createElement('i');if(marks[k])d.className=marks[k];else if(k===i)d.className='cur';dots.appendChild(d)})}
+  fc.addEventListener('click',function(){fc.classList.toggle('flip')});
+  sec.addEventListener('click',function(e){var b=e.target.closest('[data-a]');if(!b)return;var act=b.dataset.a;
+    if(act==='got'||act==='again'){marks[i]=act;i=(i+1)%list.length}
+    if(act==='prev')i=(i-1+list.length)%list.length;
+    if(act==='shuffle'){list=list.sort(function(){return Math.random()-.5});i=0;marks=[]}
+    show()});
+  show();
+}
+function buildMcq(topic){
+  var sec=document.querySelector('[data-topic="'+topic+'"][data-mode="mcq"]'),qs=MCQ[topic];
+  var head=document.createElement('div');head.className='mcq-head';
+  head.innerHTML='<b class="count">Score 0 / 0</b><button class="btn" data-reset>Start again</button>';sec.appendChild(head);
+  var box=document.createElement('div');sec.appendChild(box);
+  function render(){var answered=0,right=0;box.innerHTML='';head.querySelector('.count').textContent='Score 0 / 0';
+    qs.forEach(function(item,n){var d=document.createElement('div');d.className='q-card';
+      d.innerHTML='<div class="qn">Question '+(n+1)+' of '+qs.length+'</div><div class="qt"></div>';d.querySelector('.qt').textContent=item[0];
+      item[1].forEach(function(o,k){var b=document.createElement('button');b.className='opt';b.textContent=o;
+        b.addEventListener('click',function(){var opts=d.querySelectorAll('.opt');opts.forEach(function(x){x.disabled=true});
+          opts[item[2]].classList.add('right');if(k!==item[2])b.classList.add('wrong');else right++;answered++;
+          var e=document.createElement('div');e.className='expl';e.textContent=(k===item[2]?'Correct. ':'Not quite. ')+item[3];d.appendChild(e);
+          head.querySelector('.count').textContent='Score '+right+' / '+answered});d.appendChild(b)});
+      box.appendChild(d)})}
+  head.querySelector('[data-reset]').addEventListener('click',render);render();
+}
+['routes','pk','pd'].forEach(function(t){buildCards(t);buildMcq(t)});
+
+var KEY='pd-s1-review-v4',state={};
+try{state=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){state={}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+var rl=document.getElementById('reviewList');
+FLAGS.forEach(function(f,n){var s=state[f[0]]||{};
+  var d=document.createElement('div');d.className='ri';d.id=f[0];
+  d.innerHTML='<div class="where">Check '+(n+1)+' · '+f[1]+'</div><b></b><p></p><div class="choice"><button class="ok">Correct</button><button class="fix">Needs change</button></div><textarea placeholder="What should it say?"></textarea>';
+  d.querySelector('b').textContent=f[2];d.querySelector('p').textContent=f[3];
+  var ok=d.querySelector('.ok'),fix=d.querySelector('.fix'),ta=d.querySelector('textarea');ta.id='note-'+f[0];ta.value=s.note||'';
+  function paint(){ok.setAttribute('aria-pressed',s.v==='ok');fix.setAttribute('aria-pressed',s.v==='fix');status()}
+  ok.onclick=function(){s.v='ok';state[f[0]]=s;save();paint()};
+  fix.onclick=function(){s.v='fix';state[f[0]]=s;save();paint();ta.focus()};
+  ta.oninput=function(){s.note=ta.value;state[f[0]]=s;save()};
+  rl.appendChild(d);paint()});
+var gn=document.getElementById('generalNote');gn.value=state.general||'';gn.oninput=function(){state.general=gn.value;save()};
+function status(){var c=FLAGS.filter(function(f){return state[f[0]]&&state[f[0]].v}).length;
+  document.getElementById('copyStatus').textContent=c+' of '+FLAGS.length+' checked';
+  document.getElementById('flagCount').textContent=(FLAGS.length-c)?String(FLAGS.length-c):'✓'}
+document.getElementById('copyBtn').onclick=function(){
+  var lines=['PharmDaily Section 1 review (round 2)',''];
+  FLAGS.forEach(function(f,n){var s=state[f[0]]||{};lines.push((n+1)+'. '+f[2]+': '+(s.v==='ok'?'Correct':s.v==='fix'?'Needs change':'Not checked')+(s.note?' — '+s.note:''))});
+  if(state.general)lines.push('','Other notes: '+state.general);
+  var txt=lines.join('\n'),st=document.getElementById('copyStatus'),fb=document.getElementById('copyFallback');
+  function fallback(){fb.hidden=false;fb.textContent=txt;var r=document.createRange();r.selectNodeContents(fb);var sel=getSelection();sel.removeAllRanges();sel.addRange(r);st.textContent='Copy the selected text below'}
+  try{navigator.clipboard.writeText(txt).then(function(){st.textContent='Copied. Paste it in WhatsApp.'},fallback)}catch(e){fallback()}
+};
+
+(function(){var svg=document.getElementById('drc'),NS='http://www.w3.org/2000/svg',L=44,R=328,T=12,B=184;
+  function X(lg){return L+(lg+2)/5*(R-L)}function Y(p){return B-p/100*(B-T)}
+  function el(n,a,t){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);if(t)e.textContent=t;svg.appendChild(e);return e}
+  [0,50,100].forEach(function(p){el('line',{x1:L,x2:R,y1:Y(p),y2:Y(p),stroke:'rgba(255,255,255,.1)'});el('text',{x:L-8,y:Y(p)+4,'text-anchor':'end','font-size':11,fill:'#A7ABC8'},p+'%')});
+  [-2,-1,0,1,2,3].forEach(function(lg){el('text',{x:X(lg),y:B+16,'text-anchor':'middle','font-size':11,fill:'#A7ABC8'},String(Math.pow(10,lg)))});
+  el('line',{x1:L,x2:R,y1:B,y2:B,stroke:'#E6E8F5','stroke-width':1.2});
+  el('text',{x:(L+R)/2,y:B+32,'text-anchor':'middle','font-size':11,fill:'#A7ABC8'},'Dose (log scale)');
+  el('text',{x:12,y:(T+B)/2,'text-anchor':'middle','font-size':11,fill:'#A7ABC8',transform:'rotate(-90 12 '+((T+B)/2)+')'},'Response');
+  [[0,100,'#6D7CFF'],[1,100,'#FFB86B'],[0,60,'#FF9B9B']].forEach(function(c){var d='';for(var lg=-2;lg<=3.001;lg+=.05){var p=c[1]/(1+Math.pow(10,(c[0]-lg)*1.6));d+=(d?'L':'M')+X(lg).toFixed(1)+' '+Y(p).toFixed(1)}
+    el('path',{d:d,fill:'none',stroke:c[2],'stroke-width':2.6,'stroke-linecap':'round'})});
+  el('line',{x1:X(0),x2:X(0),y1:Y(50),y2:B,stroke:'#8C90AE','stroke-dasharray':'3 3'});
+  el('text',{x:X(0)+4,y:B-6,'font-size':10,fill:'#A7ABC8'},'EC50 of A')})();
+
+var mode='notes',topic='routes',modes=document.getElementById('modes');
+function apply(){document.querySelectorAll('main section').forEach(function(s){var t=s.dataset.topic,m=s.dataset.mode;
+    s.hidden=topic==='review'?t!=='review':!(t===topic&&m===mode)});
+  modes.hidden=topic==='review';
+  document.querySelectorAll('.pills a').forEach(function(a){a.removeAttribute('aria-current');if(a.dataset.t===topic)a.setAttribute('aria-current','page')});
+  modes.querySelectorAll('button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.m===mode)})}
+function fromHash(){var h=location.hash.slice(1);topic=['routes','pk','pd'].indexOf(h)>-1?h:'routes';apply()}
+modes.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;mode=b.dataset.m;apply();window.scrollTo(0,0)});
+document.addEventListener('click',function(e){var j=e.target.closest('[data-jump]');if(j){mode=j.dataset.jump;apply();window.scrollTo(0,0);return}
+  var a=e.target.closest('[data-go]');if(!a)return;setTimeout(function(){var t=document.getElementById(a.dataset.go);if(t)t.scrollIntoView({behavior:'smooth'})},60)});
+window.addEventListener('hashchange',function(){fromHash();window.scrollTo(0,0)});
+fromHash();
+})();
+</script>
+
+</body></html>

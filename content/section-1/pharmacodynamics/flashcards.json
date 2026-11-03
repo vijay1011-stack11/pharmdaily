@@ -1,0 +1,114 @@
+[
+  {
+    "q": "Define pharmacodynamics.",
+    "a": "What the drug does to the body: its effects and mechanism of action."
+  },
+  {
+    "q": "Affinity vs intrinsic activity?",
+    "a": "Affinity: how strongly a drug binds. Intrinsic activity: how much response it produces once bound."
+  },
+  {
+    "q": "Intrinsic activity values?",
+    "a": "Full agonist 1, partial agonist 0 to 1, competitive antagonist 0, inverse agonist 0 to −1."
+  },
+  {
+    "q": "Name the receptor families.",
+    "a": "Ligand-gated ion channels, GPCRs, enzyme-linked (tyrosine kinase), JAK-STAT linked, intracellular (nuclear)."
+  },
+  {
+    "q": "Most common drug target?",
+    "a": "G-protein coupled receptors."
+  },
+  {
+    "q": "Fastest and slowest receptor types?",
+    "a": "Fastest: ion channels (milliseconds). Slowest: nuclear receptors (hours)."
+  },
+  {
+    "q": "Potency vs efficacy?",
+    "a": "Potency: dose needed for an effect (curve position). Efficacy: maximum response (curve height)."
+  },
+  {
+    "q": "Therapeutic index formula?",
+    "a": "LD50 / ED50."
+  },
+  {
+    "q": "Give an additive combination.",
+    "a": "Aspirin + paracetamol."
+  },
+  {
+    "q": "Give supra-additive combinations.",
+    "a": "Levodopa + carbidopa, sulfamethoxazole + trimethoprim, ACh + physostigmine."
+  },
+  {
+    "q": "Competitive antagonist on the dose–response curve?",
+    "a": "Parallel shift right. Emax unchanged (surmountable)."
+  },
+  {
+    "q": "Non-competitive antagonist?",
+    "a": "Flattens the curve. Emax falls (unsurmountable)."
+  },
+  {
+    "q": "Example of physical antagonism?",
+    "a": "Activated charcoal adsorbing alkaloids in poisoning."
+  },
+  {
+    "q": "Pethidine vs morphine: potency and efficacy?",
+    "a": "Pethidine is less potent but equally efficacious as an analgesic."
+  },
+  {
+    "q": "Competitive enzyme inhibition: what happens to Km and Vmax?",
+    "a": "Km rises, Vmax is unchanged. Enough substrate displaces the inhibitor."
+  },
+  {
+    "q": "Non-competitive enzyme inhibition: what happens to Km and Vmax?",
+    "a": "Km is unchanged, Vmax falls. The inhibitor binds an adjacent site, not the catalytic site."
+  },
+  {
+    "q": "Give two non-equilibrium enzyme inhibitors.",
+    "a": "Organophosphates (covalent bond with cholinesterase) and methotrexate (50,000× more affinity for dihydrofolate reductase than DHFA)."
+  },
+  {
+    "q": "Which drug blocks the Na⁺K⁺2Cl⁻ cotransporter, and where?",
+    "a": "Furosemide, in the ascending limb of the loop of Henle."
+  },
+  {
+    "q": "Reserpine acts on which transporter?",
+    "a": "VMAT-2 (vesicular monoamine transporter): blocks vesicular uptake of noradrenaline and 5-HT."
+  },
+  {
+    "q": "Define a receptor.",
+    "a": "A macromolecule or binding site on the surface or inside the effector cell that recognises the signal molecule or drug and starts the response, but has no other function of its own."
+  },
+  {
+    "q": "Define a partial agonist.",
+    "a": "Activates a receptor to produce a submaximal effect, but antagonises the action of a full agonist."
+  },
+  {
+    "q": "What did Ariëns and Stephenson add to Clark's occupation theory?",
+    "a": "Occupation is essential but not enough: the agonist must also cause a conformational change in the receptor. D + R ⇌ DR → S → E."
+  },
+  {
+    "q": "Why does buprenorphine precipitate withdrawal in a morphine-dependent person?",
+    "a": "As a partial agonist it occupies many receptors while giving a small response, leaving fewer receptors for morphine."
+  },
+  {
+    "q": "What are the second messengers of the phospholipase C pathway?",
+    "a": "IP₃ (releases Ca²⁺ from the ER) and DAG (with Ca²⁺, activates protein kinase C)."
+  },
+  {
+    "q": "How do JAK-STAT receptors differ from receptor tyrosine kinases?",
+    "a": "They have no enzyme (catalytic) domain of their own; after dimerising they recruit the cytosolic tyrosine kinase JAK."
+  },
+  {
+    "q": "What holds a nuclear (steroid) receptor inactive in the cytoplasm?",
+    "a": "Heat shock protein 90 (HSP-90)."
+  },
+  {
+    "q": "Name ligands that act through JAK-STAT receptors.",
+    "a": "Cytokines, growth hormone, prolactin, interferons."
+  },
+  {
+    "q": "Clinical relevance of receptor up-regulation (supersensitivity)?",
+    "a": "Withdrawal syndromes after clonidine, CNS depressants or opioids; sudden stopping of propranolol in angina pectoris."
+  }
+]

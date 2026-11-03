@@ -1,0 +1,222 @@
+[
+  {
+    "q": "The most common drug target is:",
+    "options": [
+      "Ion channel",
+      "GPCR",
+      "Nuclear receptor",
+      "Enzyme-linked receptor"
+    ],
+    "answer": 1,
+    "explanation": "Adrenergic and muscarinic receptors are GPCRs."
+  },
+  {
+    "q": "Intrinsic activity of a pure antagonist:",
+    "options": [
+      "+1",
+      "0",
+      "−1",
+      "0.5"
+    ],
+    "answer": 1,
+    "explanation": "It binds but produces no response."
+  },
+  {
+    "q": "An inverse agonist has intrinsic activity of:",
+    "options": [
+      "1",
+      "0",
+      "Between 0 and 1",
+      "Between 0 and −1"
+    ],
+    "answer": 3,
+    "explanation": "It prefers the inactive state and gives the opposite effect."
+  },
+  {
+    "q": "The nicotinic receptor is a:",
+    "options": [
+      "GPCR",
+      "Ligand-gated ion channel",
+      "Enzyme-linked receptor",
+      "Nuclear receptor"
+    ],
+    "answer": 1,
+    "explanation": "It opens an ion channel in milliseconds."
+  },
+  {
+    "q": "Steroid hormones act on:",
+    "options": [
+      "Membrane receptors",
+      "Ion channels",
+      "Intracellular receptors",
+      "G-proteins"
+    ],
+    "answer": 2,
+    "explanation": "Lipid-soluble; they change gene transcription."
+  },
+  {
+    "q": "A competitive antagonist causes:",
+    "options": [
+      "Parallel right shift, same Emax",
+      "Lower Emax",
+      "Left shift",
+      "No change"
+    ],
+    "answer": 0,
+    "explanation": "More agonist overcomes it."
+  },
+  {
+    "q": "Therapeutic index is:",
+    "options": [
+      "ED50 / LD50",
+      "LD50 / ED50",
+      "LD50 × ED50",
+      "LD50 − ED50"
+    ],
+    "answer": 1,
+    "explanation": "A higher value means a wider safety margin."
+  },
+  {
+    "q": "Aspirin + paracetamol is:",
+    "options": [
+      "Potentiation",
+      "Additive synergism",
+      "Antagonism",
+      "Tolerance"
+    ],
+    "answer": 1,
+    "explanation": "Same direction; effects simply add."
+  },
+  {
+    "q": "Activated charcoal in alkaloid poisoning is:",
+    "options": [
+      "Chemical antagonism",
+      "Physical antagonism",
+      "Physiological antagonism",
+      "Competitive antagonism"
+    ],
+    "answer": 1,
+    "explanation": "It adsorbs the poison."
+  },
+  {
+    "q": "Potency refers to:",
+    "options": [
+      "Maximum effect",
+      "Amount of drug needed for an effect",
+      "Duration of action",
+      "Safety"
+    ],
+    "answer": 1,
+    "explanation": "Position of the curve on the dose axis."
+  },
+  {
+    "q": "A competitive enzyme inhibitor:",
+    "options": [
+      "Raises Km, Vmax unchanged",
+      "Km unchanged, lowers Vmax",
+      "Raises Km, lowers Vmax",
+      "Lowers Km, raises Vmax"
+    ],
+    "answer": 0,
+    "explanation": "Enough substrate displaces it, so the same maximum velocity is still reached."
+  },
+  {
+    "q": "Which is a non-competitive enzyme inhibitor?",
+    "options": [
+      "Allopurinol",
+      "Captopril",
+      "Omeprazole",
+      "Carbidopa"
+    ],
+    "answer": 2,
+    "explanation": "Omeprazole non-competitively inhibits H⁺K⁺ ATPase. The others are competitive."
+  },
+  {
+    "q": "Methotrexate inhibits dihydrofolate reductase by:",
+    "options": [
+      "Competitive (equilibrium) inhibition",
+      "Non-equilibrium inhibition",
+      "Allosteric non-competitive inhibition",
+      "Enzyme induction"
+    ],
+    "answer": 1,
+    "explanation": "Its affinity is 50,000 times higher than the normal substrate, so DHFA can't displace it."
+  },
+  {
+    "q": "Nifedipine blocks:",
+    "options": [
+      "L-type voltage-sensitive Ca²⁺ channels",
+      "ATP-sensitive K⁺ channels",
+      "Myocardial Na⁺ channels",
+      "Renal epithelial Na⁺ channels"
+    ],
+    "answer": 0,
+    "explanation": "Sulfonylureas block ATP-sensitive K⁺, quinidine myocardial Na⁺, amiloride renal epithelial Na⁺."
+  },
+  {
+    "q": "Hydrochlorothiazide inhibits the:",
+    "options": [
+      "Na⁺K⁺2Cl⁻ cotransporter",
+      "Na⁺Cl⁻ symporter in the early distal tubule",
+      "Organic anion transporter",
+      "Norepinephrine transporter"
+    ],
+    "answer": 1,
+    "explanation": "Furosemide blocks the Na⁺K⁺2Cl⁻ cotransporter; probenecid the organic anion transporter."
+  },
+  {
+    "q": "Buprenorphine at μ opioid receptors is a:",
+    "options": [
+      "Full agonist",
+      "Partial agonist",
+      "Competitive antagonist",
+      "Inverse agonist"
+    ],
+    "answer": 1,
+    "explanation": "25 times more potent than morphine but with a lower ceiling."
+  },
+  {
+    "q": "IP₃ acts by:",
+    "options": [
+      "Activating protein kinase C",
+      "Releasing Ca²⁺ from the endoplasmic reticulum",
+      "Activating adenylyl cyclase",
+      "Opening K⁺ channels directly"
+    ],
+    "answer": 1,
+    "explanation": "DAG, with Ca²⁺, is what activates protein kinase C."
+  },
+  {
+    "q": "ACh on the M₂ receptor activates Gi, which:",
+    "options": [
+      "Stimulates adenylyl cyclase",
+      "Inhibits adenylyl cyclase",
+      "Activates phospholipase Cβ",
+      "Phosphorylates STAT"
+    ],
+    "answer": 1,
+    "explanation": "Giα inhibits adenylyl cyclase; its βγ dimer opens K⁺ channels."
+  },
+  {
+    "q": "The insulin receptor is a:",
+    "options": [
+      "G-protein coupled receptor",
+      "Ligand-gated ion channel",
+      "Receptor tyrosine kinase",
+      "Nuclear receptor"
+    ],
+    "answer": 2,
+    "explanation": "EGF and NGF receptors are also receptor tyrosine kinases."
+  },
+  {
+    "q": "Prolonged use of an antagonist leads to:",
+    "options": [
+      "Down-regulation",
+      "Supersensitivity (up-regulation)",
+      "No change",
+      "Enzyme induction"
+    ],
+    "answer": 1,
+    "explanation": "Lack of agonist makes the receptor supersensitive: the basis of withdrawal after sudden stopping of propranolol."
+  }
+]

@@ -1,0 +1,112 @@
+[
+  {
+    "q": "Which drug is better absorbed from the stomach?",
+    "options": [
+      "Morphine",
+      "Quinine",
+      "Salicylate",
+      "All of these"
+    ],
+    "answer": 2,
+    "explanation": "Acidic drugs stay un-ionised in acid, so they cross the stomach lining."
+  },
+  {
+    "q": "Basic drugs mainly bind to:",
+    "options": [
+      "Albumin",
+      "α1-acid glycoprotein",
+      "Globulin",
+      "Haemoglobin"
+    ],
+    "answer": 1,
+    "explanation": "Lidocaine and bupivacaine bind α1-acid glycoprotein."
+  },
+  {
+    "q": "Tetracyclines are deposited in:",
+    "options": [
+      "Fat",
+      "Retina",
+      "Bone and teeth",
+      "Thyroid"
+    ],
+    "answer": 2,
+    "explanation": "They bind calcium and discolour developing teeth."
+  },
+  {
+    "q": "Which is a prodrug?",
+    "options": [
+      "Paracetamol",
+      "Enalapril",
+      "Ibuprofen",
+      "Lidocaine"
+    ],
+    "answer": 1,
+    "explanation": "Enalapril becomes active enalaprilat."
+  },
+  {
+    "q": "Paracetamol's toxic metabolite is:",
+    "options": [
+      "Acrolein",
+      "Formic acid",
+      "NAPQI",
+      "Trifluoroacetic acid"
+    ],
+    "answer": 2,
+    "explanation": "Glutathione detoxifies NAPQI; in overdose it runs out."
+  },
+  {
+    "q": "Which is an enzyme inducer?",
+    "options": [
+      "Erythromycin",
+      "Ketoconazole",
+      "Rifampin",
+      "Allopurinol"
+    ],
+    "answer": 2,
+    "explanation": "Rifampin induces; the others inhibit."
+  },
+  {
+    "q": "Which is a Phase II reaction?",
+    "options": [
+      "Oxidation",
+      "Hydrolysis",
+      "Glucuronidation",
+      "Reduction"
+    ],
+    "answer": 2,
+    "explanation": "Conjugations are Phase II."
+  },
+  {
+    "q": "Thiopentone acts briefly because of:",
+    "options": [
+      "Rapid excretion",
+      "Redistribution",
+      "First-pass metabolism",
+      "Protein binding"
+    ],
+    "answer": 1,
+    "explanation": "It shifts from brain to muscle and fat."
+  },
+  {
+    "q": "Procaine is metabolised by:",
+    "options": [
+      "Ester hydrolysis",
+      "Amide hydrolysis",
+      "Acetylation",
+      "Oxidation"
+    ],
+    "answer": 0,
+    "explanation": "Ester local anaesthetics are broken down by plasma esterases."
+  },
+  {
+    "q": "Thiazides and furosemide are secreted in the kidney by:",
+    "options": [
+      "Organic acid transport",
+      "Organic base transport",
+      "Passive diffusion",
+      "Pinocytosis"
+    ],
+    "answer": 1,
+    "explanation": "KD Tripathi lists them under organic base transport, with quinine, procainamide and cimetidine."
+  }
+]

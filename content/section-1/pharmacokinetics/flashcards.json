@@ -1,0 +1,66 @@
+[
+  {
+    "q": "What does ADME stand for?",
+    "a": "Absorption, distribution, metabolism, excretion."
+  },
+  {
+    "q": "Define absorption.",
+    "a": "Movement of an unchanged drug from its site of administration into the circulation."
+  },
+  {
+    "q": "Define bioavailability.",
+    "a": "The fraction of a dose reaching the systemic circulation unchanged. IV is 100%."
+  },
+  {
+    "q": "What is first-pass metabolism? Examples?",
+    "a": "Metabolism before the drug reaches systemic circulation. Gut wall: GTN, isoprenaline. Liver: lignocaine."
+  },
+  {
+    "q": "Acidic drugs bind which protein? Basic drugs?",
+    "a": "Acidic: albumin. Basic: α1-acid glycoprotein."
+  },
+  {
+    "q": "Which drugs are stored in bone and teeth?",
+    "a": "Tetracyclines, heavy metals, bisphosphonates. Tetracyclines stain developing teeth."
+  },
+  {
+    "q": "Why is thiopentone so short-acting?",
+    "a": "Redistribution: it moves from brain to muscle and fat."
+  },
+  {
+    "q": "Loading vs maintenance dose?",
+    "a": "Loading: quick doses at the start to reach the target level. Maintenance: repeated doses to hold it."
+  },
+  {
+    "q": "Give three prodrugs and their active forms.",
+    "a": "Enalapril → enalaprilat, levodopa → dopamine, prednisone → prednisolone."
+  },
+  {
+    "q": "Paracetamol's toxic metabolite?",
+    "a": "N-acetyl-p-benzoquinone imine (NAPQI)."
+  },
+  {
+    "q": "Phase I vs Phase II?",
+    "a": "Phase I: functionalisation (oxidation, reduction, hydrolysis). Phase II: conjugation (glucuronide, sulphate, acetylation…)."
+  },
+  {
+    "q": "Name enzyme inducers.",
+    "a": "Phenobarbitone, phenytoin, carbamazepine, rifampin, griseofulvin, glucocorticoids."
+  },
+  {
+    "q": "Disulfiram inhibits which enzyme?",
+    "a": "Aldehyde dehydrogenase, so alcohol causes a disulfiram reaction."
+  },
+  {
+    "q": "How many half-lives to eliminate a drug, or reach steady state?",
+    "a": "4–5 half-lives."
+  },
+  {
+    "q": "What does apparent volume of distribution tell you?",
+    "a": "Where the drug sits. Low V: held in plasma (warfarin). High V: stored in tissues (digoxin), not removable by dialysis."
+  },
+  {
+    "q": "Aspirin in a patient on glibenclamide: what can happen?",
+    "a": "Aspirin displaces the sulfonylurea from albumin, so hypoglycaemia can occur."
+  }
+]

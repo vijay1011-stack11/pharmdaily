@@ -1,0 +1,54 @@
+[
+  {
+    "q": "What are the four kinds of drug name?",
+    "a": "Chemical, code, non-proprietary (generic) and proprietary (brand)."
+  },
+  {
+    "q": "Give three brand names of paracetamol.",
+    "a": "Crocin, Calpol, Metacin."
+  },
+  {
+    "q": "Name drugs made by genetic engineering.",
+    "a": "Insulin, interferons, alteplase, reteplase."
+  },
+  {
+    "q": "Why is glyceryl trinitrate given under the tongue?",
+    "a": "It acts in minutes and skips first-pass metabolism in the liver."
+  },
+  {
+    "q": "Antacids, activated charcoal and neomycin taken orally act where?",
+    "a": "Locally in the gut. They aren't absorbed."
+  },
+  {
+    "q": "Which drugs are given only as an IV infusion?",
+    "a": "Dopamine, dobutamine, nitroprusside."
+  },
+  {
+    "q": "Give examples of the intradermal route.",
+    "a": "BCG vaccine, Mantoux test, allergen test dose."
+  },
+  {
+    "q": "What is given intrathecally?",
+    "a": "Local anaesthetics (spinal anaesthesia) and methotrexate."
+  },
+  {
+    "q": "Layers of a skin patch, from outside in?",
+    "a": "Backing film, drug reservoir, micropore membrane, adhesive with priming dose."
+  },
+  {
+    "q": "Name four drugs that come as skin patches.",
+    "a": "Glyceryl trinitrate, hyoscine, clonidine, fentanyl."
+  },
+  {
+    "q": "What is the aim of a new drug delivery system?",
+    "a": "Deliver the drug to its target at a rate and concentration that gives the most benefit and fewest adverse effects."
+  },
+  {
+    "q": "Give examples of retention enemas.",
+    "a": "Hydrocortisone, sulfasalazine, diazepam, aminophylline."
+  },
+  {
+    "q": "Which topical forms do dentists use most?",
+    "a": "Mouthwash, dental gel, paste."
+  }
+]
