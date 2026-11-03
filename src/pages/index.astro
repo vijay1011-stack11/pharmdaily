@@ -1,0 +1,117 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SECTIONS, isLive, sectionPath } from '../lib/sections';
+import { getFlashcards, getMcqs } from '../lib/content';
+
+const first = SECTIONS.find(isLive)!;
+const totals = (n: number) =>
+  SECTIONS.find((s) => s.n === n)!.topics.reduce(
+    (acc, t) => ({ cards: acc.cards + getFlashcards(n, t.slug).length, mcqs: acc.mcqs + getMcqs(n, t.slug).length }),
+    { cards: 0, mcqs: 0 },
+  );
+---
+<BaseLayout title="PharmDaily">
+  <section class="hero wrap">
+    <p class="eyebrow">For BDS students · Free</p>
+    <h1>Pharmacology revision you can do on your phone.</h1>
+    <p class="lede">Diagram notes, flashcards and MCQs, built on KD Tripathi's <i>Essentials of Medical Pharmacology</i>. Points that matter in the dental chair are marked <span class="clinic-tag">For your clinic</span>.</p>
+    <div class="cta">
+      <a class="btn primary press" href={sectionPath(first)}>Start Section {first.n}</a>
+      <a class="btn press" href="#sections">All sections</a>
+    </div>
+  </section>
+
+  <section id="sections" class="wrap block" aria-labelledby="sections-h">
+    <div class="block-head">
+      <h2 id="sections-h">Sections</h2>
+      <p>14 sections in syllabus order. New ones open after review.</p>
+    </div>
+    <ol class="sections">
+      {SECTIONS.map((s) => {
+        const live = isLive(s);
+        const t = live ? totals(s.n) : null;
+        return (
+          <li class:list={['sec', { live }]}>
+            {live ? (
+              <a class="sec-link press" href={sectionPath(s)}>
+                <span class="num tabular">{String(s.n).padStart(2, '0')}</span>
+                <span class="body">
+                  <span class="name">{s.title}</span>
+                  <span class="meta tabular">{s.topics.length} topics · {t!.cards} flashcards · {t!.mcqs} MCQs</span>
+                </span>
+                <svg class="go" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+              </a>
+            ) : (
+              <div class="sec-link">
+                <span class="num tabular">{String(s.n).padStart(2, '0')}</span>
+                <span class="body"><span class="name">{s.title}</span></span>
+                <span class="soon">Soon</span>
+              </div>
+            )}
+          </li>
+        );
+      })}
+    </ol>
+  </section>
+
+  <section class="wrap block" aria-labelledby="how-h">
+    <div class="block-head">
+      <h2 id="how-h">How a topic works</h2>
+      <p>Each topic is one page with three tabs.</p>
+    </div>
+    <ol class="how">
+      <li>
+        <span class="step-n">1</span>
+        <h3>Notes</h3>
+        <p>Read the topic as diagrams first, with short notes around them. Drug names are marked so you can spot them fast.</p>
+      </li>
+      <li>
+        <span class="step-n">2</span>
+        <h3>Flashcards</h3>
+        <p>Tap to reveal the answer, then mark it "Got it" or "Again". Your progress stays on this phone.</p>
+      </li>
+      <li>
+        <span class="step-n">3</span>
+        <h3>MCQs</h3>
+        <p>Four options, one answer, and a short explanation every time. Your score is saved on this phone too.</p>
+      </li>
+    </ol>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero { padding-top: 40px; padding-bottom: 8px; }
+  .hero h1 { font-size: clamp(2rem, 7.5vw, 3.4rem); font-weight: 800; letter-spacing: -0.035em; line-height: 1.06; margin-top: 12px; max-width: 16ch; }
+  .lede { font-size: 1.06rem; color: var(--muted); max-width: 58ch; margin-top: 16px; }
+  .lede i { font-style: italic; }
+  .clinic-tag { white-space: nowrap; font-weight: 650; color: var(--clinic-ink); background: var(--clinic-soft); border: 1px solid var(--clinic-line); border-radius: 999px; padding: 0 8px; font-size: 0.92em; }
+  .cta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+
+  .block { margin-top: 56px; }
+  .block-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 24px; padding-bottom: 12px; border-bottom: 2px solid var(--heading); }
+  .block-head h2 { font-size: 1.5rem; font-weight: 800; }
+  .block-head p { margin: 0; color: var(--muted); font-size: 0.94rem; }
+
+  .sections { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: minmax(0, 1fr); }
+  @media (min-width: 900px) { .sections { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 32px; } }
+  .sec { border-bottom: 1px solid var(--line); }
+  .sec-link { display: grid; grid-template-columns: 34px minmax(0, 1fr) auto; align-items: center; gap: 12px; min-height: 60px; padding: 10px 2px; color: var(--muted); text-decoration: none; border: 0; }
+  a.sec-link { color: var(--heading); }
+  .num { font-size: 0.86rem; font-weight: 700; color: var(--faint); }
+  .live .num { color: var(--primary-ink); }
+  .body { display: flex; flex-direction: column; min-width: 0; }
+  .name { font-weight: 600; line-height: 1.3; }
+  .live .name { font-weight: 700; }
+  .meta { font-size: 0.82rem; color: var(--muted); margin-top: 2px; }
+  .go { color: var(--primary-ink); }
+  .soon { font-size: 0.75rem; font-weight: 600; color: var(--faint); border: 1px solid var(--line); border-radius: 999px; padding: 1px 9px; }
+  @media (hover: hover) and (pointer: fine) { a.sec-link:hover .name { color: var(--primary-ink); } }
+
+  .how { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: minmax(0, 1fr); }
+  @media (min-width: 760px) { .how { grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: 32px; } }
+  .how li { padding: 18px 0; border-bottom: 1px solid var(--line); }
+  @media (min-width: 760px) { .how li { border-bottom: 0; } }
+  .step-n { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--primary); color: var(--on-primary); font-weight: 700; font-size: 0.85rem; }
+  .how h3 { margin-top: 10px; font-size: 1.12rem; }
+  .how p { margin: 6px 0 0; color: var(--muted); font-size: 0.95rem; }
+</style>

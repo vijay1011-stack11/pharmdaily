@@ -1,0 +1,52 @@
+---
+import '@fontsource-variable/inter';
+import '../styles/global.css';
+import Analytics from '@vercel/analytics/astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+const { title, description = 'Free pharmacology revision for BDS students: diagram notes, flashcards and MCQs.' } = Astro.props;
+const fullTitle = title === 'PharmDaily' ? title : `${title} · PharmDaily`;
+---
+<!doctype html>
+<html lang="en-IN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f5f6fb" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0c0e1c" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <script is:inline>document.documentElement.classList.add('js');</script>
+    <slot name="head" />
+  </head>
+  <body>
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+      <defs>
+        <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="mk-muted" d="M0 0 L10 5 L0 10 z" /></marker>
+        <marker id="ah-pri" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="mk-pri" d="M0 0 L10 5 L0 10 z" /></marker>
+        <marker id="ah-sec" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="mk-sec" d="M0 0 L10 5 L0 10 z" /></marker>
+        <marker id="ah-good" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="mk-good" d="M0 0 L10 5 L0 10 z" /></marker>
+        <marker id="ah-bad" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="mk-bad" d="M0 0 L10 5 L0 10 z" /></marker>
+        <pattern id="pd-lipid" width="8" height="8" patternUnits="userSpaceOnUse"><circle class="lipid-dot" cx="4" cy="4" r="1.6" /></pattern>
+      </defs>
+    </svg>
+    <a class="skip" href="#main">Skip to content</a>
+    <SiteHeader />
+    <main id="main">
+      <slot />
+    </main>
+    <SiteFooter />
+    <Analytics />
+  </body>
+</html>
+
+<style is:global>
+  .skip { position: absolute; left: 8px; top: -60px; z-index: 50; padding: 10px 14px; border-radius: 8px; background: var(--primary); color: var(--on-primary); font-weight: 600; }
+  .skip:focus { top: 8px; }
+</style>
