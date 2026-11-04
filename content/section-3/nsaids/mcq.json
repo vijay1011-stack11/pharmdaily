@@ -1,0 +1,189 @@
+[
+  {
+    "q": "The antidote for paracetamol poisoning is:",
+    "options": [
+      "Naloxone",
+      "Flumazenil",
+      "N-acetylcysteine",
+      "Atropine"
+    ],
+    "answer": 2,
+    "explanation": "It refills liver glutathione, which neutralises NABQI."
+  },
+  {
+    "q": "Which is a preferential, not selective, COX-2 inhibitor?",
+    "options": [
+      "Celecoxib",
+      "Etoricoxib",
+      "Nimesulide",
+      "Ibuprofen"
+    ],
+    "answer": 2,
+    "explanation": "Celecoxib and etoricoxib are selective coxibs; ibuprofen is non-selective."
+  },
+  {
+    "q": "Drug of choice for fever in a child with chickenpox:",
+    "options": [
+      "Aspirin",
+      "Paracetamol",
+      "Indomethacin",
+      "Mephenamic acid"
+    ],
+    "answer": 1,
+    "explanation": "Aspirin in a viral illness risks Reye's syndrome."
+  },
+  {
+    "q": "Aspirin should be stopped before an elective dental extraction by:",
+    "options": [
+      "24 hours",
+      "3 days",
+      "1 week",
+      "1 month"
+    ],
+    "answer": 2,
+    "explanation": "Platelet COX stays blocked for the platelet's lifespan."
+  },
+  {
+    "q": "The antiplatelet dose of aspirin is:",
+    "options": [
+      "75–150 mg/day",
+      "0.3–0.6 g 6-hourly",
+      "3–5 g/day",
+      "75–100 mg/kg/day"
+    ],
+    "answer": 0,
+    "explanation": "0.3–0.6 g is the analgesic dose; 3–5 g/day is anti-inflammatory."
+  },
+  {
+    "q": "Which group carries the highest risk of heart attack and stroke?",
+    "options": [
+      "Salicylates",
+      "Selective COX-2 inhibitors",
+      "Propionic acid derivatives",
+      "Para-aminophenol"
+    ],
+    "answer": 1,
+    "explanation": "Coxibs lower prostacyclin while thromboxane A₂ continues."
+  },
+  {
+    "q": "The most important dose-related side effect of mephenamic acid is:",
+    "options": [
+      "Diarrhoea",
+      "Tinnitus",
+      "Frontal headache",
+      "Hepatic necrosis"
+    ],
+    "answer": 0,
+    "explanation": "Frontal headache is indomethacin; tinnitus is salicylism."
+  },
+  {
+    "q": "Continuous oral ketorolac should not exceed:",
+    "options": [
+      "2 days",
+      "5 days",
+      "2 weeks",
+      "1 month"
+    ],
+    "answer": 1,
+    "explanation": "Beyond 5 days, GI and kidney toxicity rise."
+  },
+  {
+    "q": "Paracetamol overdose damages which zone of the liver?",
+    "options": [
+      "Periportal",
+      "Midzonal",
+      "Centrilobular",
+      "The whole lobule equally"
+    ],
+    "answer": 2,
+    "explanation": "NABQI causes centrilobular necrosis 12–18 hours after the overdose."
+  },
+  {
+    "q": "A patient with a history of peptic ulcer disease needs an NSAID. Which has a relatively lower risk of GI ulceration?",
+    "options": [
+      "Indomethacin",
+      "Ketorolac",
+      "Celecoxib",
+      "Piroxicam"
+    ],
+    "answer": 2,
+    "explanation": "Celecoxib spares COX-1, so gastroprotective PGs are kept. The other three block COX-1 and are quite ulcerogenic."
+  },
+  {
+    "q": "Which NSAID is commonly used for acute postoperative pain but carries a significant risk of GI bleeding and renal toxicity?",
+    "options": [
+      "Ketorolac",
+      "Celecoxib",
+      "Meloxicam",
+      "Etoricoxib"
+    ],
+    "answer": 0,
+    "explanation": "Ketorolac rivals morphine for postoperative pain, but GI and kidney toxicity limit it to 5 days."
+  },
+  {
+    "q": "Which NSAID is most likely to cause premature closure of the ductus arteriosus?",
+    "options": [
+      "Paracetamol",
+      "Indomethacin",
+      "Celecoxib",
+      "Aspirin"
+    ],
+    "answer": 1,
+    "explanation": "Indomethacin is the potent COX inhibitor used to close a patent ductus in newborns, so it closes the fetal ductus too. Any NSAID near term, aspirin included, carries this risk."
+  },
+  {
+    "q": "A patient on warfarin develops GI bleeding after starting an NSAID. Which mechanism contributes most?",
+    "options": [
+      "Increased vitamin K synthesis",
+      "Increased platelet aggregation",
+      "GI mucosal damage and impaired platelet function",
+      "Increased thrombin synthesis"
+    ],
+    "answer": 2,
+    "explanation": "The NSAID erodes the gastric mucosa and blocks platelet TXA₂, on top of warfarin's anticoagulant effect. Aspirin also displaces warfarin from plasma proteins."
+  },
+  {
+    "q": "A patient taking aspirin develops bronchospasm. What is the most likely mechanism?",
+    "options": [
+      "Increased leukotriene synthesis",
+      "Increased prostaglandin synthesis",
+      "Inhibition of 5-lipoxygenase",
+      "Inhibition of phospholipase A₂"
+    ],
+    "answer": 0,
+    "explanation": "With COX blocked, arachidonic acid is thought to shift to the lipoxygenase pathway, making bronchoconstrictor leukotrienes (LTC₄, LTD₄)."
+  },
+  {
+    "q": "Which NSAID produces irreversible inhibition of cyclooxygenase?",
+    "options": [
+      "Ibuprofen",
+      "Diclofenac",
+      "Aspirin",
+      "Indomethacin"
+    ],
+    "answer": 2,
+    "explanation": "Aspirin acetylates COX permanently; the others bind reversibly."
+  },
+  {
+    "q": "Aspirin inhibits platelet aggregation by:",
+    "options": [
+      "Reversible inhibition of COX-2",
+      "Irreversible inhibition of platelet COX-1",
+      "Inhibition of thrombin",
+      "Activation of prostacyclin synthesis"
+    ],
+    "answer": 1,
+    "explanation": "Platelets can't make new COX-1, so TXA₂ stays low for the platelet's lifespan, about a week."
+  },
+  {
+    "q": "Prostaglandins protect the stomach mainly by:",
+    "options": [
+      "Decreasing mucus secretion",
+      "Increasing gastric acid secretion",
+      "Increasing mucus and bicarbonate secretion",
+      "Decreasing mucosal blood flow"
+    ],
+    "answer": 2,
+    "explanation": "PGE₂ and PGI₂ raise mucus and HCO₃⁻, lower acid and keep mucosal blood flow up."
+  }
+]

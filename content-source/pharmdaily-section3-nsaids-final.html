@@ -1,0 +1,847 @@
+<title>PharmDaily NSAIDs</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap">
+<style>
+/* Night direction: one dark navy-violet world. Phone-first single column; sticky glass header; diagrams are stacking blocks; indigo = enteral/primary, amber = parenteral/secondary. Deliberately single-theme. */
+:root{
+  color-scheme:dark;
+  --bg:#0B0C1A; --surface:#10122A; --glass:rgba(255,255,255,.045); --glass-2:rgba(255,255,255,.07);
+  --line:rgba(255,255,255,.09); --line-2:rgba(255,255,255,.16);
+  --ink:#E6E8F5; --ink-strong:#FFFFFF; --muted:#A7ABC8; --faint:#8C90AE;
+  --indigo:#6D7CFF; --indigo-ink:#C9CEFF; --indigo-soft:rgba(109,124,255,.14);
+  --amber:#FFB86B; --amber-ink:#FFCF94; --amber-soft:rgba(255,184,107,.12);
+  --good:#7CE2B0; --good-soft:rgba(124,226,176,.09); --bad:#FF9B9B; --bad-soft:rgba(255,155,155,.08);
+  --font:"Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --ease-out:cubic-bezier(.23,1,.32,1); --ease-in-out:cubic-bezier(.77,0,.175,1);
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{-webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:100%;background:var(--bg)}
+body{overflow-x:clip;background:var(--surface);color:var(--ink);font-family:var(--font);font-size:16.5px;line-height:1.6}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+button,a,[role="button"]{touch-action:manipulation}
+button,.pills a,.seg button,.fc,.flag,.src{user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+button{font:inherit;color:inherit}
+input,textarea{font-size:16px}
+:focus-visible{outline:2px solid var(--indigo-ink);outline-offset:3px;border-radius:10px}
+a{color:var(--indigo-ink)}
+.gut{padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.col{max-width:680px;margin:0 auto}
+h1,h2,h3{text-wrap:balance;margin:0;color:var(--ink-strong);letter-spacing:-.02em}
+h2{font-size:1.4rem;font-weight:700;margin-top:2.6rem}
+h3{font-size:1.08rem;font-weight:700;margin-top:1.8rem}
+p{margin:.55rem 0}
+b{color:var(--ink-strong)}
+
+/* header */
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:6;background:rgba(11,12,26,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:12px 4px}
+.brand{font-weight:800;font-size:1.15rem;letter-spacing:-.02em;color:var(--ink-strong)}
+.sec{font-size:.8rem;color:var(--muted)}
+.pills{display:flex;gap:6px;padding-block:8px}
+.pills a{flex:1 1 auto;min-width:0;display:inline-flex;align-items:center;justify-content:center;gap:4px;min-height:42px;padding:0 8px;border-radius:21px;border:1px solid var(--line-2);color:var(--ink);text-decoration:none;font-size:.84rem;font-weight:600;white-space:nowrap}
+.pills a[aria-current="page"]{background:var(--ink-strong);border-color:var(--ink-strong);color:var(--bg);font-weight:800}
+.pills a.rev{color:var(--amber-ink);border-color:rgba(255,184,107,.45)}
+.pills a.rev[aria-current="page"]{background:var(--amber);border-color:var(--amber);color:var(--bg)}
+.seg{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:4px;margin-bottom:10px;border-radius:24px;background:var(--glass-2)}
+.seg button{min-height:40px;border:0;border-radius:20px;background:transparent;color:var(--muted);font-weight:700;font-size:.9rem;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--ink-strong);color:var(--bg)}
+
+/* motion: press feedback only (emil-design-eng) */
+.btn,.opt,.choice button,.seg button,.pills a,.go{transition:transform 140ms var(--ease-out),background-color 150ms ease,border-color 150ms ease,color 150ms ease}
+.btn:active,.opt:not([disabled]):active,.choice button:active,.seg button:active,.pills a:active,.go:active{transform:scale(.97)}
+@media (hover:hover) and (pointer:fine){
+  .btn:hover,.opt:not([disabled]):hover,.choice button:hover{border-color:var(--muted)}
+  .pills a:not([aria-current]):hover{border-color:var(--ink)}
+}
+
+/* topic hero */
+.hero{position:relative;padding-block:30px 6px}
+.hero::before{content:"";position:absolute;left:-20px;top:-40px;width:calc(100% + 40px);height:340px;background:radial-gradient(closest-side,rgba(109,124,255,.22),rgba(16,18,42,0));pointer-events:none;z-index:0}
+.hero>*{position:relative}
+.eyebrow{font-size:.82rem;color:var(--muted)}
+.hero h1{font-size:2.15rem;line-height:1.08;font-weight:700;letter-spacing:-.035em;margin-top:6px}
+.lede{color:#B5B9D3;font-size:1.02rem}
+.legend{margin-top:16px;display:flex;flex-direction:column;gap:8px;padding:14px 16px;border-radius:16px;background:var(--glass);border:1px solid var(--line);font-size:.88rem;color:var(--muted)}
+.legend div{display:flex;gap:10px;align-items:flex-start}
+
+/* tags */
+.src{display:inline-flex;align-items:center;font-size:.7rem;font-weight:800;padding:2px 8px;border-radius:999px;border:1px solid rgba(201,206,255,.4);color:var(--indigo-ink);vertical-align:middle;margin-left:6px;white-space:nowrap;letter-spacing:.01em}
+.flag{position:relative;display:inline-flex;align-items:center;font-size:.72rem;font-weight:800;padding:3px 9px;border-radius:999px;background:var(--amber);color:var(--bg);text-decoration:none;vertical-align:middle;margin-left:6px;white-space:nowrap}
+.flag::after{content:"";position:absolute;inset:-10px -4px}
+.dental{display:inline-flex;font-size:.7rem;font-weight:800;padding:2px 8px;border-radius:999px;border:1px solid rgba(255,207,148,.45);color:var(--amber-ink);vertical-align:middle;margin-left:6px}
+
+/* capsule chips */
+.drugs{display:flex;flex-wrap:wrap;gap:7px;margin:.5rem 0}
+.rx{display:inline-flex;align-items:center;min-height:30px;border-radius:15px;overflow:hidden;border:1px solid var(--line-2);font-size:.82rem;font-weight:600;color:var(--ink);background:rgba(255,255,255,.02)}
+.rx::before{content:"";width:11px;align-self:stretch;background:var(--indigo)}
+.rx span{padding:3px 11px 3px 9px}
+.par .rx::before{background:var(--amber)}
+
+/* surfaces */
+.card{background:var(--glass);border:1px solid var(--line);border-radius:18px;padding:16px;margin-top:12px}
+.card>b:first-child,.card>.ct{display:block;color:var(--ink-strong);font-weight:800;margin-bottom:4px}
+.def{background:var(--indigo-soft);border:1px solid rgba(109,124,255,.35);border-radius:18px;padding:14px 16px;margin-top:12px}
+.split{display:grid;grid-template-columns:1fr;gap:10px;margin-top:12px}
+@media (min-width:560px){.split{grid-template-columns:1fr 1fr}}
+.split>*{min-width:0;margin-top:0}
+.pro,.con{border-radius:18px;padding:14px 16px}
+.pro{background:var(--good-soft);border:1px solid rgba(124,226,176,.28)}
+.con{background:var(--bad-soft);border:1px solid rgba(255,155,155,.26)}
+.pro h4,.con h4{margin:0 0 4px;font-size:.92rem;font-weight:800}
+.pro h4{color:var(--good)} .con h4{color:var(--bad)}
+ul{margin:.3rem 0;padding-left:1.1rem} li{margin:.2rem 0}
+li::marker{color:var(--faint)}
+
+/* stacked label/value list */
+.rows{margin-top:12px;border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.025);overflow:hidden}
+.row{padding:13px 16px;display:flex;flex-direction:column;gap:3px}
+.row+.row{border-top:1px solid rgba(255,255,255,.07)}
+.row>*{min-width:0}
+.row .k{font-size:.82rem;font-weight:800;color:var(--indigo-ink)}
+.par .row .k{color:var(--amber-ink)}
+.row .k small{font-weight:600;color:var(--faint);margin-left:6px}
+.row .drugs{margin:2px 0 0}
+
+/* metro map */
+.metro{margin-top:12px;padding:18px 14px;border-radius:20px;background:var(--glass);border:1px solid var(--line);display:flex;flex-direction:column;align-items:center}
+.metro .root{padding:8px 18px;border-radius:20px;background:var(--ink-strong);color:var(--bg);font-weight:800}
+.metro .stem{width:2px;height:16px;background:rgba(255,255,255,.3)}
+.metro .bridge{width:50%;height:2px;background:rgba(255,255,255,.3)}
+.lines{width:100%;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.line{display:flex;flex-direction:column;align-items:center;--c:var(--indigo)}
+.line.amb{--c:var(--amber)}
+.line .head{width:100%;text-align:center;padding:10px 6px;border-radius:14px;background:var(--c);color:var(--bg)}
+.line .head b{display:block;color:var(--bg);font-weight:800}
+.line .head span{font-size:.75rem;font-weight:700}
+.stops{position:relative;width:100%;list-style:none;margin:0;padding:14px 0 0 24px;display:flex;flex-direction:column;gap:14px}
+.stops::before{content:"";position:absolute;left:10px;top:0;bottom:12px;width:2px;background:var(--c)}
+.stops li{position:relative;margin:0;font-size:.88rem;font-weight:700;color:var(--ink-strong);line-height:1.3}
+.stops li::before{content:"";position:absolute;left:-19px;top:3px;width:10px;height:10px;border-radius:50%;background:var(--surface);border:2px solid var(--c)}
+.stops small{display:block;font-weight:500;color:var(--muted);font-size:.75rem}
+
+/* vertical flow */
+.flow{display:flex;flex-direction:column;align-items:stretch;margin-top:12px}
+.step{background:var(--glass);border:1px solid var(--line);border-radius:14px;padding:11px 14px}
+.step b{color:var(--ink-strong)}
+.arrow{align-self:center;color:var(--faint);font-size:1rem;line-height:1;padding:5px 0;text-align:center}
+.arrow small{display:block;font-size:.75rem;margin-top:2px}
+.step.hit{background:var(--bad-soft);border:1px dashed rgba(255,155,155,.55);color:var(--bad)}
+.step.ok{background:var(--good-soft);border-color:rgba(124,226,176,.4);color:var(--good)}
+
+/* side-by-side paths */
+.paths{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}
+.path{padding:14px 10px;border-radius:18px;background:var(--glass);border:1px solid var(--line);display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;font-size:.86rem;font-weight:700;color:var(--ink-strong)}
+.path.win{background:var(--indigo-soft);border-color:rgba(109,124,255,.4)}
+.path .t{font-size:.75rem;color:var(--muted)} .path.win .t{color:var(--indigo-ink)}
+.path .ar{color:var(--faint);font-weight:400}
+.path .hit{color:var(--bad);border:1px dashed rgba(255,155,155,.6);border-radius:10px;padding:3px 9px}
+.path .ok{color:var(--good);border:1px solid rgba(124,226,176,.5);border-radius:10px;padding:3px 9px}
+.path .note{font-size:.75rem;font-weight:500;color:var(--muted)}
+
+/* patch layers */
+.layers{margin-top:12px;display:flex;flex-direction:column;gap:4px}
+.layer{display:flex;justify-content:space-between;gap:10px;padding:11px 14px;border-radius:4px;font-size:.88rem;font-weight:700}
+.layer span{font-weight:500;opacity:.85;text-align:right}
+.l1{background:#2B2F55;color:#fff;border-radius:12px 12px 4px 4px}
+.l2{background:var(--indigo);color:var(--bg);padding-block:15px}
+.l3{border:1px dashed var(--indigo-ink);color:var(--indigo-ink)}
+.l4{background:var(--amber-soft);color:var(--amber-ink)}
+.l5{background:rgba(255,155,155,.13);color:#FFB3B3;border-radius:4px 4px 12px 12px}
+
+/* cause → effect */
+.cause{display:grid;grid-template-columns:1fr auto;align-items:center;gap:10px;padding:10px 0;font-size:.92rem}
+.cause+.cause{border-top:1px solid rgba(255,255,255,.07)}
+.up{color:var(--good);font-weight:800;white-space:nowrap} .down{color:var(--bad);font-weight:800;white-space:nowrap}
+
+/* IA scale */
+.scale{margin-top:16px;padding:0 6px}
+.track{height:10px;border-radius:999px;background:linear-gradient(90deg,var(--bad),rgba(255,255,255,.2) 50%,var(--good))}
+.ticks{position:relative;height:74px}
+.tick{position:absolute;top:6px;transform:translateX(-50%);text-align:center;font-size:.72rem;line-height:1.25;width:78px;color:var(--muted)}
+.tick b{display:block;font-size:.95rem}
+.tick::before{content:"";display:block;width:2px;height:10px;background:var(--ink-strong);margin:-16px auto 8px}
+
+.rgrid{display:grid;grid-template-columns:1fr;gap:10px;margin-top:12px}
+@media (min-width:560px){.rgrid{grid-template-columns:1fr 1fr}}
+.rcard{background:var(--glass);border:1px solid var(--line);border-radius:18px;padding:14px 16px;display:flex;flex-direction:column;gap:4px}
+.rcard h4{margin:0;font-size:1rem;color:var(--ink-strong)}
+.speed{font-size:.78rem;font-weight:800;color:var(--amber-ink)}
+.rcard p{margin:0;font-size:.9rem}
+
+.chart{margin-top:12px;background:var(--glass);border:1px solid var(--line);border-radius:18px;padding:10px}
+.chart svg{display:block;width:100%;height:auto}
+.legend2{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.82rem;padding:6px 4px 2px;color:var(--muted)}
+.legend2 i{display:inline-block;width:14px;height:3px;vertical-align:middle;margin-right:6px;border-radius:2px}
+
+.clinic{margin-top:14px;display:flex;gap:12px;padding:14px 16px;border-radius:18px;background:var(--amber-soft);border:1px solid rgba(255,184,107,.35)}
+.clinic svg{flex:none}
+.clinic b{display:block;color:var(--amber-ink)}
+
+.next{display:flex;gap:10px;margin-top:36px}
+.go{flex:1;min-height:52px;border-radius:26px;border:1px solid var(--line-2);background:var(--glass-2);color:var(--ink-strong);font-weight:700;cursor:pointer}
+.go.main{background:var(--ink-strong);color:var(--bg);border-color:var(--ink-strong);font-weight:800}
+
+/* flashcards */
+.fc-top{display:flex;justify-content:space-between;align-items:center;margin-top:22px}
+.count{font-variant-numeric:tabular-nums;color:var(--indigo-ink);font-weight:800}
+.dots{display:flex;gap:4px;margin-top:10px}
+.dots i{flex:1;height:4px;border-radius:2px;background:rgba(255,255,255,.16)}
+.dots i.cur{background:#fff} .dots i.got{background:var(--good)} .dots i.again{background:var(--amber)}
+.fc{perspective:1200px;height:380px;margin-top:20px;cursor:pointer;display:block;width:100%;border:0;background:none;padding:0;text-align:left}
+.fc-inner{position:relative;width:100%;height:100%;transition:transform 280ms var(--ease-in-out);transform-style:preserve-3d}
+.fc.flip .fc-inner{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:28px;padding:26px 24px;display:flex;flex-direction:column;gap:14px;overflow:auto}
+.front{background:rgba(26,29,58,.85);border:1px solid var(--line-2);box-shadow:0 30px 60px rgba(20,24,80,.45)}
+.back{background:var(--indigo);color:var(--bg);transform:rotateY(180deg)}
+.face .lab{font-size:.8rem;font-weight:800;color:var(--muted)}
+.back .lab{color:rgba(11,12,26,.7)}
+.face .q{font-size:1.55rem;line-height:1.22;font-weight:700;letter-spacing:-.02em;color:var(--ink-strong)}
+.face .a{font-size:1.2rem;line-height:1.45;font-weight:600}
+.face .hint{margin-top:auto;font-size:.8rem;color:var(--muted)}
+.back .hint{color:rgba(11,12,26,.7)}
+.fc-btns{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+.btn{min-height:52px;border-radius:26px;border:1px solid var(--line-2);background:var(--glass-2);color:var(--ink-strong);font-weight:700;cursor:pointer;padding:0 18px}
+.btn.primary{background:var(--ink-strong);color:var(--bg);border-color:var(--ink-strong);font-weight:800}
+.btn.quiet{min-height:44px;background:none;border:0;color:var(--indigo-ink);margin-top:6px}
+@media (prefers-reduced-motion:reduce){.fc-inner{transition:none}.btn:active,.opt:active,.choice button:active,.seg button:active,.pills a:active,.go:active{transform:none}}
+
+/* mcq */
+.mcq-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:22px}
+.q-card{background:var(--glass);border:1px solid var(--line);border-radius:20px;padding:16px;margin-top:12px}
+.qn{font-size:.78rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.qt{font-weight:700;color:var(--ink-strong);margin:3px 0 10px;font-size:1.02rem;line-height:1.4}
+.opt{display:block;width:100%;min-height:48px;text-align:left;border:1px solid var(--line-2);background:rgba(255,255,255,.03);border-radius:14px;padding:11px 14px;margin-top:7px;cursor:pointer;font-size:.95rem}
+.opt[disabled]{cursor:default}
+.opt.right{background:var(--good-soft);border-color:var(--good);color:var(--good);font-weight:800}
+.opt.wrong{background:var(--bad-soft);border-color:var(--bad);color:var(--bad)}
+.expl{margin-top:10px;font-size:.9rem;color:var(--muted);transition:opacity 200ms var(--ease-out),transform 200ms var(--ease-out)}
+@starting-style{.expl{opacity:0;transform:translateY(4px)}}
+
+/* review */
+.ri{background:var(--glass);border:1px solid var(--line);border-radius:20px;padding:16px;margin-top:12px;scroll-margin-top:190px}
+.ri .where{font-size:.78rem;color:var(--amber-ink);font-weight:800}
+.ri b{display:block;margin-top:2px}
+.ri p{margin:.3rem 0 .7rem;color:var(--muted);font-size:.93rem}
+.choice{display:flex;gap:8px;flex-wrap:wrap}
+.choice button{min-height:44px;border:1px solid var(--line-2);background:rgba(255,255,255,.03);border-radius:22px;padding:0 18px;cursor:pointer;font-size:.92rem;font-weight:700}
+.choice button[aria-pressed="true"].ok{background:var(--good);border-color:var(--good);color:var(--bg)}
+.choice button[aria-pressed="true"].fix{background:var(--bad);border-color:var(--bad);color:var(--bg)}
+textarea{width:100%;margin-top:10px;font-family:inherit;border:1px solid var(--line-2);border-radius:14px;padding:12px;background:rgba(255,255,255,.03);color:var(--ink);min-height:76px}
+textarea::placeholder{color:var(--faint)}
+.copybox{position:sticky;bottom:0;background:var(--bg);border-top:1px solid var(--line);padding-block:12px calc(12px + env(safe-area-inset-bottom,0px));margin-top:18px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.copybox .status{font-size:.85rem;color:var(--muted)}
+pre.fallback{white-space:pre-wrap;font-family:inherit;font-size:.85rem;background:var(--glass);border:1px solid var(--line);border-radius:14px;padding:12px;margin-top:12px}
+
+main{padding-block:0 72px}
+footer{color:var(--faint);font-size:.82rem;border-top:1px solid var(--line);padding-block:20px 30px;background:var(--bg)}
+
+/* NSAIDs additions: MBBS extras box (CLAUDE.md content rule) */
+.mbbs{margin-top:14px;padding:14px 16px;border-radius:18px;background:var(--glass);border:1px dashed var(--indigo-ink)}
+.mbbs>b:first-child{display:block;color:var(--indigo-ink);font-weight:800;margin-bottom:4px}
+.mnem{margin-top:12px;padding:14px 16px;border-radius:18px;background:var(--indigo-soft);border:1px solid rgba(109,124,255,.35)}
+.mnem .say{display:block;font-size:1.12rem;font-weight:800;color:var(--ink-strong);letter-spacing:-.01em;line-height:1.35;margin:2px 0 4px}
+.mnem .say u{text-decoration:none;color:var(--amber);font-weight:800}
+.mnem .eyebrow{color:var(--indigo-ink);font-weight:700}
+.mnem p{margin:.2rem 0 0;color:var(--muted);font-size:.9rem}
+.ladder{margin-top:12px;border-left:2px solid var(--indigo);margin-left:6px;display:flex;flex-direction:column}
+.rung{position:relative;padding:8px 0 8px 18px;font-size:.92rem}
+.rung::before{content:"";position:absolute;left:-7px;top:13px;width:10px;height:10px;border-radius:50%;background:var(--surface);border:2px solid var(--indigo)}
+.rung.hot::before{background:var(--bad);border-color:var(--bad)}
+.rung .d{display:block;font-weight:800;color:var(--indigo-ink);font-variant-numeric:tabular-nums}
+.rung.hot .d{color:var(--bad)}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.tg{font-size:.78rem;font-weight:700;padding:3px 10px;border-radius:999px}
+.tg.u{background:var(--good-soft);color:var(--good);border:1px solid rgba(124,226,176,.3)}
+.tg.r{background:var(--bad-soft);color:var(--bad);border:1px solid rgba(255,155,155,.3)}
+/* cloud mind maps for Uses and ADRs */
+.mind{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px 10px;margin-top:12px;padding:20px 10px;border-radius:20px;background:var(--glass);border:1px solid var(--line)}
+.mind svg.links{position:absolute;left:0;top:0;pointer-events:none;z-index:0;overflow:visible}
+.cloud{--c:var(--indigo);position:relative;z-index:1;display:flex;align-items:center;justify-content:center;text-align:center;min-height:78px;padding:12px 8px;font:inherit;font-size:.8rem;font-weight:800;line-height:1.2;color:var(--ink-strong);background:#191C40;border:1.5px solid var(--c);border-radius:58% 42% 52% 48% / 54% 58% 42% 46%;box-shadow:0 0 0 5px rgba(255,255,255,.03);cursor:pointer;overflow-wrap:break-word;hyphens:manual;transition:transform 140ms var(--ease-out)}
+.cloud:active{transform:scale(.96)}
+.cloud.u{--c:var(--good)} .cloud.r{--c:var(--bad)}
+.cloud.center{--c:var(--amber);background:var(--amber);color:var(--bg);font-size:.88rem;cursor:default;border-radius:50% 50% 46% 54% / 56% 48% 52% 44%}
+.rcard.ex{margin-top:12px;scroll-margin-top:var(--hdr,200px)}
+.rcard.ex .speed{color:var(--good)} .rcard.ex.bad .speed{color:var(--bad)}
+.rcard.ex.hl{border-color:var(--amber)}
+@media (prefers-reduced-motion:reduce){.cloud:active{transform:none}}
+/* section jump bar under the Notes/Flashcards/MCQs switch */
+.toc{display:flex;gap:6px;overflow-x:auto;padding:2px 0 10px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.toc::-webkit-scrollbar{display:none}
+.toc a{position:relative;flex:none;display:inline-flex;align-items:center;min-height:36px;padding:0 14px;border-radius:18px;background:var(--glass);border:1px solid var(--line);color:var(--muted);font-size:.82rem;font-weight:700;text-decoration:none;white-space:nowrap;transition:background-color 150ms ease,color 150ms ease,border-color 150ms ease}
+.toc a::after{content:"";position:absolute;inset:-4px -3px}
+.toc a.on{background:var(--amber);border-color:var(--amber);color:var(--bg)}
+main h2{scroll-margin-top:var(--hdr,200px)}
+</style>
+
+<header>
+  <div class="gut"><div class="col">
+    <div class="bar"><span class="brand">PharmDaily</span><span class="sec">Section 3 · Autacoids and NSAIDs</span></div>
+    <nav class="pills" aria-label="Topics">
+      <a href="#nsaids" data-t="nsaids">NSAIDs</a>
+      <a href="#review" data-t="review" class="rev" hidden>Review <span id="flagCount" style="font-variant-numeric:tabular-nums"></span></a>
+    </nav>
+    <div class="seg" id="modes" role="group" aria-label="Study mode">
+      <button data-m="notes" aria-pressed="true">Notes</button>
+      <button data-m="cards" aria-pressed="false">Flashcards</button>
+      <button data-m="mcq" aria-pressed="false">MCQs</button>
+    </div>
+    <nav class="toc" id="toc" aria-label="Jump to section"></nav>
+  </div></div>
+</header>
+
+<main class="gut"><div class="col">
+
+<!-- ===================== NSAIDS ===================== -->
+<section data-topic="nsaids" data-mode="notes">
+  <div class="hero">
+    <div class="eyebrow">Chapter 15 · NSAIDs and antipyretic-analgesics</div>
+    <h1>Pain, fever and swelling</h1>
+    <p class="lede">One enzyme, cyclooxygenase, explains almost everything here: why NSAIDs work, and why they hurt the stomach, kidney and platelets.</p>
+  </div>
+
+  <h2>Definition</h2>
+  <div class="def"><b>NSAIDs</b> are drugs that relieve pain, lower fever and reduce inflammation by blocking <b>cyclooxygenase (COX)</b>, which stops prostaglandin (PG) synthesis. Unlike morphine, they don't depress the CNS and don't cause physical dependence.</div>
+  <div class="rows">
+    <div class="row"><div class="k">Pain → algesia</div><div>A drug that relieves it is an <b>analgesic</b></div></div>
+    <div class="row"><div class="k">Fever → pyrexia</div><div>A drug that lowers it is an <b>antipyretic</b></div></div>
+    <div class="row"><div class="k">Swelling → inflammation</div><div>A drug that reduces it is an <b>anti-inflammatory</b></div></div>
+  </div>
+  <div class="split">
+    <div class="card"><b>Analgesics</b>Opioid (morphine) and non-opioid (NSAIDs).</div>
+    <div class="card"><b>Anti-inflammatory drugs</b>Steroids and non-steroidal. Hence the name NSAID.</div>
+  </div>
+  <p style="color:var(--muted);font-size:.9rem">History: willow bark (Salix alba) → sodium salicylate (1875) → aspirin, acetylsalicylic acid (1899) → phenylbutazone (1949) → indomethacin (1963).</p>
+
+  <h2>Classification</h2>
+  <p>Grouped by which COX enzyme the drug blocks.</p>
+  <h3>A. Non-selective COX inhibitors</h3>
+  <p style="color:var(--muted);font-size:.9rem;margin-top:0">Block both COX-1 and COX-2.</p>
+  <div class="rows">
+    <div class="row"><div class="k">Salicylates</div><div class="drugs">Aspirin</div></div>
+    <div class="row"><div class="k">Propionic acid derivatives</div><div><div class="drugs">Ibuprofen, Naproxen, Ketoprofen, Flurbiprofen, Zaltoprofen</div></div></div>
+    <div class="row"><div class="k">Fenamates<small>anthranilic acid</small></div><div class="drugs">Mephenamic acid, Tolfenamic acid</div></div>
+    <div class="row"><div class="k">Enolic acid (oxicams)</div><div><div class="drugs">Piroxicam, Tenoxicam, Lornoxicam</div></div></div>
+    <div class="row"><div class="k">Acetic acid derivatives</div><div><div class="drugs">Ketorolac, Indomethacin, Nabumetone</div>Ketorolac is chemically a pyrrolo-pyrrole and indomethacin an indole, but both are acetic acid derivatives.</div></div>
+    <div class="row"><div class="k">Pyrazolones</div><div><div class="drugs">Phenylbutazone, Propyphenazone</div></div></div>
+  </div>
+  <h3>B. Preferential COX-2 inhibitors</h3>
+  <div class="rows"><div class="row"><div class="k">Mostly COX-2, some COX-1</div><div><div class="drugs">Nimesulide, Diclofenac, Aceclofenac, Meloxicam, Etodolac</div></div></div></div>
+  <h3>C. Selective COX-2 inhibitors (coxibs)</h3>
+  <div class="rows"><div class="row"><div class="k">COX-2 only</div><div><div class="drugs">Celecoxib, Etoricoxib, Parecoxib, Polmacoxib</div></div></div></div>
+  <h3>D. Analgesic-antipyretics with poor anti-inflammatory action</h3>
+  <div class="rows">
+    <div class="row"><div class="k">Para-aminophenol</div><div class="drugs">Paracetamol (acetaminophen)</div></div>
+    <div class="row"><div class="k">Benzoxazocine</div><div><div class="drugs">Nefopam</div>Does not inhibit PG synthesis</div></div>
+  </div>
+
+  <h3>Mnemonics</h3>
+  <div class="mnem"><span class="eyebrow">Non-selective groups, in order</span>
+    <span class="say"><u>S</u>ome <u>P</u>eople <u>F</u>ind <u>E</u>xams <u>A</u>wfully <u>P</u>ainful</span>
+    <p>Salicylates · Propionic · Fenamates · Enolic · Acetic · Pyrazolones</p></div>
+  <div class="mnem"><span class="eyebrow">Preferential COX-2</span>
+    <span class="say"><u>N</u>ice <u>D</u>octors <u>A</u>lways <u>M</u>ake <u>E</u>ffort</span>
+    <p>Nimesulide · Diclofenac · Aceclofenac · Meloxicam · Etodolac</p></div>
+  <div class="mnem"><span class="eyebrow">Acetic acid derivatives</span>
+    <span class="say"><u>KIN</u></span>
+    <p>Ketorolac · Indomethacin · Nabumetone</p></div>
+  <div class="card"><b>Read the drug name</b><ul>
+    <li><b>-profen</b> → propionic acid (plus naproxen)</li>
+    <li><b>-fenamic acid</b> → fenamates</li>
+    <li><b>-xicam</b> → oxicams. Trap: <b>meloxicam</b> is preferential COX-2</li>
+    <li><b>-coxib</b> → selective COX-2</li>
+    <li><b>-zone</b> → pyrazolones</li></ul></div>
+
+  <h2>Mechanism of action</h2>
+  <div class="def">NSAIDs <b>inhibit cyclooxygenase</b>, so arachidonic acid is not turned into prostaglandins and thromboxane. They do not block lipoxygenase.</div>
+  <div class="flow">
+    <div class="step"><b>Membrane phospholipids</b></div><div class="arrow">↓<small>phospholipase A₂</small></div>
+    <div class="step"><b>Arachidonic acid</b></div>
+  </div>
+  <div class="paths">
+    <div class="path win"><span class="t">Cyclooxygenase pathway</span>COX<span class="hit">✕ NSAIDs block</span><span class="ar">↓</span>Prostaglandins<span class="note">PGE₂, PGI₂, PGD₂, PGF₂α</span>Thromboxane A₂</div>
+    <div class="path"><span class="t">Lipoxygenase pathway</span>LOX<span class="ok">not blocked</span><span class="ar">↓</span>Leukotrienes<span class="note">LTB₄, LTC₄, LTD₄</span></div>
+  </div>
+  <div class="split">
+    <div class="con"><h4>COX-1 · constitutive</h4><ul><li>Always present: stomach, kidney, platelets, lung, liver</li><li>Makes housekeeping PGs</li><li>Protects gastric mucosa</li><li>Keeps renal blood flow</li><li>TXA₂ for platelet function</li><li><b>Blocking it → side effects</b></li></ul></div>
+    <div class="pro"><h4>COX-2 · inducible</h4><ul><li>Hardly present normally</li><li>Switched on at injury by cytokines (IL-1, TNF-α)</li><li>PGs of pain, inflammation, fever</li><li>Also constitutive in brain, kidney, uterus</li><li><b>Blocking it → benefit</b></li></ul></div>
+  </div>
+  <div class="card"><b>Who blocks what</b><ul><li><b>Non-selective:</b> COX-1 + COX-2 → benefit plus gastric, platelet and kidney effects</li><li><b>Selective:</b> COX-2 only → benefit with less gastric damage, but kidney COX-2 is still hit</li></ul></div>
+
+  <h2>Pharmacological actions</h2>
+  <p>Nearly every action of an NSAID, good or bad, comes from less prostaglandin. Aspirin is the prototype, so its actions are described first; the rest of the group shares them to different degrees.</p>
+  <div class="split">
+    <div class="pro"><h4>Benefits from PG block</h4><ul><li>Analgesia</li><li>Antipyresis</li><li>Anti-inflammatory action</li><li>Relief of dysmenorrhoea</li><li>Antiplatelet (antithrombotic) action</li><li>Closure of patent ductus arteriosus</li></ul></div>
+    <div class="con"><h4>Toxicities from the same block</h4><ul><li>Gastric mucosal damage</li><li>Bleeding: platelet function inhibited</li><li>Less renal blood flow: Na⁺ and water retention</li><li>Delayed or prolonged labour</li><li>Asthma and anaphylactoid reactions in susceptible people</li></ul></div>
+  </div>
+
+  <h3>1. Analgesic action</h3>
+  <div class="flow">
+    <div class="step"><b>Peripherally</b>, PGs sensitise nerve endings to bradykinin and histamine</div><div class="arrow">+</div>
+    <div class="step"><b>Centrally</b>, PGs lower the threshold of pain circuits</div><div class="arrow">↓<small>NSAIDs block both</small></div>
+    <div class="step ok">Pain intensity falls: analgesia</div>
+  </div>
+  <div class="card"><b>Points to write in the exam</b><ul>
+    <li>Aspirin is a <b>weaker analgesic than morphine</b>: 600 mg of aspirin roughly equals 60 mg of codeine</li>
+    <li>Works well on pain from <b>inflammation and tissue injury</b>: joints, muscles, connective tissue, skin, teeth</li>
+    <li>Works poorly on <b>visceral and ischaemic pain</b></li>
+    <li>Mainly a <b>peripheral</b> action: dulls pain receptors and stops PG sensitisation of nerve endings</li>
+    <li>A smaller <b>central</b> (subcortical) action raises the pain threshold</li>
+    <li>No sedation, no tolerance, no dependence</li></ul></div>
+
+  <h3>2. Antipyretic action</h3>
+  <div class="flow">
+    <div class="step">Infection or injury → pyrogens: IL-1, TNF-α, interferons</div><div class="arrow">↓</div>
+    <div class="step"><b>PGE₂</b> made in the hypothalamus</div><div class="arrow">↓</div>
+    <div class="step hit">Thermostat set higher: more heat made, heat loss shut down → fever</div><div class="arrow">↓<small>NSAIDs block PGE₂</small></div>
+    <div class="step ok">Thermostat resets: sweating and skin vasodilation bring temperature down</div>
+  </div>
+  <div class="card"><b>Points to write in the exam</b><ul>
+    <li>The hypothalamus balances heat production and heat loss</li>
+    <li>NSAIDs lower fever by <b>increasing heat loss</b>; they don't reduce heat production</li>
+    <li><b>Normal body temperature is not lowered</b></li>
+    <li>Useless in heat stroke: there the thermostat is not reset, so only external cooling works</li></ul></div>
+
+  <h3>3. Anti-inflammatory action</h3>
+  <div class="card"><ul>
+    <li>Blocks PG synthesis <b>at the site of injury</b></li>
+    <li>Needs <b>high doses</b> of aspirin: 3–6 g/day, or about 100 mg/kg/day</li>
+    <li>Suppresses the signs of inflammation: pain, tenderness, swelling, vasodilation, leucocyte infiltration</li>
+    <li>Strength roughly follows how strongly each drug blocks COX</li>
+    <li>Other mechanisms: quenches free radicals; reduces adhesion molecules, GM-CSF and IL-6; stabilises leucocyte lysosomes; opposes kinins</li>
+    <li><b>Disease progression is not changed</b> in RA, osteoarthritis or rheumatic fever: only symptoms improve</li></ul></div>
+
+  <h3>4. Gastrointestinal tract</h3>
+  <div class="flow">
+    <div class="step">Aspirin (pKa 3.5) is <b>un-ionised in stomach acid</b> → diffuses into mucosal cells</div><div class="arrow">↓</div>
+    <div class="step">Inside the cell (pH 7.1) it <b>ionises and gets trapped</b> ("ion trapping")</div><div class="arrow">↓</div>
+    <div class="step hit">Focal mucosal necrosis → erosive gastritis, acute ulcers, small bleeds</div>
+  </div>
+  <div class="card"><b>Why every NSAID can damage the stomach</b><ul>
+    <li>COX-1 makes <b>gastroprotective PGE₂ and PGI₂</b></li>
+    <li>Without them: less mucus and HCO₃⁻, more acid, less mucosal blood flow (ischaemia)</li>
+    <li>Local irritation adds <b>back-diffusion of H⁺</b> into the mucosa</li>
+    <li>Result: aggressive factors rise, defensive factors fall</li>
+    <li>Symptoms: epigastric distress, nausea, vomiting; more occult blood in stools</li>
+    <li>High doses also stimulate the <b>CTZ</b>, causing vomiting</li></ul></div>
+  <div class="split">
+    <div class="pro"><h4>Less gastric damage</h4><ul><li>Paracetamol: very weak COX blocker, practically free of gastric toxicity</li><li>Selective COX-2 inhibitors</li><li>Misoprostol (a stable PG analogue) given alongside</li></ul></div>
+    <div class="con"><h4>Doesn't fully solve it</h4><ul><li>Soluble (buffered) aspirin: less local irritation, but ulcers and bleeding are not much lower</li></ul></div>
+  </div>
+
+  <h3>5. Blood and platelets (antiplatelet action)</h3>
+  <div class="paths">
+    <div class="path"><span class="t">Vessel wall</span>Prostacyclin (PGI₂)<span class="note">vasodilation, stops platelets clumping</span></div>
+    <div class="path win"><span class="t">Platelet</span>Thromboxane A₂<span class="note">vasoconstriction, makes platelets clump</span><span class="hit">aspirin blocks</span></div>
+  </div>
+  <div class="card"><ul>
+    <li>NSAIDs block both TXA₂ and PGI₂, but the effect on <b>platelet TXA₂ (COX-1) wins</b>, so platelets clump less</li>
+    <li>Aspirin <b>acetylates platelet COX irreversibly</b>, and does this in the portal blood before the liver deacetylates it</li>
+    <li>Platelets have no nucleus, so they can't make new COX: <b>bleeding time roughly doubles and stays long for about a week</b> (platelet turnover)</li>
+    <li>Even small doses work; this is why aspirin is antithrombotic</li>
+    <li>Long-term large doses also cut liver synthesis of clotting factors → bleeding; prevented with vitamin K</li>
+    <li>Raises the risk of surgical bleeding and bleeding with anticoagulants</li></ul></div>
+
+  <h3>6. Kidney</h3>
+  <p>In a healthy person the renal effects are small. When renal perfusion is low (CHF, hypovolaemia, cirrhosis, kidney disease, patients on diuretics), the kidney leans on its own PGs to keep blood flow and excrete Na⁺. NSAIDs remove that support in three ways:</p>
+  <div class="flow">
+    <div class="step"><b>1. COX-1 block</b> → less renal blood flow and GFR → can worsen renal failure</div><div class="arrow">+</div>
+    <div class="step"><b>2. COX-2 block</b> (juxtaglomerular) → Na⁺ and water retained → edema</div><div class="arrow">+</div>
+    <div class="step"><b>3. Habitual long-term use</b> → papillary necrosis</div>
+  </div>
+  <div class="card"><b>Also</b><ul><li>Blunt the effect of diuretics and antihypertensives</li><li><b>Analgesic nephropathy:</b> after years of heavy analgesic use, especially combinations. Papillary necrosis, tubular atrophy, renal fibrosis. Phenacetin was blamed and banned.</li></ul></div>
+
+  <h3>7. Uterus</h3>
+  <div class="split">
+    <div class="pro"><h4>Dysmenorrhoea</h4><ul><li>PGs from the myometrium cause menstrual cramps</li><li>NSAIDs lower uterine PG: excellent relief in 60–70%, partial in the rest</li><li>Headache, muscle ache and nausea also ease; heavy flow may normalise</li></ul></div>
+    <div class="con"><h4>Labour</h4><ul><li>A sudden rise in uterine PG triggers labour and keeps it going</li><li>NSAIDs <b>delay and slow labour</b></li><li>More postpartum bleeding</li></ul></div>
+  </div>
+
+  <h3>8. Ductus arteriosus</h3>
+  <div class="split">
+    <div class="pro"><h4>In the newborn</h4><ul><li>The ductus is a fetal shunt from pulmonary artery to aorta, kept open by local PGE₂ and PGI₂</li><li>It normally closes at birth</li><li>If it stays open, small doses of <b>indomethacin or aspirin</b> close it in most babies within hours</li></ul></div>
+    <div class="con"><h4>In late pregnancy</h4><ul><li>NSAIDs can close the ductus <b>prematurely</b> in the fetus</li><li>So avoid them near term</li></ul></div>
+  </div>
+
+  <h3>9. Respiration (aspirin)</h3>
+  <div class="flow">
+    <div class="step">Therapeutic anti-inflammatory doses: respiratory centre stimulated directly and by extra CO₂</div><div class="arrow">↓</div>
+    <div class="step">Hyperventilation washes out CO₂ → <b>respiratory alkalosis</b>, compensated by the kidney losing HCO₃⁻</div><div class="arrow">↓<small>adults on 3–5 g/day sit in compensated respiratory alkalosis</small></div>
+    <div class="step hit">Toxic doses: respiration depressed while CO₂ keeps rising → <b>respiratory acidosis</b></div><div class="arrow">+</div>
+    <div class="step hit">Lactic, pyruvic and acetoacetic acids plus salicylic acid pile up → <b>uncompensated metabolic acidosis</b></div>
+  </div>
+  <p style="color:var(--muted);font-size:.9rem">Bronchi: PGE₂ and PGI₂ dilate, LTC₄ and LTD₄ constrict. Blocking COX may push arachidonic acid towards leukotrienes and trigger asthma in sensitive people; this is suspected, not proven.</p>
+
+  <h3>10. Metabolic effects (high-dose aspirin)</h3>
+  <div class="card"><ul>
+    <li><b>Uncouples oxidative phosphorylation</b>, mainly in skeletal muscle → more heat produced</li>
+    <li>More glucose used → <b>blood sugar falls</b>, especially in diabetics; liver glycogen is used up</li>
+    <li>Toxic doses stimulate the sympathetic centre → <b>blood sugar rises</b></li>
+    <li>Negative nitrogen balance</li>
+    <li>Interferes with urate excretion and blocks the uricosuric effect of probenecid</li></ul></div>
+
+  <h3>11. Cardiovascular system</h3>
+  <div class="card"><ul>
+    <li>No direct action on heart or vessels</li>
+    <li>Doses that raise metabolic rate increase cardiac output indirectly</li>
+    <li>Toxic doses depress the vasomotor centre: BP may fall</li>
+    <li>Na⁺ and water retention can <b>precipitate CHF</b> when cardiac reserve is low</li></ul></div>
+
+  <h3>Aspirin: the dose decides the effect</h3>
+  <div class="ladder">
+    <div class="rung"><span class="d">75–150 mg/day</span>Antiplatelet</div>
+    <div class="rung"><span class="d">0.3–0.6 g every 6–8 h</span>Analgesic and antipyretic; little else happens</div>
+    <div class="rung"><span class="d">3–5 g/day</span>Anti-inflammatory; salicylism and metabolic effects begin</div>
+    <div class="rung hot"><span class="d">15–30 g</span>Fatal in adults; far less in children</div>
+  </div>
+
+  <h2>Dosage</h2>
+  <p style="color:var(--muted);font-size:.9rem;margin-top:0">Adult doses unless stated.</p>
+  <div class="rows">
+    <div class="row"><div class="k">Aspirin</div><div>Analgesic or antipyretic: 0.3–0.6 g every 6–8 h (best effect near 1 g single dose)<br>Anti-inflammatory: 3–5 g/day<br>Acute rheumatic fever: 75–100 mg/kg/day in divided doses<br>Antiplatelet: 75–150 mg/day</div></div>
+    <div class="row"><div class="k">Paracetamol</div><div>325–650 mg, 3–4 times a day<br>Children: 10–15 mg/kg, 3–4 times a day</div></div>
+    <div class="row"><div class="k">Ketorolac</div><div>15–30 mg IM or IV every 4–6 h, max 90 mg/day<br>Oral: 10–20 mg 6-hourly, not beyond 5 days</div></div>
+    <div class="row"><div class="k">Piroxicam</div><div>20 mg BD for 2 days, then 20 mg OD</div></div>
+    <div class="row"><div class="k">Tenoxicam</div><div>20 mg OD</div></div>
+    <div class="row"><div class="k">Lornoxicam</div><div>8–16 mg/day in 2–3 doses</div></div>
+    <div class="row"><div class="k">Mephenamic acid</div><div>250–500 mg TDS</div></div>
+    <div class="row"><div class="k">Tolfenamic acid</div><div>200 mg BD–TDS</div></div>
+    <div class="row"><div class="k">Dexketoprofen</div><div>25–50 mg BD or TDS</div></div>
+    <div class="row"><div class="k">Nefopam</div><div>30–60 mg TDS oral · 20 mg IM 6-hourly</div></div>
+    <div class="row"><div class="k">Ibuprofen</div><div>400–600 mg TDS<br>Children: 5–10 mg/kg TDS</div></div>
+    <div class="row"><div class="k">Naproxen</div><div>250–500 mg BD</div></div>
+    <div class="row"><div class="k">Ketoprofen</div><div>50–100 mg BD–TDS</div></div>
+    <div class="row"><div class="k">Flurbiprofen</div><div>100 mg BD–TDS</div></div>
+    <div class="row"><div class="k">Zaltoprofen</div><div>80–160 mg BD</div></div>
+  </div>
+
+  <h2>Routes of administration</h2>
+  <div class="rows par">
+    <div class="row"><div class="k">Oral</div><div>Almost every NSAID. The usual route.</div></div>
+    <div class="row"><div class="k">IM / IV</div><div><div class="drugs">Ketorolac, Diclofenac, Ketoprofen, Piroxicam, Parecoxib</div>Paracetamol by slow IV infusion</div></div>
+    <div class="row"><div class="k">Rectal</div><div><div class="drugs">Paracetamol suppository, Indomethacin</div>Indomethacin is absorbed slowly but reliably</div></div>
+    <div class="row"><div class="k">Topical gel</div><div><div class="drugs">Diclofenac 1%, Aceclofenac 1.5%, Ibuprofen 10%, Ketoprofen 2.5%, Piroxicam 0.5%</div>Blood levels stay under 15% of the oral dose, so few systemic effects. For sprains, OA of knee and hand.</div></div>
+    <div class="row"><div class="k">Eye drops</div><div><div class="drugs">Flurbiprofen 0.03%, Ketorolac 0.5%</div>Non-infective eye inflammation</div></div>
+  </div>
+
+  <h2>Therapeutic uses</h2>
+  <p>Tap a cloud to jump to its explanation.</p>
+  <div class="mind" aria-label="Mind map of NSAID uses">
+    <button class="cloud u" data-to="u1">Analgesic</button>
+    <button class="cloud u" data-to="u2">Antipyretic</button>
+    <button class="cloud u" data-to="u3">Rheumatic fever</button>
+    <button class="cloud u" data-to="u4">Rheumatoid arthritis and osteo&shy;arthritis</button>
+    <div class="cloud center">Uses of NSAIDs</div>
+    <button class="cloud u" data-to="u5">MI and stroke prophylaxis</button>
+    <button class="cloud u" data-to="u6">Dysmenor&shy;rhoea</button>
+    <button class="cloud u" data-to="u7">Patent ductus</button>
+    <button class="cloud u" data-to="u8">Pre&shy;eclampsia</button>
+  </div>
+
+  <div class="rcard ex" id="u1"><span class="speed">1 · Analgesic</span><h4>Mild to moderate pain</h4><ul><li>Headache, including mild migraine</li><li>Backache, myalgia, joint pain, pulled muscle</li><li><b>Toothache</b>, neuralgia, dysmenorrhoea, post-operative pain</li><li>Aspirin 0.3–0.6 g every 6–8 h; analgesia peaks near 1 g as a single dose</li><li>Pain with little inflammation: paracetamol or low-dose ibuprofen</li><li>Post-operative, dental, renal colic and fracture pain: injectable ketorolac or diclofenac</li></ul></div>
+  <div class="rcard ex" id="u2"><span class="speed">2 · Antipyretic</span><h4>Fever of any cause</h4><ul><li>Fever of any cause</li><li>Same dose as for analgesia</li><li><b>Paracetamol is preferred</b> because it is safer</li><li>Antipyretic of choice in children: no Reye’s syndrome</li><li>Not useful in heat stroke: only external cooling lowers the temperature</li></ul></div>
+  <div class="rcard ex" id="u3"><span class="speed">3 · Acute rheumatic fever</span><h4>Aspirin is the first drug in every case</h4><ul><li>Aspirin is the first drug in every case</li><li>Dose: 3–5 g/day (75–100 mg/kg/day) in divided doses</li><li>Marked relief in 1–3 days</li><li>Reduce the dose after 4–7 days</li><li>Maintenance 50 mg/kg/day for 2–3 weeks, or until signs of active disease (raised ESR) settle</li><li>Withdraw slowly over 2 weeks</li><li>Other drugs are added only if aspirin fails or the case is severe; corticosteroids act faster</li><li>Does <b>not</b> change nodules, carditis, valve damage, chorea or the course of the disease</li></ul></div>
+  <div class="rcard ex" id="u4"><span class="speed">4 · Arthritis</span><h4>Rheumatoid arthritis and osteoarthritis: symptom relief only</h4><ul><li><b>Rheumatoid arthritis:</b> aspirin 3–5 g/day relieves pain, swelling and morning stiffness</li><li>Disease progress is not changed</li><li>Large doses are poorly tolerated long-term, so newer NSAIDs are preferred now</li><li><b>Osteoarthritis:</b> paracetamol is the first choice; aspirin is rarely used</li><li>Also used in ankylosing spondylitis, bursitis and acute gout (naproxen, piroxicam, indomethacin)</li></ul></div>
+  <div class="rcard ex" id="u5"><span class="speed">5 · MI and stroke prophylaxis</span><h4>Now aspirin's most important use</h4><ul><li>Now aspirin’s most important use</li><li>Low-dose aspirin: <b>75–150 mg/day</b></li><li>Blocks platelet aggregation</li><li>Lowers the risk of myocardial infarction in coronary artery disease</li><li>Lowers the risk of stroke in transient ischaemic attacks and atrial fibrillation</li><li>Also used after unstable angina</li></ul></div>
+  <div class="rcard ex" id="u6"><span class="speed">6 · Dysmenorrhoea</span><h4>Uterine PGs cause the cramps</h4><ul><li>Uterine PGs cause the menstrual cramps</li><li>NSAIDs lower uterine PG levels</li><li>Excellent relief in 60–70% of women, partial in the rest</li><li>Headache, muscle ache and nausea also improve</li><li>Mephenamic acid is especially effective</li></ul></div>
+  <div class="rcard ex" id="u7"><span class="speed">7 · Patent ductus arteriosus</span><h4>Medical closure in the newborn</h4><ul><li>The fetal ductus is held open by PGE₂ and PGI₂</li><li>It should close after birth</li><li>If it stays open: small doses of indomethacin or aspirin</li><li>Closes in most babies within a few hours</li></ul></div>
+  <div class="rcard ex" id="u8"><span class="speed">8 · Prevention of preeclampsia</span><h4>Correcting the TXA₂–PGI₂ balance</h4><ul><li>Excess TXA₂ over PGI₂ is believed to cause pregnancy-induced hypertension and preeclampsia</li><li>Low-dose aspirin is used to prevent it in high-risk women</li></ul></div>
+
+  <div class="clinic">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFCF94" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3c-2 0-3 2-3 4 0 3 1 5 2 8 .6 2 1 5 2.5 5 1.4 0 1.5-3 2.2-5 .3-.9.6-1.3 1.3-1.3s1 .4 1.3 1.3c.7 2 .8 5 2.2 5 1.5 0 1.9-3 2.5-5 1-3 2-5 2-8 0-2-1-4-3-4-1.8 0-2.6 1-5 1S8.8 3 7 3z"/></svg>
+    <div><b>For your clinic</b>NSAIDs in dentistry: irreversible pulpitis, apical periodontitis, acute alveolar abscess, infected cyst, sinusitis, TMJ arthritis, MPDS, after tooth extraction, dry socket, recurrent aphthous ulcers, lichen planus. For post-extraction pain: injectable ketorolac or diclofenac, or an oral propionic acid drug. Piroxicam is also used in dentistry.</div>
+  </div>
+
+  <h3>Paracetamol uses</h3>
+  <div class="card"><ul><li>The most used over-the-counter analgesic: headache, mild migraine, musculoskeletal pain, dysmenorrhoea</li><li>First-choice analgesic in osteoarthritis</li><li>Poor when inflammation dominates, as in RA</li><li>One of the best antipyretics, especially in children</li></ul></div>
+
+  <h3>Flowchart: choosing an NSAID</h3>
+  <div class="flow">
+    <div class="step"><b>Patient needs an analgesic</b></div><div class="arrow">↓<small>check risk factors first</small></div>
+    <div class="step">Child, pregnant, or ulcer history?</div><div class="arrow">↓<small>yes</small></div>
+    <div class="step ok"><b>Paracetamol</b>; in ulcer patients a selective COX-2 inhibitor, plus a PPI if NSAIDs are long-term</div><div class="arrow">↓<small>no</small></div>
+    <div class="step">Asthma or allergy to aspirin?</div><div class="arrow">↓<small>yes</small></div>
+    <div class="step ok"><b>Nimesulide</b> or a <b>COX-2 inhibitor</b></div><div class="arrow">↓<small>no</small></div>
+    <div class="step">Heart attack or stroke risk?</div><div class="arrow">↓<small>yes</small></div>
+    <div class="step hit"><b>Avoid selective COX-2</b>; propionic acid drug or aspirin, lowest dose, shortest time</div><div class="arrow">↓<small>no: choose by the pain</small></div>
+  </div>
+  <div class="rows">
+    <div class="row"><div class="k">Mild pain, little inflammation</div><div>Paracetamol or low-dose ibuprofen</div></div>
+    <div class="row"><div class="k">Post-operative, dental, short-lasting</div><div>Injectable ketorolac or diclofenac, or oral propionic acid drug or nimesulide</div></div>
+    <div class="row"><div class="k">Renal colic, acute gout, fractures</div><div>A parenteral NSAID: ketorolac, diclofenac, ketoprofen, piroxicam, parecoxib</div></div>
+    <div class="row"><div class="k">Flare of RA, spondylitis, gout</div><div>Naproxen, piroxicam, indomethacin</div></div>
+    <div class="row"><div class="k">Acute rheumatic fever</div><div>High-dose aspirin</div></div>
+  </div>
+
+  <h2>Adverse drug reactions</h2>
+  <div class="mnem"><span class="eyebrow">Shared by all NSAIDs</span>
+    <span class="say"><u>S</u>ome <u>B</u>ad <u>K</u>ids <u>L</u>ie <u>W</u>ildly</span>
+    <p>Stomach · Blood · Kidney · Lungs · Womb</p></div>
+  <p>Tap a cloud to jump to its explanation.</p>
+  <div class="mind" aria-label="Mind map of NSAID adverse effects">
+    <button class="cloud r" data-to="a1">Gastric damage</button>
+    <button class="cloud r" data-to="a2">Bleeding</button>
+    <button class="cloud r" data-to="a3">Kidney, edema</button>
+    <button class="cloud r" data-to="a4">Hyper&shy;sensitivity, asthma</button>
+    <div class="cloud center">ADRs of NSAIDs</div>
+    <button class="cloud r" data-to="a5">Pregnancy, labour</button>
+    <button class="cloud r" data-to="a6">Salicylism</button>
+    <button class="cloud r" data-to="a7">Reye's, liver</button>
+    <button class="cloud r" data-to="a8">Poisoning</button>
+  </div>
+
+  <div class="rcard ex bad" id="a1"><span class="speed">1 · Gastric damage</span><h4>The most important adverse effect of aspirin</h4><ul><li>The most important adverse effect of aspirin</li><li>At analgesic doses (0.5–1.5 g/day): epigastric distress, nausea, vomiting, more occult blood in stools</li><li>With continued use: erosive gastritis, peptic ulcer, bleeding, perforation</li><li>Cause: loss of COX-1 gastroprotective PGs, plus ion trapping and H⁺ back-diffusion</li><li>Every NSAID does this, to different extents</li><li>Much less with paracetamol and COX-2 inhibitors</li></ul></div>
+  <div class="rcard ex bad" id="a2"><span class="speed">2 · Bleeding</span><h4>Platelets can't clump</h4><ul><li>Irreversible block of platelet TXA₂</li><li>Bleeding time doubles and stays long for about a week</li><li>Long-term high doses also lower clotting factors</li><li>Profuse gastric bleeding occurs rarely</li><li>Higher risk with anticoagulants and around surgery or extraction</li></ul></div>
+  <div class="rcard ex bad" id="a3"><span class="speed">3 · Kidney</span><h4>Na⁺ and water retention</h4><ul><li>Dose-dependent Na⁺ and water retention → edema</li><li>Raises BP; can precipitate CHF</li><li>Worse in CHF, cirrhosis, hypovolaemia, renal disease and patients on diuretics</li><li>Interstitial nephritis, chronic renal failure</li><li>Papillary necrosis: rare; analgesic nephropathy after years of heavy use</li></ul></div>
+  <div class="rcard ex bad" id="a4"><span class="speed">4 · Hypersensitivity and asthma</span><h4>Not common, but can be serious</h4><ul><li>Rashes, fixed drug eruption, urticaria, rhinorrhoea</li><li>Angioedema, asthma, anaphylactoid reactions</li><li>People who react to aspirin react to chemically unrelated NSAIDs too, so it is not true allergy</li><li>Suspected cause: arachidonic acid diverted to leukotrienes</li><li>Test dose is a must</li></ul></div>
+  <div class="rcard ex bad" id="a5"><span class="speed">5 · Pregnancy and labour</span><h4>Avoid near term</h4><ul><li>Delayed and prolonged labour</li><li>More postpartum haemorrhage</li><li>Premature closure of the fetal ductus arteriosus</li><li>Repeated aspirin in pregnancy may cause low birth weight babies</li><li>Avoid near term</li></ul></div>
+  <div class="rcard ex bad" id="a6"><span class="speed">6 · Salicylism</span><h4>At anti-inflammatory doses, 3–5 g/day</h4><ul><li>Seen at anti-inflammatory doses, 3–5 g/day</li><li>Dizziness, tinnitus, vertigo</li><li>Reversible loss of hearing and vision</li><li>Excitement, mental confusion</li><li>Hyperventilation, electrolyte imbalance</li></ul></div>
+  <div class="rcard ex bad" id="a7"><span class="speed">7 · Reye's syndrome and liver</span><h4>Children with viral infections</h4><ul><li>Aspirin in children with chickenpox or influenza → Reye’s syndrome</li><li>Features: vomiting, liver damage, encephalopathy</li><li>High mortality, about 35%</li><li>So paediatric aspirin formulations are banned in India and the UK</li><li>Raised liver enzymes in children with RA on aspirin</li><li>Long-term high doses can injure the liver in adults too</li></ul></div>
+  <div class="rcard ex bad" id="a8"><span class="speed">8 · Acute salicylate poisoning</span><h4>More common in children</h4><ul><li>More common in children</li><li><b>Fatal dose:</b> 15–30 g in adults, much less in children</li><li><b>Features:</b> vomiting, dehydration, electrolyte imbalance, acidotic breathing</li><li>Hyperpyrexia, high or low blood sugar, petechial haemorrhages</li><li>Restlessness, delirium, hallucinations, convulsions, coma</li><li>Death from respiratory failure and circulatory collapse</li><li><b>Treatment (no antidote):</b> external cooling</li><li>IV fluids with Na⁺, K⁺, HCO₃⁻ and glucose, guided by repeated tests</li><li>Gastric lavage, dialysis</li><li>Vitamin K and blood transfusion if bleeding</li></ul></div>
+
+  <h3>Paracetamol overdose</h3>
+  <div class="flow">
+    <div class="step ok"><b>Normal dose:</b> conjugated with glucuronic acid and sulphate, excreted in urine. Safe and well tolerated; nausea and rashes occasionally, leukopenia rarely.</div><div class="arrow">↓<small>overdose: &gt;150 mg/kg or &gt;10 g in adults; fatal above 250 mg/kg</small></div>
+    <div class="step">Conjugation saturates; more drug goes to the minor pathway; hepatic glutathione runs out</div><div class="arrow">↓</div>
+    <div class="step hit">Toxic metabolite <b>NABQI</b> binds covalently to liver (and kidney tubule) proteins</div><div class="arrow">↓<small>12–18 hours</small></div>
+    <div class="step hit"><b>Centrilobular hepatic necrosis</b>, sometimes renal tubular necrosis and hypoglycaemia; jaundice from day 2</div>
+  </div>
+  <div class="card"><b>Treatment</b><ul><li>Early: induce vomiting or gastric lavage; activated charcoal to stop absorption</li><li>Antidote: <b>N-acetylcysteine</b>, IV or oral. It refills glutathione and stops NABQI binding to liver cells.</li><li>The earlier the better; almost useless if started 16 hours or more after ingestion</li></ul></div>
+  <p style="color:var(--muted);font-size:.9rem">Chronic alcoholics: even 5 g in a day can damage the liver, because alcohol induces CYP2E1, which makes NABQI. Not recommended in premature infants for fear of liver toxicity.</p>
+
+  <h3>Paracetamol: why it's different</h3>
+  <div class="split">
+    <div class="card"><b>Action</b><ul><li>De-ethylated active metabolite of phenacetin</li><li>Raises pain threshold centrally</li><li>Weak COX blocker in tissues, strong in the brain</li><li>Good, quick antipyretic; negligible anti-inflammatory action</li></ul></div>
+    <div class="pro"><h4>Advantages over aspirin</h4><ul><li>Little gastric irritation; usable in ulcer patients</li><li>Doesn't prolong bleeding time</li><li>Hypersensitivity rare</li><li>No metabolic or acid–base disturbance</li><li>All ages, pregnancy, lactation</li><li>Few drug interactions</li></ul></div>
+  </div>
+
+  <h3>Selective COX-2 inhibitors</h3>
+  <div class="split">
+    <div class="pro"><h4>Advantages</h4><ul><li>Little GI ulceration</li><li>No bleeding tendency</li></ul></div>
+    <div class="con"><h4>Disadvantages</h4><ul><li>More heart attacks and strokes</li><li>Kidney COX-2 still blocked: Na⁺ and water retention, edema, high BP, can precipitate CHF</li></ul></div>
+  </div>
+  <div class="paths">
+    <div class="path"><span class="t">Aspirin</span>Blocks COX-1<span class="ar">↓</span><span class="ok">↓ Thromboxane</span><span class="ar">↓</span>Fewer CV events</div>
+    <div class="path"><span class="t">Coxibs</span>Block COX-2<span class="ar">↓</span><span class="hit">↓ Prostacyclin, TXA₂ intact</span><span class="ar">↓</span>More CV events</div>
+  </div>
+
+  <h3>Drug-specific adverse effects</h3>
+  <div class="rows">
+    <div class="row"><div class="k">Indomethacin</div><div>GI and CNS effects in up to 50%: gastric irritation, nausea, anorexia, bleeding, diarrhoea. <b>Frontal headache</b> is very common; dizziness, ataxia, confusion, hallucinations, depression, psychosis. Also leukopenia and rashes.</div></div>
+    <div class="row"><div class="k">Mephenamic acid</div><div><b>Diarrhoea</b> is the main dose-related effect. Epigastric distress, but little gut bleeding. Rashes, dizziness. Haemolytic anaemia: rare but serious.</div></div>
+    <div class="row"><div class="k">Ketorolac</div><div>Nausea, abdominal pain, dyspepsia, ulceration, loose stools, drowsiness, headache, pruritus, pain at injection site, raised liver enzymes, fluid retention. Not beyond 5 days.</div></div>
+    <div class="row"><div class="k">Piroxicam</div><div>More GI effects than ibuprofen; rashes and pruritus in about 1%</div></div>
+    <div class="row"><div class="k">Lornoxicam</div><div>Nausea, abdominal pain, visual disturbances, tinnitus, insomnia</div></div>
+    <div class="row"><div class="k">Nefopam</div><div>Anticholinergic (dry mouth, urinary retention, blurred vision) and sympathomimetic (tachycardia, nervousness) effects; nausea limits the dose. Contraindicated in epilepsy.</div></div>
+  </div>
+
+  <h3>Drug interactions</h3>
+  <div class="rows">
+    <div class="row"><div class="k">Warfarin, sulfonylureas, phenytoin, methotrexate</div><div>Aspirin displaces them from plasma proteins → toxicity (bleeding, hypoglycaemia)</div></div>
+    <div class="row"><div class="k">Oral anticoagulants</div><div>More GI bleeding (antiplatelet action)</div></div>
+    <div class="row"><div class="k">Diuretics (furosemide, thiazides, spironolactone)</div><div>Less diuresis</div></div>
+    <div class="row"><div class="k">β-blockers, ACE inhibitors</div><div>Less antihypertensive effect</div></div>
+    <div class="row"><div class="k">Probenecid</div><div>Aspirin blocks its uricosuric action</div></div>
+    <div class="row"><div class="k">Cyclosporine</div><div>More nephrotoxicity</div></div>
+  </div>
+
+  <h2>Contraindications</h2>
+  <div class="mnem"><span class="eyebrow">All NSAIDs: conditions they worsen</span>
+    <span class="say"><u>P</u>eptic <u>H</u>earts <u>C</u>an't <u>R</u>un <u>H</u>ard</span>
+    <p>Peptic ulcer · Hypertension · CHF · Renal insufficiency · Haemostatic disorders</p></div>
+  <h3>Aspirin</h3>
+  <div class="rows">
+    <div class="row"><div class="k">Absolute</div><div>Aspirin allergy · peptic ulcer · bleeding tendency · children with chickenpox or flu</div></div>
+    <div class="row"><div class="k">Avoid</div><div>Chronic liver disease · diabetes · low cardiac reserve or CHF · juvenile RA · asthma</div></div>
+    <div class="row"><div class="k">Pregnancy and lactation</div><div>Late pregnancy (delayed labour, bleeding, ductus closure) · breastfeeding</div></div>
+    <div class="row"><div class="k">G6PD deficiency</div><div>High doses cause haemolysis</div></div>
+  </div>
+  <div class="clinic">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFCF94" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3c-2 0-3 2-3 4 0 3 1 5 2 8 .6 2 1 5 2.5 5 1.4 0 1.5-3 2.2-5 .3-.9.6-1.3 1.3-1.3s1 .4 1.3 1.3c.7 2 .8 5 2.2 5 1.5 0 1.9-3 2.5-5 1-3 2-5 2-8 0-2-1-4-3-4-1.8 0-2.6 1-5 1S8.8 3 7 3z"/></svg>
+    <div><b>For your clinic</b>Stop aspirin <b>1 week before</b> elective surgery or dental extraction. Its antiplatelet effect lasts that long.</div>
+  </div>
+  <div class="split">
+    <div class="card"><b>Selective COX-2 inhibitors</b>Avoid in heart disease, stroke risk and hypertension.</div>
+    <div class="card"><b>Paracetamol</b>Caution in liver disease and chronic alcoholism.</div>
+  </div>
+
+  <div class="next"><button class="go main" data-jump="cards">Flip 15 flashcards</button><button class="go" data-jump="mcq">17 MCQs</button></div>
+</section>
+<section data-topic="nsaids" data-mode="cards" hidden></section>
+<section data-topic="nsaids" data-mode="mcq" hidden></section>
+
+<!-- ===================== REVIEW ===================== -->
+<section data-topic="review" hidden>
+  <div class="hero">
+    <div class="eyebrow">For the reviewer</div>
+    <h1>Your review</h1>
+    <p class="lede">All review points are resolved. Approved for the website.</p>
+  </div>
+  <div id="reviewList"></div>
+  <h3>Anything else?</h3>
+  <textarea id="generalNote" placeholder="Wrong facts, missing topics, anything hard to read on your phone"></textarea>
+  <div class="copybox"><span class="status" id="copyStatus">0 of 0 checked</span><button class="btn primary" id="copyBtn">Copy feedback</button></div>
+  <pre class="fallback" id="copyFallback" hidden></pre>
+</section>
+
+</div></main>
+
+
+<script>
+(function(){
+[['(prefers-color-scheme: light)','#0B0C1A'],['(prefers-color-scheme: dark)','#0B0C1A']].forEach(function(t){
+  var m=document.createElement('meta');m.name='theme-color';m.media=t[0];m.content=t[1];document.head.appendChild(m)});
+
+document.querySelectorAll('.drugs').forEach(function(el){
+  if(el.children.length) return;
+  var items=el.textContent.split(',').map(function(s){return s.trim()}).filter(Boolean);
+  el.textContent='';
+  items.forEach(function(t){var s=document.createElement('span');s.className='rx';var i=document.createElement('span');i.textContent=t;s.appendChild(i);el.appendChild(s)});
+});
+
+var CARDS={
+nsaids:[
+["Define NSAIDs.","Drugs that relieve pain, fever and inflammation by blocking cyclooxygenase (COX), which stops prostaglandin synthesis. They don't depress the CNS or cause dependence."],
+["What is the mechanism of action of NSAIDs?","They inhibit COX, so arachidonic acid is not converted to prostaglandins and thromboxane A₂."],
+["COX-1 vs COX-2?","COX-1 is constitutive: protects the stomach, keeps renal blood flow, makes platelet TXA₂. COX-2 is inducible: made at injury by cytokines and drives pain, fever and inflammation."],
+["Name the preferential COX-2 inhibitors.","Nice Doctors Always Make Effort: nimesulide, diclofenac, aceclofenac, meloxicam, etodolac."],
+["Why does aspirin's antiplatelet effect last about a week?","It acetylates platelet COX irreversibly. Platelets can't make new enzyme, so the effect lasts until new platelets replace them."],
+["Antiplatelet dose of aspirin?","75–150 mg per day, to prevent MI and stroke."],
+["How long before a dental extraction should aspirin be stopped?","1 week, because of its long antiplatelet (bleeding) effect."],
+["What is salicylism?","Toxicity at anti-inflammatory aspirin doses (3–5 g/day): tinnitus, vertigo, dizziness, reversible hearing and vision loss, hyperventilation."],
+["What is Reye's syndrome?","Vomiting, liver damage and encephalopathy in children given aspirin during a viral illness like chickenpox or flu."],
+["Why do NSAIDs cause peptic ulcer?","They block COX-1, losing gastroprotective PGE₂ and PGI₂, and allow H⁺ back-diffusion into the mucosa."],
+["Why is paracetamol a poor anti-inflammatory?","It blocks COX weakly in tissues but well in the brain, so it lowers pain and fever but not inflammation."],
+["Paracetamol's toxic metabolite and antidote?","NABQI, which causes centrilobular liver necrosis. Antidote: N-acetylcysteine, best within 16 hours."],
+["Why do selective COX-2 inhibitors raise heart attack risk?","They cut vessel-wall prostacyclin but leave platelet thromboxane A₂ intact, tilting the balance towards clotting."],
+["Which NSAID is injected for post-operative dental pain, and for how long can it be used?","Ketorolac, 15–30 mg IM/IV. Not beyond 5 days, because of GI and kidney toxicity."],
+["What is ion trapping of aspirin in the stomach?","Un-ionised in stomach acid, aspirin enters mucosal cells; at the cell's pH 7.1 it ionises and gets trapped, causing focal necrosis and erosions."]
+]};
+
+var MCQ={
+nsaids:[
+["The antidote for paracetamol poisoning is:",["Naloxone","Flumazenil","N-acetylcysteine","Atropine"],2,"It refills liver glutathione, which neutralises NABQI."],
+["Which is a preferential, not selective, COX-2 inhibitor?",["Celecoxib","Etoricoxib","Nimesulide","Ibuprofen"],2,"Celecoxib and etoricoxib are selective coxibs; ibuprofen is non-selective."],
+["Drug of choice for fever in a child with chickenpox:",["Aspirin","Paracetamol","Indomethacin","Mephenamic acid"],1,"Aspirin in a viral illness risks Reye's syndrome."],
+["Aspirin should be stopped before an elective dental extraction by:",["24 hours","3 days","1 week","1 month"],2,"Platelet COX stays blocked for the platelet's lifespan."],
+["The antiplatelet dose of aspirin is:",["75–150 mg/day","0.3–0.6 g 6-hourly","3–5 g/day","75–100 mg/kg/day"],0,"0.3–0.6 g is the analgesic dose; 3–5 g/day is anti-inflammatory."],
+["Which group carries the highest risk of heart attack and stroke?",["Salicylates","Selective COX-2 inhibitors","Propionic acid derivatives","Para-aminophenol"],1,"Coxibs lower prostacyclin while thromboxane A₂ continues."],
+["The most important dose-related side effect of mephenamic acid is:",["Diarrhoea","Tinnitus","Frontal headache","Hepatic necrosis"],0,"Frontal headache is indomethacin; tinnitus is salicylism."],
+["Continuous oral ketorolac should not exceed:",["2 days","5 days","2 weeks","1 month"],1,"Beyond 5 days, GI and kidney toxicity rise."],
+["Paracetamol overdose damages which zone of the liver?",["Periportal","Midzonal","Centrilobular","The whole lobule equally"],2,"NABQI causes centrilobular necrosis 12–18 hours after the overdose."],
+["A patient with a history of peptic ulcer disease needs an NSAID. Which has a relatively lower risk of GI ulceration?",["Indomethacin","Ketorolac","Celecoxib","Piroxicam"],2,"Celecoxib spares COX-1, so gastroprotective PGs are kept. The other three block COX-1 and are quite ulcerogenic."],
+["Which NSAID is commonly used for acute postoperative pain but carries a significant risk of GI bleeding and renal toxicity?",["Ketorolac","Celecoxib","Meloxicam","Etoricoxib"],0,"Ketorolac rivals morphine for postoperative pain, but GI and kidney toxicity limit it to 5 days."],
+["Which NSAID is most likely to cause premature closure of the ductus arteriosus?",["Paracetamol","Indomethacin","Celecoxib","Aspirin"],1,"Indomethacin is the potent COX inhibitor used to close a patent ductus in newborns, so it closes the fetal ductus too. Any NSAID near term, aspirin included, carries this risk."],
+["A patient on warfarin develops GI bleeding after starting an NSAID. Which mechanism contributes most?",["Increased vitamin K synthesis","Increased platelet aggregation","GI mucosal damage and impaired platelet function","Increased thrombin synthesis"],2,"The NSAID erodes the gastric mucosa and blocks platelet TXA₂, on top of warfarin's anticoagulant effect. Aspirin also displaces warfarin from plasma proteins."],
+["A patient taking aspirin develops bronchospasm. What is the most likely mechanism?",["Increased leukotriene synthesis","Increased prostaglandin synthesis","Inhibition of 5-lipoxygenase","Inhibition of phospholipase A₂"],0,"With COX blocked, arachidonic acid is thought to shift to the lipoxygenase pathway, making bronchoconstrictor leukotrienes (LTC₄, LTD₄)."],
+["Which NSAID produces irreversible inhibition of cyclooxygenase?",["Ibuprofen","Diclofenac","Aspirin","Indomethacin"],2,"Aspirin acetylates COX permanently; the others bind reversibly."],
+["Aspirin inhibits platelet aggregation by:",["Reversible inhibition of COX-2","Irreversible inhibition of platelet COX-1","Inhibition of thrombin","Activation of prostacyclin synthesis"],1,"Platelets can't make new COX-1, so TXA₂ stays low for the platelet's lifespan, about a week."],
+["Prostaglandins protect the stomach mainly by:",["Decreasing mucus secretion","Increasing gastric acid secretion","Increasing mucus and bicarbonate secretion","Decreasing mucosal blood flow"],2,"PGE₂ and PGI₂ raise mucus and HCO₃⁻, lower acid and keep mucosal blood flow up."]
+]};
+
+var FLAGS=[];
+
+function buildCards(topic){
+  var sec=document.querySelector('[data-topic="'+topic+'"][data-mode="cards"]');
+  var list=CARDS[topic].slice(), i=0, marks=[];
+  sec.innerHTML='<div class="fc-top"><b style="color:var(--ink-strong)">Flashcards</b><span class="count"></span></div><div class="dots"></div>'+
+    '<button class="fc" aria-label="Flip card"><div class="fc-inner"><div class="face front"><span class="lab">Question</span><div class="q"></div><span class="hint">Tap to reveal</span></div><div class="face back"><span class="lab">Answer</span><div class="a"></div><span class="hint">Tap to flip back</span></div></div></button>'+
+    '<div class="fc-btns"><button class="btn" data-a="again">Again</button><button class="btn primary" data-a="got">Got it</button></div>'+
+    '<div style="display:flex;justify-content:space-between"><button class="btn quiet" data-a="prev">Previous</button><button class="btn quiet" data-a="shuffle">Shuffle</button></div>';
+  var fc=sec.querySelector('.fc'),q=sec.querySelector('.q'),a=sec.querySelector('.a'),c=sec.querySelector('.count'),dots=sec.querySelector('.dots');
+  function show(){fc.classList.remove('flip');q.textContent=list[i][0];a.textContent=list[i][1];c.textContent=(i+1)+' / '+list.length;
+    dots.innerHTML='';list.forEach(function(_,k){var d=document.createElement('i');if(marks[k])d.className=marks[k];else if(k===i)d.className='cur';dots.appendChild(d)})}
+  fc.addEventListener('click',function(){fc.classList.toggle('flip')});
+  sec.addEventListener('click',function(e){var b=e.target.closest('[data-a]');if(!b)return;var act=b.dataset.a;
+    if(act==='got'||act==='again'){marks[i]=act;i=(i+1)%list.length}
+    if(act==='prev')i=(i-1+list.length)%list.length;
+    if(act==='shuffle'){list=list.sort(function(){return Math.random()-.5});i=0;marks=[]}
+    show()});
+  show();
+}
+function buildMcq(topic){
+  var sec=document.querySelector('[data-topic="'+topic+'"][data-mode="mcq"]'),qs=MCQ[topic];
+  var head=document.createElement('div');head.className='mcq-head';
+  head.innerHTML='<b class="count">Score 0 / 0</b><button class="btn" data-reset>Start again</button>';sec.appendChild(head);
+  var box=document.createElement('div');sec.appendChild(box);
+  function render(){var answered=0,right=0;box.innerHTML='';head.querySelector('.count').textContent='Score 0 / 0';
+    qs.forEach(function(item,n){var d=document.createElement('div');d.className='q-card';
+      d.innerHTML='<div class="qn">Question '+(n+1)+' of '+qs.length+'</div><div class="qt"></div>';d.querySelector('.qt').textContent=item[0];
+      item[1].forEach(function(o,k){var b=document.createElement('button');b.className='opt';b.textContent=o;
+        b.addEventListener('click',function(){var opts=d.querySelectorAll('.opt');opts.forEach(function(x){x.disabled=true});
+          opts[item[2]].classList.add('right');if(k!==item[2])b.classList.add('wrong');else right++;answered++;
+          var e=document.createElement('div');e.className='expl';e.textContent=(k===item[2]?'Correct. ':'Not quite. ')+item[3];d.appendChild(e);
+          head.querySelector('.count').textContent='Score '+right+' / '+answered});d.appendChild(b)});
+      box.appendChild(d)})}
+  head.querySelector('[data-reset]').addEventListener('click',render);render();
+}
+['nsaids'].forEach(function(t){buildCards(t);buildMcq(t)});
+
+var KEY='pd-s3-nsaids-review-v3',state={};
+try{state=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){state={}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+var rl=document.getElementById('reviewList');
+FLAGS.forEach(function(f,n){var s=state[f[0]]||{};
+  var d=document.createElement('div');d.className='ri';d.id=f[0];
+  d.innerHTML='<div class="where">Check '+(n+1)+' · '+f[1]+'</div><b></b><p></p><div class="choice"><button class="ok">Correct</button><button class="fix">Needs change</button></div><textarea placeholder="What should it say?"></textarea>';
+  d.querySelector('b').textContent=f[2];d.querySelector('p').textContent=f[3];
+  var ok=d.querySelector('.ok'),fix=d.querySelector('.fix'),ta=d.querySelector('textarea');ta.id='note-'+f[0];ta.value=s.note||'';
+  function paint(){ok.setAttribute('aria-pressed',s.v==='ok');fix.setAttribute('aria-pressed',s.v==='fix');status()}
+  ok.onclick=function(){s.v='ok';state[f[0]]=s;save();paint()};
+  fix.onclick=function(){s.v='fix';state[f[0]]=s;save();paint();ta.focus()};
+  ta.oninput=function(){s.note=ta.value;state[f[0]]=s;save()};
+  rl.appendChild(d);paint()});
+var gn=document.getElementById('generalNote');gn.value=state.general||'';gn.oninput=function(){state.general=gn.value;save()};
+function status(){var c=FLAGS.filter(function(f){return state[f[0]]&&state[f[0]].v}).length;
+  document.getElementById('copyStatus').textContent=c+' of '+FLAGS.length+' checked';
+  document.getElementById('flagCount').textContent=(FLAGS.length-c)?String(FLAGS.length-c):'✓'}
+document.getElementById('copyBtn').onclick=function(){
+  var lines=['PharmDaily NSAIDs review (final)',''];
+  FLAGS.forEach(function(f,n){var s=state[f[0]]||{};lines.push((n+1)+'. '+f[2]+': '+(s.v==='ok'?'Correct':s.v==='fix'?'Needs change':'Not checked')+(s.note?' — '+s.note:''))});
+  if(state.general)lines.push('','Other notes: '+state.general);
+  var txt=lines.join('\n'),st=document.getElementById('copyStatus'),fb=document.getElementById('copyFallback');
+  function fallback(){fb.hidden=false;fb.textContent=txt;var r=document.createRange();r.selectNodeContents(fb);var sel=getSelection();sel.removeAllRanges();sel.addRange(r);st.textContent='Copy the selected text below'}
+  try{navigator.clipboard.writeText(txt).then(function(){st.textContent='Copied. Paste it in WhatsApp.'},fallback)}catch(e){fallback()}
+};
+
+var LABELS={'Mechanism of action':'Mechanism','Pharmacological actions':'Actions','Routes of administration':'Routes','Therapeutic uses':'Uses','Adverse drug reactions':'ADRs'};
+var toc=document.getElementById('toc'),hdr=document.querySelector('header'),heads=[];
+document.querySelectorAll('[data-topic="nsaids"][data-mode="notes"] h2').forEach(function(h,n){
+  h.id='sec-'+(n+1);heads.push(h);
+  var a=document.createElement('a');a.href='#'+h.id;a.textContent=LABELS[h.textContent]||h.textContent;
+  a.addEventListener('click',function(e){e.preventDefault();h.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'})});
+  toc.appendChild(a)});
+function setHdr(){document.documentElement.style.setProperty('--hdr',(hdr.offsetHeight+12)+'px')}
+function spy(){if(toc.hidden)return;var lim=hdr.offsetHeight+24,cur=0;
+  heads.forEach(function(h,k){if(h.getBoundingClientRect().top<=lim)cur=k});
+  toc.querySelectorAll('a').forEach(function(a,k){var on=k===cur;if(on!==a.classList.contains('on')){a.classList.toggle('on',on);
+    if(on)toc.scrollTo({left:a.offsetLeft-toc.clientWidth/2+a.offsetWidth/2,behavior:'smooth'})}})}
+window.addEventListener('scroll',spy,{passive:true});window.addEventListener('resize',function(){setHdr();spy()});
+
+function drawMinds(){document.querySelectorAll('.mind').forEach(function(m){
+  var svg=m.querySelector('svg.links');if(!svg){svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('class','links');svg.setAttribute('aria-hidden','true');m.insertBefore(svg,m.firstChild)}
+  svg.innerHTML='';var W=m.offsetWidth,H=m.offsetHeight;if(!W)return;svg.setAttribute('width',W);svg.setAttribute('height',H);svg.setAttribute('viewBox','0 0 '+W+' '+H);
+  var r=m.getBoundingClientRect(),c=m.querySelector('.center').getBoundingClientRect(),cx=c.left+c.width/2-r.left,cy=c.top+c.height/2-r.top;
+  m.querySelectorAll('.cloud:not(.center)').forEach(function(n){var b=n.getBoundingClientRect();
+    var l=document.createElementNS('http://www.w3.org/2000/svg','line');l.setAttribute('x1',cx);l.setAttribute('y1',cy);l.setAttribute('x2',b.left+b.width/2-r.left);l.setAttribute('y2',b.top+b.height/2-r.top);
+    l.setAttribute('stroke','rgba(255,255,255,.22)');l.setAttribute('stroke-width','1.5');l.setAttribute('stroke-dasharray','4 4');svg.appendChild(l)})})}
+document.addEventListener('click',function(e){var c=e.target.closest('[data-to]');if(!c)return;var t=document.getElementById(c.dataset.to);if(!t)return;
+  t.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});t.classList.add('hl');setTimeout(function(){t.classList.remove('hl')},1600)});
+window.addEventListener('resize',drawMinds);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(drawMinds);
+
+var TOPICS=['nsaids','review'],mode='notes',topic='nsaids',modes=document.getElementById('modes');
+function apply(){document.querySelectorAll('main section').forEach(function(s){var t=s.dataset.topic,m=s.dataset.mode;
+    s.hidden=topic==='review'?t!=='review':!(t===topic&&m===mode)});
+  modes.hidden=topic==='review';toc.hidden=!(topic==='nsaids'&&mode==='notes');setHdr();spy();drawMinds();
+  document.querySelectorAll('.pills a').forEach(function(a){a.removeAttribute('aria-current');if(a.dataset.t===topic)a.setAttribute('aria-current','page')});
+  modes.querySelectorAll('button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.m===mode)})}
+function fromHash(){var h=location.hash.slice(1);topic=TOPICS.indexOf(h)>-1?h:'nsaids';apply()}
+modes.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;mode=b.dataset.m;apply();window.scrollTo(0,0)});
+document.addEventListener('click',function(e){var j=e.target.closest('[data-jump]');if(j){mode=j.dataset.jump;apply();window.scrollTo(0,0);return}
+  var a=e.target.closest('[data-go]');if(!a)return;setTimeout(function(){var t=document.getElementById(a.dataset.go);if(t)t.scrollIntoView({behavior:'smooth'})},60)});
+window.addEventListener('hashchange',function(){fromHash();window.scrollTo(0,0)});
+fromHash();
+})();
+</script>

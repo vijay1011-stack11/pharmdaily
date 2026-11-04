@@ -24,7 +24,13 @@ export const SECTIONS: Section[] = [
     ],
   },
   { n: 2, title: 'Autonomic Nervous System', topics: [] },
-  { n: 3, title: 'Autacoids and NSAIDs', topics: [] },
+  {
+    n: 3,
+    title: 'Autacoids and NSAIDs',
+    topics: [
+      { slug: 'nsaids', title: 'NSAIDs and antipyretic-analgesics', short: 'NSAIDs' },
+    ],
+  },
   { n: 4, title: 'Respiratory System', topics: [] },
   { n: 5, title: 'Hormones', topics: [] },
   { n: 6, title: 'Peripheral Nervous System (Local Anaesthetics)', topics: [] },

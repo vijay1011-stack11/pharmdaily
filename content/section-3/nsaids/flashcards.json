@@ -1,0 +1,62 @@
+[
+  {
+    "q": "Define NSAIDs.",
+    "a": "Drugs that relieve pain, fever and inflammation by blocking cyclooxygenase (COX), which stops prostaglandin synthesis. They don't depress the CNS or cause dependence."
+  },
+  {
+    "q": "What is the mechanism of action of NSAIDs?",
+    "a": "They inhibit COX, so arachidonic acid is not converted to prostaglandins and thromboxane A₂."
+  },
+  {
+    "q": "COX-1 vs COX-2?",
+    "a": "COX-1 is constitutive: protects the stomach, keeps renal blood flow, makes platelet TXA₂. COX-2 is inducible: made at injury by cytokines and drives pain, fever and inflammation."
+  },
+  {
+    "q": "Name the preferential COX-2 inhibitors.",
+    "a": "Nice Doctors Always Make Effort: nimesulide, diclofenac, aceclofenac, meloxicam, etodolac."
+  },
+  {
+    "q": "Why does aspirin's antiplatelet effect last about a week?",
+    "a": "It acetylates platelet COX irreversibly. Platelets can't make new enzyme, so the effect lasts until new platelets replace them."
+  },
+  {
+    "q": "Antiplatelet dose of aspirin?",
+    "a": "75–150 mg per day, to prevent MI and stroke."
+  },
+  {
+    "q": "How long before a dental extraction should aspirin be stopped?",
+    "a": "1 week, because of its long antiplatelet (bleeding) effect."
+  },
+  {
+    "q": "What is salicylism?",
+    "a": "Toxicity at anti-inflammatory aspirin doses (3–5 g/day): tinnitus, vertigo, dizziness, reversible hearing and vision loss, hyperventilation."
+  },
+  {
+    "q": "What is Reye's syndrome?",
+    "a": "Vomiting, liver damage and encephalopathy in children given aspirin during a viral illness like chickenpox or flu."
+  },
+  {
+    "q": "Why do NSAIDs cause peptic ulcer?",
+    "a": "They block COX-1, losing gastroprotective PGE₂ and PGI₂, and allow H⁺ back-diffusion into the mucosa."
+  },
+  {
+    "q": "Why is paracetamol a poor anti-inflammatory?",
+    "a": "It blocks COX weakly in tissues but well in the brain, so it lowers pain and fever but not inflammation."
+  },
+  {
+    "q": "Paracetamol's toxic metabolite and antidote?",
+    "a": "NABQI, which causes centrilobular liver necrosis. Antidote: N-acetylcysteine, best within 16 hours."
+  },
+  {
+    "q": "Why do selective COX-2 inhibitors raise heart attack risk?",
+    "a": "They cut vessel-wall prostacyclin but leave platelet thromboxane A₂ intact, tilting the balance towards clotting."
+  },
+  {
+    "q": "Which NSAID is injected for post-operative dental pain, and for how long can it be used?",
+    "a": "Ketorolac, 15–30 mg IM/IV. Not beyond 5 days, because of GI and kidney toxicity."
+  },
+  {
+    "q": "What is ion trapping of aspirin in the stomach?",
+    "a": "Un-ionised in stomach acid, aspirin enters mucosal cells; at the cell's pH 7.1 it ionises and gets trapped, causing focal necrosis and erosions."
+  }
+]
