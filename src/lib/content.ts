@@ -40,6 +40,16 @@ function enhance(root: HTMLElement) {
     const items = el.text.split(',').map((s) => s.trim()).filter(Boolean);
     el.replaceWith(`<ul class="chips">${items.map((t) => `<li class="chip">${escapeHtml(t)}</li>`).join('')}</ul>`);
   }
+  // Mind maps: the review page's jump buttons become plain in-page links (no script needed),
+  // and the dashed spokes are drawn by a static SVG behind the 3 x 3 grid.
+  for (const el of root.querySelectorAll('.cloud[data-to]')) {
+    el.replaceWith(`<a class="${el.getAttribute('class')}" href="#${el.getAttribute('data-to')}">${el.innerHTML}</a>`);
+  }
+  for (const el of root.querySelectorAll('.mind')) {
+    const spokes = [[1, 1], [3, 1], [5, 1], [1, 3], [5, 3], [1, 5], [3, 5], [5, 5]]
+      .map(([x, y]) => `<line x1="3" y1="3" x2="${x}" y2="${y}"/>`).join('');
+    el.insertAdjacentHTML('afterbegin', `<svg class="spokes" viewBox="0 0 6 6" preserveAspectRatio="none" aria-hidden="true">${spokes}</svg>`);
+  }
   // Clinic callouts get an icon and an aside role.
   for (const el of root.querySelectorAll('.clinic')) {
     el.tagName = 'aside';
