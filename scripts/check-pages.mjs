@@ -16,11 +16,11 @@ const VERCEL_HEADERS = Object.fromEntries(
 );
 
 const BASE = process.env.BASE ?? 'http://localhost:4321';
-const PAGES = ['/', '/section-1/', '/section-1/routes-of-administration/', '/section-1/pharmacokinetics/', '/section-1/pharmacodynamics/', '/about/', '/privacy/', '/404'];
+const PAGES = ['/', '/section-1/', '/section-1/routes-of-administration/', '/section-1/pharmacokinetics/', '/section-1/pharmacodynamics/', '/section-3/', '/section-3/nsaids/', '/about/', '/privacy/', '/404'];
 const SIZES = [{ name: 'phone', width: 390, height: 844 }, { name: 'desktop', width: 1280, height: 800 }];
 mkdirSync('screenshots', { recursive: true });
 
-const browser = await chromium.launch();
+const browser = await chromium.launch(process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : {});
 let problems = 0;
 const say = (ok, msg) => { if (!ok) problems++; console.log(`${ok ? '✓' : '✗'} ${msg}`); };
 
