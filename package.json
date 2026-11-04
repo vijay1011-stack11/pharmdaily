@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Free diagram-based pharmacology notes, flashcards and MCQs for BDS students",
+  "description": "Free diagram-based pharmacology notes, flashcards and MCQs for BDS and MBBS students",
   "engines": {
     "node": ">=22"
   },

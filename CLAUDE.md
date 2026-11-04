@@ -1,6 +1,6 @@
 # PharmDaily
 
-Free pharmacology revision site for BDS (dental) students. Diagram notes, flashcards and MCQs, built on KD Tripathi's *Essentials of Medical Pharmacology*.
+Free pharmacology revision site for BDS (dental) and MBBS students. Every topic is written for both courses. Diagram notes, flashcards and MCQs, built on KD Tripathi's *Essentials of Medical Pharmacology*.
 
 - **Developer:** Vijay. Also a portfolio project for his MS application, so commit history and code quality matter.
 - **Content reviewer:** a BDS 3rd-year student. She checks everything on her phone. Nothing goes live without her approval.
@@ -54,7 +54,7 @@ All visual design (colours, type, layout, components, motion) comes from the `ui
 - Never copy textbook text or figures. Rewrite in plain words and redraw all diagrams.
 - Anything added from the textbook (not in her notes) carries the `KDT` tag. Anything uncertain or conflicting gets a review flag. Never guess a fact.
 - Per topic: at least 10 flashcards and at least 10 MCQs (4 options, one short explanation); larger topics may have more.
-- BDS focus: give dental relevance extra weight (local anaesthetics, analgesics, antimicrobials).
+- Build every topic for both BDS and MBBS: one shared core, an "MBBS extras" box where MBBS needs more depth, and dental relevance (local anaesthetics, analgesics, antimicrobials) marked "For your clinic". MBBS extras need an MBBS reviewer's approval before going live.
 - Before a topic goes live: its review flags are resolved and the reviewer has approved it. In the live site, hide the `KDT` tags and the review UI (they're for review copies only), unless Vijay says otherwise.
 
 ## Section order

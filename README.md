@@ -1,6 +1,6 @@
 # PharmDaily
 
-Free diagram-based pharmacology notes, flashcards and MCQs for BDS students. Built with Astro as a static site; notes pages ship no JavaScript beyond the tab switcher.
+Free diagram-based pharmacology notes, flashcards and MCQs for BDS and MBBS students. Built with Astro as a static site; notes pages ship no JavaScript beyond the tab switcher.
 
 ## Commands
 

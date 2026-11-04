@@ -9,7 +9,7 @@ interface Props {
   title: string;
   description?: string;
 }
-const { title, description = 'Free pharmacology revision for BDS students: diagram notes, flashcards and MCQs.' } = Astro.props;
+const { title, description = 'Free pharmacology revision for BDS and MBBS students: diagram notes, flashcards and MCQs.' } = Astro.props;
 const fullTitle = title === 'PharmDaily' ? title : `${title} · PharmDaily`;
 ---
 <!doctype html>
