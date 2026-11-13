@@ -1,19 +1,33 @@
 ---
+import { SITE } from '../lib/site';
 ---
 <footer class="site-footer">
   <div class="wrap inner">
-    <p class="line"><b>PharmDaily</b> · Free pharmacology revision for BDS &amp; MBBS students. No ads, no sign-in.</p>
-    <nav aria-label="Footer">
-      <a href="/about/">About</a>
-      <a href="/privacy/">Privacy</a>
-    </nav>
+    <p class="disclaimer"><b>{SITE.disclaimer}</b></p>
+    <p class="line"><b>{SITE.name}</b> · Free pharmacology revision for BDS &amp; MBBS students. No ads, no sign-in.</p>
+    <p class="line">
+      Built by {SITE.author} ·
+      <a href={SITE.github} rel="noopener">GitHub</a> ·
+      <a href={SITE.linkedin} rel="noopener">LinkedIn</a>
+    </p>
+    <div class="bottom">
+      <p class="line">© {SITE.year} {SITE.name} · <a href={`mailto:${SITE.email}`}>{SITE.email}</a></p>
+      <nav aria-label="Footer">
+        <a href="/about/">About</a>
+        <a href="/privacy/">Privacy</a>
+      </nav>
+    </div>
   </div>
 </footer>
 
 <style>
   .site-footer { margin-top: 64px; border-top: 1px solid var(--line); background: var(--surface); padding-bottom: env(safe-area-inset-bottom); }
-  .inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 24px; padding-top: 16px; padding-bottom: 20px; }
-  .line { margin: 0; font-size: 0.88rem; color: var(--muted); }
+  .inner { display: flex; flex-direction: column; gap: 6px; padding-top: 16px; padding-bottom: 20px; }
+  .disclaimer { margin: 0 0 6px; padding: 10px 12px; border-left: 3px solid var(--primary); background: var(--primary-soft); border-radius: 0 var(--radius) var(--radius) 0; font-size: 0.88rem; color: var(--heading); }
+  .disclaimer b { font-weight: 600; }
+  .line { margin: 0; font-size: 0.88rem; color: var(--muted); overflow-wrap: anywhere; }
+  .line a { color: var(--fg); font-weight: 550; display: inline-flex; align-items: center; min-height: 44px; }
+  .bottom { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0 24px; }
   nav { display: flex; gap: 4px; margin-left: -12px; }
   nav a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 12px; color: var(--fg); font-size: 0.9rem; font-weight: 550; }
 </style>
