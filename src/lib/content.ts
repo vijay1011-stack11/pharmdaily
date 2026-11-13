@@ -50,6 +50,14 @@ function enhance(root: HTMLElement) {
       .map(([x, y]) => `<line x1="3" y1="3" x2="${x}" y2="${y}"/>`).join('');
     el.insertAdjacentHTML('afterbegin', `<svg class="spokes" viewBox="0 0 6 6" preserveAspectRatio="none" aria-hidden="true">${spokes}</svg>`);
   }
+  // Text diagrams: hide the drawn arrow and cross glyphs from screen readers, so a flowchart
+  // reads as "Membrane phospholipids, phospholipase A2, Arachidonic acid" instead of
+  // "down arrow" between every step. Arrow labels (<small>) and "+" stay readable.
+  for (const el of root.querySelectorAll('.arrow, .ar, .path .hit')) {
+    const html = el.innerHTML;
+    const m = html.match(/^(\s*)([↓↑→←✕]+)/);
+    if (m) el.set_content(`${m[1]}<span aria-hidden="true">${m[2]}</span>${html.slice(m[0].length)}`);
+  }
   // Clinic callouts get an icon and an aside role.
   for (const el of root.querySelectorAll('.clinic')) {
     el.tagName = 'aside';
