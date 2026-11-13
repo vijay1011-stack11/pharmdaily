@@ -1,10 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../lib/site';
 ---
 <BaseLayout title="Privacy" description="PharmDaily privacy policy: no accounts, no cookies, cookieless anonymous analytics only.">
   <article class="wrap measure page">
     <p class="eyebrow">Privacy</p>
     <h1>Privacy policy</h1>
+    <p class="updated">Effective date: 13 November 2026 · Last updated: 13 November 2026</p>
     <p class="credit">Short version: no accounts, no cookies, and only anonymous visit counts.</p>
     <h2>No accounts</h2>
     <p>There is no sign-in. We never ask for your name, email or phone number.</p>
@@ -18,5 +20,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <p>Fonts are served from this site, not from a third party. The site is hosted on Vercel, which processes standard web requests to deliver the pages.</p>
     <h2>No ads</h2>
     <p>There are no ads and no other trackers.</p>
+    <h2>Contact</h2>
+    <p>Questions about privacy, or anything else: <a href={`mailto:${SITE.email}`}>{SITE.email}</a>. If you email us, we use your address only to reply to you.</p>
+    <h2>Changes</h2>
+    <p>If this policy changes, the new version will be posted on this page with a new "Last updated" date.</p>
   </article>
 </BaseLayout>

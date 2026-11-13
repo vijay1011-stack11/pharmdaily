@@ -370,4 +370,5 @@ a.cloud:active { transform: scale(0.97); }
 .page h1 { font-size: clamp(1.9rem, 6vw, 2.6rem); font-weight: 800; letter-spacing: -0.03em; margin-top: 8px; }
 .page h2 { font-size: 1.2rem; margin-top: 2rem; }
 .page .credit { font-size: 1.08rem; color: var(--heading); padding: 14px 16px; margin-top: 16px; border-left: 3px solid var(--primary); background: var(--primary-soft); border-radius: 0 var(--radius) var(--radius) 0; }
+.updated { margin: 8px 0 0; font-size: 0.88rem; color: var(--muted); }
 html:not(.js) .tabbar { display: none; }

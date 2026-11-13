@@ -1,17 +1,29 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../lib/site';
 ---
 <BaseLayout title="About" description="About PharmDaily: free pharmacology revision for BDS and MBBS students.">
   <article class="wrap measure page">
     <p class="eyebrow">About</p>
     <h1>About PharmDaily</h1>
-    <p class="credit">Based on college notes and KD Tripathi's Essentials of Medical Pharmacology. Reviewed by a BDS student.</p>
+    <p class="credit">Built by {SITE.author}. Content reviewed by {SITE.reviewer}.</p>
     <h2>What it is</h2>
     <p>A free revision site for BDS and MBBS students. Each topic has diagram notes, flashcards and MCQs, and it is built to work well on a phone on mobile data.</p>
     <h2>How the content is made</h2>
     <p>Every topic starts from college notes and is checked against the textbook. Wording is rewritten in plain language and every diagram is redrawn; nothing is copied from the book. A topic only goes live after it has been reviewed and approved.</p>
     <p>Points that matter in the dental clinic are marked <b>For your clinic</b>.</p>
+    <h2>Sources and attribution</h2>
+    <p>Original notes written in our own words. {SITE.textbook} used as reference. Not affiliated with the author or publisher.</p>
+    <h2>Medical disclaimer</h2>
+    <p>PharmDaily is for exam revision only. It is not clinical guidance and must not be used to diagnose, treat or prescribe for any patient.</p>
+    <p>Doses and drug details are given as they appear in standard undergraduate textbooks, to help you prepare for exams. They may not match current prescribing information, local guidelines or a particular patient's needs. Always check a current formulary or the official product information before prescribing.</p>
+    <p>We check every topic carefully, but mistakes can slip through. If you spot one, please email us.</p>
+    <h2>Who made it</h2>
+    <p>PharmDaily is designed and built by {SITE.author}, a computer science student. Find him on <a href={SITE.github} rel="noopener">GitHub</a> and <a href={SITE.linkedin} rel="noopener">LinkedIn</a>.</p>
+    <p>Every topic is reviewed by {SITE.reviewer}, before it goes live.</p>
     <h2>Free, with no catch</h2>
     <p>No ads, no payments, no sign-in. See the <a href="/privacy/">privacy policy</a> for what is and isn't collected.</p>
+    <h2>Contact</h2>
+    <p>Corrections, questions or feedback: <a href={`mailto:${SITE.email}`}>{SITE.email}</a></p>
   </article>
 </BaseLayout>
