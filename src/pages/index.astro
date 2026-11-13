@@ -1,9 +1,11 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { SECTIONS, isLive, sectionPath } from '../lib/sections';
+import { SECTIONS, isLive, sectionPath, plural } from '../lib/sections';
 import { getFlashcards, getMcqs } from '../lib/content';
 
 const first = SECTIONS.find(isLive)!;
+const live = SECTIONS.filter(isLive);
+const next = SECTIONS.filter((s) => !isLive(s) && s.planned);
 const totals = (n: number) =>
   SECTIONS.find((s) => s.n === n)!.topics.reduce(
     (acc, t) => ({ cards: acc.cards + getFlashcards(n, t.slug).length, mcqs: acc.mcqs + getMcqs(n, t.slug).length }),
@@ -24,34 +26,45 @@ const totals = (n: number) =>
   <section id="sections" class="wrap block" aria-labelledby="sections-h">
     <div class="block-head">
       <h2 id="sections-h">Sections</h2>
-      <p>14 sections in syllabus order. New ones open after review.</p>
+      <p>{live.length} of {SECTIONS.length} sections live. New ones open after review.</p>
     </div>
     <ol class="sections">
-      {SECTIONS.map((s) => {
-        const live = isLive(s);
-        const t = live ? totals(s.n) : null;
+      {live.map((s) => {
+        const t = totals(s.n);
         return (
-          <li class:list={['sec', { live }]}>
-            {live ? (
-              <a class="sec-link press" href={sectionPath(s)}>
-                <span class="num tabular">{String(s.n).padStart(2, '0')}</span>
-                <span class="body">
-                  <span class="name">{s.title}</span>
-                  <span class="meta tabular">{s.topics.length} topics · {t!.cards} flashcards · {t!.mcqs} MCQs</span>
-                </span>
-                <svg class="go" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
-              </a>
-            ) : (
-              <div class="sec-link">
-                <span class="num tabular">{String(s.n).padStart(2, '0')}</span>
-                <span class="body"><span class="name">{s.title}</span></span>
-                <span class="soon">Soon</span>
-              </div>
-            )}
+          <li class="sec live">
+            <a class="sec-link press" href={sectionPath(s)}>
+              <span class="num tabular">{String(s.n).padStart(2, '0')}</span>
+              <span class="body">
+                <span class="name">{s.title}</span>
+                <span class="meta tabular">{plural(s.topics.length, 'topic')} · {plural(t.cards, 'flashcard')} · {plural(t.mcqs, 'MCQ')}</span>
+              </span>
+              <svg class="go" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+            </a>
           </li>
         );
       })}
     </ol>
+    {next.length > 0 && (
+      <p class="roadmap">
+        <b>Next:</b>{' '}
+        {next.map((s, i) => (
+          <>{i > 0 && ' · '}<span>Section {s.n} ({s.title}) – {s.planned}</span></>
+        ))}
+      </p>
+    )}
+    <details class="all">
+      <summary>All {SECTIONS.length} sections in syllabus order</summary>
+      <ol class="upcoming">
+        {SECTIONS.map((s) => (
+          <li>
+            <span class="num tabular">{String(s.n).padStart(2, '0')}</span>
+            {isLive(s) ? <a href={sectionPath(s)}>{s.title}</a> : <span>{s.title}</span>}
+            <span class="status">{isLive(s) ? 'Live' : s.planned ?? 'Soon'}</span>
+          </li>
+        ))}
+      </ol>
+    </details>
   </section>
 
   <section class="wrap block" aria-labelledby="how-h">
@@ -104,7 +117,14 @@ const totals = (n: number) =>
   .live .name { font-weight: 700; }
   .meta { font-size: 0.82rem; color: var(--muted); margin-top: 2px; }
   .go { color: var(--primary-ink); }
-  .soon { font-size: 0.75rem; font-weight: 600; color: var(--faint); border: 1px solid var(--line); border-radius: 999px; padding: 1px 9px; }
+  .roadmap { margin: 16px 0 0; font-size: 0.95rem; color: var(--muted); }
+  .roadmap b { color: var(--heading); }
+  .all { margin-top: 12px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
+  .all summary { min-height: 48px; display: flex; align-items: center; padding: 0 16px; font-weight: 650; font-size: 0.92rem; color: var(--heading); cursor: pointer; }
+  .upcoming { list-style: none; margin: 0; padding: 0 16px 8px; }
+  .upcoming li { display: grid; grid-template-columns: 34px minmax(0, 1fr) auto; align-items: center; gap: 12px; min-height: 44px; border-top: 1px solid var(--line); font-size: 0.92rem; color: var(--muted); }
+  .upcoming a { color: var(--heading); font-weight: 650; display: inline-flex; align-items: center; min-height: 44px; }
+  .status { font-size: 0.75rem; font-weight: 600; color: var(--faint); }
   @media (hover: hover) and (pointer: fine) { a.sec-link:hover .name { color: var(--primary-ink); } }
 
   .how { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: minmax(0, 1fr); }

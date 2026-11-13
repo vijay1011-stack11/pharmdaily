@@ -33,7 +33,7 @@ content/section-<n>/review-flags.json   # reviewer's open questions, if any; del
 
 ## Site structure (v1)
 
-- `/` Home: hero, list of all 14 sections (live ones link, others say "Soon"), how a topic works, footer.
+- `/` Home: hero, live sections, a "Next:" roadmap line (from `planned` in `sections.ts`), a collapsed list of all 14 sections, how a topic works, footer.
 - `/section-1/` Section page: its topics.
 - `/section-1/<topic>/` Topic: Notes / Flashcards / MCQs as three tabs on one page.
 - `/privacy/`, `/about/`.

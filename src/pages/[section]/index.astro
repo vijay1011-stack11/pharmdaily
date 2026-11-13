@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { SECTIONS, isLive, topicPath, type Section } from '../../lib/sections';
+import { SECTIONS, isLive, topicPath, type Section, plural } from '../../lib/sections';
 import { getFlashcards, getMcqs, getNotes } from '../../lib/content';
 
 export function getStaticPaths() {
@@ -20,7 +20,7 @@ const topics = s.topics.map((t) => ({
     <header class="head">
       <p class="eyebrow">Section {s.n}</p>
       <h1>{s.title}</h1>
-      <p class="sub">{s.topics.length} topics. Read the notes first, then test yourself.</p>
+      <p class="sub">{plural(s.topics.length, 'topic')}. Read the notes first, then test yourself.</p>
     </header>
     <ol class="topics">
       {topics.map(({ t, hero, cards, mcqs }, i) => (
@@ -31,7 +31,7 @@ const topics = s.topics.map((t) => ({
               <span class="title">{t.title}</span>
               <span class="h">{hero.title}</span>
               <span class="lede" set:html={hero.lede} />
-              <span class="counts tabular"><span>Notes</span><span>{cards} flashcards</span><span>{mcqs} MCQs</span></span>
+              <span class="counts tabular"><span>Notes</span><span>{plural(cards, 'flashcard')}</span><span>{plural(mcqs, 'MCQ')}</span></span>
             </span>
           </a>
         </li>
