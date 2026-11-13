@@ -29,7 +29,16 @@ const letters = ['A', 'B', 'C', 'D'];
       </li>
     ))}
   </ol>
-  <noscript><p class="noscript">MCQs need JavaScript to check your answers.</p></noscript>
+  <noscript>
+    <details class="key">
+      <summary>Answer key</summary>
+      <ol>
+        {items.map((m) => (
+          <li><b>{letters[m.answer]}. {m.options[m.answer]}</b>. {m.explanation}</li>
+        ))}
+      </ol>
+    </details>
+  </noscript>
 </div>
 
 <script>
@@ -113,5 +122,8 @@ const letters = ['A', 'B', 'C', 'D'];
   .result { margin: 12px 0 0; padding: 10px 12px; border-radius: 10px; font-size: 0.93rem; background: var(--surface-2); }
   .result.is-right { border-left: 3px solid var(--good); }
   .result.is-wrong { border-left: 3px solid var(--bad); }
-  .noscript { color: var(--muted); font-size: 0.9rem; }
+  .key { margin-top: 16px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
+  .key summary { min-height: 48px; display: flex; align-items: center; padding: 0 16px; font-weight: 650; cursor: pointer; color: var(--heading); }
+  .key ol { margin: 0; padding: 0 16px 12px 40px; font-size: 0.92rem; }
+  .key li { margin-top: 8px; }
 </style>
