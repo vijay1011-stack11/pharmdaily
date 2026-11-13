@@ -8,7 +8,7 @@ Free pharmacology revision site for BDS (dental) and MBBS students. Every topic 
 ## v1 scope. Do not add anything beyond this without asking Vijay.
 
 - No sign-in, no accounts, no database. Notes are static files in this repo.
-- No custom domain yet. Use the free `*.vercel.app` address.
+- Custom domain: `www.pharmdaily.in` (apex redirects to www). `pharmdaily.vercel.app` still works.
 - Free and non-commercial: no ads, no payments. (Required by the Vercel Hobby plan.)
 - Flashcard and MCQ progress is saved only in the student's browser (`localStorage`, wrapped in try/catch).
 - A simple privacy policy page: no accounts, no cookies, cookieless anonymous analytics only.
