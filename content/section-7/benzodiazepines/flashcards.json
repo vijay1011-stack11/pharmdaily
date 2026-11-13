@@ -1,0 +1,62 @@
+[
+  {
+    "q": "Mechanism of action of benzodiazepines?",
+    "a": "Bind the GABA-A–benzodiazepine receptor–Cl⁻ channel complex → potentiate GABA → ↑ frequency of Cl⁻ channel opening → hyperpolarisation → CNS depression."
+  },
+  {
+    "q": "Benzodiazepines vs barbiturates at the Cl⁻ channel?",
+    "a": "Benzodiazepines increase the frequency of opening. Barbiturates increase the duration of opening, and at high doses open the channel directly."
+  },
+  {
+    "q": "Why do benzodiazepines have a low ceiling effect?",
+    "a": "They only help GABA; they don't open the Cl⁻ channel by themselves (no GABA-mimetic action)."
+  },
+  {
+    "q": "Where on the GABA-A receptor do benzodiazepines bind?",
+    "a": "At the interface of the α and γ subunits. GABA binds the β subunit."
+  },
+  {
+    "q": "Effect of benzodiazepines on sleep stages?",
+    "a": "↑ Stage 2; ↓ stages 3 and 4; ↓ REM; ↓ sleep latency and night awakenings; ↑ total sleep time."
+  },
+  {
+    "q": "Advantages of benzodiazepines over barbiturates?",
+    "a": "Wide therapeutic index, deep refreshing sleep, little respiratory or cardiovascular effect at hypnotic doses, no enzyme induction, lower abuse liability, specific antidote flumazenil."
+  },
+  {
+    "q": "What is dental (conscious) sedation?",
+    "a": "Sedation that relieves anxiety and pain while the patient keeps a patent airway and responds to verbal commands."
+  },
+  {
+    "q": "Drugs for dental sedation?",
+    "a": "IV: midazolam, diazepam. Oral: midazolam, diazepam, nitrazepam. Inhalation: nitrous oxide."
+  },
+  {
+    "q": "What is bruxism and which benzodiazepine treats it?",
+    "a": "Grinding of teeth with jaw clenching. Diazepam."
+  },
+  {
+    "q": "Benzodiazepines for status epilepticus?",
+    "a": "IV lorazepam, IV or rectal diazepam."
+  },
+  {
+    "q": "Which benzodiazepine has no active metabolite and reliable IM absorption?",
+    "a": "Lorazepam."
+  },
+  {
+    "q": "Which benzodiazepine is unsuitable for the elderly because of next-day sedation?",
+    "a": "Flurazepam (very long t½; builds up over 3–5 days)."
+  },
+  {
+    "q": "Withdrawal symptoms of benzodiazepines?",
+    "a": "Rebound insomnia, dysphoria, irritability, bad dreams, tremors, restlessness, anxiety. Taper the dose when stopping."
+  },
+  {
+    "q": "What is floppy infant syndrome?",
+    "a": "Flaccidity and respiratory depression in a newborn after benzodiazepines are given during labour. Flumazenil reverses it."
+  },
+  {
+    "q": "Flumazenil: what, how and why?",
+    "a": "Competitive benzodiazepine receptor antagonist. Given IV. Reverses benzodiazepine anaesthesia and treats benzodiazepine overdose."
+  }
+]

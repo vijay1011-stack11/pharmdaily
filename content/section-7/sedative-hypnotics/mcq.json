@@ -1,0 +1,112 @@
+[
+  {
+    "q": "A drug that reduces anxiety without inducing sleep is a:",
+    "options": [
+      "Hypnotic",
+      "Sedative",
+      "General anaesthetic",
+      "Analgesic"
+    ],
+    "answer": 1,
+    "explanation": "A hypnotic induces or maintains sleep; a sedative calms without sleep."
+  },
+  {
+    "q": "Which sleep stage occupies the largest share of sleep time?",
+    "options": [
+      "Stage 1",
+      "Stage 2",
+      "Stage 4",
+      "REM"
+    ],
+    "answer": 1,
+    "explanation": "Stage 2 takes 40–50% of sleep time."
+  },
+  {
+    "q": "Slow-wave sleep is made up of:",
+    "options": [
+      "Stages 1 and 2",
+      "Stages 2 and 3",
+      "Stages 3 and 4",
+      "Stage 4 and REM"
+    ],
+    "answer": 2,
+    "explanation": "Stages 3 and 4 together are slow-wave sleep."
+  },
+  {
+    "q": "Night terrors occur during:",
+    "options": [
+      "REM sleep",
+      "Stage 1",
+      "Stage 2",
+      "Stage 4"
+    ],
+    "answer": 3,
+    "explanation": "Stage 4, where δ waves dominate and the subject is hard to arouse."
+  },
+  {
+    "q": "Dreams, darting eye movements and irregular heart rate occur in:",
+    "options": [
+      "Stage 2",
+      "Stage 3",
+      "REM sleep",
+      "Stage 0"
+    ],
+    "answer": 2,
+    "explanation": "REM (paradoxical) sleep."
+  },
+  {
+    "q": "Which is a Z compound?",
+    "options": [
+      "Midazolam",
+      "Zolpidem",
+      "Ramelteon",
+      "Suvorexant"
+    ],
+    "answer": 1,
+    "explanation": "Zolpidem, zopiclone, eszopiclone and zaleplon are Z compounds."
+  },
+  {
+    "q": "Suvorexant belongs to which group?",
+    "options": [
+      "Melatonin agonist",
+      "Z compound",
+      "Dual orexin receptor antagonist",
+      "Barbiturate"
+    ],
+    "answer": 2,
+    "explanation": "It blocks OX1R and OX2R orexin receptors."
+  },
+  {
+    "q": "An ultra-short acting barbiturate is:",
+    "options": [
+      "Phenobarbitone",
+      "Butobarbitone",
+      "Pentobarbitone",
+      "Thiopentone"
+    ],
+    "answer": 3,
+    "explanation": "Thiopentone and methohexitone are ultra-short acting."
+  },
+  {
+    "q": "In KD Tripathi's classification, which benzodiazepine is listed only as an anticonvulsant?",
+    "options": [
+      "Clobazam",
+      "Triazolam",
+      "Flurazepam",
+      "Nitrazepam"
+    ],
+    "answer": 0,
+    "explanation": "Clobazam is only in the anticonvulsant group; triazolam, flurazepam and nitrazepam are hypnotics."
+  },
+  {
+    "q": "Increasing doses of a barbiturate produce, in order:",
+    "options": [
+      "Sleep, sedation, coma, anaesthesia",
+      "Sedation, sleep, anaesthesia, coma",
+      "Anaesthesia, sedation, sleep, coma",
+      "Sedation, anaesthesia, sleep, coma"
+    ],
+    "answer": 1,
+    "explanation": "Sedation → sleep → anaesthesia → coma."
+  }
+]

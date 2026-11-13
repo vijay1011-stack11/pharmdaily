@@ -1,0 +1,112 @@
+[
+  {
+    "q": "Z compounds act selectively on GABA-A receptors containing the:",
+    "options": [
+      "α1 subunit",
+      "α2 subunit",
+      "γ subunit only",
+      "β subunit only"
+    ],
+    "answer": 0,
+    "explanation": "α1 mediates sedative-hypnotic and amnesic actions."
+  },
+  {
+    "q": "Metallic taste is a typical side effect of:",
+    "options": [
+      "Zolpidem",
+      "Zopiclone",
+      "Ramelteon",
+      "Suvorexant"
+    ],
+    "answer": 1,
+    "explanation": "Zopiclone causes a metallic or bitter after-taste."
+  },
+  {
+    "q": "The shortest acting Z compound is:",
+    "options": [
+      "Zopiclone",
+      "Eszopiclone",
+      "Zolpidem",
+      "Zaleplon"
+    ],
+    "answer": 3,
+    "explanation": "Zaleplon, t½ about 1 hour."
+  },
+  {
+    "q": "Melatonin is used for:",
+    "options": [
+      "Status epilepticus",
+      "Jet lag",
+      "Alcohol withdrawal",
+      "Muscle spasm"
+    ],
+    "answer": 1,
+    "explanation": "Jet lag and insomnia in the elderly."
+  },
+  {
+    "q": "Ramelteon acts on:",
+    "options": [
+      "GABA-A receptors",
+      "MT1 and MT2 receptors",
+      "Orexin receptors",
+      "5-HT3 receptors"
+    ],
+    "answer": 1,
+    "explanation": "It is a selective melatonin receptor agonist."
+  },
+  {
+    "q": "Orexins promote:",
+    "options": [
+      "Sleep",
+      "Wakefulness",
+      "Muscle relaxation",
+      "Appetite loss"
+    ],
+    "answer": 1,
+    "explanation": "Orexins from the lateral hypothalamus promote wakefulness via OX1R and OX2R."
+  },
+  {
+    "q": "Worsening of depression is a reported adverse effect of:",
+    "options": [
+      "Suvorexant",
+      "Melatonin",
+      "Zaleplon",
+      "Flumazenil"
+    ],
+    "answer": 0,
+    "explanation": "Suvorexant can worsen depression and suicidal thoughts."
+  },
+  {
+    "q": "The barbiturate most commonly used for IV induction is:",
+    "options": [
+      "Phenobarbitone",
+      "Thiopental sodium",
+      "Butobarbitone",
+      "Pentobarbitone"
+    ],
+    "answer": 1,
+    "explanation": "Thiopental sodium; methohexital is the alternative."
+  },
+  {
+    "q": "Phenobarbitone helps in neonatal hyperbilirubinaemia by:",
+    "options": [
+      "Binding bilirubin",
+      "Inducing liver enzymes that metabolise bilirubin",
+      "Increasing bile flow only",
+      "Blocking haemolysis"
+    ],
+    "answer": 1,
+    "explanation": "Enzyme induction speeds bilirubin metabolism."
+  },
+  {
+    "q": "Alkaline diuresis helps in poisoning with:",
+    "options": [
+      "Thiopentone",
+      "Pentobarbitone",
+      "Phenobarbitone",
+      "Any barbiturate equally"
+    ],
+    "answer": 2,
+    "explanation": "Only long-acting barbiturates excreted mainly by the kidney, like phenobarbitone."
+  }
+]

@@ -1,0 +1,54 @@
+[
+  {
+    "q": "Define a sedative.",
+    "a": "A drug that reduces excitement and anxiety without inducing sleep. It decreases responsiveness and motor activity."
+  },
+  {
+    "q": "Define a hypnotic.",
+    "a": "A drug that induces and/or maintains sleep similar to normal arousable sleep."
+  },
+  {
+    "q": "Grades of CNS depression with increasing dose?",
+    "a": "Sedation → sleep (hypnosis) → general anaesthesia → coma."
+  },
+  {
+    "q": "Most important use of sedative-hypnotics?",
+    "a": "Treatment of insomnia."
+  },
+  {
+    "q": "How long is one sleep cycle?",
+    "a": "About 80–100 minutes: stages 0 → 4, then REM, repeated through the night."
+  },
+  {
+    "q": "Which sleep stage takes the most time?",
+    "a": "Stage 2 (unequivocal sleep): 40–50% of sleep time."
+  },
+  {
+    "q": "What is slow-wave sleep?",
+    "a": "Stages 3 and 4 of NREM sleep together."
+  },
+  {
+    "q": "In which stage do night terrors occur?",
+    "a": "Stage 4 (cerebral sleep), where δ waves dominate."
+  },
+  {
+    "q": "Features of REM sleep?",
+    "a": "Darting eye movements, dreams, irregular heart rate, BP and breathing, fully relaxed muscles. 20–30% of sleep time. Also called paradoxical sleep."
+  },
+  {
+    "q": "Name four Z compounds.",
+    "a": "Zolpidem, zopiclone, eszopiclone, zaleplon."
+  },
+  {
+    "q": "Name three dual orexin receptor antagonists.",
+    "a": "Suvorexant, lemborexant, daridorexant."
+  },
+  {
+    "q": "Classify barbiturates by duration.",
+    "a": "Long acting: phenobarbitone. Short acting: butobarbitone, pentobarbitone. Ultra-short acting: thiopentone, methohexitone."
+  },
+  {
+    "q": "KD Tripathi's hypnotic benzodiazepines?",
+    "a": "Diazepam, flurazepam, nitrazepam, alprazolam, lorazepam, triazolam."
+  }
+]

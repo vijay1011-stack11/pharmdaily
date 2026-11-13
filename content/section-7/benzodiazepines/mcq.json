@@ -1,0 +1,112 @@
+[
+  {
+    "q": "Benzodiazepines increase the:",
+    "options": [
+      "Duration of Cl⁻ channel opening",
+      "Frequency of Cl⁻ channel opening",
+      "Release of GABA",
+      "Synthesis of GABA"
+    ],
+    "answer": 1,
+    "explanation": "Benzodiazepines increase frequency; barbiturates increase duration."
+  },
+  {
+    "q": "The benzodiazepine binding site lies at the interface of which subunits?",
+    "options": [
+      "α and β",
+      "β and γ",
+      "α and γ",
+      "Two β subunits"
+    ],
+    "answer": 2,
+    "explanation": "GABA binds β; benzodiazepines bind at the α/γ interface."
+  },
+  {
+    "q": "Benzodiazepines have a lower ceiling than barbiturates because they:",
+    "options": [
+      "Are poorly absorbed",
+      "Don't open the Cl⁻ channel by themselves",
+      "Are rapidly metabolised",
+      "Don't cross the blood–brain barrier"
+    ],
+    "answer": 1,
+    "explanation": "They have no GABA-mimetic action; they only facilitate GABA."
+  },
+  {
+    "q": "Benzodiazepines affect sleep by:",
+    "options": [
+      "Increasing stage 4",
+      "Increasing REM",
+      "Increasing stage 2",
+      "Increasing sleep latency"
+    ],
+    "answer": 2,
+    "explanation": "They increase stage 2 and decrease stages 3, 4 and REM."
+  },
+  {
+    "q": "For IV conscious sedation in dentistry, the commonly used benzodiazepine is:",
+    "options": [
+      "Flurazepam",
+      "Midazolam",
+      "Clobazam",
+      "Alprazolam"
+    ],
+    "answer": 1,
+    "explanation": "IV midazolam or diazepam; oral midazolam, diazepam or nitrazepam."
+  },
+  {
+    "q": "Drug used for bruxism:",
+    "options": [
+      "Diazepam",
+      "Lorazepam",
+      "Zolpidem",
+      "Phenobarbitone"
+    ],
+    "answer": 0,
+    "explanation": "Diazepam; buspirone, gabapentin, propranolol and botulinum toxin are alternatives."
+  },
+  {
+    "q": "Drugs for status epilepticus include:",
+    "options": [
+      "Oral clobazam",
+      "IV lorazepam",
+      "Oral alprazolam",
+      "Ramelteon"
+    ],
+    "answer": 1,
+    "explanation": "IV lorazepam or IV/rectal diazepam."
+  },
+  {
+    "q": "Which benzodiazepine has no active metabolite?",
+    "options": [
+      "Diazepam",
+      "Flurazepam",
+      "Lorazepam",
+      "Chlordiazepoxide"
+    ],
+    "answer": 2,
+    "explanation": "Lorazepam is conjugated directly, so no cumulative drowsiness."
+  },
+  {
+    "q": "Floppy infant syndrome follows benzodiazepine use during:",
+    "options": [
+      "First trimester",
+      "Labour",
+      "Breastfeeding only",
+      "Neonatal period"
+    ],
+    "answer": 1,
+    "explanation": "Given in labour, benzodiazepines cause flaccidity and respiratory depression in the newborn."
+  },
+  {
+    "q": "Flumazenil is a:",
+    "options": [
+      "Benzodiazepine receptor agonist",
+      "Benzodiazepine receptor inverse agonist",
+      "Competitive benzodiazepine receptor antagonist",
+      "GABA site antagonist"
+    ],
+    "answer": 2,
+    "explanation": "It competes at the benzodiazepine site and reverses benzodiazepine effects."
+  }
+]

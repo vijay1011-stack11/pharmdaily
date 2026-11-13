@@ -36,7 +36,15 @@ export const SECTIONS: Section[] = [
   { n: 4, title: 'Respiratory system', topics: [], planned: 'Jan' },
   { n: 5, title: 'Hormones', topics: [] },
   { n: 6, title: 'Peripheral nervous system (local anaesthetics)', topics: [] },
-  { n: 7, title: 'Central nervous system', topics: [] },
+  {
+    n: 7,
+    title: 'Central nervous system',
+    topics: [
+      { slug: 'sedative-hypnotics', title: 'Sedative-hypnotics: basics', short: 'Basics', reviewed: '2026-11' },
+      { slug: 'benzodiazepines', title: 'Benzodiazepines', short: 'Benzodiazepines', reviewed: '2026-11' },
+      { slug: 'z-compounds', title: 'Z compounds and other hypnotics', short: 'Z compounds', reviewed: '2026-11' },
+    ],
+  },
   { n: 8, title: 'Cardiovascular system', topics: [] },
   { n: 9, title: 'Kidney', topics: [] },
   { n: 10, title: 'Blood', topics: [] },

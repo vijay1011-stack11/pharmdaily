@@ -16,7 +16,7 @@ const VERCEL_HEADERS = Object.fromEntries(
 );
 
 const BASE = process.env.BASE ?? 'http://localhost:4321';
-const PAGES = ['/', '/section-1/', '/section-1/routes-of-administration/', '/section-1/pharmacokinetics/', '/section-1/pharmacodynamics/', '/section-3/', '/section-3/nsaids/', '/about/', '/privacy/', '/404'];
+const PAGES = ['/', '/section-1/', '/section-1/routes-of-administration/', '/section-1/pharmacokinetics/', '/section-1/pharmacodynamics/', '/section-3/', '/section-3/nsaids/', '/section-7/', '/section-7/sedative-hypnotics/', '/section-7/benzodiazepines/', '/section-7/z-compounds/', '/about/', '/privacy/', '/404'];
 const SIZES = [{ name: 'phone', width: 390, height: 844 }, { name: 'desktop', width: 1280, height: 800 }];
 mkdirSync('screenshots', { recursive: true });
 

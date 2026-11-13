@@ -1,0 +1,58 @@
+[
+  {
+    "q": "Mechanism of Z compounds?",
+    "a": "Agonists at the benzodiazepine site of the GABA-A receptor, selective for receptors with the α1 subunit. Flumazenil blocks them."
+  },
+  {
+    "q": "Characteristic side effect of zopiclone?",
+    "a": "Metallic (bitter) taste. Also dry mouth."
+  },
+  {
+    "q": "Shortest acting Z compound?",
+    "a": "Zaleplon (t½ about 1 hour); can be taken late at night without morning sedation."
+  },
+  {
+    "q": "Which Z compound is the S-enantiomer of zopiclone?",
+    "a": "Eszopiclone."
+  },
+  {
+    "q": "Where is melatonin produced and what receptors does it act on?",
+    "a": "Pineal gland. MT1 and MT2 receptors in the brain."
+  },
+  {
+    "q": "Uses of melatonin?",
+    "a": "Jet lag and insomnia in the elderly."
+  },
+  {
+    "q": "Ramelteon: mechanism and best use?",
+    "a": "Selective MT1, MT2 agonist. Best for sleep-onset difficulty."
+  },
+  {
+    "q": "What do orexins do?",
+    "a": "Neuropeptides from the lateral hypothalamus that promote wakefulness via OX1R and OX2R."
+  },
+  {
+    "q": "Mechanism of suvorexant?",
+    "a": "Dual orexin receptor antagonist (DORA): blocks OX1R and OX2R."
+  },
+  {
+    "q": "Adverse effects of suvorexant?",
+    "a": "Somnolence, muscle weakness, abnormal dreams, headache, worsening of depression."
+  },
+  {
+    "q": "Barbiturate used for IV induction of anaesthesia?",
+    "a": "Thiopental sodium (most common); also methohexital sodium."
+  },
+  {
+    "q": "Why is phenobarbitone used in neonatal jaundice?",
+    "a": "It induces the liver enzymes that metabolise bilirubin."
+  },
+  {
+    "q": "Treatment of acute barbiturate poisoning?",
+    "a": "Gastric lavage with activated charcoal, supportive care, alkaline diuresis (long-acting only), haemodialysis or haemoperfusion. No specific antidote."
+  },
+  {
+    "q": "Which condition is a contraindication for all hypnotics?",
+    "a": "Obstructive sleep apnoea: all hypnotics worsen it."
+  }
+]

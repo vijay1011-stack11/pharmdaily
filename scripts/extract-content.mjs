@@ -25,6 +25,11 @@ const SOURCES = [
     section: 'section-3',
     topics: { nsaids: 'nsaids' },
   },
+  {
+    file: 'pharmdaily-section7-sedative-hypnotics-final.html',
+    section: 'section-7',
+    topics: { basics: 'sedative-hypnotics', bzd: 'benzodiazepines', others: 'z-compounds' },
+  },
 ];
 
 let html = '';

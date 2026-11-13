@@ -1,0 +1,835 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>PharmDaily Sedative-Hypnotics</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap">
+<style>
+/* Night direction: one dark navy-violet world. Phone-first single column; sticky glass header; diagrams are stacking blocks; indigo = enteral/primary, amber = parenteral/secondary. Deliberately single-theme. */
+:root{
+  color-scheme:dark;
+  --bg:#0B0C1A; --surface:#10122A; --glass:rgba(255,255,255,.045); --glass-2:rgba(255,255,255,.07);
+  --line:rgba(255,255,255,.09); --line-2:rgba(255,255,255,.16);
+  --ink:#E6E8F5; --ink-strong:#FFFFFF; --muted:#A7ABC8; --faint:#8C90AE;
+  --indigo:#6D7CFF; --indigo-ink:#C9CEFF; --indigo-soft:rgba(109,124,255,.14);
+  --amber:#FFB86B; --amber-ink:#FFCF94; --amber-soft:rgba(255,184,107,.12);
+  --good:#7CE2B0; --good-soft:rgba(124,226,176,.09); --bad:#FF9B9B; --bad-soft:rgba(255,155,155,.08);
+  --font:"Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --ease-out:cubic-bezier(.23,1,.32,1); --ease-in-out:cubic-bezier(.77,0,.175,1);
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{-webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:100%;background:var(--bg)}
+body{overflow-x:clip;background:var(--surface);color:var(--ink);font-family:var(--font);font-size:16.5px;line-height:1.6}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+button,a,[role="button"]{touch-action:manipulation}
+button,.pills a,.seg button,.fc,.flag,.src{user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+button{font:inherit;color:inherit}
+input,textarea{font-size:16px}
+:focus-visible{outline:2px solid var(--indigo-ink);outline-offset:3px;border-radius:10px}
+a{color:var(--indigo-ink)}
+.gut{padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.col{max-width:680px;margin:0 auto}
+h1,h2,h3{text-wrap:balance;margin:0;color:var(--ink-strong);letter-spacing:-.02em}
+h2{font-size:1.4rem;font-weight:700;margin-top:2.6rem}
+h3{font-size:1.08rem;font-weight:700;margin-top:1.8rem}
+p{margin:.55rem 0}
+b{color:var(--ink-strong)}
+
+/* header */
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:6;background:rgba(11,12,26,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:12px 4px}
+.brand{font-weight:800;font-size:1.15rem;letter-spacing:-.02em;color:var(--ink-strong)}
+.sec{font-size:.8rem;color:var(--muted)}
+.pills{display:flex;gap:6px;padding-block:8px}
+.pills a{flex:1 1 auto;min-width:0;display:inline-flex;align-items:center;justify-content:center;gap:4px;min-height:42px;padding:0 8px;border-radius:21px;border:1px solid var(--line-2);color:var(--ink);text-decoration:none;font-size:.84rem;font-weight:600;white-space:nowrap}
+.pills a[aria-current="page"]{background:var(--ink-strong);border-color:var(--ink-strong);color:var(--bg);font-weight:800}
+.pills a.rev{color:var(--amber-ink);border-color:rgba(255,184,107,.45)}
+.pills a.rev[aria-current="page"]{background:var(--amber);border-color:var(--amber);color:var(--bg)}
+.seg{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:4px;margin-bottom:10px;border-radius:24px;background:var(--glass-2)}
+.seg button{min-height:40px;border:0;border-radius:20px;background:transparent;color:var(--muted);font-weight:700;font-size:.9rem;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--ink-strong);color:var(--bg)}
+
+/* motion: press feedback only (emil-design-eng) */
+.btn,.opt,.choice button,.seg button,.pills a,.go{transition:transform 140ms var(--ease-out),background-color 150ms ease,border-color 150ms ease,color 150ms ease}
+.btn:active,.opt:not([disabled]):active,.choice button:active,.seg button:active,.pills a:active,.go:active{transform:scale(.97)}
+@media (hover:hover) and (pointer:fine){
+  .btn:hover,.opt:not([disabled]):hover,.choice button:hover{border-color:var(--muted)}
+  .pills a:not([aria-current]):hover{border-color:var(--ink)}
+}
+
+/* topic hero */
+.hero{position:relative;padding-block:30px 6px}
+.hero::before{content:"";position:absolute;left:-20px;top:-40px;width:calc(100% + 40px);height:340px;background:radial-gradient(closest-side,rgba(109,124,255,.22),rgba(16,18,42,0));pointer-events:none;z-index:0}
+.hero>*{position:relative}
+.eyebrow{font-size:.82rem;color:var(--muted)}
+.hero h1{font-size:2.15rem;line-height:1.08;font-weight:700;letter-spacing:-.035em;margin-top:6px}
+.lede{color:#B5B9D3;font-size:1.02rem}
+.legend{margin-top:16px;display:flex;flex-direction:column;gap:8px;padding:14px 16px;border-radius:16px;background:var(--glass);border:1px solid var(--line);font-size:.88rem;color:var(--muted)}
+.legend div{display:flex;gap:10px;align-items:flex-start}
+
+/* tags */
+.src{display:inline-flex;align-items:center;font-size:.7rem;font-weight:800;padding:2px 8px;border-radius:999px;border:1px solid rgba(201,206,255,.4);color:var(--indigo-ink);vertical-align:middle;margin-left:6px;white-space:nowrap;letter-spacing:.01em}
+.flag{position:relative;display:inline-flex;align-items:center;font-size:.72rem;font-weight:800;padding:3px 9px;border-radius:999px;background:var(--amber);color:var(--bg);text-decoration:none;vertical-align:middle;margin-left:6px;white-space:nowrap}
+.flag::after{content:"";position:absolute;inset:-10px -4px}
+.dental{display:inline-flex;font-size:.7rem;font-weight:800;padding:2px 8px;border-radius:999px;border:1px solid rgba(255,207,148,.45);color:var(--amber-ink);vertical-align:middle;margin-left:6px}
+
+/* capsule chips */
+.drugs{display:flex;flex-wrap:wrap;gap:7px;margin:.5rem 0}
+.rx{display:inline-flex;align-items:center;min-height:30px;border-radius:15px;overflow:hidden;border:1px solid var(--line-2);font-size:.82rem;font-weight:600;color:var(--ink);background:rgba(255,255,255,.02)}
+.rx::before{content:"";width:11px;align-self:stretch;background:var(--indigo)}
+.rx span{padding:3px 11px 3px 9px}
+.par .rx::before{background:var(--amber)}
+
+/* surfaces */
+.card{background:var(--glass);border:1px solid var(--line);border-radius:18px;padding:16px;margin-top:12px}
+.card>b:first-child,.card>.ct{display:block;color:var(--ink-strong);font-weight:800;margin-bottom:4px}
+.def{background:var(--indigo-soft);border:1px solid rgba(109,124,255,.35);border-radius:18px;padding:14px 16px;margin-top:12px}
+.split{display:grid;grid-template-columns:1fr;gap:10px;margin-top:12px}
+@media (min-width:560px){.split{grid-template-columns:1fr 1fr}}
+.split>*{min-width:0;margin-top:0}
+.pro,.con{border-radius:18px;padding:14px 16px}
+.pro{background:var(--good-soft);border:1px solid rgba(124,226,176,.28)}
+.con{background:var(--bad-soft);border:1px solid rgba(255,155,155,.26)}
+.pro h4,.con h4{margin:0 0 4px;font-size:.92rem;font-weight:800}
+.pro h4{color:var(--good)} .con h4{color:var(--bad)}
+ul{margin:.3rem 0;padding-left:1.1rem} li{margin:.2rem 0}
+li::marker{color:var(--faint)}
+
+/* stacked label/value list */
+.rows{margin-top:12px;border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.025);overflow:hidden}
+.row{padding:13px 16px;display:flex;flex-direction:column;gap:3px}
+.row+.row{border-top:1px solid rgba(255,255,255,.07)}
+.row>*{min-width:0}
+.row .k{font-size:.82rem;font-weight:800;color:var(--indigo-ink)}
+.par .row .k{color:var(--amber-ink)}
+.row .k small{font-weight:600;color:var(--faint);margin-left:6px}
+.row .drugs{margin:2px 0 0}
+
+/* metro map */
+.metro{margin-top:12px;padding:18px 14px;border-radius:20px;background:var(--glass);border:1px solid var(--line);display:flex;flex-direction:column;align-items:center}
+.metro .root{padding:8px 18px;border-radius:20px;background:var(--ink-strong);color:var(--bg);font-weight:800}
+.metro .stem{width:2px;height:16px;background:rgba(255,255,255,.3)}
+.metro .bridge{width:50%;height:2px;background:rgba(255,255,255,.3)}
+.lines{width:100%;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.line{display:flex;flex-direction:column;align-items:center;--c:var(--indigo)}
+.line.amb{--c:var(--amber)}
+.line .head{width:100%;text-align:center;padding:10px 6px;border-radius:14px;background:var(--c);color:var(--bg)}
+.line .head b{display:block;color:var(--bg);font-weight:800}
+.line .head span{font-size:.75rem;font-weight:700}
+.stops{position:relative;width:100%;list-style:none;margin:0;padding:14px 0 0 24px;display:flex;flex-direction:column;gap:14px}
+.stops::before{content:"";position:absolute;left:10px;top:0;bottom:12px;width:2px;background:var(--c)}
+.stops li{position:relative;margin:0;font-size:.88rem;font-weight:700;color:var(--ink-strong);line-height:1.3}
+.stops li::before{content:"";position:absolute;left:-19px;top:3px;width:10px;height:10px;border-radius:50%;background:var(--surface);border:2px solid var(--c)}
+.stops small{display:block;font-weight:500;color:var(--muted);font-size:.75rem}
+
+/* vertical flow */
+.flow{display:flex;flex-direction:column;align-items:stretch;margin-top:12px}
+.step{background:var(--glass);border:1px solid var(--line);border-radius:14px;padding:11px 14px}
+.step b{color:var(--ink-strong)}
+.arrow{align-self:center;color:var(--faint);font-size:1rem;line-height:1;padding:5px 0;text-align:center}
+.arrow small{display:block;font-size:.75rem;margin-top:2px}
+.step.hit{background:var(--bad-soft);border:1px dashed rgba(255,155,155,.55);color:var(--bad)}
+.step.ok{background:var(--good-soft);border-color:rgba(124,226,176,.4);color:var(--good)}
+
+/* side-by-side paths */
+.paths{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}
+.path{padding:14px 10px;border-radius:18px;background:var(--glass);border:1px solid var(--line);display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;font-size:.86rem;font-weight:700;color:var(--ink-strong)}
+.path.win{background:var(--indigo-soft);border-color:rgba(109,124,255,.4)}
+.path .t{font-size:.75rem;color:var(--muted)} .path.win .t{color:var(--indigo-ink)}
+.path .ar{color:var(--faint);font-weight:400}
+.path .hit{color:var(--bad);border:1px dashed rgba(255,155,155,.6);border-radius:10px;padding:3px 9px}
+.path .ok{color:var(--good);border:1px solid rgba(124,226,176,.5);border-radius:10px;padding:3px 9px}
+.path .note{font-size:.75rem;font-weight:500;color:var(--muted)}
+
+/* patch layers */
+.layers{margin-top:12px;display:flex;flex-direction:column;gap:4px}
+.layer{display:flex;justify-content:space-between;gap:10px;padding:11px 14px;border-radius:4px;font-size:.88rem;font-weight:700}
+.layer span{font-weight:500;opacity:.85;text-align:right}
+.l1{background:#2B2F55;color:#fff;border-radius:12px 12px 4px 4px}
+.l2{background:var(--indigo);color:var(--bg);padding-block:15px}
+.l3{border:1px dashed var(--indigo-ink);color:var(--indigo-ink)}
+.l4{background:var(--amber-soft);color:var(--amber-ink)}
+.l5{background:rgba(255,155,155,.13);color:#FFB3B3;border-radius:4px 4px 12px 12px}
+
+/* cause → effect */
+.cause{display:grid;grid-template-columns:1fr auto;align-items:center;gap:10px;padding:10px 0;font-size:.92rem}
+.cause+.cause{border-top:1px solid rgba(255,255,255,.07)}
+.up{color:var(--good);font-weight:800;white-space:nowrap} .down{color:var(--bad);font-weight:800;white-space:nowrap}
+
+/* IA scale */
+.scale{margin-top:16px;padding:0 6px}
+.track{height:10px;border-radius:999px;background:linear-gradient(90deg,var(--bad),rgba(255,255,255,.2) 50%,var(--good))}
+.ticks{position:relative;height:74px}
+.tick{position:absolute;top:6px;transform:translateX(-50%);text-align:center;font-size:.72rem;line-height:1.25;width:78px;color:var(--muted)}
+.tick b{display:block;font-size:.95rem}
+.tick::before{content:"";display:block;width:2px;height:10px;background:var(--ink-strong);margin:-16px auto 8px}
+
+.rgrid{display:grid;grid-template-columns:1fr;gap:10px;margin-top:12px}
+@media (min-width:560px){.rgrid{grid-template-columns:1fr 1fr}}
+.rcard{background:var(--glass);border:1px solid var(--line);border-radius:18px;padding:14px 16px;display:flex;flex-direction:column;gap:4px}
+.rcard h4{margin:0;font-size:1rem;color:var(--ink-strong)}
+.speed{font-size:.78rem;font-weight:800;color:var(--amber-ink)}
+.rcard p{margin:0;font-size:.9rem}
+
+.chart{margin-top:12px;background:var(--glass);border:1px solid var(--line);border-radius:18px;padding:10px}
+.chart svg{display:block;width:100%;height:auto}
+.legend2{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.82rem;padding:6px 4px 2px;color:var(--muted)}
+.legend2 i{display:inline-block;width:14px;height:3px;vertical-align:middle;margin-right:6px;border-radius:2px}
+
+.clinic{margin-top:14px;display:flex;gap:12px;padding:14px 16px;border-radius:18px;background:var(--amber-soft);border:1px solid rgba(255,184,107,.35)}
+.clinic svg{flex:none}
+.clinic b{display:block;color:var(--amber-ink)}
+
+.next{display:flex;gap:10px;margin-top:36px}
+.go{flex:1;min-height:52px;border-radius:26px;border:1px solid var(--line-2);background:var(--glass-2);color:var(--ink-strong);font-weight:700;cursor:pointer}
+.go.main{background:var(--ink-strong);color:var(--bg);border-color:var(--ink-strong);font-weight:800}
+
+/* flashcards */
+.fc-top{display:flex;justify-content:space-between;align-items:center;margin-top:22px}
+.count{font-variant-numeric:tabular-nums;color:var(--indigo-ink);font-weight:800}
+.dots{display:flex;gap:4px;margin-top:10px}
+.dots i{flex:1;height:4px;border-radius:2px;background:rgba(255,255,255,.16)}
+.dots i.cur{background:#fff} .dots i.got{background:var(--good)} .dots i.again{background:var(--amber)}
+.fc{perspective:1200px;height:380px;margin-top:20px;cursor:pointer;display:block;width:100%;border:0;background:none;padding:0;text-align:left}
+.fc-inner{position:relative;width:100%;height:100%;transition:transform 280ms var(--ease-in-out);transform-style:preserve-3d}
+.fc.flip .fc-inner{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:28px;padding:26px 24px;display:flex;flex-direction:column;gap:14px;overflow:auto}
+.front{background:rgba(26,29,58,.85);border:1px solid var(--line-2);box-shadow:0 30px 60px rgba(20,24,80,.45)}
+.back{background:var(--indigo);color:var(--bg);transform:rotateY(180deg)}
+.face .lab{font-size:.8rem;font-weight:800;color:var(--muted)}
+.back .lab{color:rgba(11,12,26,.7)}
+.face .q{font-size:1.55rem;line-height:1.22;font-weight:700;letter-spacing:-.02em;color:var(--ink-strong)}
+.face .a{font-size:1.2rem;line-height:1.45;font-weight:600}
+.face .hint{margin-top:auto;font-size:.8rem;color:var(--muted)}
+.back .hint{color:rgba(11,12,26,.7)}
+.fc-btns{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+.btn{min-height:52px;border-radius:26px;border:1px solid var(--line-2);background:var(--glass-2);color:var(--ink-strong);font-weight:700;cursor:pointer;padding:0 18px}
+.btn.primary{background:var(--ink-strong);color:var(--bg);border-color:var(--ink-strong);font-weight:800}
+.btn.quiet{min-height:44px;background:none;border:0;color:var(--indigo-ink);margin-top:6px}
+@media (prefers-reduced-motion:reduce){.fc-inner{transition:none}.btn:active,.opt:active,.choice button:active,.seg button:active,.pills a:active,.go:active{transform:none}}
+
+/* mcq */
+.mcq-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:22px}
+.q-card{background:var(--glass);border:1px solid var(--line);border-radius:20px;padding:16px;margin-top:12px}
+.qn{font-size:.78rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.qt{font-weight:700;color:var(--ink-strong);margin:3px 0 10px;font-size:1.02rem;line-height:1.4}
+.opt{display:block;width:100%;min-height:48px;text-align:left;border:1px solid var(--line-2);background:rgba(255,255,255,.03);border-radius:14px;padding:11px 14px;margin-top:7px;cursor:pointer;font-size:.95rem}
+.opt[disabled]{cursor:default}
+.opt.right{background:var(--good-soft);border-color:var(--good);color:var(--good);font-weight:800}
+.opt.wrong{background:var(--bad-soft);border-color:var(--bad);color:var(--bad)}
+.expl{margin-top:10px;font-size:.9rem;color:var(--muted);transition:opacity 200ms var(--ease-out),transform 200ms var(--ease-out)}
+@starting-style{.expl{opacity:0;transform:translateY(4px)}}
+
+/* review */
+.ri{background:var(--glass);border:1px solid var(--line);border-radius:20px;padding:16px;margin-top:12px;scroll-margin-top:190px}
+.ri .where{font-size:.78rem;color:var(--amber-ink);font-weight:800}
+.ri b{display:block;margin-top:2px}
+.ri p{margin:.3rem 0 .7rem;color:var(--muted);font-size:.93rem}
+.choice{display:flex;gap:8px;flex-wrap:wrap}
+.choice button{min-height:44px;border:1px solid var(--line-2);background:rgba(255,255,255,.03);border-radius:22px;padding:0 18px;cursor:pointer;font-size:.92rem;font-weight:700}
+.choice button[aria-pressed="true"].ok{background:var(--good);border-color:var(--good);color:var(--bg)}
+.choice button[aria-pressed="true"].fix{background:var(--bad);border-color:var(--bad);color:var(--bg)}
+textarea{width:100%;margin-top:10px;font-family:inherit;border:1px solid var(--line-2);border-radius:14px;padding:12px;background:rgba(255,255,255,.03);color:var(--ink);min-height:76px}
+textarea::placeholder{color:var(--faint)}
+.copybox{position:sticky;bottom:0;background:var(--bg);border-top:1px solid var(--line);padding-block:12px calc(12px + env(safe-area-inset-bottom,0px));margin-top:18px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.copybox .status{font-size:.85rem;color:var(--muted)}
+pre.fallback{white-space:pre-wrap;font-family:inherit;font-size:.85rem;background:var(--glass);border:1px solid var(--line);border-radius:14px;padding:12px;margin-top:12px}
+
+main{padding-block:0 72px}
+footer{color:var(--faint);font-size:.82rem;border-top:1px solid var(--line);padding-block:20px 30px;background:var(--bg)}
+
+/* topic pills wrap instead of truncating; segmented labels never clip */
+.pills{flex-wrap:wrap}
+.pills a{flex:1 1 auto;white-space:normal;text-align:center;line-height:1.15;padding:6px 12px}
+.seg button{white-space:normal;line-height:1.15;padding:4px 6px;min-width:0}
+.hero h1{font-size:clamp(1.6rem,8.5vw,2.15rem);overflow-wrap:break-word}
+</style>
+
+<header>
+  <div class="gut"><div class="col">
+    <div class="bar"><span class="brand">PharmDaily</span><span class="sec">Section 7 · CNS</span></div>
+    <nav class="pills" aria-label="Topics">
+      <a href="#basics" data-t="basics">Basics</a>
+      <a href="#bzd" data-t="bzd">Benzodiazepines</a>
+      <a href="#others" data-t="others">Z compounds</a>
+      <a href="#review" data-t="review" class="rev">Review <span id="flagCount" style="font-variant-numeric:tabular-nums"></span></a>
+    </nav>
+    <div class="seg" id="modes" role="group" aria-label="Study mode">
+      <button data-m="notes" aria-pressed="true">Notes</button>
+      <button data-m="cards" aria-pressed="false">Flashcards</button>
+      <button data-m="mcq" aria-pressed="false">MCQs</button>
+    </div>
+  </div></div>
+</header>
+
+<main class="gut"><div class="col">
+
+<!-- ===================== BASICS ===================== -->
+<section data-topic="basics" data-mode="notes">
+  <div class="hero">
+    <div class="eyebrow">Chapter 29 · Sedative-hypnotics</div>
+    <h1>Calming down and falling asleep</h1>
+    <p class="lede">What sedatives and hypnotics are, how normal sleep is built, and the four groups of drugs used for insomnia.</p>
+  </div>
+
+  <h2>Two definitions</h2>
+  <div class="split">
+    <div class="def" style="margin-top:0"><b>Sedative:</b> a drug that reduces excitement and anxiety without inducing sleep. It decreases responsiveness and motor activity. Some drowsiness may occur.</div>
+    <div class="def" style="margin-top:0"><b>Hypnotic:</b> a drug that induces and/or maintains sleep similar to normal arousable sleep.</div>
+  </div>
+  <p style="color:var(--muted);font-size:.9rem">"Hypnotic" here has nothing to do with hypnosis, the trance-like state where a person is under another's control.</p>
+
+  <h3>One family, increasing doses</h3>
+  <div class="flow">
+    <div class="step">Sedation</div><div class="arrow">↓<small>higher dose</small></div>
+    <div class="step">Sleep (hypnosis)</div><div class="arrow">↓</div>
+    <div class="step">General anaesthesia</div><div class="arrow">↓</div>
+    <div class="step hit">Coma</div>
+  </div>
+  <div class="card"><b>Where the drugs differ</b><ul><li>Quick onset, short action, steep dose-response curve: better as <b>hypnotics</b></li><li>Slow onset, flatter curve: better as <b>sedatives</b></li><li>Barbiturates walk the whole ladder. Benzodiazepines have a <b>low ceiling</b>: they don't reach anaesthesia or coma when given orally</li><li>Most important use of this class: <b>treatment of insomnia</b></li></ul></div>
+
+  <h2>Normal sleep</h2>
+  <p>Sleep runs in cycles of about <b>80–100 minutes</b>: stages 0 → 4, then REM, repeated through the night.</p>
+  <div class="rows">
+    <div class="row"><div class="k">Stage 0 · awake<small>1–2%</small></div><div>Lying down until sleep, plus short night awakenings. EEG: α waves (eyes closed), β waves (eyes open).</div></div>
+    <div class="row"><div class="k">Stage 1 · dozing<small>3–6%</small></div><div>α waves mixed with θ waves. Eye movements fewer; neck muscles relax.</div></div>
+    <div class="row"><div class="k">Stage 2 · unequivocal sleep<small>40–50%</small></div><div>θ waves with sleep spindles; K complexes on sensory stimulation. Easily aroused.</div></div>
+    <div class="row"><div class="k">Stage 3 · deep sleep transition<small>5–8%</small></div><div>θ and δ waves, spindles. Not easily aroused.</div></div>
+    <div class="row"><div class="k">Stage 4 · cerebral sleep<small>10–20%</small></div><div>δ waves dominate. Hard to arouse. Night terrors happen here.</div></div>
+    <div class="row"><div class="k">REM · paradoxical sleep<small>20–30%</small></div><div>Darting eye movements, dreams and nightmares. Heart rate, BP and breathing irregular; muscles fully relaxed.</div></div>
+  </div>
+  <div class="def"><b>Slow-wave sleep (SWS)</b> = stages 3 + 4 together. Stages 1–4 are non-REM (NREM) sleep.</div>
+  <div class="rows">
+    <div class="row"><div class="k">α waves</div><div>High amplitude, 8–14 cycles/s</div></div>
+    <div class="row"><div class="k">β waves</div><div>Low amplitude, 15–35 cycles/s</div></div>
+    <div class="row"><div class="k">θ waves</div><div>Low amplitude, 4–7 cycles/s</div></div>
+    <div class="row"><div class="k">δ waves</div><div>High amplitude, 0.5–3 cycles/s</div></div>
+  </div>
+
+  <h2>Classification</h2>
+  <div class="metro" role="img" aria-label="Sedative-hypnotics split into benzodiazepines, Z compounds, miscellaneous and barbiturates">
+    <div class="root">Sedative-hypnotics</div><div class="stem"></div><div class="bridge"></div>
+    <div class="lines">
+      <div class="line"><div class="stem"></div><div class="head"><b>GABA-A drugs</b><span>work at the Cl⁻ channel</span></div>
+        <ul class="stops"><li>I · Benzodiazepines</li><li>II · Z compounds<small>non-benzodiazepines</small></li><li>IV · Barbiturates<small>old, global depressants</small></li></ul></div>
+      <div class="line amb"><div class="stem"></div><div class="head"><b>Other targets</b><span>no GABA action</span></div>
+        <ul class="stops"><li>III · Melatonin group<small>MT1, MT2 receptors</small></li><li>III · Orexin antagonists<small>OX1R, OX2R</small></li></ul></div>
+    </div>
+  </div>
+
+  <h3>I. Benzodiazepines</h3>
+  <div class="rows">
+    <div class="row"><div class="k">Hypnotic</div><div class="drugs">Diazepam, Flurazepam, Nitrazepam, Alprazolam, Lorazepam, Triazolam</div></div>
+    <div class="row"><div class="k">Antianxiety</div><div class="drugs">Diazepam, Chlordiazepoxide, Oxazepam, Lorazepam, Alprazolam, Clonazepam</div></div>
+    <div class="row"><div class="k">Anticonvulsant</div><div class="drugs">Clonazepam, Clobazam, Diazepam, Lorazepam</div></div>
+  </div>
+  <p style="color:var(--muted);font-size:.9rem">Other uses (IV anaesthetic, preanaesthetic, muscle relaxant, adjuvant) are under Therapeutic uses on the Benzodiazepines page.</p>
+
+  <h3>II. Non-benzodiazepines ("Z compounds")</h3>
+  <div class="drugs">Zolpidem, Zopiclone, Eszopiclone, Zaleplon</div>
+  <p style="color:var(--muted);font-size:.9rem">Etizolam, a benzodiazepine analogue, is also in this group.</p>
+
+  <h3>III. Miscellaneous</h3>
+  <div class="rows par">
+    <div class="row"><div class="k">Hormone of pineal gland</div><div class="drugs">Melatonin</div></div>
+    <div class="row"><div class="k">Melatonin receptor agonists</div><div><div class="drugs">Ramelteon, Tasimelteon</div>Also agomelatine.</div></div>
+    <div class="row"><div class="k">Dual orexin receptor antagonists (DORA)</div><div class="drugs">Suvorexant, Lemborexant, Daridorexant</div></div>
+  </div>
+
+  <h3>IV. Barbiturates</h3>
+  <div class="rows">
+    <div class="row"><div class="k">Long acting</div><div class="drugs">Phenobarbitone</div></div>
+    <div class="row"><div class="k">Short acting</div><div class="drugs">Butobarbitone, Pentobarbitone</div></div>
+    <div class="row"><div class="k">Ultra-short acting</div><div class="drugs">Thiopentone, Methohexitone</div></div>
+  </div>
+  <div class="card"><b>Sedating, but not for insomnia</b>Some antihistamines (promethazine, diphenhydramine), antipsychotics and antidepressants (chlorpromazine, amitriptyline), hyoscine and opioids (morphine, pethidine) cause marked sedation. They are not reliable for treating insomnia.</div>
+
+  <div class="next"><button class="go main" data-jump="cards">Flip 13 flashcards</button><button class="go" data-jump="mcq">10 MCQs</button></div>
+</section>
+<section data-topic="basics" data-mode="cards" hidden></section>
+<section data-topic="basics" data-mode="mcq" hidden></section>
+
+<!-- ===================== BENZODIAZEPINES ===================== -->
+<section data-topic="bzd" data-mode="notes" hidden>
+  <div class="hero">
+    <div class="eyebrow">Chapter 29 · Benzodiazepines</div>
+    <h1>Benzodiazepines</h1>
+    <p class="lede">Selective CNS depressants: they sedate, relieve anxiety, help sleep, stop seizures and relax muscle. The most used group, and the safest.</p>
+  </div>
+
+  <div class="def">Benzodiazepines have a <b>lower ceiling</b> of CNS depression than barbiturates and a <b>high therapeutic index</b>. Even 10 hypnotic doses taken together don't usually endanger life: the patient can be roused and breathing rarely needs support.</div>
+
+  <h2>1. Mechanism of action</h2>
+  <div class="flow">
+    <div class="step">Benzodiazepine binds the <b>GABA-A – benzodiazepine receptor – Cl⁻ channel</b> complex</div><div class="arrow">↓</div>
+    <div class="step">Potentiates the inhibitory effect of <b>GABA</b></div><div class="arrow">↓</div>
+    <div class="step">↑ <b>Frequency</b> of Cl⁻ channel opening</div><div class="arrow">↓<small>Cl⁻ flows in</small></div>
+    <div class="step">Membrane hyperpolarisation</div><div class="arrow">↓</div>
+    <div class="step ok">CNS depression</div>
+  </div>
+  <p>Benzodiazepines bind specific subunits of the GABA-A receptor, which is why one group gives sedative-hypnotic, anticonvulsant, antianxiety and muscle relaxant actions.</p>
+
+  <h3>Inside the receptor</h3>
+  <div class="chart">
+    <svg viewBox="0 0 340 250" role="img" aria-label="GABA-A receptor seen from above: five subunits around a chloride pore; GABA binds the beta subunit, benzodiazepines bind between alpha and gamma">
+      <circle cx="170" cy="118" r="26" fill="none" stroke="#16A34A" stroke-width="2" stroke-dasharray="4 3"/>
+      <text x="170" y="114" text-anchor="middle" font-size="12" font-weight="800" fill="#16A34A">Cl⁻</text>
+      <text x="170" y="129" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".7">pore</text>
+      <g font-size="15" font-weight="800" text-anchor="middle">
+        <circle cx="170" cy="50" r="27" fill="#6D7CFF"/><text x="170" y="55" fill="#0B0C1A">β</text>
+        <circle cx="235" cy="97" r="27" fill="#C9CEFF"/><text x="235" y="102" fill="#0B0C1A">α</text>
+        <circle cx="210" cy="175" r="27" fill="#FFB86B"/><text x="210" y="180" fill="#0B0C1A">γ</text>
+        <circle cx="130" cy="175" r="27" fill="#C9CEFF"/><text x="130" y="180" fill="#0B0C1A">α</text>
+        <circle cx="105" cy="97" r="27" fill="#6D7CFF"/><text x="105" y="102" fill="#0B0C1A">β</text>
+      </g>
+      <line x1="196" y1="40" x2="262" y2="24" stroke="currentColor" stroke-opacity=".5" stroke-width="1.2"/>
+      <text x="264" y="22" font-size="12" font-weight="700" fill="currentColor">GABA site</text>
+      <text x="264" y="37" font-size="11" fill="currentColor" fill-opacity=".7">on β</text>
+      <circle cx="228" cy="140" r="7" fill="currentColor"/>
+      <line x1="235" y1="142" x2="240" y2="152" stroke="currentColor" stroke-opacity=".5" stroke-width="1.2"/>
+      <text x="242" y="156" font-size="11" font-weight="700" fill="currentColor">Benzodiazepine</text>
+      <text x="242" y="170" font-size="11" font-weight="700" fill="currentColor">site</text>
+      <text x="242" y="184" font-size="10.5" fill="currentColor" fill-opacity=".7">α/γ interface</text>
+      <text x="170" y="232" text-anchor="middle" font-size="12" fill="currentColor" fill-opacity=".7">Pentamer seen from above: GABA opens the pore</text>
+      <text x="170" y="247" text-anchor="middle" font-size="12" fill="currentColor" fill-opacity=".7">Benzodiazepines make GABA open it more often</text>
+    </svg>
+  </div>
+  <div class="rows">
+    <div class="row"><div class="k">No GABA-mimetic action</div><div>Benzodiazepines don't open the Cl⁻ channel by themselves; they only help GABA. That explains their lower ceiling.</div></div>
+    <div class="row"><div class="k">α1 subunit</div><div>Sedative, hypnotic, amnesic actions. Z compounds act selectively here.</div></div>
+    <div class="row"><div class="k">α2 subunit</div><div>Anxiolytic and muscle relaxant actions. Diazepam acts on α1, α2, α3 and α5: broad spectrum.</div></div>
+    <div class="row"><div class="k">Where in the brain</div><div>Midbrain reticular formation (wakefulness) and limbic system. Muscle relaxation: medulla. Ataxia: cerebellum.</div></div>
+  </div>
+
+  <h3>Benzodiazepine vs barbiturate at the same channel</h3>
+  <div class="paths">
+    <div class="path win"><span class="t">Benzodiazepine</span>Binds benzodiazepine site<span class="ar">↓</span><span class="ok">↑ frequency of opening</span><span class="ar">↓</span>Needs GABA<span class="note">low ceiling, safe</span></div>
+    <div class="path"><span class="t">Barbiturate</span>Binds its own site<span class="ar">↓</span><span class="hit">↑ duration of opening</span><span class="ar">↓</span>High dose opens it alone<span class="note">no ceiling, coma</span></div>
+  </div>
+
+  <h3>Drugs at the GABA-A receptor</h3>
+  <div class="rows">
+    <div class="row"><div class="k">GABA</div><div>Natural agonist at the GABA-A receptor: Cl⁻ influx</div></div>
+    <div class="row"><div class="k">Muscimol</div><div>Agonist at the GABA site</div></div>
+    <div class="row"><div class="k">Bicuculline</div><div>Competitive antagonist at the GABA site</div></div>
+    <div class="row"><div class="k">Picrotoxin</div><div>Blocks the Cl⁻ channel directly (non-competitive)</div></div>
+    <div class="row"><div class="k">Barbiturates</div><div>Agonist at an allosteric site: prolong GABA action; open the channel directly</div></div>
+    <div class="row"><div class="k">Alcohol, inhalational anaesthetics, propofol</div><div>Open the Cl⁻ channel directly; allosteric help for GABA</div></div>
+    <div class="row"><div class="k">Benzodiazepines</div><div>Agonist at the allosteric benzodiazepine site: help GABA</div></div>
+    <div class="row"><div class="k">β-carboline (DMCM)</div><div>Inverse agonist at the benzodiazepine site: blocks GABA action, causes convulsions</div></div>
+    <div class="row"><div class="k">Flumazenil</div><div>Competitive antagonist at the benzodiazepine site</div></div>
+  </div>
+
+  <h3>What this does: actions</h3>
+  <div class="rows">
+    <div class="row"><div class="k">Antianxiety</div><div>Relatively selective; not just a side effect of sedation. Drowsiness wears off with regular use, but anxiety relief stays.</div></div>
+    <div class="row"><div class="k">Muscle relaxant</div><div>Centrally acting, without impairing voluntary activity. Clonazepam and diazepam are strongest.</div></div>
+    <div class="row"><div class="k">Anticonvulsant</div><div>Clonazepam, diazepam, nitrazepam, lorazepam and flurazepam are strongest. Tolerance limits long-term use in epilepsy.</div></div>
+    <div class="row"><div class="k">Other</div><div>IV diazepam causes some analgesia (barbiturates cause hyperalgesia). Diazepam lowers night-time gastric acid and prevents stress ulcers.</div></div>
+  </div>
+  <h2>2. Routes</h2>
+  <div class="rows par">
+    <div class="row"><div class="k">Diazepam</div><div>Oral, IM, IV, rectal (suppository, solution)</div></div>
+    <div class="row"><div class="k">Midazolam</div><div>Oral, IM, IV, rectal (suppository)</div></div>
+    <div class="row"><div class="k">Lorazepam</div><div>Oral, IM, IV, sublingual</div></div>
+    <div class="row"><div class="k">Chlordiazepoxide</div><div>Oral, IM, IV</div></div>
+    <div class="row"><div class="k">Alprazolam</div><div>Oral</div></div>
+  </div>
+
+  <h2>3. Therapeutic uses</h2>
+  <div class="clinic">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFCF94" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3c-2 0-3 2-3 4 0 3 1 5 2 8 .6 2 1 5 2.5 5 1.4 0 1.5-3 2.2-5 .3-.9.6-1.3 1.3-1.3s1 .4 1.3 1.3c.7 2 .8 5 2.2 5 1.5 0 1.9-3 2.5-5 1-3 2-5 2-8 0-2-1-4-3-4-1.8 0-2.6 1-5 1S8.8 3 7 3z"/></svg>
+    <div><b>1. Dental sedation</b>Conscious sedation: relieves anxiety and pain. Small sedative doses alter consciousness, but the patient keeps a patent airway and responds to verbal commands.<div class="rows" style="margin-top:8px"><div class="row"><div class="k">Intravenous</div><div class="drugs">Midazolam, Diazepam</div></div><div class="row"><div class="k">Oral</div><div class="drugs">Midazolam, Diazepam, Nitrazepam</div></div><div class="row"><div class="k">Inhalation</div><div class="drugs">Nitrous oxide</div></div></div></div>
+  </div>
+  <div class="clinic">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFCF94" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3c-2 0-3 2-3 4 0 3 1 5 2 8 .6 2 1 5 2.5 5 1.4 0 1.5-3 2.2-5 .3-.9.6-1.3 1.3-1.3s1 .4 1.3 1.3c.7 2 .8 5 2.2 5 1.5 0 1.9-3 2.5-5 1-3 2-5 2-8 0-2-1-4-3-4-1.8 0-2.6 1-5 1S8.8 3 7 3z"/></svg>
+    <div><b>2. Bruxism</b>Grinding of the teeth, usually with jaw clenching. Causes permanent tooth damage, TMJ dysfunction and muscle pain, and severe headache.<br>Drug used: <b>diazepam</b>. Others: buspirone, gabapentin, propranolol, botulinum toxin, cyclobenzaprine (muscle relaxant).</div>
+  </div>
+  <div class="rows">
+    <div class="row"><div class="k">3. Insomnia</div><div>Shorter sleep latency, fewer awakenings, longer total sleep</div></div>
+    <div class="row"><div class="k">4. Anxiety</div><div>Acute stress disorder, generalised anxiety disorder (GAD), panic disorder, phobic disorder. Alprazolam also has antidepressant action.</div></div>
+    <div class="row"><div class="k">5. IV anaesthetic</div><div>Diazepam and midazolam for induction in adults; slow onset and recovery</div></div>
+    <div class="row"><div class="k">6. Preanaesthetic medication</div><div>Sedative, antianxiety and amnesic actions before surgery</div></div>
+    <div class="row"><div class="k">7. Anticonvulsant</div><div>Absence and myoclonic seizures, infantile spasms: clonazepam, clobazam (tolerance limits long-term use) · Status epilepticus: IV lorazepam, IV or rectal diazepam · Febrile convulsions: IV or rectal diazepam · Drug overdose convulsions · Organophosphate nerve agents (tabun, sarin, soman) · Tetanus</div></div>
+    <div class="row"><div class="k">8. Muscle relaxant</div><div>Muscle spasm; spastic disorders: multiple sclerosis, cerebral palsy, head injury, stroke</div></div>
+    <div class="row"><div class="k">9. Pre-procedure sedation</div><div>ECT, cardioversion, cardiac catheterisation, angiography, endoscopy</div></div>
+    <div class="row"><div class="k">10. Alcohol withdrawal</div><div>Controls the acute symptoms</div></div>
+    <div class="row"><div class="k">11. Adjuvant</div><div>Stress-induced peptic ulcer; anticipatory emesis</div></div>
+  </div>
+  <h3>Diazepam: 14 uses to remember</h3>
+  <div class="drugs">Dental sedation and bruxism, Insomnia, Anxiety disorders, Anticonvulsant: status epilepticus · febrile convulsions · drug poisoning · eclampsia · tetanus, IV anaesthetic, Preanaesthetic medication, Muscle relaxant: spastic disorders · cerebral palsy, Alcohol or sedative-hypnotic withdrawal, Before ECT · cardioversion · catheterisation · endoscopy, Emesis: anticancer drug-induced · anticipatory, Stress ulcers, Phobic disorders: agoraphobia · panic disorder · depression, Bruxism, Diagnostic aid in neurology and psychiatry</div>
+
+  <h3>3. Insomnia: effect on sleep</h3>
+  <p>They give a sense of deep, refreshing sleep by:</p>
+  <div class="card">
+    <div class="cause"><span>Sleep latency (time to fall asleep)</span><span class="down">↓</span></div>
+    <div class="cause"><span>Night awakenings</span><span class="down">↓</span></div>
+    <div class="cause"><span>Total sleep time</span><span class="up">↑</span></div>
+    <div class="cause"><span>Stage 2 NREM</span><span class="up">↑</span></div>
+    <div class="cause"><span>Stages 3 and 4 NREM</span><span class="down">↓</span></div>
+    <div class="cause"><span>REM sleep</span><span class="down">↓</span></div>
+    <div class="cause"><span>Body movements</span><span class="down">↓</span></div>
+  </div>
+  <p style="color:var(--muted);font-size:.9rem">They shorten each REM phase but allow more REM cycles, so total REM falls less than with barbiturates. Some tolerance to the sleep effect develops with nightly use.</p>
+
+  <h2>4. Adverse effects</h2>
+  <div class="rows">
+    <div class="row"><div class="k">Drug dependence</div><div>Stopping suddenly after long use causes withdrawal: rebound insomnia, dysphoria, irritability, bad dreams, tremors, restlessness, anxiety. <b>Taper the dose</b> when stopping.</div></div>
+    <div class="row"><div class="k">CNS</div><div>Drowsiness, light-headedness, anterograde amnesia, lassitude, hangover, confusion. Impaired judgement, motor skills and cognition: patients shouldn't drive.</div></div>
+    <div class="row"><div class="k">Other</div><div>Muscle weakness, blurred vision, vertigo, ataxia</div></div>
+    <div class="row"><div class="k">Also</div><div>Sleep walking and sleep driving with no memory of it · Paradoxical stimulation, nightmares, sweating (esp. flurazepam) · Elderly more prone to psychomotor effects · Aggravate sleep apnoea · Dry mouth, urinary incontinence</div></div>
+    <div class="row"><div class="k">Pregnancy</div><div><b>Floppy infant syndrome</b>: given in labour, benzodiazepines cause flaccidity and respiratory depression in the newborn. Flumazenil reverses it.<br><b>Cleft lip and palate</b>: reported with first-trimester use.</div></div>
+    <div class="row"><div class="k">Abuse</div><div>Low dependence liability: weak reinforcers, seldom abused alone. Withdrawal usually mild; worse with fast-eliminated drugs. Convulsions rare.</div></div>
+  </div>
+
+  <h3>Drug interactions</h3>
+  <div class="rows">
+    <div class="row"><div class="k">Other CNS depressants</div><div>Alcohol and other CNS depressants add up: excessive impairment</div></div>
+    <div class="row"><div class="k">Sodium valproate</div><div>Together they have caused psychotic symptoms</div></div>
+    <div class="row"><div class="k">CYP3A4 inhibitors</div><div>Ketoconazole, erythromycin prolong benzodiazepine action. Cimetidine, isoniazid and oral contraceptives also slow benzodiazepine metabolism.</div></div>
+  </div>
+  <div class="clinic">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFCF94" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3c-2 0-3 2-3 4 0 3 1 5 2 8 .6 2 1 5 2.5 5 1.4 0 1.5-3 2.2-5 .3-.9.6-1.3 1.3-1.3s1 .4 1.3 1.3c.7 2 .8 5 2.2 5 1.5 0 1.9-3 2.5-5 1-3 2-5 2-8 0-2-1-4-3-4-1.8 0-2.6 1-5 1S8.8 3 7 3z"/></svg>
+    <div><b>For your clinic</b>A patient on erythromycin given oral midazolam for sedation stays drowsy much longer: erythromycin slows its breakdown by CYP3A4.</div>
+  </div>
+
+  <h2>5. Antidote: flumazenil</h2>
+  <div class="def">A benzodiazepine analogue with almost no action of its own. It <b>competes</b> with benzodiazepines (and inverse agonists) at the benzodiazepine receptor and reverses their effects. It also blocks zolpidem-like Z compounds.</div>
+  <div class="rows par">
+    <div class="row"><div class="k">Route</div><div>Intravenous. Acts in seconds, lasts 1–2 hours; t½ about 1 hour.</div></div>
+    <div class="row"><div class="k">Reverse benzodiazepine anaesthesia</div><div>Patient wakes and regains control within a minute of 0.3–1 mg IV. Re-sedation may come within an hour.</div></div>
+    <div class="row"><div class="k">Benzodiazepine overdose</div><div>0.2 mg/min IV until conscious, max 1 mg; most respond within 5 min. Supportive care alone works for most.</div></div>
+    <div class="row"><div class="k">Hepatic encephalopathy</div><div>Used to reverse encephalopathy in liver failure</div></div>
+    <div class="row"><div class="k">Caution</div><div>Risky in mixed overdose with a tricyclic antidepressant, and in benzodiazepine-dependent people: can trigger severe withdrawal and seizures</div></div>
+    <div class="row"><div class="k">Side effects</div><div>Agitation, discomfort, fear, anxiety, coldness, withdrawal seizures</div></div>
+  </div>
+  <div class="clinic">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFCF94" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3c-2 0-3 2-3 4 0 3 1 5 2 8 .6 2 1 5 2.5 5 1.4 0 1.5-3 2.2-5 .3-.9.6-1.3 1.3-1.3s1 .4 1.3 1.3c.7 2 .8 5 2.2 5 1.5 0 1.9-3 2.5-5 1-3 2-5 2-8 0-2-1-4-3-4-1.8 0-2.6 1-5 1S8.8 3 7 3z"/></svg>
+    <div><b>For your clinic</b>Keep flumazenil ready whenever you give IV midazolam or diazepam for dental sedation. It reverses over-sedation in about a minute.</div>
+  </div>
+
+  <h2>More to know: advantages over barbiturates</h2>
+  <div class="rows">
+    <div class="row"><div class="k">Safety</div><div>Wide therapeutic index; risk of fatal CNS depression is minimal</div></div>
+    <div class="row"><div class="k">Sleep quality</div><div>Deep, refreshing sleep; less distortion of sleep stages; less rebound on stopping</div></div>
+    <div class="row"><div class="k">Breathing and heart</div><div>Don't affect respiratory or cardiovascular function at hypnotic doses. Higher doses cause mild respiratory depression and low BP, which matters only in lung or heart disease. IV injection lowers BP.</div></div>
+    <div class="row"><div class="k">Enzymes</div><div>Don't induce liver microsomal enzymes, so no enzyme-induction interactions</div></div>
+    <div class="row"><div class="k">Abuse</div><div>Lower abuse liability; tolerance mild; dependence and withdrawal less marked</div></div>
+    <div class="row"><div class="k">Antidote</div><div>Specific antagonist <b>flumazenil</b> is available</div></div>
+  </div>
+
+  <h2>Pharmacokinetics</h2>
+  <ul>
+    <li>Lipid solubility differs more than 50-fold between benzodiazepines, which drives most of the differences</li>
+    <li>IM absorption is irregular, except lorazepam</li>
+    <li>Plasma protein binding: flurazepam 10% to diazepam 99%</li>
+    <li>Lipid-soluble ones enter brain fast, then redistribute: a single dose can act briefly even with a long t½</li>
+    <li>Metabolised in liver by CYP3A4 and CYP2C19; many have active metabolites, so the real effect outlasts plasma t½</li>
+    <li>Diazepam undergoes enterohepatic circulation; most are excreted in urine as glucuronides</li>
+    <li>Cross the placenta and enter milk</li>
+  </ul>
+  <h3>Benzodiazepines used as hypnotics</h3>
+  <div class="rows">
+    <div class="row"><div class="k">Long acting<small>t½ in hours</small></div><div>Flurazepam 50–100 · Diazepam 30–60 · Nitrazepam 30 · Lorazepam 10–20<br><span style="color:var(--muted)">Chronic insomnia, insomnia with anxiety, frequent night awakening, night before surgery</span></div></div>
+    <div class="row"><div class="k">Short acting<small>t½ in hours</small></div><div>Alprazolam 12 · Triazolam 1–3<br><span style="color:var(--muted)">Trouble falling asleep; unfamiliar surroundings or unusual sleep timings</span></div></div>
+  </div>
+  <h3>Individual drugs</h3>
+  <div class="rows">
+    <div class="row"><div class="k">Diazepam</div><div>Oldest, all-purpose benzodiazepine. Active metabolites (desmethyldiazepam, oxazepam). Less rebound insomnia on stopping.</div></div>
+    <div class="row"><div class="k">Flurazepam</div><div>Very long t½: next-morning sedation, builds up over 3–5 days. Not for the elderly.</div></div>
+    <div class="row"><div class="k">Nitrazepam</div><div>Equipotent to diazepam. For frequent night awakenings when some daytime sedation is acceptable.</div></div>
+    <div class="row"><div class="k">Lorazepam</div><div>No active metabolite, so no build-up. Mainly for anxiety; also sleep in tense patients.</div></div>
+    <div class="row"><div class="k">Alprazolam</div><div>Mainly for anxiety; also a night-time hypnotic. Rapid absorption, short t½, few next-day effects.</div></div>
+    <div class="row"><div class="k">Triazolam</div><div>Very potent, peaks in under an hour. Early-morning waking with anxiety; anterograde amnesia. Withdrawn in the UK.</div></div>
+  </div>
+
+  <div class="next"><button class="go main" data-jump="cards">Flip 15 flashcards</button><button class="go" data-jump="mcq">10 MCQs</button></div>
+</section>
+<section data-topic="bzd" data-mode="cards" hidden></section>
+<section data-topic="bzd" data-mode="mcq" hidden></section>
+
+<!-- ===================== OTHERS ===================== -->
+<section data-topic="others" data-mode="notes" hidden>
+  <div class="hero">
+    <div class="eyebrow">Chapter 29 · Other hypnotics</div>
+    <h1>Z compounds, melatonin, orexin blockers, barbiturates</h1>
+    <p class="lede">Newer drugs built to fix the benzodiazepines' weak points, and the old barbiturates they replaced.</p>
+  </div>
+
+  <h2>Z compounds (non-benzodiazepine hypnotics)</h2>
+  <div class="def"><b>Mechanism:</b> agonists at the benzodiazepine site of the GABA-A receptor. Chemically different from benzodiazepines, but they act on a subset of benzodiazepine receptors, selectively those with the <b>α1 subunit</b>. Flumazenil blocks them.</div>
+  <div class="split">
+    <div class="pro"><h4>Why they're preferred for insomnia</h4><ul><li>Strong hypnotic-amnesic action</li><li>Weak antianxiety, muscle relaxant and anticonvulsant action</li><li>Lower abuse potential than hypnotic benzodiazepines</li><li>Shorter action: fewer next-day effects</li></ul></div>
+    <div class="con"><h4>Still remember</h4><ul><li>Short-term use only (mostly 1–4 weeks)</li><li>Some morning impairment possible</li><li>Overdose safety is like benzodiazepines</li></ul></div>
+  </div>
+  <div class="rows">
+    <div class="row"><div class="k">Zopiclone</div><div>First non-benzodiazepine hypnotic. Oral; for insomnia. ADR: <b>metallic taste</b>, dry mouth. <span style="color:var(--muted)">T½ 5–6 h; doesn't alter REM; used to wean insomniacs off regular benzodiazepines; also bitter after-taste, impaired judgement, milder dependence.</span></div></div>
+    <div class="row"><div class="k">Eszopiclone</div><div>Active S-enantiomer of zopiclone. Lengthens stage 2; little effect on sleep architecture. No active metabolite, t½ 6 h, little tolerance: for short-term and chronic insomnia.</div></div>
+    <div class="row"><div class="k">Zolpidem</div><div>α1-selective, strong hypnotic. Little effect on slow-wave sleep; little fading with nightly use; low abuse potential. t½ 2 h. For sleep-onset insomnia and night awakenings, 1–2 weeks. One of the most prescribed hypnotics.</div></div>
+    <div class="row"><div class="k">Zaleplon</div><div>Shortest acting (t½ 1 h; 30% bioavailability due to first-pass). For sleep-onset insomnia; can be taken late at night without morning sedation. Doesn't stop night awakenings.</div></div>
+    <div class="row"><div class="k">Etizolam</div><div>Benzodiazepine analogue with the full range of benzodiazepine actions; flumazenil reverses it. Abuse potential: a controlled drug in many countries. For short-term anxiety and sleep disorder.</div></div>
+  </div>
+
+  <h2>Melatonin group</h2>
+  <div class="rows par">
+    <div class="row"><div class="k">Melatonin</div><div>Hormone of the pineal gland, secreted at night. Binds <b>MT1 and MT2</b> receptors in the brain. Shortens time to fall asleep. Oral; used in <b>jet lag</b> and <b>insomnia in the elderly</b>. <span style="color:var(--muted)">MT1 and MT2 are GPCRs; it sets the circadian rhythm. Low doses (2–10 mg) don't depress the CNS. Also for shift workers; not a dependable hypnotic.</span></div></div>
+    <div class="row"><div class="k">Ramelteon</div><div>Selective MT1, MT2 agonist; more pronounced hypnotic effect than melatonin. Oral; useful for <b>sleep-onset difficulty</b>. <span style="color:var(--muted)">No GABA action, no next-morning sedation, no rebound or dependence. 8 mg half an hour before bed. Low bioavailability (first-pass), t½ 1–3 h. Fluvoxamine, ciprofloxacin and fluconazole raise its levels; rifampicin lowers them. ADR: fatigue, sleepiness, dizziness.</span></div></div>
+    <div class="row"><div class="k">Tasimelteon</div><div>Melatonin receptor agonist</div></div>
+    <div class="row"><div class="k">Agomelatine</div><div>MT1, MT2 agonist and 5-HT2C antagonist. Improves sleep quality; antidepressant effect comparable to paroxetine and venlafaxine. Liver enzymes may rise.</div></div>
+  </div>
+
+  <h2>Orexin antagonists (DORAs)</h2>
+  <div class="flow">
+    <div class="step"><b>Orexins</b>: neuropeptides from the lateral hypothalamus</div><div class="arrow">↓<small>act on OX1R and OX2R</small></div>
+    <div class="step">Promote <b>wakefulness</b></div><div class="arrow">↓<small>suvorexant blocks both receptors</small></div>
+    <div class="step ok">Sleep</div>
+  </div>
+  <p style="color:var(--muted);font-size:.9rem">Orexin levels are high by day and low at night. Narcolepsy is linked to loss of orexin neurons.</p>
+  <div class="rows">
+    <div class="row"><div class="k">Suvorexant</div><div>First DORA. Hastens sleep onset, maintains sleep, increases total sleep time. ADR: somnolence, muscle weakness, abnormal dreams, headache, worsening of depression. Less neurophysiological disturbance than zolpidem; low addiction and dependence potential. <span style="color:var(--muted)">T½ 12 h, metabolised by CYP3A4; night-time sleep walking or driving possible.</span></div></div>
+    <div class="row"><div class="k">Lemborexant</div><div>Another DORA. <span style="color:var(--muted)">T½ 17–19 h, twice as potent as suvorexant.</span></div></div>
+    <div class="row"><div class="k">Daridorexant</div><div>DORA</div></div>
+  </div>
+
+  <h2>Barbiturates</h2>
+  <div class="def">Prototype <b>global CNS depressants</b>, depressing all excitable cells. Popular until the 1960s; not used now to induce sleep or calm patients.</div>
+  <div class="rows">
+    <div class="row"><div class="k">Mechanism</div><div>Potentiate GABA by increasing the <b>duration</b> of Cl⁻ channel opening. At high doses they open the channel directly (GABA-mimetic), block glutamate AMPA receptors and depress Na⁺ and K⁺ channels: hence deep CNS depression.</div></div>
+    <div class="row"><div class="k">CNS</div><div>Dose-dependent: sedation → sleep → anaesthesia → coma. Cut REM and stages 3, 4; hangover next morning. Impair memory and judgement. Phenobarbitone has selective anticonvulsant action.</div></div>
+    <div class="row"><div class="k">Other actions</div><div>Higher doses depress breathing, lower BP and cardiac contractility. Toxic doses: respiratory failure, cardiovascular collapse.</div></div>
+    <div class="row"><div class="k">Pharmacokinetics</div><div>Thiopentone (highly lipid-soluble) enters brain instantly, then redistributes: wakes in 6–10 min. Phenobarbitone is excreted unchanged in urine, t½ 80–120 h; alkalinising urine speeds its excretion.</div></div>
+    <div class="row"><div class="k">Interactions</div><div>Induce liver enzymes (CYP3A4, 2D6, 2C9, UGT): speed up their own and other drugs' metabolism (warfarin, steroids, theophylline). Add to other CNS depressants.</div></div>
+    <div class="row"><div class="k">Adverse effects</div><div>Hangover, confusion. Tolerance and dependence; high abuse liability. Withdrawal: excitement, hallucinations, delirium, convulsions; deaths have occurred.</div></div>
+  </div>
+  <h3>Therapeutic uses</h3>
+  <div class="rows">
+    <div class="row"><div class="k">Anticonvulsant</div><div>Status epilepticus: phenobarbitone, thiopental sodium · Generalised tonic-clonic and partial seizures: phenobarbitone</div></div>
+    <div class="row"><div class="k">IV anaesthetic (induction)</div><div>Thiopental sodium (most commonly used), methohexital sodium</div></div>
+    <div class="row"><div class="k">Kernicterus</div><div>Phenobarbitone induces the liver enzymes that metabolise bilirubin: used for kernicterus and hyperbilirubinaemia in the newborn</div></div>
+  </div>
+  <h3>Acute barbiturate poisoning</h3>
+  <p>Flabby, comatose patient with shallow failing breathing, falling BP, cardiovascular collapse, renal shutdown. <b>No specific antidote.</b></p>
+  <div class="flow">
+    <div class="step">Gastric lavage; leave activated charcoal in the stomach</div><div class="arrow">↓</div>
+    <div class="step">Supportive: airway, assisted breathing, oxygen, IV fluids, vasopressors (dopamine)</div><div class="arrow">↓</div>
+    <div class="step">Alkaline diuresis (sodium bicarbonate): only for long-acting ones like phenobarbitone</div><div class="arrow">↓</div>
+    <div class="step ok">Haemodialysis or haemoperfusion: removes long- and short-acting ones</div>
+  </div>
+
+  <h2>Choosing a hypnotic</h2>
+  <div class="rows">
+    <div class="row"><div class="k">Transient insomnia<small>1–3 days</small></div><div>New place, noise, travel, jet lag, shift work. Use a rapidly eliminated hypnotic to avoid next-morning effects.</div></div>
+    <div class="row"><div class="k">Short-term<small>3–21 days</small></div><div>Stress, bereavement, illness. Low dose of a drug matched to the problem, for 2–3 weeks max. Anxiety prominent: a benzodiazepine whose action lasts into the day. Elderly: short acting.</div></div>
+    <div class="row"><div class="k">Chronic<small>over 3 weeks</small></div><div>Non-drug measures first: exercise, sleep hygiene, cut coffee and alcohol, treat the cause. Intermittent hypnotic (once every 3 days) in selected cases.</div></div>
+  </div>
+  <div class="card"><b>Rules worth an exam line</b><ul><li>Any hypnotic except zolpidem-like drugs stops working after a few days of regular use</li><li>Next-morning impairment comes from long action (hangover) or short action (rebound anxiety)</li><li>All hypnotics worsen obstructive sleep apnoea: contraindicated</li><li>The patient's own feeling of sleeping well and waking fresh matters most</li></ul></div>
+
+  <div class="next"><button class="go main" data-jump="cards">Flip 14 flashcards</button><button class="go" data-jump="mcq">10 MCQs</button></div>
+</section>
+<section data-topic="others" data-mode="cards" hidden></section>
+<section data-topic="others" data-mode="mcq" hidden></section>
+
+<!-- ===================== REVIEW ===================== -->
+<section data-topic="review" hidden>
+  <div class="hero">
+    <div class="eyebrow">For the reviewer</div>
+    <h1>Your review</h1>
+    <p class="lede">Round 2. All 8 points from your last review are done. These 3 are the changes to confirm. Mark each one, then tap Copy feedback and paste it in WhatsApp.</p>
+  </div>
+  <div id="reviewList"></div>
+  <h3>Anything else?</h3>
+  <textarea id="generalNote" placeholder="Wrong facts, missing topics, anything hard to read on your phone"></textarea>
+  <div class="copybox"><span class="status" id="copyStatus">0 of 3 checked</span><button class="btn primary" id="copyBtn">Copy feedback</button></div>
+  <pre class="fallback" id="copyFallback" hidden></pre>
+</section>
+
+</div></main>
+<footer class="gut"><div class="col">PharmDaily · Section 7 · Sedative-hypnotics review copy. Written from college notes and checked against KD Tripathi's <i>Essentials of Medical Pharmacology</i> (chapter 29), rewritten for revision. For BDS and MBBS students.</div></footer>
+
+<script>
+(function(){
+[['(prefers-color-scheme: light)','#0B0C1A'],['(prefers-color-scheme: dark)','#0B0C1A']].forEach(function(t){
+  var m=document.createElement('meta');m.name='theme-color';m.media=t[0];m.content=t[1];document.head.appendChild(m)});
+
+document.querySelectorAll('.drugs').forEach(function(el){
+  if(el.children.length) return;
+  var items=el.textContent.split(',').map(function(s){return s.trim()}).filter(Boolean);
+  el.textContent='';
+  items.forEach(function(t){var s=document.createElement('span');s.className='rx';var i=document.createElement('span');i.textContent=t;s.appendChild(i);el.appendChild(s)});
+});
+
+var CARDS={
+basics:[
+["Define a sedative.","A drug that reduces excitement and anxiety without inducing sleep. It decreases responsiveness and motor activity."],
+["Define a hypnotic.","A drug that induces and/or maintains sleep similar to normal arousable sleep."],
+["Grades of CNS depression with increasing dose?","Sedation → sleep (hypnosis) → general anaesthesia → coma."],
+["Most important use of sedative-hypnotics?","Treatment of insomnia."],
+["How long is one sleep cycle?","About 80–100 minutes: stages 0 → 4, then REM, repeated through the night."],
+["Which sleep stage takes the most time?","Stage 2 (unequivocal sleep): 40–50% of sleep time."],
+["What is slow-wave sleep?","Stages 3 and 4 of NREM sleep together."],
+["In which stage do night terrors occur?","Stage 4 (cerebral sleep), where δ waves dominate."],
+["Features of REM sleep?","Darting eye movements, dreams, irregular heart rate, BP and breathing, fully relaxed muscles. 20–30% of sleep time. Also called paradoxical sleep."],
+["Name four Z compounds.","Zolpidem, zopiclone, eszopiclone, zaleplon."],
+["Name three dual orexin receptor antagonists.","Suvorexant, lemborexant, daridorexant."],
+["Classify barbiturates by duration.","Long acting: phenobarbitone. Short acting: butobarbitone, pentobarbitone. Ultra-short acting: thiopentone, methohexitone."],
+["KD Tripathi's hypnotic benzodiazepines?","Diazepam, flurazepam, nitrazepam, alprazolam, lorazepam, triazolam."]
+],
+bzd:[
+["Mechanism of action of benzodiazepines?","Bind the GABA-A–benzodiazepine receptor–Cl⁻ channel complex → potentiate GABA → ↑ frequency of Cl⁻ channel opening → hyperpolarisation → CNS depression."],
+["Benzodiazepines vs barbiturates at the Cl⁻ channel?","Benzodiazepines increase the frequency of opening. Barbiturates increase the duration of opening, and at high doses open the channel directly."],
+["Why do benzodiazepines have a low ceiling effect?","They only help GABA; they don't open the Cl⁻ channel by themselves (no GABA-mimetic action)."],
+["Where on the GABA-A receptor do benzodiazepines bind?","At the interface of the α and γ subunits. GABA binds the β subunit."],
+["Effect of benzodiazepines on sleep stages?","↑ Stage 2; ↓ stages 3 and 4; ↓ REM; ↓ sleep latency and night awakenings; ↑ total sleep time."],
+["Advantages of benzodiazepines over barbiturates?","Wide therapeutic index, deep refreshing sleep, little respiratory or cardiovascular effect at hypnotic doses, no enzyme induction, lower abuse liability, specific antidote flumazenil."],
+["What is dental (conscious) sedation?","Sedation that relieves anxiety and pain while the patient keeps a patent airway and responds to verbal commands."],
+["Drugs for dental sedation?","IV: midazolam, diazepam. Oral: midazolam, diazepam, nitrazepam. Inhalation: nitrous oxide."],
+["What is bruxism and which benzodiazepine treats it?","Grinding of teeth with jaw clenching. Diazepam."],
+["Benzodiazepines for status epilepticus?","IV lorazepam, IV or rectal diazepam."],
+["Which benzodiazepine has no active metabolite and reliable IM absorption?","Lorazepam."],
+["Which benzodiazepine is unsuitable for the elderly because of next-day sedation?","Flurazepam (very long t½; builds up over 3–5 days)."],
+["Withdrawal symptoms of benzodiazepines?","Rebound insomnia, dysphoria, irritability, bad dreams, tremors, restlessness, anxiety. Taper the dose when stopping."],
+["What is floppy infant syndrome?","Flaccidity and respiratory depression in a newborn after benzodiazepines are given during labour. Flumazenil reverses it."],
+["Flumazenil: what, how and why?","Competitive benzodiazepine receptor antagonist. Given IV. Reverses benzodiazepine anaesthesia and treats benzodiazepine overdose."]
+],
+others:[
+["Mechanism of Z compounds?","Agonists at the benzodiazepine site of the GABA-A receptor, selective for receptors with the α1 subunit. Flumazenil blocks them."],
+["Characteristic side effect of zopiclone?","Metallic (bitter) taste. Also dry mouth."],
+["Shortest acting Z compound?","Zaleplon (t½ about 1 hour); can be taken late at night without morning sedation."],
+["Which Z compound is the S-enantiomer of zopiclone?","Eszopiclone."],
+["Where is melatonin produced and what receptors does it act on?","Pineal gland. MT1 and MT2 receptors in the brain."],
+["Uses of melatonin?","Jet lag and insomnia in the elderly."],
+["Ramelteon: mechanism and best use?","Selective MT1, MT2 agonist. Best for sleep-onset difficulty."],
+["What do orexins do?","Neuropeptides from the lateral hypothalamus that promote wakefulness via OX1R and OX2R."],
+["Mechanism of suvorexant?","Dual orexin receptor antagonist (DORA): blocks OX1R and OX2R."],
+["Adverse effects of suvorexant?","Somnolence, muscle weakness, abnormal dreams, headache, worsening of depression."],
+["Barbiturate used for IV induction of anaesthesia?","Thiopental sodium (most common); also methohexital sodium."],
+["Why is phenobarbitone used in neonatal jaundice?","It induces the liver enzymes that metabolise bilirubin."],
+["Treatment of acute barbiturate poisoning?","Gastric lavage with activated charcoal, supportive care, alkaline diuresis (long-acting only), haemodialysis or haemoperfusion. No specific antidote."],
+["Which condition is a contraindication for all hypnotics?","Obstructive sleep apnoea: all hypnotics worsen it."]
+]};
+
+var MCQ={
+basics:[
+["A drug that reduces anxiety without inducing sleep is a:",["Hypnotic","Sedative","General anaesthetic","Analgesic"],1,"A hypnotic induces or maintains sleep; a sedative calms without sleep."],
+["Which sleep stage occupies the largest share of sleep time?",["Stage 1","Stage 2","Stage 4","REM"],1,"Stage 2 takes 40–50% of sleep time."],
+["Slow-wave sleep is made up of:",["Stages 1 and 2","Stages 2 and 3","Stages 3 and 4","Stage 4 and REM"],2,"Stages 3 and 4 together are slow-wave sleep."],
+["Night terrors occur during:",["REM sleep","Stage 1","Stage 2","Stage 4"],3,"Stage 4, where δ waves dominate and the subject is hard to arouse."],
+["Dreams, darting eye movements and irregular heart rate occur in:",["Stage 2","Stage 3","REM sleep","Stage 0"],2,"REM (paradoxical) sleep."],
+["Which is a Z compound?",["Midazolam","Zolpidem","Ramelteon","Suvorexant"],1,"Zolpidem, zopiclone, eszopiclone and zaleplon are Z compounds."],
+["Suvorexant belongs to which group?",["Melatonin agonist","Z compound","Dual orexin receptor antagonist","Barbiturate"],2,"It blocks OX1R and OX2R orexin receptors."],
+["An ultra-short acting barbiturate is:",["Phenobarbitone","Butobarbitone","Pentobarbitone","Thiopentone"],3,"Thiopentone and methohexitone are ultra-short acting."],
+["In KD Tripathi's classification, which benzodiazepine is listed only as an anticonvulsant?",["Clobazam","Triazolam","Flurazepam","Nitrazepam"],0,"Clobazam is only in the anticonvulsant group; triazolam, flurazepam and nitrazepam are hypnotics."],
+["Increasing doses of a barbiturate produce, in order:",["Sleep, sedation, coma, anaesthesia","Sedation, sleep, anaesthesia, coma","Anaesthesia, sedation, sleep, coma","Sedation, anaesthesia, sleep, coma"],1,"Sedation → sleep → anaesthesia → coma."]
+],
+bzd:[
+["Benzodiazepines increase the:",["Duration of Cl⁻ channel opening","Frequency of Cl⁻ channel opening","Release of GABA","Synthesis of GABA"],1,"Benzodiazepines increase frequency; barbiturates increase duration."],
+["The benzodiazepine binding site lies at the interface of which subunits?",["α and β","β and γ","α and γ","Two β subunits"],2,"GABA binds β; benzodiazepines bind at the α/γ interface."],
+["Benzodiazepines have a lower ceiling than barbiturates because they:",["Are poorly absorbed","Don't open the Cl⁻ channel by themselves","Are rapidly metabolised","Don't cross the blood–brain barrier"],1,"They have no GABA-mimetic action; they only facilitate GABA."],
+["Benzodiazepines affect sleep by:",["Increasing stage 4","Increasing REM","Increasing stage 2","Increasing sleep latency"],2,"They increase stage 2 and decrease stages 3, 4 and REM."],
+["For IV conscious sedation in dentistry, the commonly used benzodiazepine is:",["Flurazepam","Midazolam","Clobazam","Alprazolam"],1,"IV midazolam or diazepam; oral midazolam, diazepam or nitrazepam."],
+["Drug used for bruxism:",["Diazepam","Lorazepam","Zolpidem","Phenobarbitone"],0,"Diazepam; buspirone, gabapentin, propranolol and botulinum toxin are alternatives."],
+["Drugs for status epilepticus include:",["Oral clobazam","IV lorazepam","Oral alprazolam","Ramelteon"],1,"IV lorazepam or IV/rectal diazepam."],
+["Which benzodiazepine has no active metabolite?",["Diazepam","Flurazepam","Lorazepam","Chlordiazepoxide"],2,"Lorazepam is conjugated directly, so no cumulative drowsiness."],
+["Floppy infant syndrome follows benzodiazepine use during:",["First trimester","Labour","Breastfeeding only","Neonatal period"],1,"Given in labour, benzodiazepines cause flaccidity and respiratory depression in the newborn."],
+["Flumazenil is a:",["Benzodiazepine receptor agonist","Benzodiazepine receptor inverse agonist","Competitive benzodiazepine receptor antagonist","GABA site antagonist"],2,"It competes at the benzodiazepine site and reverses benzodiazepine effects."]
+],
+others:[
+["Z compounds act selectively on GABA-A receptors containing the:",["α1 subunit","α2 subunit","γ subunit only","β subunit only"],0,"α1 mediates sedative-hypnotic and amnesic actions."],
+["Metallic taste is a typical side effect of:",["Zolpidem","Zopiclone","Ramelteon","Suvorexant"],1,"Zopiclone causes a metallic or bitter after-taste."],
+["The shortest acting Z compound is:",["Zopiclone","Eszopiclone","Zolpidem","Zaleplon"],3,"Zaleplon, t½ about 1 hour."],
+["Melatonin is used for:",["Status epilepticus","Jet lag","Alcohol withdrawal","Muscle spasm"],1,"Jet lag and insomnia in the elderly."],
+["Ramelteon acts on:",["GABA-A receptors","MT1 and MT2 receptors","Orexin receptors","5-HT3 receptors"],1,"It is a selective melatonin receptor agonist."],
+["Orexins promote:",["Sleep","Wakefulness","Muscle relaxation","Appetite loss"],1,"Orexins from the lateral hypothalamus promote wakefulness via OX1R and OX2R."],
+["Worsening of depression is a reported adverse effect of:",["Suvorexant","Melatonin","Zaleplon","Flumazenil"],0,"Suvorexant can worsen depression and suicidal thoughts."],
+["The barbiturate most commonly used for IV induction is:",["Phenobarbitone","Thiopental sodium","Butobarbitone","Pentobarbitone"],1,"Thiopental sodium; methohexital is the alternative."],
+["Phenobarbitone helps in neonatal hyperbilirubinaemia by:",["Binding bilirubin","Inducing liver enzymes that metabolise bilirubin","Increasing bile flow only","Blocking haemolysis"],1,"Enzyme induction speeds bilirubin metabolism."],
+["Alkaline diuresis helps in poisoning with:",["Thiopentone","Pentobarbitone","Phenobarbitone","Any barbiturate equally"],2,"Only long-acting barbiturates excreted mainly by the kidney, like phenobarbitone."]
+]};
+
+var FLAGS=[
+["f1","Basics","Classification now follows KD Tripathi","The benzodiazepine lists are now KDT's: hypnotic (diazepam, flurazepam, nitrazepam, alprazolam, lorazepam, triazolam), antianxiety (diazepam, chlordiazepoxide, oxazepam, lorazepam, alprazolam, clonazepam), anticonvulsant (clonazepam, clobazam, diazepam, lorazepam). Your other rows (IV anaesthetic, preanaesthetic, muscle relaxant, adjuvants) are covered under Therapeutic uses. Is this right?"],
+["f2","Benzodiazepines","Cleft lip and palate added","Added under Pregnancy: \"Cleft lip and palate: reported with first-trimester use.\" It isn't in KDT and studies disagree, so I worded it as reported, not proven. Is this wording right?"],
+["f3","Benzodiazepines","New order of the benzodiazepine tab","Now: 1 Mechanism of action, 2 Routes, 3 Therapeutic uses, 4 Adverse effects, 5 Antidote (flumazenil). Actions sit inside Mechanism, the sleep effects sit under Uses (insomnia), interactions under Adverse effects. Advantages over barbiturates and pharmacokinetics moved to the end. Is this right?"]
+];
+
+function buildCards(topic){
+  var sec=document.querySelector('[data-topic="'+topic+'"][data-mode="cards"]');
+  var list=CARDS[topic].slice(), i=0, marks=[];
+  sec.innerHTML='<div class="fc-top"><b style="color:var(--ink-strong)">Flashcards</b><span class="count"></span></div><div class="dots"></div>'+
+    '<button class="fc" aria-label="Flip card"><div class="fc-inner"><div class="face front"><span class="lab">Question</span><div class="q"></div><span class="hint">Tap to reveal</span></div><div class="face back"><span class="lab">Answer</span><div class="a"></div><span class="hint">Tap to flip back</span></div></div></button>'+
+    '<div class="fc-btns"><button class="btn" data-a="again">Again</button><button class="btn primary" data-a="got">Got it</button></div>'+
+    '<div style="display:flex;justify-content:space-between"><button class="btn quiet" data-a="prev">Previous</button><button class="btn quiet" data-a="shuffle">Shuffle</button></div>';
+  var fc=sec.querySelector('.fc'),q=sec.querySelector('.q'),a=sec.querySelector('.a'),c=sec.querySelector('.count'),dots=sec.querySelector('.dots');
+  function show(){fc.classList.remove('flip');q.textContent=list[i][0];a.textContent=list[i][1];c.textContent=(i+1)+' / '+list.length;
+    dots.innerHTML='';list.forEach(function(_,k){var d=document.createElement('i');if(marks[k])d.className=marks[k];else if(k===i)d.className='cur';dots.appendChild(d)})}
+  fc.addEventListener('click',function(){fc.classList.toggle('flip')});
+  sec.addEventListener('click',function(e){var b=e.target.closest('[data-a]');if(!b)return;var act=b.dataset.a;
+    if(act==='got'||act==='again'){marks[i]=act;i=(i+1)%list.length}
+    if(act==='prev')i=(i-1+list.length)%list.length;
+    if(act==='shuffle'){list=list.sort(function(){return Math.random()-.5});i=0;marks=[]}
+    show()});
+  show();
+}
+function buildMcq(topic){
+  var sec=document.querySelector('[data-topic="'+topic+'"][data-mode="mcq"]'),qs=MCQ[topic];
+  var head=document.createElement('div');head.className='mcq-head';
+  head.innerHTML='<b class="count">Score 0 / 0</b><button class="btn" data-reset>Start again</button>';sec.appendChild(head);
+  var box=document.createElement('div');sec.appendChild(box);
+  function render(){var answered=0,right=0;box.innerHTML='';head.querySelector('.count').textContent='Score 0 / 0';
+    qs.forEach(function(item,n){var d=document.createElement('div');d.className='q-card';
+      d.innerHTML='<div class="qn">Question '+(n+1)+' of '+qs.length+'</div><div class="qt"></div>';d.querySelector('.qt').textContent=item[0];
+      item[1].forEach(function(o,k){var b=document.createElement('button');b.className='opt';b.textContent=o;
+        b.addEventListener('click',function(){var opts=d.querySelectorAll('.opt');opts.forEach(function(x){x.disabled=true});
+          opts[item[2]].classList.add('right');if(k!==item[2])b.classList.add('wrong');else right++;answered++;
+          var e=document.createElement('div');e.className='expl';e.textContent=(k===item[2]?'Correct. ':'Not quite. ')+item[3];d.appendChild(e);
+          head.querySelector('.count').textContent='Score '+right+' / '+answered});d.appendChild(b)});
+      box.appendChild(d)})}
+  head.querySelector('[data-reset]').addEventListener('click',render);render();
+}
+['basics','bzd','others'].forEach(function(t){buildCards(t);buildMcq(t)});
+
+var KEY='pd-s7-sedhyp-review-v2',state={};
+try{state=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){state={}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+var rl=document.getElementById('reviewList');
+FLAGS.forEach(function(f,n){var s=state[f[0]]||{};
+  var d=document.createElement('div');d.className='ri';d.id=f[0];
+  d.innerHTML='<div class="where">Check '+(n+1)+' · '+f[1]+'</div><b></b><p></p><div class="choice"><button class="ok">Correct</button><button class="fix">Needs change</button></div><textarea placeholder="What should it say?"></textarea>';
+  d.querySelector('b').textContent=f[2];d.querySelector('p').textContent=f[3];
+  var ok=d.querySelector('.ok'),fix=d.querySelector('.fix'),ta=d.querySelector('textarea');ta.id='note-'+f[0];ta.value=s.note||'';
+  function paint(){ok.setAttribute('aria-pressed',s.v==='ok');fix.setAttribute('aria-pressed',s.v==='fix');status()}
+  ok.onclick=function(){s.v='ok';state[f[0]]=s;save();paint()};
+  fix.onclick=function(){s.v='fix';state[f[0]]=s;save();paint();ta.focus()};
+  ta.oninput=function(){s.note=ta.value;state[f[0]]=s;save()};
+  rl.appendChild(d);paint()});
+var gn=document.getElementById('generalNote');gn.value=state.general||'';gn.oninput=function(){state.general=gn.value;save()};
+function status(){var c=FLAGS.filter(function(f){return state[f[0]]&&state[f[0]].v}).length;
+  document.getElementById('copyStatus').textContent=c+' of '+FLAGS.length+' checked';
+  document.getElementById('flagCount').textContent=(FLAGS.length-c)?String(FLAGS.length-c):'✓'}
+document.getElementById('copyBtn').onclick=function(){
+  var lines=['PharmDaily Sedative-Hypnotics review (round 2)',''];
+  FLAGS.forEach(function(f,n){var s=state[f[0]]||{};lines.push((n+1)+'. '+f[2]+': '+(s.v==='ok'?'Correct':s.v==='fix'?'Needs change':'Not checked')+(s.note?' — '+s.note:''))});
+  if(state.general)lines.push('','Other notes: '+state.general);
+  var txt=lines.join('\n'),st=document.getElementById('copyStatus'),fb=document.getElementById('copyFallback');
+  function fallback(){fb.hidden=false;fb.textContent=txt;var r=document.createRange();r.selectNodeContents(fb);var sel=getSelection();sel.removeAllRanges();sel.addRange(r);st.textContent='Copy the selected text below'}
+  try{navigator.clipboard.writeText(txt).then(function(){st.textContent='Copied. Paste it in WhatsApp.'},fallback)}catch(e){fallback()}
+};
+
+
+var mode='notes',topic='basics',modes=document.getElementById('modes');
+function apply(){document.querySelectorAll('main section').forEach(function(s){var t=s.dataset.topic,m=s.dataset.mode;
+    s.hidden=topic==='review'?t!=='review':!(t===topic&&m===mode)});
+  modes.hidden=topic==='review';
+  document.querySelectorAll('.pills a').forEach(function(a){a.removeAttribute('aria-current');if(a.dataset.t===topic)a.setAttribute('aria-current','page')});
+  modes.querySelectorAll('button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.m===mode)})}
+function fromHash(){var h=location.hash.slice(1);topic=['basics','bzd','others','review'].indexOf(h)>-1?h:'basics';apply()}
+modes.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;mode=b.dataset.m;apply();window.scrollTo(0,0)});
+document.addEventListener('click',function(e){var j=e.target.closest('[data-jump]');if(j){mode=j.dataset.jump;apply();window.scrollTo(0,0);return}
+  var a=e.target.closest('[data-go]');if(!a)return;setTimeout(function(){var t=document.getElementById(a.dataset.go);if(t)t.scrollIntoView({behavior:'smooth'})},60)});
+window.addEventListener('hashchange',function(){fromHash();window.scrollTo(0,0)});
+fromHash();
+})();
+</script>
+
+</body></html>
