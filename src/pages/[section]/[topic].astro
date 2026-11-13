@@ -3,7 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import NotesBody from '../../components/NotesBody.astro';
 import Flashcards from '../../components/Flashcards.astro';
 import Mcq from '../../components/Mcq.astro';
-import { SECTIONS, isLive, sectionPath, topicPath, type Section, type Topic } from '../../lib/sections';
+import { SECTIONS, isLive, sectionPath, topicPath, formatMonth, type Section, type Topic } from '../../lib/sections';
 import { getFlashcards, getMcqs, getNotes } from '../../lib/content';
 
 export function getStaticPaths() {
@@ -40,6 +40,7 @@ const storeKey = `pd:s${s.n}:${t.slug}`;
       <p class="eyebrow">{notes.hero.eyebrow}</p>
       <h1>{notes.hero.title}</h1>
       <p class="lede" set:html={notes.hero.lede} />
+      <p class="updated">Last reviewed: <time datetime={t.reviewed}>{formatMonth(t.reviewed)}</time></p>
     </header>
   </div>
 

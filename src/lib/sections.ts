@@ -5,6 +5,7 @@ export interface Topic {
   slug: string; // folder name under content/section-<n>/
   title: string; // shown in navigation and cards
   short: string; // compact label for the topic switcher
+  reviewed: string; // month the reviewer last approved it, YYYY-MM
 }
 
 export interface Section {
@@ -18,9 +19,9 @@ export const SECTIONS: Section[] = [
     n: 1,
     title: 'General Pharmacology',
     topics: [
-      { slug: 'routes-of-administration', title: 'Routes of administration', short: 'Routes' },
-      { slug: 'pharmacokinetics', title: 'Pharmacokinetics', short: 'Kinetics' },
-      { slug: 'pharmacodynamics', title: 'Pharmacodynamics', short: 'Dynamics' },
+      { slug: 'routes-of-administration', title: 'Routes of administration', short: 'Routes', reviewed: '2026-11' },
+      { slug: 'pharmacokinetics', title: 'Pharmacokinetics', short: 'Kinetics', reviewed: '2026-11' },
+      { slug: 'pharmacodynamics', title: 'Pharmacodynamics', short: 'Dynamics', reviewed: '2026-11' },
     ],
   },
   { n: 2, title: 'Autonomic Nervous System', topics: [] },
@@ -28,7 +29,7 @@ export const SECTIONS: Section[] = [
     n: 3,
     title: 'Autacoids and NSAIDs',
     topics: [
-      { slug: 'nsaids', title: 'NSAIDs and antipyretic-analgesics', short: 'NSAIDs' },
+      { slug: 'nsaids', title: 'NSAIDs and antipyretic-analgesics', short: 'NSAIDs', reviewed: '2026-11' },
     ],
   },
   { n: 4, title: 'Respiratory System', topics: [] },
@@ -46,4 +47,7 @@ export const SECTIONS: Section[] = [
 
 export const isLive = (s: Section) => s.topics.length > 0;
 export const sectionPath = (s: Section) => `/section-${s.n}/`;
+// '2026-11' -> 'Nov 2026'
+export const formatMonth = (ym: string) =>
+  new Date(`${ym}-01T00:00:00Z`).toLocaleDateString('en-GB', { month: 'short', year: 'numeric', timeZone: 'UTC' });
 export const topicPath = (s: Section, t: Topic) => `/section-${s.n}/${t.slug}/`;
