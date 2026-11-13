@@ -352,7 +352,7 @@ input, textarea, select { font-size: 16px; }
   --c: var(--primary); position: relative; display: flex; align-items: center; justify-content: center; text-align: center;
   min-height: 76px; padding: 10px 8px; border-radius: 58% 42% 52% 48% / 54% 58% 42% 46%;
   background: var(--surface); border: 1.5px solid var(--c); color: var(--heading); text-decoration: none;
-  font-size: 0.8rem; font-weight: 700; line-height: 1.2; overflow-wrap: break-word;
+  font-size: 0.8rem; font-weight: 700; line-height: 1.2; overflow-wrap: break-word; hyphens: auto; -webkit-hyphens: auto;
 }
 .cloud.u { --c: var(--good); }
 .cloud.r { --c: var(--bad); }
