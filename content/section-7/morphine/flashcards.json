@@ -1,0 +1,62 @@
+[
+  {
+    "q": "Which kind of pain does morphine relieve best?",
+    "a": "Dull, poorly localised visceral pain, better than sharp somatic pain. Neuritic pain responds less."
+  },
+  {
+    "q": "Where does morphine act spinally?",
+    "a": "Substantia gelatinosa of the dorsal horn: inhibits release of glutamate and substance P from primary afferents."
+  },
+  {
+    "q": "How does morphine sedation differ from hypnotic sedation?",
+    "a": "Drowsiness and indifference without motor incoordination or ataxia. No anticonvulsant action."
+  },
+  {
+    "q": "Cause of death in morphine poisoning?",
+    "a": "Respiratory failure."
+  },
+  {
+    "q": "Why do morphine users have pinpoint pupils?",
+    "a": "Stimulation of the Edinger-Westphal nucleus of the III nerve (removal of GABAergic inhibition). No tolerance develops to miosis."
+  },
+  {
+    "q": "Why are emetics useless in morphine poisoning?",
+    "a": "Larger doses of morphine directly depress the vomiting centre."
+  },
+  {
+    "q": "Mechanisms of morphine constipation?",
+    "a": "↑ tone, ↓ propulsion, sphincter spasm, ↓ secretions with more fluid absorption, central inattention to defecation reflex. No tolerance."
+  },
+  {
+    "q": "Effect of morphine on the biliary tract?",
+    "a": "Spasm of the sphincter of Oddi; intrabiliary pressure rises several fold, may cause biliary colic."
+  },
+  {
+    "q": "Active metabolite of morphine?",
+    "a": "Morphine-6-glucuronide: more potent than morphine at μ, accumulates on chronic dosing."
+  },
+  {
+    "q": "Treatment of apnoea in a newborn after morphine in labour?",
+    "a": "Naloxone 10 µg/kg injected into the umbilical cord."
+  },
+  {
+    "q": "Lethal dose of morphine in a non-tolerant adult?",
+    "a": "About 250 mg. 50 mg IM produces serious toxicity."
+  },
+  {
+    "q": "Why is gastric lavage done even when morphine was injected?",
+    "a": "Morphine (a base) passes into acid gastric juice, ionises and can't diffuse back."
+  },
+  {
+    "q": "To which morphine actions does tolerance NOT develop?",
+    "a": "Constipation, miosis and convulsant action."
+  },
+  {
+    "q": "Why is morphine contraindicated in head injury?",
+    "a": "Raises intracranial tension (CO₂ retention), marked respiratory depression, and vomiting, miosis and altered mentation hide the patient's progress."
+  },
+  {
+    "q": "How does morphine help acute left ventricular failure?",
+    "a": "↓ preload by venodilatation, shifts blood out of the lungs, relieves air hunger, reduces sympathetic drive and cardiac work."
+  }
+]

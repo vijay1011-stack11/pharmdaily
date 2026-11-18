@@ -1,0 +1,112 @@
+[
+  {
+    "q": "Which is a semisynthetic opioid?",
+    "options": [
+      "Fentanyl",
+      "Codeine",
+      "Heroin",
+      "Methadone"
+    ],
+    "answer": 2,
+    "explanation": "Heroin (diacetylmorphine), pholcodine and ethylmorphine are semisynthetic."
+  },
+  {
+    "q": "Dysphoria and psychotomimetic effects are mainly mediated by:",
+    "options": [
+      "μ receptors",
+      "κ receptors",
+      "δ receptors",
+      "NOP receptors"
+    ],
+    "answer": 1,
+    "explanation": "κ agonism produces dysphoria; naloxone-resistant effects are put down to σ."
+  },
+  {
+    "q": "Physical dependence of the morphine type is mediated by:",
+    "options": [
+      "μ receptors",
+      "κ receptors",
+      "δ receptors",
+      "σ receptors"
+    ],
+    "answer": 0,
+    "explanation": "μ: morphine-type dependence. κ: nalorphine-type."
+  },
+  {
+    "q": "The endogenous ligand of the κ receptor is:",
+    "options": [
+      "β-endorphin",
+      "Met-enkephalin",
+      "Dynorphin A",
+      "Endomorphin-1"
+    ],
+    "answer": 2,
+    "explanation": "Dynorphin A; enkephalins prefer δ, endomorphins and β-endorphin prefer μ."
+  },
+  {
+    "q": "Opioid receptors are:",
+    "options": [
+      "Ligand-gated ion channels",
+      "G-protein coupled receptors",
+      "Tyrosine kinase receptors",
+      "Nuclear receptors"
+    ],
+    "answer": 1,
+    "explanation": "All three are Gi/Go-coupled GPCRs."
+  },
+  {
+    "q": "κ receptor activation mainly reduces transmitter release by:",
+    "options": [
+      "Opening K⁺ channels",
+      "Closing N-type Ca²⁺ channels",
+      "Raising cAMP",
+      "Opening Cl⁻ channels"
+    ],
+    "answer": 1,
+    "explanation": "κ mainly closes N-type Ca²⁺ channels; μ and δ mainly open K⁺ channels."
+  },
+  {
+    "q": "β-endorphin is derived from:",
+    "options": [
+      "Proenkephalin",
+      "Prodynorphin",
+      "Pro-opiomelanocortin",
+      "Proinsulin"
+    ],
+    "answer": 2,
+    "explanation": "POMC also gives ACTH, γ-MSH and lipotropins."
+  },
+  {
+    "q": "Which is a natural opium alkaloid?",
+    "options": [
+      "Pethidine",
+      "Codeine",
+      "Methadone",
+      "Fentanyl"
+    ],
+    "answer": 1,
+    "explanation": "Natural opium alkaloids: morphine and codeine."
+  },
+  {
+    "q": "Tramadol is classified as a:",
+    "options": [
+      "Natural opium alkaloid",
+      "Semisynthetic opioid",
+      "Synthetic opioid",
+      "Agonist-antagonist"
+    ],
+    "answer": 2,
+    "explanation": "Synthetic: pethidine, methadone, fentanyl, remifentanil, tramadol, tapentadol."
+  },
+  {
+    "q": "Buprenorphine is classified as a:",
+    "options": [
+      "Pure antagonist",
+      "Partial μ agonist + κ antagonist",
+      "Full μ agonist",
+      "κ agonist only"
+    ],
+    "answer": 1,
+    "explanation": "It is a complex action opioid."
+  }
+]

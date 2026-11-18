@@ -1,0 +1,50 @@
+[
+  {
+    "q": "Naloxone: mechanism?",
+    "a": "Competitive antagonist at all opioid receptors; blocks μ at much lower doses than κ or δ. No agonist action."
+  },
+  {
+    "q": "Effects of naloxone 0.4–0.8 mg IV in a morphine-treated patient?",
+    "a": "Analgesia reversed, breathing normalised (even stimulated), pupils dilate; sedation reverses less completely."
+  },
+  {
+    "q": "What does naloxone do in someone who hasn't taken an opioid?",
+    "a": "Nothing noticeable: no subjective or autonomic effects, no dependence."
+  },
+  {
+    "q": "Naloxone dose for neonatal asphyxia from opioids given in labour?",
+    "a": "10 µg/kg injected into the umbilical cord."
+  },
+  {
+    "q": "Naloxone dose and route in morphine poisoning?",
+    "a": "0.4–0.8 mg IV every 2–3 min until breathing picks up, max 10 mg."
+  },
+  {
+    "q": "Why must naloxone doses be repeated?",
+    "a": "Short duration (1–3 h; t½ 1 h) — the opioid can outlast it."
+  },
+  {
+    "q": "Naloxone by mouth?",
+    "a": "Inactive orally due to high first-pass metabolism."
+  },
+  {
+    "q": "Uses of naltrexone?",
+    "a": "Opioid blockade therapy in post-addicts (50 mg/day oral) and preventing relapse of heavy drinking."
+  },
+  {
+    "q": "Peripheral μ antagonists and their uses?",
+    "a": "Methylnaltrexone: opioid-induced constipation. Alvimopan: postoperative ileus after bowel resection."
+  },
+  {
+    "q": "Which opioid does naloxone not reverse effectively?",
+    "a": "Buprenorphine: it binds receptors too tightly to be displaced."
+  },
+  {
+    "q": "Naltrexone vs naloxone?",
+    "a": "Naltrexone is more potent, orally active and lasts 1–2 days. Naloxone is inactive orally and lasts 1–3 h."
+  },
+  {
+    "q": "Advantage of nalmefene over naltrexone?",
+    "a": "No hepatotoxicity, better oral bioavailability, longer acting."
+  }
+]

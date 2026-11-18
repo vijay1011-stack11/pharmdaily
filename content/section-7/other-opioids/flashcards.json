@@ -1,0 +1,62 @@
+[
+  {
+    "q": "How does codeine produce analgesia?",
+    "a": "It is demethylated to morphine by CYP2D6. It fails in CYP2D6 poor metabolisers."
+  },
+  {
+    "q": "Codeine dose equal in analgesia to 600 mg aspirin?",
+    "a": "60 mg codeine."
+  },
+  {
+    "q": "Main side effect and clinical use of codeine besides analgesia?",
+    "a": "Constipation; used as an antitussive (10–30 mg) and for diarrhoea."
+  },
+  {
+    "q": "Why is heroin more addicting than morphine?",
+    "a": "More lipid-soluble, reaches the brain faster: more euphoric, especially IV. About 3× more potent."
+  },
+  {
+    "q": "Pethidine differs from morphine in heart rate how?",
+    "a": "Causes tachycardia (antimuscarinic) instead of bradycardia."
+  },
+  {
+    "q": "Toxic metabolite of pethidine?",
+    "a": "Norpethidine: excitatory, causes tremors, myoclonus, convulsions. Builds up in renal failure."
+  },
+  {
+    "q": "Dangerous interactions of pethidine?",
+    "a": "Nonselective MAO inhibitors (norpethidine excess, excitement) and SSRIs (serotonin syndrome)."
+  },
+  {
+    "q": "Current use of pethidine?",
+    "a": "Control of shivering after anaesthesia or during IV infusions."
+  },
+  {
+    "q": "How potent is fentanyl compared with morphine?",
+    "a": "80–100 times more potent, for both analgesia and respiratory depression."
+  },
+  {
+    "q": "Transdermal fentanyl: use and patch interval?",
+    "a": "Cancer and chronic pain; patch changed every 3 days."
+  },
+  {
+    "q": "Shortest-acting fentanyl congener?",
+    "a": "Remifentanil: 10–15 min after IV, used only in anaesthesia."
+  },
+  {
+    "q": "Two key features of methadone?",
+    "a": "High oral activity (oral:parenteral 1:2) and firm tissue binding (t½ 24–48 h on chronic use)."
+  },
+  {
+    "q": "Main use of methadone?",
+    "a": "Substitution and maintenance therapy for opioid dependence."
+  },
+  {
+    "q": "Mechanism of tramadol?",
+    "a": "Weak μ agonist plus inhibition of NA and 5-HT reuptake (and 5-HT release). Only partly reversed by naloxone."
+  },
+  {
+    "q": "Contraindications to tramadol?",
+    "a": "Epilepsy (lowers seizure threshold) and patients on SSRIs (serotonin syndrome)."
+  }
+]

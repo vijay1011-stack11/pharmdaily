@@ -1,0 +1,112 @@
+[
+  {
+    "q": "Pentazocine is a:",
+    "options": [
+      "Pure μ agonist",
+      "κ agonist and weak μ antagonist",
+      "Pure antagonist",
+      "Partial μ agonist only"
+    ],
+    "answer": 1,
+    "explanation": "Marked κ agonist with weak μ antagonism."
+  },
+  {
+    "q": "Which should be avoided in myocardial infarction?",
+    "options": [
+      "Nalbuphine",
+      "Pentazocine",
+      "Morphine",
+      "Buprenorphine"
+    ],
+    "answer": 1,
+    "explanation": "Pentazocine raises heart rate and BP. Morphine, nalbuphine and buprenorphine are used in MI."
+  },
+  {
+    "q": "Psychotomimetic effects of pentazocine appear above:",
+    "options": [
+      "10 mg",
+      "30 mg",
+      "60 mg IM",
+      "200 mg"
+    ],
+    "answer": 2,
+    "explanation": "Higher doses are unpleasant and nalorphine-like."
+  },
+  {
+    "q": "No further analgesia or respiratory depression occurs with nalbuphine above:",
+    "options": [
+      "10 mg",
+      "30 mg IM",
+      "60 mg",
+      "100 mg"
+    ],
+    "answer": 1,
+    "explanation": "It shows a ceiling effect at 30 mg IM."
+  },
+  {
+    "q": "Buprenorphine is:",
+    "options": [
+      "A full μ agonist",
+      "A partial μ agonist and κ antagonist",
+      "A κ agonist",
+      "A pure antagonist"
+    ],
+    "answer": 1,
+    "explanation": "Partial μ agonist, 25× more potent than morphine, with a ceiling."
+  },
+  {
+    "q": "Buprenorphine is not used in labour because:",
+    "options": [
+      "It stops contractions",
+      "Its neonatal respiratory depression isn't reversed well by naloxone",
+      "It is teratogenic",
+      "It acts too briefly"
+    ],
+    "answer": 1,
+    "explanation": "Tight receptor binding resists naloxone."
+  },
+  {
+    "q": "Nalorphine is not used clinically because it causes:",
+    "options": [
+      "Severe constipation",
+      "Dysphoria and psychotomimetic effects",
+      "Hepatotoxicity",
+      "Hypertension"
+    ],
+    "answer": 1,
+    "explanation": "It is a κ agonist; its κ actions are dysphoric and psychotomimetic."
+  },
+  {
+    "q": "Compared with pentazocine, butorphanol:",
+    "options": [
+      "Raises BP more",
+      "Is less potent",
+      "Is more potent and doesn't raise BP",
+      "Is a pure antagonist"
+    ],
+    "answer": 2,
+    "explanation": "2 mg butorphanol = 30 mg pentazocine; BP isn't raised, but it is still avoided in cardiac ischaemia."
+  },
+  {
+    "q": "Buprenorphine is effective by which route?",
+    "options": [
+      "Sublingual",
+      "Inhalational",
+      "Topical on the eye",
+      "Rectal only"
+    ],
+    "answer": 0,
+    "explanation": "Good sublingual efficacy; also IM, SC or slow IV."
+  },
+  {
+    "q": "In a highly morphine-dependent person, buprenorphine:",
+    "options": [
+      "Fully substitutes for morphine",
+      "Precipitates withdrawal",
+      "Has no effect",
+      "Causes only euphoria"
+    ],
+    "answer": 1,
+    "explanation": "As a partial μ agonist it substitutes only at low levels of dependence."
+  }
+]

@@ -1,0 +1,1120 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>PharmDaily Opioids</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap">
+<style>
+/* Night direction: one dark navy-violet world. Phone-first single column; sticky glass header; diagrams are stacking blocks; indigo = enteral/primary, amber = parenteral/secondary. Deliberately single-theme. */
+:root{
+  color-scheme:dark;
+  --bg:#0B0C1A; --surface:#10122A; --glass:rgba(255,255,255,.045); --glass-2:rgba(255,255,255,.07);
+  --line:rgba(255,255,255,.09); --line-2:rgba(255,255,255,.16);
+  --ink:#E6E8F5; --ink-strong:#FFFFFF; --muted:#A7ABC8; --faint:#8C90AE;
+  --indigo:#6D7CFF; --indigo-ink:#C9CEFF; --indigo-soft:rgba(109,124,255,.14);
+  --amber:#FFB86B; --amber-ink:#FFCF94; --amber-soft:rgba(255,184,107,.12);
+  --good:#7CE2B0; --good-soft:rgba(124,226,176,.09); --bad:#FF9B9B; --bad-soft:rgba(255,155,155,.08);
+  --font:"Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --ease-out:cubic-bezier(.23,1,.32,1); --ease-in-out:cubic-bezier(.77,0,.175,1);
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{-webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:100%;background:var(--bg)}
+body{overflow-x:clip;background:var(--surface);color:var(--ink);font-family:var(--font);font-size:16.5px;line-height:1.6}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+button,a,[role="button"]{touch-action:manipulation}
+button,.pills a,.seg button,.fc,.flag,.src{user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+button{font:inherit;color:inherit}
+input,textarea{font-size:16px}
+:focus-visible{outline:2px solid var(--indigo-ink);outline-offset:3px;border-radius:10px}
+a{color:var(--indigo-ink)}
+.gut{padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.col{max-width:680px;margin:0 auto}
+h1,h2,h3{text-wrap:balance;margin:0;color:var(--ink-strong);letter-spacing:-.02em}
+h2{font-size:1.4rem;font-weight:700;margin-top:2.6rem}
+h3{font-size:1.08rem;font-weight:700;margin-top:1.8rem}
+p{margin:.55rem 0}
+b{color:var(--ink-strong)}
+
+/* header */
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:6;background:rgba(11,12,26,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:12px 4px}
+.brand{font-weight:800;font-size:1.15rem;letter-spacing:-.02em;color:var(--ink-strong)}
+.sec{font-size:.8rem;color:var(--muted)}
+.pills{display:flex;gap:6px;padding-block:8px}
+.pills a{flex:1 1 auto;min-width:0;display:inline-flex;align-items:center;justify-content:center;gap:4px;min-height:42px;padding:0 8px;border-radius:21px;border:1px solid var(--line-2);color:var(--ink);text-decoration:none;font-size:.84rem;font-weight:600;white-space:nowrap}
+.pills a[aria-current="page"]{background:var(--ink-strong);border-color:var(--ink-strong);color:var(--bg);font-weight:800}
+.pills a.rev{color:var(--amber-ink);border-color:rgba(255,184,107,.45)}
+.pills a.rev[aria-current="page"]{background:var(--amber);border-color:var(--amber);color:var(--bg)}
+.seg{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:4px;margin-bottom:10px;border-radius:24px;background:var(--glass-2)}
+.seg button{min-height:40px;border:0;border-radius:20px;background:transparent;color:var(--muted);font-weight:700;font-size:.9rem;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--ink-strong);color:var(--bg)}
+
+/* motion: press feedback only (emil-design-eng) */
+.btn,.opt,.choice button,.seg button,.pills a,.go{transition:transform 140ms var(--ease-out),background-color 150ms ease,border-color 150ms ease,color 150ms ease}
+.btn:active,.opt:not([disabled]):active,.choice button:active,.seg button:active,.pills a:active,.go:active{transform:scale(.97)}
+@media (hover:hover) and (pointer:fine){
+  .btn:hover,.opt:not([disabled]):hover,.choice button:hover{border-color:var(--muted)}
+  .pills a:not([aria-current]):hover{border-color:var(--ink)}
+}
+
+/* topic hero */
+.hero{position:relative;padding-block:30px 6px}
+.hero::before{content:"";position:absolute;left:-20px;top:-40px;width:calc(100% + 40px);height:340px;background:radial-gradient(closest-side,rgba(109,124,255,.22),rgba(16,18,42,0));pointer-events:none;z-index:0}
+.hero>*{position:relative}
+.eyebrow{font-size:.82rem;color:var(--muted)}
+.hero h1{font-size:2.15rem;line-height:1.08;font-weight:700;letter-spacing:-.035em;margin-top:6px}
+.lede{color:#B5B9D3;font-size:1.02rem}
+.legend{margin-top:16px;display:flex;flex-direction:column;gap:8px;padding:14px 16px;border-radius:16px;background:var(--glass);border:1px solid var(--line);font-size:.88rem;color:var(--muted)}
+.legend div{display:flex;gap:10px;align-items:flex-start}
+
+/* tags */
+.src{display:inline-flex;align-items:center;font-size:.7rem;font-weight:800;padding:2px 8px;border-radius:999px;border:1px solid rgba(201,206,255,.4);color:var(--indigo-ink);vertical-align:middle;margin-left:6px;white-space:nowrap;letter-spacing:.01em}
+.flag{position:relative;display:inline-flex;align-items:center;font-size:.72rem;font-weight:800;padding:3px 9px;border-radius:999px;background:var(--amber);color:var(--bg);text-decoration:none;vertical-align:middle;margin-left:6px;white-space:nowrap}
+.flag::after{content:"";position:absolute;inset:-10px -4px}
+.dental{display:inline-flex;font-size:.7rem;font-weight:800;padding:2px 8px;border-radius:999px;border:1px solid rgba(255,207,148,.45);color:var(--amber-ink);vertical-align:middle;margin-left:6px}
+
+/* capsule chips */
+.drugs{display:flex;flex-wrap:wrap;gap:7px;margin:.5rem 0}
+.rx{display:inline-flex;align-items:center;min-height:30px;border-radius:15px;overflow:hidden;border:1px solid var(--line-2);font-size:.82rem;font-weight:600;color:var(--ink);background:rgba(255,255,255,.02)}
+.rx::before{content:"";width:11px;align-self:stretch;background:var(--indigo)}
+.rx span{padding:3px 11px 3px 9px}
+.par .rx::before{background:var(--amber)}
+
+/* surfaces */
+.card{background:var(--glass);border:1px solid var(--line);border-radius:18px;padding:16px;margin-top:12px}
+.card>b:first-child,.card>.ct{display:block;color:var(--ink-strong);font-weight:800;margin-bottom:4px}
+.def{background:var(--indigo-soft);border:1px solid rgba(109,124,255,.35);border-radius:18px;padding:14px 16px;margin-top:12px}
+.split{display:grid;grid-template-columns:1fr;gap:10px;margin-top:12px}
+@media (min-width:560px){.split{grid-template-columns:1fr 1fr}}
+.split>*{min-width:0;margin-top:0}
+.pro,.con{border-radius:18px;padding:14px 16px}
+.pro{background:var(--good-soft);border:1px solid rgba(124,226,176,.28)}
+.con{background:var(--bad-soft);border:1px solid rgba(255,155,155,.26)}
+.pro h4,.con h4{margin:0 0 4px;font-size:.92rem;font-weight:800}
+.pro h4{color:var(--good)} .con h4{color:var(--bad)}
+ul{margin:.3rem 0;padding-left:1.1rem} li{margin:.2rem 0}
+li::marker{color:var(--faint)}
+
+/* stacked label/value list */
+.rows{margin-top:12px;border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.025);overflow:hidden}
+.row{padding:13px 16px;display:flex;flex-direction:column;gap:3px}
+.row+.row{border-top:1px solid rgba(255,255,255,.07)}
+.row>*{min-width:0}
+.row .k{font-size:.82rem;font-weight:800;color:var(--indigo-ink)}
+.par .row .k{color:var(--amber-ink)}
+.row .k small{font-weight:600;color:var(--faint);margin-left:6px}
+.row .drugs{margin:2px 0 0}
+
+/* metro map */
+.metro{margin-top:12px;padding:18px 14px;border-radius:20px;background:var(--glass);border:1px solid var(--line);display:flex;flex-direction:column;align-items:center}
+.metro .root{padding:8px 18px;border-radius:20px;background:var(--ink-strong);color:var(--bg);font-weight:800}
+.metro .stem{width:2px;height:16px;background:rgba(255,255,255,.3)}
+.metro .bridge{width:50%;height:2px;background:rgba(255,255,255,.3)}
+.lines{width:100%;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.line{display:flex;flex-direction:column;align-items:center;--c:var(--indigo)}
+.line.amb{--c:var(--amber)}
+.line .head{width:100%;text-align:center;padding:10px 6px;border-radius:14px;background:var(--c);color:var(--bg)}
+.line .head b{display:block;color:var(--bg);font-weight:800}
+.line .head span{font-size:.75rem;font-weight:700}
+.stops{position:relative;width:100%;list-style:none;margin:0;padding:14px 0 0 24px;display:flex;flex-direction:column;gap:14px}
+.stops::before{content:"";position:absolute;left:10px;top:0;bottom:12px;width:2px;background:var(--c)}
+.stops li{position:relative;margin:0;font-size:.88rem;font-weight:700;color:var(--ink-strong);line-height:1.3}
+.stops li::before{content:"";position:absolute;left:-19px;top:3px;width:10px;height:10px;border-radius:50%;background:var(--surface);border:2px solid var(--c)}
+.stops small{display:block;font-weight:500;color:var(--muted);font-size:.75rem}
+
+/* vertical flow */
+.flow{display:flex;flex-direction:column;align-items:stretch;margin-top:12px}
+.step{background:var(--glass);border:1px solid var(--line);border-radius:14px;padding:11px 14px}
+.step b{color:var(--ink-strong)}
+.arrow{align-self:center;color:var(--faint);font-size:1rem;line-height:1;padding:5px 0;text-align:center}
+.arrow small{display:block;font-size:.75rem;margin-top:2px}
+.step.hit{background:var(--bad-soft);border:1px dashed rgba(255,155,155,.55);color:var(--bad)}
+.step.ok{background:var(--good-soft);border-color:rgba(124,226,176,.4);color:var(--good)}
+
+/* side-by-side paths */
+.paths{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}
+.path{padding:14px 10px;border-radius:18px;background:var(--glass);border:1px solid var(--line);display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;font-size:.86rem;font-weight:700;color:var(--ink-strong)}
+.path.win{background:var(--indigo-soft);border-color:rgba(109,124,255,.4)}
+.path .t{font-size:.75rem;color:var(--muted)} .path.win .t{color:var(--indigo-ink)}
+.path .ar{color:var(--faint);font-weight:400}
+.path .hit{color:var(--bad);border:1px dashed rgba(255,155,155,.6);border-radius:10px;padding:3px 9px}
+.path .ok{color:var(--good);border:1px solid rgba(124,226,176,.5);border-radius:10px;padding:3px 9px}
+.path .note{font-size:.75rem;font-weight:500;color:var(--muted)}
+
+/* patch layers */
+.layers{margin-top:12px;display:flex;flex-direction:column;gap:4px}
+.layer{display:flex;justify-content:space-between;gap:10px;padding:11px 14px;border-radius:4px;font-size:.88rem;font-weight:700}
+.layer span{font-weight:500;opacity:.85;text-align:right}
+.l1{background:#2B2F55;color:#fff;border-radius:12px 12px 4px 4px}
+.l2{background:var(--indigo);color:var(--bg);padding-block:15px}
+.l3{border:1px dashed var(--indigo-ink);color:var(--indigo-ink)}
+.l4{background:var(--amber-soft);color:var(--amber-ink)}
+.l5{background:rgba(255,155,155,.13);color:#FFB3B3;border-radius:4px 4px 12px 12px}
+
+/* cause → effect */
+.cause{display:grid;grid-template-columns:1fr auto;align-items:center;gap:10px;padding:10px 0;font-size:.92rem}
+.cause+.cause{border-top:1px solid rgba(255,255,255,.07)}
+.up{color:var(--good);font-weight:800;white-space:nowrap} .down{color:var(--bad);font-weight:800;white-space:nowrap}
+
+/* IA scale */
+.scale{margin-top:16px;padding:0 6px}
+.track{height:10px;border-radius:999px;background:linear-gradient(90deg,var(--bad),rgba(255,255,255,.2) 50%,var(--good))}
+.ticks{position:relative;height:74px}
+.tick{position:absolute;top:6px;transform:translateX(-50%);text-align:center;font-size:.72rem;line-height:1.25;width:78px;color:var(--muted)}
+.tick b{display:block;font-size:.95rem}
+.tick::before{content:"";display:block;width:2px;height:10px;background:var(--ink-strong);margin:-16px auto 8px}
+
+.rgrid{display:grid;grid-template-columns:1fr;gap:10px;margin-top:12px}
+@media (min-width:560px){.rgrid{grid-template-columns:1fr 1fr}}
+.rcard{background:var(--glass);border:1px solid var(--line);border-radius:18px;padding:14px 16px;display:flex;flex-direction:column;gap:4px}
+.rcard h4{margin:0;font-size:1rem;color:var(--ink-strong)}
+.speed{font-size:.78rem;font-weight:800;color:var(--amber-ink)}
+.rcard p{margin:0;font-size:.9rem}
+
+.chart{margin-top:12px;background:var(--glass);border:1px solid var(--line);border-radius:18px;padding:10px}
+.chart svg{display:block;width:100%;height:auto}
+.legend2{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.82rem;padding:6px 4px 2px;color:var(--muted)}
+.legend2 i{display:inline-block;width:14px;height:3px;vertical-align:middle;margin-right:6px;border-radius:2px}
+
+.clinic{margin-top:14px;display:flex;gap:12px;padding:14px 16px;border-radius:18px;background:var(--amber-soft);border:1px solid rgba(255,184,107,.35)}
+.clinic svg{flex:none}
+.clinic b{display:block;color:var(--amber-ink)}
+
+.next{display:flex;gap:10px;margin-top:36px}
+.go{flex:1;min-height:52px;border-radius:26px;border:1px solid var(--line-2);background:var(--glass-2);color:var(--ink-strong);font-weight:700;cursor:pointer}
+.go.main{background:var(--ink-strong);color:var(--bg);border-color:var(--ink-strong);font-weight:800}
+
+/* flashcards */
+.fc-top{display:flex;justify-content:space-between;align-items:center;margin-top:22px}
+.count{font-variant-numeric:tabular-nums;color:var(--indigo-ink);font-weight:800}
+.dots{display:flex;gap:4px;margin-top:10px}
+.dots i{flex:1;height:4px;border-radius:2px;background:rgba(255,255,255,.16)}
+.dots i.cur{background:#fff} .dots i.got{background:var(--good)} .dots i.again{background:var(--amber)}
+.fc{perspective:1200px;height:380px;margin-top:20px;cursor:pointer;display:block;width:100%;border:0;background:none;padding:0;text-align:left}
+.fc-inner{position:relative;width:100%;height:100%;transition:transform 280ms var(--ease-in-out);transform-style:preserve-3d}
+.fc.flip .fc-inner{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:28px;padding:26px 24px;display:flex;flex-direction:column;gap:14px;overflow:auto}
+.front{background:rgba(26,29,58,.85);border:1px solid var(--line-2);box-shadow:0 30px 60px rgba(20,24,80,.45)}
+.back{background:var(--indigo);color:var(--bg);transform:rotateY(180deg)}
+.face .lab{font-size:.8rem;font-weight:800;color:var(--muted)}
+.back .lab{color:rgba(11,12,26,.7)}
+.face .q{font-size:1.55rem;line-height:1.22;font-weight:700;letter-spacing:-.02em;color:var(--ink-strong)}
+.face .a{font-size:1.2rem;line-height:1.45;font-weight:600}
+.face .hint{margin-top:auto;font-size:.8rem;color:var(--muted)}
+.back .hint{color:rgba(11,12,26,.7)}
+.fc-btns{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+.btn{min-height:52px;border-radius:26px;border:1px solid var(--line-2);background:var(--glass-2);color:var(--ink-strong);font-weight:700;cursor:pointer;padding:0 18px}
+.btn.primary{background:var(--ink-strong);color:var(--bg);border-color:var(--ink-strong);font-weight:800}
+.btn.quiet{min-height:44px;background:none;border:0;color:var(--indigo-ink);margin-top:6px}
+@media (prefers-reduced-motion:reduce){.fc-inner{transition:none}.btn:active,.opt:active,.choice button:active,.seg button:active,.pills a:active,.go:active{transform:none}}
+
+/* mcq */
+.mcq-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:22px}
+.q-card{background:var(--glass);border:1px solid var(--line);border-radius:20px;padding:16px;margin-top:12px}
+.qn{font-size:.78rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.qt{font-weight:700;color:var(--ink-strong);margin:3px 0 10px;font-size:1.02rem;line-height:1.4}
+.opt{display:block;width:100%;min-height:48px;text-align:left;border:1px solid var(--line-2);background:rgba(255,255,255,.03);border-radius:14px;padding:11px 14px;margin-top:7px;cursor:pointer;font-size:.95rem}
+.opt[disabled]{cursor:default}
+.opt.right{background:var(--good-soft);border-color:var(--good);color:var(--good);font-weight:800}
+.opt.wrong{background:var(--bad-soft);border-color:var(--bad);color:var(--bad)}
+.expl{margin-top:10px;font-size:.9rem;color:var(--muted);transition:opacity 200ms var(--ease-out),transform 200ms var(--ease-out)}
+@starting-style{.expl{opacity:0;transform:translateY(4px)}}
+
+/* review */
+.ri{background:var(--glass);border:1px solid var(--line);border-radius:20px;padding:16px;margin-top:12px;scroll-margin-top:190px}
+.ri .where{font-size:.78rem;color:var(--amber-ink);font-weight:800}
+.ri b{display:block;margin-top:2px}
+.ri p{margin:.3rem 0 .7rem;color:var(--muted);font-size:.93rem}
+.choice{display:flex;gap:8px;flex-wrap:wrap}
+.choice button{min-height:44px;border:1px solid var(--line-2);background:rgba(255,255,255,.03);border-radius:22px;padding:0 18px;cursor:pointer;font-size:.92rem;font-weight:700}
+.choice button[aria-pressed="true"].ok{background:var(--good);border-color:var(--good);color:var(--bg)}
+.choice button[aria-pressed="true"].fix{background:var(--bad);border-color:var(--bad);color:var(--bg)}
+textarea{width:100%;margin-top:10px;font-family:inherit;border:1px solid var(--line-2);border-radius:14px;padding:12px;background:rgba(255,255,255,.03);color:var(--ink);min-height:76px}
+textarea::placeholder{color:var(--faint)}
+.copybox{position:sticky;bottom:0;background:var(--bg);border-top:1px solid var(--line);padding-block:12px calc(12px + env(safe-area-inset-bottom,0px));margin-top:18px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.copybox .status{font-size:.85rem;color:var(--muted)}
+pre.fallback{white-space:pre-wrap;font-family:inherit;font-size:.85rem;background:var(--glass);border:1px solid var(--line);border-radius:14px;padding:12px;margin-top:12px}
+
+main{padding-block:0 72px}
+footer{color:var(--faint);font-size:.82rem;border-top:1px solid var(--line);padding-block:20px 30px;background:var(--bg)}
+
+/* topic pills wrap instead of truncating; segmented labels never clip */
+.pills{flex-wrap:wrap}
+.pills a{flex:1 1 auto;white-space:normal;text-align:center;line-height:1.15;padding:6px 12px}
+.seg button{white-space:normal;line-height:1.15;padding:4px 6px;min-width:0}
+.hero h1{font-size:clamp(1.6rem,8.5vw,2.15rem);overflow-wrap:break-word}
+</style>
+
+<header>
+  <div class="gut"><div class="col">
+    <div class="bar"><span class="brand">PharmDaily</span><span class="sec">Section 7 · CNS</span></div>
+    <nav class="pills" aria-label="Topics">
+      <a href="#basics" data-t="basics">Basics</a>
+      <a href="#morphine" data-t="morphine">Morphine</a>
+      <a href="#others" data-t="others">Other opioids</a>
+      <a href="#complex" data-t="complex">Complex action</a>
+      <a href="#antagonists" data-t="antagonists">Antagonists</a>
+      <a href="#review" data-t="review" class="rev">Review <span id="flagCount" style="font-variant-numeric:tabular-nums"></span></a>
+    </nav>
+    <div class="seg" id="modes" role="group" aria-label="Study mode">
+      <button data-m="notes" aria-pressed="true">Notes</button>
+      <button data-m="cards" aria-pressed="false">Flashcards</button>
+      <button data-m="mcq" aria-pressed="false">MCQs</button>
+    </div>
+  </div></div>
+</header>
+
+<main class="gut"><div class="col">
+
+<!-- ===================== BASICS ===================== -->
+<section data-topic="basics" data-mode="notes">
+  <div class="hero">
+    <div class="eyebrow">Chapter 34 &middot; Opioid analgesics and antagonists</div>
+    <h1>Pain and the opioid receptors</h1>
+    <p class="lede">What an analgesic is, how opioids are classified, and the three receptors that explain everything morphine does.</p>
+  </div>
+
+  <h2>Two definitions</h2>
+  <div class="split">
+    <div class="def" style="margin-top:0"><b>Pain (algesia)</b><br>Unpleasant bodily sensation felt as suffering. Set off by a noxious stimulus, outside or inside the body.</div>
+    <div class="def" style="margin-top:0"><b>Analgesic</b><br>Relieves pain selectively &mdash; in the CNS or at peripheral pain mechanisms &mdash; <b>without altering consciousness</b>.</div>
+  </div>
+
+  <h3>Three groups of analgesics</h3>
+  <div class="metro" role="img" aria-label="Analgesics split into opioid, nonopioid and adjuvant groups">
+    <div class="root">Analgesics</div><div class="stem"></div><div class="bridge"></div>
+    <div class="lines" style="grid-template-columns:1fr;gap:18px">
+      <div class="line"><div class="stem"></div><div class="head"><b>A &middot; Opioid</b><span>narcotic, morphine-like</span></div>
+        <ul class="stops"><li>This section</li></ul></div>
+      <div class="line"><div class="stem"></div><div class="head"><b>B &middot; Nonopioid</b><span>aspirin-like</span></div>
+        <ul class="stops"><li>NSAIDs<small>antipyretic, anti-inflammatory &middot; Section 3</small></li></ul></div>
+      <div class="line amb"><div class="stem"></div><div class="head"><b>C &middot; Adjuvant</b><span>mainly neuropathic pain</span></div>
+        <ul class="stops"><li>Anticonvulsants<small>gabapentin, pregabalin, carbamazepine, lamotrigine</small></li><li>Antidepressants<small>amitriptyline, duloxetine</small></li></ul></div>
+    </div>
+  </div>
+  <p style="color:var(--muted);font-size:.9rem">Analgesics treat pain as a symptom, without touching its cause.</p>
+
+  <h2>Classification</h2>
+  <div class="metro" role="img" aria-label="Mind map of opioid agonists: natural, semisynthetic and synthetic">
+    <div class="root">Opioid agonists</div><div class="stem"></div><div class="bridge"></div>
+    <div class="lines" style="grid-template-columns:1fr;gap:18px">
+      <div class="line"><div class="stem"></div><div class="head"><b>Natural</b><span>opium alkaloids</span></div>
+        <ul class="stops"><li>Morphine</li><li>Codeine</li></ul></div>
+      <div class="line"><div class="stem"></div><div class="head"><b>Semisynthetic</b><span>made from morphine</span></div>
+        <ul class="stops"><li>Diacetylmorphine<small>heroin</small></li><li>Pholcodine</li><li>Ethylmorphine</li></ul></div>
+      <div class="line"><div class="stem"></div><div class="head"><b>Synthetic</b><span>built in the lab</span></div>
+        <ul class="stops"><li>Pethidine<small>meperidine</small></li><li>Methadone</li><li>Fentanyl</li><li>Remifentanil</li><li>Tramadol</li><li>Tapentadol</li></ul></div>
+    </div>
+  </div>
+
+  <h3>Complex action opioids and antagonists</h3>
+  <div class="metro" role="img" aria-label="Mind map of complex action opioids and pure antagonists">
+    <div class="root">Complex action &amp; blockers</div><div class="stem"></div><div class="bridge"></div>
+    <div class="lines" style="grid-template-columns:1fr;gap:18px">
+      <div class="line amb"><div class="stem"></div><div class="head"><b>Agonist-antagonists</b><span>&kappa; analgesics</span></div>
+        <ul class="stops"><li>Nalorphine</li><li>Pentazocine</li><li>Butorphanol</li><li>Nalbuphine</li></ul></div>
+      <div class="line amb"><div class="stem"></div><div class="head"><b>Partial &mu; agonist</b><span>+ &kappa; antagonist</span></div>
+        <ul class="stops"><li>Buprenorphine</li></ul></div>
+      <div class="line amb"><div class="stem"></div><div class="head"><b>Pure antagonists</b><span>no agonist action</span></div>
+        <ul class="stops"><li>Naloxone</li><li>Naltrexone</li><li>Nalmefene</li></ul></div>
+    </div>
+  </div>
+
+  <h2>Opioid receptors</h2>
+  <div class="def">Three types &mdash; <b>&mu; (mu), &kappa; (kappa), &delta; (delta)</b>. All are <b>G-protein coupled receptors</b>. Morphine is an agonist at all three, but its affinity for <b>&mu;</b> is far higher, so its effects are &mu; effects.</div>
+  <div class="rgrid">
+    <div class="rcard"><h4>&mu; &middot; mu</h4><span class="speed">Morphine's receptor</span>
+      <p>Analgesia &middot; respiratory depression &middot; sedation &middot; euphoria &middot; miosis &middot; muscular rigidity &middot; &darr; GI motility &middot; dependence</p>
+      <p style="color:var(--muted)">Own ligands: endomorphin 1 and 2<br>&mu;&#8321; supraspinal analgesia &middot; &mu;&#8322; spinal analgesia, respiratory depression, constipation<br>Dense in periaqueductal grey, thalamus, NTS, nucleus ambiguus, area postrema</p></div>
+    <div class="rcard"><h4>&kappa; &middot; kappa</h4><span class="speed">Dynorphin A</span>
+      <p>Analgesia (spinal &kappa;&#8321;) &middot; respiratory depression, low ceiling &middot; <b>dysphoria, psychotomimetic</b> &middot; miosis &middot; sedation &middot; &darr; GI motility</p>
+      <p style="color:var(--muted)">Nalorphine-type dependence &middot; antagonist: norbinaltorphimine<br>Some &kappa; actions oppose &mu; actions</p></div>
+    <div class="rcard"><h4>&delta; &middot; delta</h4><span class="speed">Enkephalins</span>
+      <p>Analgesia (mainly spinal) &middot; respiratory depression &middot; affective behaviour &middot; reinforcement &middot; &darr; GI motility &middot; proconvulsant</p>
+      <p style="color:var(--muted)">Rich in limbic areas: the affective side of analgesia<br>Antagonist: naltrindole</p></div>
+    <div class="rcard"><h4>&sigma; &middot; sigma</h4><span class="speed">Not an opioid receptor</span>
+      <p>Morphine doesn't activate it &middot; naloxone doesn't block it</p>
+      <p style="color:var(--muted)">Bound by pentazocine, butorphanol, phencyclidine<br>Explains naloxone-resistant dysphoria, hallucinations, tachycardia, mydriasis</p></div>
+  </div>
+
+  <h2>Transducer mechanism</h2>
+  <div class="chart">
+    <svg viewBox="0 0 340 344" role="img" aria-label="Opioid agonist binds a G-protein coupled receptor; Gi/Go inhibits adenylyl cyclase, opens potassium channels and closes N-type calcium channels, reducing transmitter release">
+      <rect x="90" y="6" width="160" height="34" rx="12" fill="#6D7CFF"/>
+      <text x="170" y="28" text-anchor="middle" font-size="13" font-weight="800" fill="#0B0C1A">Opioid agonist</text>
+      <line x1="170" y1="40" x2="170" y2="56" stroke="#8C90AE" stroke-width="1.5"/>
+      <rect x="70" y="58" width="200" height="34" rx="12" fill="#10122A" stroke="#C9CEFF" stroke-width="1.5"/>
+      <text x="170" y="80" text-anchor="middle" font-size="12.5" font-weight="700" fill="#E6E8F5">&#956; &middot; &#954; &middot; &#948; receptor (GPCR)</text>
+      <line x1="170" y1="92" x2="170" y2="108" stroke="#8C90AE" stroke-width="1.5"/>
+      <rect x="100" y="110" width="140" height="32" rx="12" fill="#FFB86B"/>
+      <text x="170" y="131" text-anchor="middle" font-size="12.5" font-weight="800" fill="#0B0C1A">Gi / Go protein</text>
+      <path d="M170 142 V156 M58 156 H282 M58 156 V172 M170 156 V172 M282 156 V172" stroke="#8C90AE" stroke-width="1.5" fill="none"/>
+      <g font-size="11" text-anchor="middle">
+        <rect x="6" y="174" width="104" height="50" rx="12" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.16)"/>
+        <text x="58" y="195" font-weight="700" fill="#FFFFFF">Adenylyl cyclase</text>
+        <text x="58" y="212" fill="#FF9B9B" font-weight="700">inhibited</text>
+        <rect x="118" y="174" width="104" height="50" rx="12" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.16)"/>
+        <text x="170" y="195" font-weight="700" fill="#FFFFFF">K&#8314; channels open</text>
+        <text x="170" y="212" fill="#C9CEFF" font-weight="700">mainly &#956;, &#948;</text>
+        <rect x="230" y="174" width="104" height="50" rx="12" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.16)"/>
+        <text x="282" y="195" font-weight="700" fill="#FFFFFF">N-type Ca&#178;&#8314; close</text>
+        <text x="282" y="212" fill="#FFCF94" font-weight="700">mainly &#954;</text>
+      </g>
+      <path d="M58 224 V240 M170 224 V240 M282 224 V240" stroke="#8C90AE" stroke-width="1.5"/>
+      <g font-size="11.5" font-weight="700" text-anchor="middle" fill="#E6E8F5">
+        <rect x="6" y="242" width="104" height="32" rx="10" fill="rgba(109,124,255,.14)"/><text x="58" y="262">&darr; cAMP</text>
+        <rect x="118" y="242" width="104" height="32" rx="10" fill="rgba(109,124,255,.14)"/><text x="170" y="262">Hyperpolarisation</text>
+        <rect x="230" y="242" width="104" height="32" rx="10" fill="rgba(109,124,255,.14)"/><text x="282" y="262">&darr; Ca&#178;&#8314; entry</text>
+      </g>
+      <path d="M58 274 V288 H282 V274 M170 274 V300" stroke="#8C90AE" stroke-width="1.5" fill="none"/>
+      <rect x="20" y="302" width="300" height="36" rx="12" fill="rgba(124,226,176,.09)" stroke="#7CE2B0" stroke-width="1.5"/>
+      <text x="170" y="325" text-anchor="middle" font-size="12" font-weight="800" fill="#7CE2B0">&darr; Release of glutamate, substance P</text>
+    </svg>
+  </div>
+  <p style="color:var(--muted);font-size:.9rem">Receptors sit mostly on <b>prejunctional</b> neurones: less transmitter leaves cerebral, spinal and myenteric nerve endings, including primary pain afferents.</p>
+
+  <h2>Endogenous opioid peptides</h2>
+  <p style="color:var(--muted);font-size:.9rem">Morphine-like peptides from brain, pituitary, spinal cord and gut, found in the mid-1970s. Naloxone blocks them. Three families, each cut from its own large precursor.</p>
+  <div class="metro" role="img" aria-label="Three precursor families and the opioid peptides they give">
+    <div class="root">Large precursor</div><div class="stem"></div><div class="bridge"></div>
+    <div class="lines" style="grid-template-columns:1fr;gap:18px">
+      <div class="line"><div class="stem"></div><div class="head"><b>POMC</b><span>limited spread</span></div>
+        <ul class="stops"><li>&beta;-Endorphin<small>31 amino acids</small></li><li>Selectivity &mu; &gt; &delta; &gt;&gt; &kappa;</li><li>Arcuate nucleus, anterior pituitary, pancreatic islets</li><li>Also gives &gamma;-MSH, ACTH, lipotropins</li></ul></div>
+      <div class="line"><div class="stem"></div><div class="head"><b>Proenkephalin</b><span>wide spread</span></div>
+        <ul class="stops"><li>Met- and leu-enkephalin<small>pentapeptides</small></li><li>Selectivity &delta; &ge; &mu; &gt;&gt; &kappa;</li><li>Pain areas, limbic system, locus coeruleus, adrenal medulla, gut glands</li></ul></div>
+      <div class="line amb"><div class="stem"></div><div class="head"><b>Prodynorphin</b><span>wide spread</span></div>
+        <ul class="stops"><li>Dynorphin A and B<small>8&ndash;17 amino acids</small></li><li>Selectivity &kappa; &gt;&gt; &mu; = &delta;</li><li>Parallel to proenkephalin, but different neurones</li></ul></div>
+    </div>
+  </div>
+
+  <h3>What the system modulates</h3>
+  <div class="drugs">Pain perception, Mood, Pleasure, Motor behaviour, Emesis, Pituitary hormones, Gut motility</div>
+
+  <h3>&beta;-Endorphin as a neurohormone</h3>
+  <div class="card">
+    <div class="cause"><span>LH, FSH</span><span class="down">&darr;</span></div>
+    <div class="cause"><span>GH, prolactin</span><span class="up">&uarr;</span></div>
+  </div>
+  <p style="color:var(--muted);font-size:.9rem">Injected into the brain it is 20&ndash;40&times; more potent than morphine. Enkephalins and dynorphins have a short t&frac12; and wide spread: they act as neuromodulators or transmitters.</p>
+
+  <h3>Naloxone blocks all three</h3>
+  <div class="drugs par">Placebo analgesia, Acupuncture analgesia, Stress-induced analgesia</div>
+  <p style="color:var(--muted);font-size:.9rem">So endogenous opioids drive them. Nociceptin / orphanin FQ acts on the NOP receptor: opioid-like or anti-opioid depending on the site.</p>
+
+  <div class="next"><button class="go main" data-jump="cards">Flip 11 flashcards</button><button class="go" data-jump="mcq">10 MCQs</button></div>
+</section>
+<section data-topic="basics" data-mode="cards" hidden></section>
+<section data-topic="basics" data-mode="mcq" hidden></section>
+
+<!-- ===================== MORPHINE ===================== -->
+<section data-topic="morphine" data-mode="notes" hidden>
+  <div class="hero">
+    <div class="eyebrow">Chapter 34 &middot; Morphine</div>
+    <h1>Morphine, the prototype</h1>
+    <p class="lede">The main alkaloid in opium and still widely used. A full &mu; agonist: know its actions and the rest of the chapter is comparisons.</p>
+  </div>
+
+  <h2>1. CNS actions</h2>
+  <h3>Depressant actions: what morphine switches down</h3>
+  <div class="flow">
+    <div class="step"><b>Morphine</b> &rarr; &mu; receptors across the CNS</div><div class="arrow">&darr;<small>each centre it depresses gives one effect</small></div>
+    <div class="step"><b>(a) Pain pathway &rarr; analgesia</b><br>Dull, poorly localised <b>visceral</b> pain relieved better than sharp somatic pain; neuritic pain responds less. Relieves the <b>perception</b> of pain and its emotional part, so the patient tolerates it better. Other sensations stay intact.</div><div class="arrow">&darr;</div>
+    <div class="step"><b>(b) Cortex, reticular formation &rarr; sedation</b><br>Drowsiness, mental dullness, indifference, but <b>no ataxia</b> (unlike hypnotics). No anticonvulsant action: fits may be precipitated.</div><div class="arrow">&darr;</div>
+    <div class="step"><b>(c&#8288;) Limbic, reward pathway &rarr; euphoria</b><br>Calming, detachment, heavy warm limbs. Unpleasant in normal people without pain; a "high" in pain, anxiety or addicts.</div><div class="arrow">&darr;</div>
+    <div class="step hit"><b>(d) Respiratory centre &rarr; respiratory depression</b><br>Rate and tidal volume both fall. Marked with other sedatives, or in asthma, COPD, cor pulmonale, liver and kidney disease. <b>Death in poisoning is from respiratory failure.</b></div><div class="arrow">&darr;</div>
+    <div class="step"><b>(e) Cough centre &rarr; cough suppression</b><br>More sensitive to morphine than the respiratory centre</div><div class="arrow">&darr;</div>
+    <div class="step"><b>(f) Hypothalamic thermostat &rarr; hypothermia</b><br>In cold surroundings</div><div class="arrow">&darr;</div>
+    <div class="step"><b>(g) Vasomotor centre &rarr; fall in BP</b><br>Depressed at higher doses</div>
+  </div>
+
+  <h3>How the analgesia works</h3>
+  <div class="paths">
+    <div class="path win"><span class="t">Spinal</span>Substantia gelatinosa of dorsal horn<span class="ar">&darr;</span><span class="ok">&darr; glutamate, substance P</span><span class="ar">&darr;</span>Pain "gate" closes<span class="note">intrathecal morphine: segmental analgesia</span></div>
+    <div class="path"><span class="t">Supraspinal</span>Medulla, periaqueductal grey, limbic, cortex<span class="ar">&darr;</span><span class="ok">Alters pain processing</span><span class="ar">&darr;</span>Boosts descending inhibition<span class="note">5-HT and NA pathways to the cord</span></div>
+  </div>
+  <p style="color:var(--muted);font-size:.9rem">The two sites multiply each other. Morphine also acts on peripheral afferent terminals in injured tissue.</p>
+
+  <h3>Why it feels good, and why it's addictive</h3>
+  <div class="flow">
+    <div class="step">&mu; agonist inhibits GABAergic neurones in the nucleus accumbens</div><div class="arrow">&darr;</div>
+    <div class="step">&uarr; <b>Dopamine</b> release</div><div class="arrow">&darr;</div>
+    <div class="step hit">Euphoria and reinforcement</div>
+  </div>
+  <p style="color:var(--muted);font-size:.9rem">&kappa; agonists do the opposite: &darr; dopamine, aversion. Less NA release in the locus coeruleus relieves fear and apprehension.</p>
+
+  <h3>Stimulant actions: what it switches up</h3>
+  <div class="flow">
+    <div class="step"><b>CTZ</b> &rarr; nausea and vomiting<br><span style="color:var(--muted)">Worse if the stomach is full or the patient walks about. Larger doses depress the vomiting centre, so <b>emetics don't work in morphine poisoning</b>.</span></div><div class="arrow">&darr;</div>
+    <div class="step"><b>Edinger-Westphal nucleus</b> &rarr; miosis<br><span style="color:var(--muted)">Removes GABAergic inhibition of the III nerve nucleus. <b>No tolerance</b>: addicts keep constricted pupils.</span></div><div class="arrow">&darr;</div>
+    <div class="step"><b>Vagal centre</b> &rarr; bradycardia</div><div class="arrow">&darr;</div>
+    <div class="step"><b>Cortex and hippocampus</b> &rarr; truncal rigidity, convulsions<br><span style="color:var(--muted)">Rigidity at high IV doses can hamper breathing.</span></div>
+  </div>
+
+  <h2>2. Neuro-endocrine actions</h2>
+  <div class="card">
+    <div class="cause"><span>FSH, LH, ACTH</span><span class="down">&darr;</span></div>
+    <div class="cause"><span>Sex hormones, cortisol</span><span class="down">&darr;</span></div>
+    <div class="cause"><span>Prolactin, GH</span><span class="up">&uarr;</span></div>
+    <div class="cause"><span>ADH release &mdash; urine volume falls</span><span class="up">&uarr;</span></div>
+  </div>
+  <p style="color:var(--muted);font-size:.9rem">Heavy abusers: loss of libido, impotence, menstrual irregularities, infertility.</p>
+
+  <h2>3. Peripheral actions</h2>
+  <h3>(a) CVS</h3>
+  <div class="card">
+    <div class="cause"><span>Peripheral resistance &mdash; vasodilatation</span><span class="down">&darr;</span></div>
+    <div class="cause"><span>BP on standing &mdash; postural hypotension, fainting</span><span class="down">&darr;</span></div>
+    <div class="cause"><span>Heart rate &mdash; vagal</span><span class="down">&darr;</span></div>
+    <div class="cause"><span>Cardiac work &mdash; <b>anti-ischaemic</b></span><span class="down">&darr;</span></div>
+    <div class="cause"><span>Intracranial tension &mdash; CO&#8322; retention</span><span class="up">&uarr;</span></div>
+  </div>
+  <p style="color:var(--muted);font-size:.9rem">Vasodilatation comes from histamine release, vasomotor depression and a direct action on vessels; blood shifts from the pulmonary to the systemic circuit. Rate may rise reflexly if BP drops.</p>
+
+  <h3>(b) GIT: constipation</h3>
+  <div class="flow">
+    <div class="step">&uarr; Tone and segmentation, &darr; <b>propulsive</b> movement</div><div class="arrow">&darr;</div>
+    <div class="step">Spasm of pyloric, ileocaecal and anal sphincters</div><div class="arrow">&darr;</div>
+    <div class="step">&darr; GI secretions; more fluid absorbed from the stasis</div><div class="arrow">&darr;</div>
+    <div class="step">Central inattention to the defecation reflex</div><div class="arrow">&darr;</div>
+    <div class="step hit">Constipation &mdash; no tolerance, addicts stay constipated</div>
+  </div>
+
+  <h3>(c&#8288;) Other smooth muscle</h3>
+  <div class="rgrid">
+    <div class="rcard"><h4>Biliary</h4><span class="speed">Sphincter of Oddi spasm</span><p>Intrabiliary pressure &uarr; several fold &rarr; biliary colic. Countered by naloxone and nitrates.</p></div>
+    <div class="rcard"><h4>Urinary</h4><span class="speed">Detrusor + sphincter tone &uarr;</span><p>Urgency and difficulty passing urine. Ureter contractions &uarr;.</p></div>
+    <div class="rcard"><h4>Uterus</h4><span class="speed">Little effect</span><p>Morphine or pethidine may prolong labour.</p></div>
+    <div class="rcard"><h4>Bronchi</h4><span class="speed">Histamine release</span><p>Bronchoconstriction. Harmless normally, <b>dangerous in asthmatics</b>.</p></div>
+  </div>
+
+  <h2>4. Pharmacokinetics</h2>
+  <div class="flow">
+    <div class="step"><b>Oral</b> &mdash; unreliable, high and variable first pass<br><span style="color:var(--muted)">bioavailability about <b>&frac14;</b> of parenteral</span></div><div class="arrow">&darr;</div>
+    <div class="step"><b>Distribution</b> &mdash; 30% protein bound; only a small fraction enters the brain, slowly; crosses the placenta</div><div class="arrow">&darr;<small>liver</small></div>
+    <div class="step"><b>Glucuronide conjugation</b><br><span style="color:var(--muted)">morphine-6-glucuronide: <b>active</b>, more potent at &mu;, accumulates on chronic dosing<br>morphine-3-glucuronide: neuroexcitatory</span></div><div class="arrow">&darr;</div>
+    <div class="step ok"><b>Kidney</b>, some in bile &mdash; t&frac12; 2&ndash;3 h &middot; one dose acts 4&ndash;6 h &middot; cleared in 24 h</div>
+  </div>
+  <div class="rows par">
+    <div class="row"><div class="k">Doses</div><div>Oral 10&ndash;50 mg &middot; IM or SC 10&ndash;15 mg &middot; IV 2&ndash;6 mg &middot; Epidural or intrathecal 2&ndash;3 mg &middot; Children 0.1&ndash;0.2 mg/kg</div></div>
+  </div>
+
+  <h2>5. Adverse effects</h2>
+  <div class="drugs">Sedation, Mental clouding, Lethargy, Dysphoria, Constipation, Vomiting, Respiratory depression, Blurred vision, Urinary retention, Fall in BP</div>
+  <div class="rows">
+    <div class="row"><div class="k">Idiosyncrasy and allergy</div><div>Urticaria, lip swelling, itching from histamine release. Anaphylactoid reaction rare.</div></div>
+    <div class="row"><div class="k">Apnoea of the newborn</div><div>Foetal blood-brain barrier is undeveloped &rarr; higher brain levels. Treat with <b>naloxone 10 &micro;g/kg into the umbilical cord</b>.</div></div>
+  </div>
+
+  <h3>Acute morphine poisoning</h3>
+  <div class="rows par">
+    <div class="row"><div class="k">Serious toxicity</div><div>50 mg IM in a non-tolerant adult</div></div>
+    <div class="row"><div class="k">Lethal dose</div><div>About <b>250 mg</b></div></div>
+  </div>
+  <h4 style="margin:18px 0 0;font-size:.95rem;color:var(--muted)">Features</h4>
+  <div class="drugs">Stupor or coma, Flaccidity, Shallow breathing, Cyanosis, Pinpoint pupils, Fall in BP, Shock, Pulmonary oedema</div>
+  <div class="flow">
+    <div class="step">Respiratory support: positive pressure breathing<br><span style="color:var(--muted)">also opposes pulmonary oedema</span></div><div class="arrow">&darr;</div>
+    <div class="step">Maintain BP: IV fluids, vasoconstrictors</div><div class="arrow">&darr;</div>
+    <div class="step">Gastric lavage with potassium permanganate<br><span style="color:var(--muted)"><b>even if morphine was injected</b> &mdash; it is a base, so it moves into acid gastric juice, ionises and can't diffuse back</span></div><div class="arrow">&darr;</div>
+    <div class="step ok">Antidote: <b>naloxone 0.4&ndash;0.8 mg IV</b> every 2&ndash;3 min until breathing picks up; repeat every 1&ndash;4 h</div>
+  </div>
+
+  <h3>Tolerance and dependence</h3>
+  <div class="split">
+    <div class="pro"><h4>Tolerance</h4><ul><li>High degree; mainly cellular, partly faster metabolism</li><li>Strong cross-tolerance among opioids</li><li>Addicts tolerate grams</li></ul></div>
+    <div class="con"><h4>No tolerance to these</h4><ul><li>Constipation</li><li>Miosis</li><li>Convulsant action</li></ul></div>
+  </div>
+  <div class="rows">
+    <div class="row"><div class="k">Dependence</div><div>Pronounced, abuse liability high. Proper medical use seldom causes it; commoner among medical staff with easy access.</div></div>
+  </div>
+  <h4 style="margin:18px 0 0;font-size:.95rem;color:var(--muted)">Withdrawal</h4>
+  <div class="drugs">Lacrimation, Sweating, Yawning, Anxiety, Restlessness, Gooseflesh, Mydriasis, Tremor, Insomnia, Abdominal colic, Diarrhoea, Dehydration, Rise in BP, Weight loss</div>
+  <p style="color:var(--muted);font-size:.9rem">Delirium and convulsions are rare, unlike barbiturate withdrawal. Antagonists precipitate it: 0.2 mg naloxone is enough in the severely dependent.</p>
+  <div class="flow">
+    <div class="step">Withdraw morphine</div><div class="arrow">&darr;</div>
+    <div class="step">Substitute <b>oral methadone</b></div><div class="arrow">&darr;</div>
+    <div class="step ok">Taper methadone<br><span style="color:var(--muted)">relapse is common: long-term maintenance or agonist-antagonists help</span></div>
+  </div>
+
+  <h2>6. Precautions and contraindications</h2>
+  <div class="rgrid">
+    <div class="rcard"><h4>Head injury</h4><span class="speed">Contraindicated</span><p>CO&#8322; retention raises intracranial tension &middot; marked respiratory depression &middot; vomiting, miosis and altered mentation hide how the injury is progressing</p></div>
+    <div class="rcard"><h4>Bronchial asthma</h4><span class="speed">Contraindicated</span><p>Histamine release can trigger an attack. If an opioid is unavoidable, use a low histamine releaser like <b>fentanyl</b>.</p></div>
+    <div class="rcard"><h4>Respiratory insufficiency</h4><span class="speed">Sudden deaths reported</span><p>Emphysema, pulmonary fibrosis, cor pulmonale. Worsens sleep apnoea.</p></div>
+    <div class="rcard"><h4>Undiagnosed acute abdomen</h4><span class="speed">Give after diagnosis</span><p>Worsens diverticulitis, biliary colic, pancreatitis; an inflamed appendix may rupture. Pentazocine and buprenorphine aggravate biliary spasm less.</p></div>
+  </div>
+  <h4 style="margin:18px 0 0;font-size:.95rem;color:var(--muted)">More sensitive, use lower doses</h4>
+  <div class="drugs par">Infants, Elderly, Hypotension, Hypovolaemia, Hypothyroidism, Liver disease, Kidney disease, Elderly males, Unstable personalities</div>
+
+  <h3>Interactions</h3>
+  <div class="rows">
+    <div class="row"><div class="k">Potentiate opioids</div><div class="drugs">Phenothiazines, Tricyclic antidepressants, MAO inhibitors, Amphetamine, Neostigmine</div></div>
+    <div class="row"><div class="k">Sedative-hypnotics</div><div>Exaggerated CNS depression</div></div>
+    <div class="row"><div class="k">Oral drugs</div><div>Morphine delays gastric emptying, so it slows their absorption</div></div>
+  </div>
+
+  <h2>7. Uses</h2>
+  <div class="metro" role="img" aria-label="Uses of morphine and its congeners grouped into pain, anaesthesia, cardiac and codeine uses">
+    <div class="root">Uses</div><div class="stem"></div><div class="bridge"></div>
+    <div class="lines" style="grid-template-columns:1fr;gap:18px">
+      <div class="line"><div class="stem"></div><div class="head"><b>1. Analgesic</b><span>the main use</span></div>
+        <ul class="stops"><li>Severe pain<small>trauma, visceral, ischaemic (MI), postoperative, burns, cancer, renal colic</small></li><li>Cancer and terminal pain<small>oral continuous-release morphine, fentanyl patch, sublingual buprenorphine &middot; round-the-clock dosing + a rescue dose</small></li><li>Epidural 2&ndash;3 mg, intrathecal 0.2 mg<small>segmental analgesia ~12 h; respiratory depression can appear late</small></li><li>Patient-controlled analgesia<small>patient sets the IV fentanyl rate</small></li><li>Not for neuropathic pain<small>pregabalin, amitriptyline, duloxetine instead</small></li></ul></div>
+      <div class="line"><div class="stem"></div><div class="head"><b>2&ndash;3. Anaesthesia</b><span>before and during</span></div>
+        <ul class="stops"><li>Preanaesthetic medication<small>morphine or pethidine, selected patients</small></li><li>Balanced anaesthesia<small>fentanyl, remifentanil or morphine</small></li></ul></div>
+      <div class="line amb"><div class="stem"></div><div class="head"><b>4&ndash;5. Cardiac</b><span>IV morphine</span></div>
+        <ul class="stops"><li>Acute LVF, cardiac asthma</li><li>Anxiety and apprehension<small>in MI or internal bleeding &mdash; never as a routine anxiolytic or sleeping drug</small></li></ul></div>
+      <div class="line amb"><div class="stem"></div><div class="head"><b>6&ndash;7. Codeine's jobs</b><span>not morphine</span></div>
+        <ul class="stops"><li>Dry, irritating cough</li><li>Diarrhoea<small>loperamide and diphenoxylate are the dedicated antidiarrhoeals</small></li></ul></div>
+    </div>
+  </div>
+  <p style="color:var(--muted);font-size:.9rem">Analgesia is symptomatic: don't relieve pain before it has been assessed, it helps diagnosis. In MI give promptly, to cut apprehension and reflex sympathetic stimulation.</p>
+
+  <h3>Why morphine helps acute LVF</h3>
+  <div class="flow">
+    <div class="step">IV morphine</div><div class="arrow">&darr;</div>
+    <div class="step">Venodilatation, peripheral pooling &rarr; <b>&darr; preload</b></div><div class="arrow">&darr;</div>
+    <div class="step">Blood shifts out of the lungs</div><div class="arrow">&darr;</div>
+    <div class="step">Respiratory centre depressed &rarr; air hunger relieved</div><div class="arrow">&darr;</div>
+    <div class="step ok">Sympathetic drive and cardiac work &darr;</div>
+  </div>
+  <p style="color:var(--muted);font-size:.9rem">Also for pulmonary oedema from lung infarction, but not from irritant gases. <b>Contraindicated in bronchial asthma.</b></p>
+
+  <div class="clinic">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFCF94" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3c-2 0-3 2-3 4 0 3 1 5 2 8 .6 2 1 5 2.5 5 1.4 0 1.5-3 2.2-5 .3-.9.6-1.3 1.3-1.3s1 .4 1.3 1.3c.7 2 .8 5 2.2 5 1.5 0 1.9-3 2.5-5 1-3 2-5 2-8 0-2-1-4-3-4-1.8 0-2.6 1-5 1S8.8 3 7 3z"/></svg>
+    <div><b>For your clinic</b>Toothache: start with an aspirin-like analgesic. If that isn't enough, add oral codeine, tramadol or tapentadol, alone or with paracetamol. Adding an NSAID lets you keep the opioid dose low.</div>
+  </div>
+  <div class="clinic">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFCF94" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3c-2 0-3 2-3 4 0 3 1 5 2 8 .6 2 1 5 2.5 5 1.4 0 1.5-3 2.2-5 .3-.9.6-1.3 1.3-1.3s1 .4 1.3 1.3c.7 2 .8 5 2.2 5 1.5 0 1.9-3 2.5-5 1-3 2-5 2-8 0-2-1-4-3-4-1.8 0-2.6 1-5 1S8.8 3 7 3z"/></svg>
+    <div><b>For your clinic</b>A patient with a facial fracture and head injury: morphine is contraindicated. It raises intracranial tension and masks the pupil and consciousness changes you need to watch.</div>
+  </div>
+
+  <div class="next"><button class="go main" data-jump="cards">Flip 15 flashcards</button><button class="go" data-jump="mcq">10 MCQs</button></div>
+</section>
+<section data-topic="morphine" data-mode="cards" hidden></section>
+<section data-topic="morphine" data-mode="mcq" hidden></section>
+
+<!-- ===================== OTHER OPIOIDS ===================== -->
+<section data-topic="others" data-mode="notes" hidden>
+  <div class="hero">
+    <div class="eyebrow">Chapter 34 &middot; Other opioids</div>
+    <h1>Codeine to tapentadol</h1>
+    <p class="lede">Each drug here is learnt as "morphine, but different in this way". Start with the comparison, then the individual drugs.</p>
+  </div>
+
+  <h2>At a glance</h2>
+  <div class="rgrid">
+    <div class="rcard"><h4>Morphine</h4><span class="speed">Full &mu; agonist &middot; ceiling ++++</span><p>10 mg &middot; acts 4&ndash;6 h</p><p style="color:var(--muted)">Poor, unreliable oral activity</p></div>
+    <div class="rcard"><h4>Codeine</h4><span class="speed">Partial &mu; agonist &middot; ceiling +</span><p>60 mg &middot; acts 4&ndash;6 h</p><p style="color:var(--muted)">High oral activity</p></div>
+    <div class="rcard"><h4>Pethidine</h4><span class="speed">&mu; agonist &middot; ceiling ++++</span><p>60&ndash;100 mg &middot; acts 2&ndash;4 h</p><p style="color:var(--muted)">Medium oral activity &middot; shortest of the full agonists</p></div>
+    <div class="rcard"><h4>Methadone</h4><span class="speed">&mu; agonist &middot; ceiling ++++</span><p>6&ndash;10 mg &middot; acts 4&ndash;6 h, longer on repeat dosing</p><p style="color:var(--muted)">High oral activity</p></div>
+    <div class="rcard"><h4>Fentanyl</h4><span class="speed">&mu; agonist &middot; ceiling ++++</span><p>0.1 mg &middot; acts 1&ndash;1.5 h</p><p style="color:var(--muted)">Low oral activity &middot; most potent</p></div>
+    <div class="rcard"><h4>Tramadol</h4><span class="speed">Weak &mu; + monoamines &middot; ceiling ++</span><p>50&ndash;100 mg &middot; acts 4&ndash;6 h</p><p style="color:var(--muted)">High oral activity</p></div>
+  </div>
+  <p style="color:var(--muted);font-size:.9rem">Ceiling = analgesic efficacy, + low to ++++ full. The dose given is the equianalgesic dose.</p>
+
+  <h2>1. Codeine</h2>
+  <div class="def">Methyl-morphine: a natural opium alkaloid and a <b>partial &mu; agonist</b> with a low ceiling. It has very little affinity for opioid receptors itself.</div>
+  <div class="paths">
+    <div class="path win"><span class="t">Normal metaboliser</span>Codeine<span class="ar">&darr;</span>CYP2D6 demethylation<span class="ar">&darr;</span>Morphine<span class="ar">&darr;</span><span class="ok">Analgesia</span></div>
+    <div class="path"><span class="t">CYP2D6 poor metaboliser</span>Codeine<span class="ar">&darr;</span>Little conversion<span class="ar">&darr;</span>No morphine<span class="ar">&darr;</span><span class="hit">Analgesia fails</span></div>
+  </div>
+  <div class="rows">
+    <div class="row"><div class="k">Analgesia</div><div>1/10 of morphine &middot; <b>60 mg codeine &asymp; 600 mg aspirin</b> &middot; mild to moderate pain only</div></div>
+    <div class="row"><div class="k">Cough</div><div>1/3 of morphine, more selective &middot; subanalgesic 10&ndash;30 mg</div></div>
+    <div class="row"><div class="k">Kinetics</div><div>Oral : parenteral 1 : 2 &middot; acts 4&ndash;6 h &middot; no parenteral preparation</div></div>
+    <div class="row"><div class="k">Side effects</div><div><b>Constipation</b> prominent, so it is used for diarrhoea. Others milder than morphine; abuse liability low.</div></div>
+  </div>
+  <div class="rgrid">
+    <div class="rcard"><h4>Pholcodine, ethylmorphine</h4><span class="speed">Codeine-like</span><p>Used mainly as antitussives; said to be less constipating.</p></div>
+    <div class="rcard"><h4>Heroin</h4><span class="speed">3&times; morphine</span><p>More lipid-soluble &rarr; reaches the brain faster &rarr; more euphoric and highly addicting. No therapeutic advantage; banned in most countries.</p></div>
+  </div>
+
+  <h2>2. Pethidine (meperidine)</h2>
+  <p style="color:var(--muted);font-size:.9rem">Made in 1939 as an atropine substitute. Chemically unlike morphine, but a &mu; agonist blocked by naloxone.</p>
+  <div class="paths">
+    <div class="path win"><span class="t">Morphine</span>10 mg<span class="ar">&darr;</span>Acts 4&ndash;6 h<span class="ar">&darr;</span>Suppresses cough<span class="ar">&darr;</span>Bradycardia<span class="note">marked miosis and constipation</span></div>
+    <div class="path"><span class="t">Pethidine</span>~100 mg<span class="ar">&darr;</span>Acts 2&ndash;4 h<span class="ar">&darr;</span><span class="hit">No cough relief</span><span class="ar">&darr;</span><span class="hit">Tachycardia</span><span class="note">antimuscarinic: dry mouth, blurred vision; less miosis, constipation, retention</span></div>
+  </div>
+  <h3>Why overdose excites instead of depressing</h3>
+  <div class="flow">
+    <div class="step">Pethidine</div><div class="arrow">&darr;<small>liver</small></div>
+    <div class="step">Meperidinic acid + a little <b>norpethidine</b></div><div class="arrow">&darr;<small>builds up in renal failure, or with MAO inhibitors</small></div>
+    <div class="step hit">Tremors, mydriasis, hyperreflexia, delirium, myoclonus, convulsions</div>
+  </div>
+  <div class="rows">
+    <div class="row"><div class="k">Interactions</div><div><b>Nonselective MAO inhibitors</b>: norpethidine builds up, excitement &middot; <b>SSRIs</b>: serotonin syndrome</div></div>
+    <div class="row"><div class="k">Use now</div><div>Declined. Controls <b>shivering</b> after anaesthesia or during IV infusions. Dose 50&ndash;100 mg IM or SC.</div></div>
+  </div>
+
+  <h2>3. Fentanyl and remifentanil</h2>
+  <div class="rgrid">
+    <div class="rcard"><h4>Fentanyl</h4><span class="speed">80&ndash;100&times; morphine</span>
+      <p>Pethidine congener. Few cardiovascular effects, less histamine release.</p>
+      <p style="color:var(--muted)">Very lipid-soluble: peak 5 min after IV, gone in 30&ndash;40 min by redistribution; elimination t&frac12; ~4 h.<br>Injection for anaesthesia &middot; <b>transdermal patch</b> for cancer and chronic pain, working after ~12 h, changed every 3 days &middot; buccal possible, not oral.</p></div>
+    <div class="rcard"><h4>Remifentanil</h4><span class="speed">Fastest</span><p>Faster-acting fentanyl congener, lasting only 10&ndash;15 min after IV. Used only in anaesthesia.</p></div>
+  </div>
+
+  <h2>4. Methadone</h2>
+  <div class="def">Synthetic, chemically unlike morphine but pharmacologically very similar. Its two key features: <b>high oral activity</b> and <b>firm tissue binding</b>.</div>
+  <div class="flow">
+    <div class="step">Single dose acts 4&ndash;6 h</div><div class="arrow">&darr;<small>accumulates in tissues, released slowly</small></div>
+    <div class="step">Repeated doses act longer &mdash; t&frac12; 24&ndash;48 h on chronic use</div><div class="arrow">&darr;</div>
+    <div class="step ok">Hardly any "kick" &middot; slow tolerance &middot; withdrawal starts in 1&ndash;2 days, prolonged but milder</div>
+  </div>
+  <div class="rows">
+    <div class="row"><div class="k">Substitution therapy</div><div>1 mg methadone replaces <b>4 mg morphine, 2 mg heroin or 20 mg pethidine</b>, then is withdrawn gradually</div></div>
+    <div class="row"><div class="k">Methadone maintenance</div><div>40&ndash;80 mg/day long-term, so injected morphine or heroin gives no pleasure</div></div>
+    <div class="row"><div class="k">Kinetics</div><div>Oral : parenteral 1 : 2 &middot; 90% protein bound &middot; CYP3A4 and CYP2B6</div></div>
+    <div class="row"><div class="k">Interactions</div><div>Rifampicin and phenytoin induce its metabolism &rarr; withdrawal in methadone-dependent patients</div></div>
+    <div class="row"><div class="k">Other uses</div><div>Analgesic 2.5&ndash;10 mg oral or IM; occasionally antitussive</div></div>
+  </div>
+  <p style="color:var(--muted);font-size:.9rem">Dextropropoxyphene, a weak opioid related to methadone, was banned in India in 2013 after overdoses caused delirium, seizures and cardiotoxicity.</p>
+
+  <h2>5. Tramadol</h2>
+  <div class="def">Centrally acting <b>atypical</b> opioid. Naloxone only partly reverses it: part of its action is non-opioid (monoamine reuptake block).</div>
+  <div class="paths">
+    <div class="path win"><span class="t">Action 1</span>Weak &mu; agonist<span class="ar">&darr;</span>Opioid analgesia<span class="note">naloxone-reversible part</span></div>
+    <div class="path win"><span class="t">Action 2</span>&darr; Reuptake of NA and 5-HT, &uarr; 5-HT release<span class="ar">&darr;</span>Spinal monoaminergic pain inhibition<span class="note">naloxone-resistant part</span></div>
+  </div>
+  <div class="split">
+    <div class="pro"><h4>Advantages</h4><ul><li>Insignificant respiratory depression, sedation, constipation, urinary retention</li><li>Good oral bioavailability; t&frac12; 5&ndash;6 h</li><li>Minimal haemodynamic effects</li><li>Little dose escalation; low abuse potential</li></ul></div>
+    <div class="con"><h4>Watch for</h4><ul><li>Nausea and dizziness prominent</li><li>Lowers seizure threshold: <b>contraindicated in epilepsy</b></li><li>With SSRIs: serotonin syndrome</li><li>Not effective in severe pain</li></ul></div>
+  </div>
+  <div class="rows">
+    <div class="row"><div class="k">Potency</div><div>100 mg IV tramadol &asymp; 10 mg IM morphine</div></div>
+    <div class="row"><div class="k">Uses</div><div>Mild to moderate short-lasting pain: diagnostic procedures, injury, surgery. Also chronic and cancer pain. 50&ndash;100 mg oral, IM or slow IV, 4&ndash;6 hourly; also with paracetamol.</div></div>
+  </div>
+
+  <h2>6. Tapentadol</h2>
+  <div class="paths">
+    <div class="path"><span class="t">Tramadol</span>Weak &mu; agonist<span class="ar">+</span>NA and <b>5-HT</b> reuptake blocked<span class="note">more nausea and vomiting</span></div>
+    <div class="path win"><span class="t">Tapentadol</span>Weak &mu; binding<span class="ar">+</span><b>NA</b> reuptake blocked &gt; 5-HT<span class="note">mainly noradrenergic; less nausea</span></div>
+  </div>
+  <div class="rows">
+    <div class="row"><div class="k">Kinetics</div><div>Well absorbed orally &middot; glucuronide conjugated &middot; excreted in urine</div></div>
+    <div class="row"><div class="k">Use</div><div>Moderately severe acute and chronic pain; at least as effective as tramadol. 50&ndash;100 mg, 2&ndash;4 times a day.</div></div>
+    <div class="row"><div class="k">Still risks</div><div>Serotonin syndrome with SSRIs &middot; seizures in predisposed patients</div></div>
+  </div>
+  <div class="clinic">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFCF94" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3c-2 0-3 2-3 4 0 3 1 5 2 8 .6 2 1 5 2.5 5 1.4 0 1.5-3 2.2-5 .3-.9.6-1.3 1.3-1.3s1 .4 1.3 1.3c.7 2 .8 5 2.2 5 1.5 0 1.9-3 2.5-5 1-3 2-5 2-8 0-2-1-4-3-4-1.8 0-2.6 1-5 1S8.8 3 7 3z"/></svg>
+    <div><b>For your clinic</b>Before prescribing tramadol or tapentadol after an extraction, ask about antidepressants (SSRIs) and epilepsy. Both are reasons to pick another analgesic.</div>
+  </div>
+
+  <div class="next"><button class="go main" data-jump="cards">Flip 15 flashcards</button><button class="go" data-jump="mcq">10 MCQs</button></div>
+</section>
+<section data-topic="others" data-mode="cards" hidden></section>
+<section data-topic="others" data-mode="mcq" hidden></section>
+
+<!-- ===================== MIXED & ANTAGONISTS ===================== -->
+<section data-topic="complex" data-mode="notes" hidden>
+  <div class="hero">
+    <div class="eyebrow">Chapter 34 &middot; Complex action opioids</div>
+    <h1>Complex action opioids</h1>
+    <p class="lede">Drugs that switch one receptor on and another off: limited efficacy, a ceiling on respiratory depression, less addicting.</p>
+  </div>
+
+  <div class="def"><b>Agonist-antagonists</b> are agonists at one opioid receptor and antagonists at another. <b>Partial agonists</b> bind well but have low intrinsic activity.</div>
+
+  <h3>Where each drug sits</h3>
+  <div class="layers">
+    <div class="layer l1">Morphine, pethidine, fentanyl<span>full &mu; agonist</span></div>
+    <div class="layer l2">Buprenorphine<span>partial &mu; agonist + &kappa; antagonist</span></div>
+    <div class="layer l3">Butorphanol<span>weak &mu; partial agonist + &kappa; agonist</span></div>
+    <div class="layer l4">Pentazocine, nalbuphine, nalorphine<span>&mu; antagonist + &kappa; agonist</span></div>
+    <div class="layer l5">Naloxone, naltrexone, nalmefene<span>pure antagonist, no agonist action</span></div>
+  </div>
+  <p style="color:var(--muted);font-size:.9rem">Intrinsic activity at the &mu; receptor, highest at the top. Everything below the first band has a ceiling.</p>
+
+  <div class="split">
+    <div class="pro"><h4>Shared features</h4><ul><li>Limited efficacy: like lower doses of morphine</li><li>Low-ceiling respiratory depression</li><li>Less addicting</li></ul></div>
+    <div class="con"><h4>Don't give</h4><ul><li>After a full &mu; agonist: analgesia may fall</li><li>To someone dependent on a &mu; agonist: severe withdrawal may be precipitated</li></ul></div>
+  </div>
+  <div class="rows">
+    <div class="row"><div class="k">Nalorphine</div><div>N-allyl-normorphine, the first opioid antagonist (1951). Later found to be a <b>&kappa; agonist</b> with low-ceiling analgesia. Not used: dysphoric and psychotomimetic.</div></div>
+  </div>
+
+  <h2>Pentazocine</h2>
+  <div class="def">The first agonist-antagonist analgesic: <b>weak &mu; antagonist, marked &kappa; agonist</b>.</div>
+  <h3>Dose decides how it feels</h3>
+  <div class="flow">
+    <div class="step">Low dose &mdash; pleasurable; post-addicts recognise it as an opiate</div><div class="arrow">&darr;<small>above 60 mg IM</small></div>
+    <div class="step hit">Unpleasant, nalorphine-like, psychotomimetic<br><span style="color:var(--muted)">&kappa; and &sigma; mediated</span></div>
+  </div>
+  <h3>CVS: why it is wrong for MI</h3>
+  <div class="card">
+    <div class="cause"><span>Sympathetic stimulation at higher doses</span><span class="up">&uarr;</span></div>
+    <div class="cause"><span>Heart rate</span><span class="up">&uarr;</span></div>
+    <div class="cause"><span>Blood pressure</span><span class="up">&uarr;</span></div>
+    <div class="cause"><span>Cardiac work</span><span class="up">&uarr;</span></div>
+  </div>
+  <p style="color:var(--muted);font-size:.9rem"><b>Avoid in coronary ischaemia and MI</b> &mdash; the opposite of morphine, which cuts cardiac work.</p>
+  <div class="rows">
+    <div class="row"><div class="k">Analgesia</div><div>Lower ceiling, mainly spinal (&kappa;&#8321;), different in character from morphine's</div></div>
+    <div class="row"><div class="k">Sedation, respiration</div><div>1/3 to 1/2 of morphine &middot; doesn't increase much beyond 60 mg</div></div>
+    <div class="row"><div class="k">Better than morphine</div><div>Less biliary spasm, constipation and vomiting. Sweating and light-headedness instead.</div></div>
+    <div class="row"><div class="k">Dependence</div><div>Occurs, but withdrawal is milder and drug-seeking less intense. Precipitates withdrawal in morphine-dependent people.</div></div>
+    <div class="row"><div class="k">Kinetics and dose</div><div>Oral : parenteral 1 : 3 &middot; t&frac12; 3&ndash;4 h, acts 3&ndash;5 h &middot; oral 50&ndash;100 mg, IM or SC 30&ndash;60 mg (irritant, causes local fibrosis)</div></div>
+    <div class="row"><div class="k">Use</div><div>Not favoured now. Postoperative and moderately severe pain; dysphoria limits chronic use.</div></div>
+  </div>
+
+  <h2>Butorphanol and nalbuphine</h2>
+  <div class="paths">
+    <div class="path"><span class="t">Butorphanol</span>&kappa; agonist, weak &mu; partial agonist<span class="ar">&darr;</span>2 mg = 30 mg pentazocine<span class="ar">&darr;</span>More sedation<span class="ar">&darr;</span><span class="hit">Avoid in cardiac ischaemia</span><span class="note">BP not raised</span></div>
+    <div class="path win"><span class="t">Nalbuphine</span>Strong &kappa; agonist, weak &mu; antagonist<span class="ar">&darr;</span>More potent than pentazocine<span class="ar">&darr;</span>No sympathetic stimulation<span class="ar">&darr;</span><span class="ok">Safe in MI</span><span class="note">an analogue of naloxone</span></div>
+  </div>
+  <div class="rgrid">
+    <div class="rcard"><h4>Butorphanol</h4><span class="speed">1&ndash;4 mg IM or IV</span>
+      <p>Less dysphoric than pentazocine; post-addicts recognise it as a barbiturate. Low abuse potential, mild withdrawal.</p>
+      <p style="color:var(--muted)"><b>Can neither substitute for nor antagonise morphine.</b> For postoperative pain and renal colic.</p></div>
+    <div class="rcard"><h4>Nalbuphine</h4><span class="speed">Ceiling at 30 mg IM</span>
+      <p>No further analgesia or respiratory depression above it. Few dysphoric effects at 10&ndash;20 mg; higher doses give weird thoughts and hallucinations.</p>
+      <p style="color:var(--muted)">t&frac12; 2&ndash;3 h &middot; 10 mg IM, SC or IV every 4&ndash;6 h &middot; precipitates withdrawal in morphine-dependent people</p></div>
+  </div>
+
+  <h2>Buprenorphine</h2>
+  <div class="def">Synthetic thebaine congener. A highly lipid-soluble <b>partial &mu; agonist</b>, <b>25&times; more potent</b> than morphine but with lower intrinsic activity and a ceiling. Also a <b>&kappa; antagonist</b>.</div>
+  <h3>Why naloxone struggles with it</h3>
+  <div class="flow">
+    <div class="step">Buprenorphine binds &mu; receptors <b>very tightly</b></div><div class="arrow">&darr;</div>
+    <div class="step">Naloxone can't displace it once bound</div><div class="arrow">&darr;</div>
+    <div class="step hit">Only partly reversed &mdash; and <b>not usable in labour</b>: neonatal respiratory depression can't be reversed</div>
+  </div>
+  <p style="color:var(--muted);font-size:.9rem">High-dose naloxone given first can prevent its effect. Naloxone doesn't precipitate buprenorphine withdrawal.</p>
+  <div class="rows">
+    <div class="row"><div class="k">Time course</div><div>Slower onset, longer action: 6&ndash;8 h after one dose, up to 24 h on repeat dosing</div></div>
+    <div class="row"><div class="k">Effects</div><div>Sedation, vomiting, miosis like morphine &middot; less constipation &middot; postural hypotension prominent &middot; analgesia and respiratory depression both show a ceiling</div></div>
+    <div class="row"><div class="k">Dependence</div><div>Substitutes for morphine at low dependence, but <b>precipitates withdrawal in the highly dependent</b>. Its own withdrawal is delayed by days, milder and longer.</div></div>
+    <div class="row"><div class="k">Kinetics</div><div>Effective <b>sublingually</b> &middot; highly protein bound, stays in tissues for days &middot; terminal t&frac12; ~40 h &middot; excreted mostly unchanged in bile</div></div>
+    <div class="row"><div class="k">Dose</div><div>0.3&ndash;0.6 mg IM, SC or slow IV &middot; sublingual 0.2&ndash;0.4 mg every 6&ndash;8 h</div></div>
+    <div class="row"><div class="k">Uses</div><div>Long-lasting cancer pain, premedication, postoperative pain, MI, and opioid dependence as an alternative to methadone</div></div>
+  </div>
+
+  <div class="next"><button class="go main" data-jump="cards">Flip 13 flashcards</button><button class="go" data-jump="mcq">10 MCQs</button></div>
+</section>
+<section data-topic="complex" data-mode="cards" hidden></section>
+<section data-topic="complex" data-mode="mcq" hidden></section>
+
+<!-- ===================== ANTAGONISTS ===================== -->
+<section data-topic="antagonists" data-mode="notes" hidden>
+  <div class="hero">
+    <div class="eyebrow">Chapter 34 &middot; Opioid antagonists</div>
+    <h1>Pure opioid antagonists</h1>
+    <p class="lede">Drugs with no agonist action of their own: they block opioid receptors and reverse opioid poisoning.</p>
+  </div>
+  <div class="drugs">Naloxone, Naltrexone, Nalmefene</div>
+
+  <h2>Naloxone</h2>
+  <div class="def">N-allyl-noroxymorphone. A <b>competitive antagonist at all opioid receptors</b>, blocking &mu; at much lower doses than &kappa; or &delta;. No agonist action even at 20&times; the &mu;-blocking dose.</div>
+  <div class="paths">
+    <div class="path"><span class="t">No opioid on board</span>Naloxone<span class="ar">&darr;</span>Nothing happens<span class="note">no subjective effects, no dependence</span></div>
+    <div class="path win"><span class="t">Opioid on board</span>Naloxone<span class="ar">&darr;</span><span class="ok">Every opioid effect reversed</span><span class="note">within 2&ndash;3 min of IV</span></div>
+  </div>
+  <div class="flow">
+    <div class="step">Naloxone <b>0.4&ndash;0.8 mg IV</b> in a morphine-treated patient</div><div class="arrow">&darr;<small>within 2&ndash;3 min</small></div>
+    <div class="step ok">Analgesia gone &middot; breathing normal, even stimulated &middot; pupils dilate</div><div class="arrow">&darr;</div>
+    <div class="step">Sedation reverses less completely</div><div class="arrow">&darr;<small>effect lasts only 1&ndash;3 h</small></div>
+    <div class="step hit">The opioid may outlast it: <b>repeat the dose</b></div>
+  </div>
+
+  <h3>Dose ladder</h3>
+  <div class="layers">
+    <div class="layer l2">0.4&ndash;0.8 mg IV<span>reverses morphine</span></div>
+    <div class="layer l3">0.4 mg IV<span>precipitates withdrawal in dependence, lasting 2&ndash;3 h</span></div>
+    <div class="layer l4">4&ndash;10 mg<span>reverses nalorphine and pentazocine</span></div>
+    <div class="layer l5">No dose works<span>buprenorphine</span></div>
+  </div>
+  <p style="color:var(--muted);font-size:.9rem">The dysphoric and psychotomimetic effects of pentazocine-like drugs are only partly reversed, because they are &sigma; mediated.</p>
+
+  <div class="rows">
+    <div class="row"><div class="k">Endogenous opioids</div><div>Blocked too: people with high pain tolerance become more pain-sensitive. Partly reverses respiratory depression from N&#8322;O and diazepam.</div></div>
+    <div class="row"><div class="k">Kinetics</div><div><b>Inactive orally</b> (first pass) &middot; IV acts in 2&ndash;3 min &middot; glucuronidated &middot; t&frac12; 1 h in adults, 3 h in newborns &middot; lasts 1&ndash;3 h</div></div>
+    <div class="row"><div class="k">Adverse effects</div><div>Uncommon: rise in BP, pulmonary oedema</div></div>
+  </div>
+
+  <h3>Uses of naloxone</h3>
+  <div class="metro" role="img" aria-label="Uses of naloxone split into emergencies and other uses">
+    <div class="root">Naloxone</div><div class="stem"></div><div class="bridge"></div>
+    <div class="lines" style="grid-template-columns:1fr;gap:18px">
+      <div class="line"><div class="stem"></div><div class="head"><b>Emergency</b><span>reverse the opioid</span></div>
+        <ul class="stops"><li><b>Morphine poisoning &mdash; drug of choice</b><small>0.4&ndash;0.8 mg IV every 2&ndash;3 min, max 10 mg</small></li><li>Neonatal asphyxia<small>opioids given in labour &mdash; 10 &micro;g/kg into the umbilical cord</small></li><li>Other opioid overdose<small>including agonist-antagonists, except buprenorphine</small></li></ul></div>
+      <div class="line amb"><div class="stem"></div><div class="head"><b>Other</b><span>smaller doses</span></div>
+        <ul class="stops"><li>Postoperative respiratory depression<small>0.1&ndash;0.2 mg IV, usually keeping the analgesia</small></li><li>Adjunct to intraspinal opioids</li><li>Diagnosis of opioid dependence<small>precipitates withdrawal</small></li><li>Partly reverses alcohol intoxication</li><li>Tried in shock, stroke, spinal injury<small>value uncertain</small></li></ul></div>
+    </div>
+  </div>
+  <div class="clinic">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFCF94" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3c-2 0-3 2-3 4 0 3 1 5 2 8 .6 2 1 5 2.5 5 1.4 0 1.5-3 2.2-5 .3-.9.6-1.3 1.3-1.3s1 .4 1.3 1.3c.7 2 .8 5 2.2 5 1.5 0 1.9-3 2.5-5 1-3 2-5 2-8 0-2-1-4-3-4-1.8 0-2.6 1-5 1S8.8 3 7 3z"/></svg>
+    <div><b>For your clinic</b>If an opioid like fentanyl is part of IV sedation, keep naloxone ready next to flumazenil. Naloxone reverses the opioid; flumazenil reverses the benzodiazepine. Watch the patient afterwards: naloxone wears off in 1&ndash;3 h.</div>
+  </div>
+
+  <h2>Other antagonists</h2>
+  <div class="paths">
+    <div class="path win"><span class="t">Enter the brain</span>Naloxone<span class="ar">&middot;</span>Naltrexone<span class="ar">&middot;</span>Nalmefene<span class="note">block central and peripheral &mu; actions</span></div>
+    <div class="path"><span class="t">Stay outside the brain</span>Methylnaltrexone<span class="ar">&middot;</span>Alvimopan<span class="note">block gut &mu; actions only, so central analgesia is kept</span></div>
+  </div>
+  <div class="rgrid">
+    <div class="rcard"><h4>Naltrexone</h4><span class="speed">Oral, lasts 1&ndash;2 days</span>
+      <p>More potent than naloxone. <b>Opioid blockade therapy</b> for post-addicts, 50 mg/day: a usual opioid shot gives no high and craving fades.</p>
+      <p style="color:var(--muted)">Also cuts alcohol craving &mdash; approved to prevent relapse of heavy drinking. Nausea, headache; hepatotoxic at high doses.</p></div>
+    <div class="rcard"><h4>Nalmefene</h4><span class="speed">Longest acting</span><p>No hepatotoxicity, better oral bioavailability, longer acting than naltrexone.</p></div>
+    <div class="rcard"><h4>Methylnaltrexone</h4><span class="speed">Peripheral only</span><p>Doesn't cross the blood-brain barrier. Reverses constipation in cancer patients on chronic opioids and in methadone maintenance.</p></div>
+    <div class="rcard"><h4>Alvimopan</h4><span class="speed">Peripheral only</span><p>Poorly absorbed from the gut and doesn't enter the brain. For postoperative ileus after bowel resection.</p></div>
+  </div>
+
+  <div class="next"><button class="go main" data-jump="cards">Flip 12 flashcards</button><button class="go" data-jump="mcq">10 MCQs</button></div>
+</section>
+<section data-topic="antagonists" data-mode="cards" hidden></section>
+<section data-topic="antagonists" data-mode="mcq" hidden></section>
+
+<!-- ===================== REVIEW ===================== -->
+<section data-topic="review" hidden>
+  <div class="hero">
+    <div class="eyebrow">For the reviewer</div>
+    <h1>Your review</h1>
+    <p class="lede">Round 1. Mark each point, then tap Copy feedback and paste it in WhatsApp. Spot anything wrong anywhere else? Add it at the bottom.</p>
+  </div>
+  <div id="reviewList"></div>
+  <h3>Anything else?</h3>
+  <textarea id="generalNote" placeholder="Wrong facts, missing topics, anything hard to read on your phone"></textarea>
+  <div class="copybox"><span class="status" id="copyStatus">0 of 2 checked</span><button class="btn primary" id="copyBtn">Copy feedback</button></div>
+  <pre class="fallback" id="copyFallback" hidden></pre>
+</section>
+
+</div></main>
+<footer class="gut"><div class="col">PharmDaily · Section 7 · Opioid analgesics and antagonists review copy. Written from KD Tripathi's <i>Essentials of Medical Pharmacology</i> (chapter 34), rewritten for revision. For BDS and MBBS students.</div></footer>
+
+<script>
+(function(){
+[['(prefers-color-scheme: light)','#0B0C1A'],['(prefers-color-scheme: dark)','#0B0C1A']].forEach(function(t){
+  var m=document.createElement('meta');m.name='theme-color';m.media=t[0];m.content=t[1];document.head.appendChild(m)});
+
+document.querySelectorAll('.drugs').forEach(function(el){
+  if(el.children.length) return;
+  var items=el.textContent.split(',').map(function(s){return s.trim()}).filter(Boolean);
+  el.textContent='';
+  items.forEach(function(t){var s=document.createElement('span');s.className='rx';var i=document.createElement('span');i.textContent=t;s.appendChild(i);el.appendChild(s)});
+});
+
+var CARDS={
+basics:[
+["Define an analgesic.","A drug that selectively relieves pain by acting in the CNS or on peripheral pain mechanisms, without significantly altering consciousness."],
+["Three groups of analgesics?","Opioid (morphine-like), nonopioid (NSAIDs) and adjuvant analgesics (anticonvulsants like gabapentin, pregabalin; antidepressants like amitriptyline, duloxetine)."],
+["Classify opioid agonists.","Natural: morphine, codeine. Semisynthetic: heroin, pholcodine, ethylmorphine. Synthetic: pethidine, methadone, fentanyl, remifentanil, tramadol, tapentadol."],
+["Name the agonist-antagonist (κ) analgesics.","Nalorphine, pentazocine, butorphanol, nalbuphine."],
+["Name three pure opioid antagonists.","Naloxone, naltrexone, nalmefene."],
+["Actions mediated by μ receptors?","Analgesia, respiratory depression, sedation, euphoria, miosis, muscular rigidity, reduced GI motility, physical dependence (morphine type)."],
+["Which receptor causes dysphoria and psychotomimetic effects?","κ (kappa). Naloxone-resistant dysphoria is put down to σ receptors."],
+["Endogenous ligands for μ, κ and δ?","μ: endomorphins 1 and 2 (β-endorphin binds strongly too). κ: dynorphin A. δ: leu- and met-enkephalins."],
+["Opioid receptor transducer mechanism?","Gi/Go-coupled: ↓ adenylyl cyclase (cAMP), opens K⁺ channels (μ, δ) and closes N-type Ca²⁺ channels (κ) → hyperpolarisation and ↓ transmitter release."],
+["Precursor of β-endorphin?","Pro-opiomelanocortin (POMC), which also gives γ-MSH, ACTH and lipotropins."],
+["Which types of analgesia does naloxone block, showing endogenous opioids are involved?","Placebo, acupuncture and stress-induced analgesia."]
+],
+morphine:[
+["Which kind of pain does morphine relieve best?","Dull, poorly localised visceral pain, better than sharp somatic pain. Neuritic pain responds less."],
+["Where does morphine act spinally?","Substantia gelatinosa of the dorsal horn: inhibits release of glutamate and substance P from primary afferents."],
+["How does morphine sedation differ from hypnotic sedation?","Drowsiness and indifference without motor incoordination or ataxia. No anticonvulsant action."],
+["Cause of death in morphine poisoning?","Respiratory failure."],
+["Why do morphine users have pinpoint pupils?","Stimulation of the Edinger-Westphal nucleus of the III nerve (removal of GABAergic inhibition). No tolerance develops to miosis."],
+["Why are emetics useless in morphine poisoning?","Larger doses of morphine directly depress the vomiting centre."],
+["Mechanisms of morphine constipation?","↑ tone, ↓ propulsion, sphincter spasm, ↓ secretions with more fluid absorption, central inattention to defecation reflex. No tolerance."],
+["Effect of morphine on the biliary tract?","Spasm of the sphincter of Oddi; intrabiliary pressure rises several fold, may cause biliary colic."],
+["Active metabolite of morphine?","Morphine-6-glucuronide: more potent than morphine at μ, accumulates on chronic dosing."],
+["Treatment of apnoea in a newborn after morphine in labour?","Naloxone 10 µg/kg injected into the umbilical cord."],
+["Lethal dose of morphine in a non-tolerant adult?","About 250 mg. 50 mg IM produces serious toxicity."],
+["Why is gastric lavage done even when morphine was injected?","Morphine (a base) passes into acid gastric juice, ionises and can't diffuse back."],
+["To which morphine actions does tolerance NOT develop?","Constipation, miosis and convulsant action."],
+["Why is morphine contraindicated in head injury?","Raises intracranial tension (CO₂ retention), marked respiratory depression, and vomiting, miosis and altered mentation hide the patient's progress."],
+["How does morphine help acute left ventricular failure?","↓ preload by venodilatation, shifts blood out of the lungs, relieves air hunger, reduces sympathetic drive and cardiac work."]
+],
+others:[
+["How does codeine produce analgesia?","It is demethylated to morphine by CYP2D6. It fails in CYP2D6 poor metabolisers."],
+["Codeine dose equal in analgesia to 600 mg aspirin?","60 mg codeine."],
+["Main side effect and clinical use of codeine besides analgesia?","Constipation; used as an antitussive (10–30 mg) and for diarrhoea."],
+["Why is heroin more addicting than morphine?","More lipid-soluble, reaches the brain faster: more euphoric, especially IV. About 3× more potent."],
+["Pethidine differs from morphine in heart rate how?","Causes tachycardia (antimuscarinic) instead of bradycardia."],
+["Toxic metabolite of pethidine?","Norpethidine: excitatory, causes tremors, myoclonus, convulsions. Builds up in renal failure."],
+["Dangerous interactions of pethidine?","Nonselective MAO inhibitors (norpethidine excess, excitement) and SSRIs (serotonin syndrome)."],
+["Current use of pethidine?","Control of shivering after anaesthesia or during IV infusions."],
+["How potent is fentanyl compared with morphine?","80–100 times more potent, for both analgesia and respiratory depression."],
+["Transdermal fentanyl: use and patch interval?","Cancer and chronic pain; patch changed every 3 days."],
+["Shortest-acting fentanyl congener?","Remifentanil: 10–15 min after IV, used only in anaesthesia."],
+["Two key features of methadone?","High oral activity (oral:parenteral 1:2) and firm tissue binding (t½ 24–48 h on chronic use)."],
+["Main use of methadone?","Substitution and maintenance therapy for opioid dependence."],
+["Mechanism of tramadol?","Weak μ agonist plus inhibition of NA and 5-HT reuptake (and 5-HT release). Only partly reversed by naloxone."],
+["Contraindications to tramadol?","Epilepsy (lowers seizure threshold) and patients on SSRIs (serotonin syndrome)."]
+],
+complex:[
+["Pentazocine acts on which receptors?","Weak μ antagonist and marked κ agonist."],
+["Why avoid pentazocine in MI?","Higher doses cause tachycardia and rise in BP through sympathetic stimulation, increasing cardiac work."],
+["Pentazocine effects above 60 mg IM?","Unpleasant, nalorphine-like dysphoria and psychotomimetic effects (κ, σ mediated)."],
+["Which agonist-antagonist is considered safe in MI?","Nalbuphine: no sympathetic stimulation, no cardiovascular effects."],
+["Ceiling dose of nalbuphine?","30 mg IM: no further analgesia or respiratory depression above it."],
+["Butorphanol vs pentazocine potency?","Butorphanol 2 mg = pentazocine 30 mg."],
+["Buprenorphine: receptor action and potency?","Partial μ agonist and κ antagonist; 25× more potent than morphine but with a ceiling."],
+["Why does naloxone poorly reverse buprenorphine?","Buprenorphine binds opioid receptors very tightly; naloxone can't displace it once bound."],
+["Why is buprenorphine avoided in labour?","Neonatal respiratory depression from it can't be effectively reversed by naloxone."],
+["What are complex action opioids?","Agonist-antagonists (agonist at one opioid receptor, antagonist at another) and partial agonists. Limited efficacy, low-ceiling respiratory depression, less addicting."],
+["Why not give an agonist-antagonist to a morphine-dependent patient?","It can precipitate severe withdrawal. Given after a full μ agonist, it can also reduce analgesia."],
+["First opioid antagonist, and why isn't it used?","Nalorphine (1951). It is a κ agonist that causes dysphoria and psychotomimetic effects."],
+["Buprenorphine: useful route and t½?","Effective sublingually; terminal t½ about 40 h; excreted mostly unchanged in bile."]
+],
+antagonists:[
+["Naloxone: mechanism?","Competitive antagonist at all opioid receptors; blocks μ at much lower doses than κ or δ. No agonist action."],
+["Effects of naloxone 0.4–0.8 mg IV in a morphine-treated patient?","Analgesia reversed, breathing normalised (even stimulated), pupils dilate; sedation reverses less completely."],
+["What does naloxone do in someone who hasn't taken an opioid?","Nothing noticeable: no subjective or autonomic effects, no dependence."],
+["Naloxone dose for neonatal asphyxia from opioids given in labour?","10 µg/kg injected into the umbilical cord."],
+["Naloxone dose and route in morphine poisoning?","0.4–0.8 mg IV every 2–3 min until breathing picks up, max 10 mg."],
+["Why must naloxone doses be repeated?","Short duration (1–3 h; t½ 1 h) — the opioid can outlast it."],
+["Naloxone by mouth?","Inactive orally due to high first-pass metabolism."],
+["Uses of naltrexone?","Opioid blockade therapy in post-addicts (50 mg/day oral) and preventing relapse of heavy drinking."],
+["Peripheral μ antagonists and their uses?","Methylnaltrexone: opioid-induced constipation. Alvimopan: postoperative ileus after bowel resection."],
+["Which opioid does naloxone not reverse effectively?","Buprenorphine: it binds receptors too tightly to be displaced."],
+["Naltrexone vs naloxone?","Naltrexone is more potent, orally active and lasts 1–2 days. Naloxone is inactive orally and lasts 1–3 h."],
+["Advantage of nalmefene over naltrexone?","No hepatotoxicity, better oral bioavailability, longer acting."]
+]};
+
+var MCQ={
+basics:[
+["Which is a semisynthetic opioid?",["Fentanyl","Codeine","Heroin","Methadone"],2,"Heroin (diacetylmorphine), pholcodine and ethylmorphine are semisynthetic."],
+["Dysphoria and psychotomimetic effects are mainly mediated by:",["μ receptors","κ receptors","δ receptors","NOP receptors"],1,"κ agonism produces dysphoria; naloxone-resistant effects are put down to σ."],
+["Physical dependence of the morphine type is mediated by:",["μ receptors","κ receptors","δ receptors","σ receptors"],0,"μ: morphine-type dependence. κ: nalorphine-type."],
+["The endogenous ligand of the κ receptor is:",["β-endorphin","Met-enkephalin","Dynorphin A","Endomorphin-1"],2,"Dynorphin A; enkephalins prefer δ, endomorphins and β-endorphin prefer μ."],
+["Opioid receptors are:",["Ligand-gated ion channels","G-protein coupled receptors","Tyrosine kinase receptors","Nuclear receptors"],1,"All three are Gi/Go-coupled GPCRs."],
+["κ receptor activation mainly reduces transmitter release by:",["Opening K⁺ channels","Closing N-type Ca²⁺ channels","Raising cAMP","Opening Cl⁻ channels"],1,"κ mainly closes N-type Ca²⁺ channels; μ and δ mainly open K⁺ channels."],
+["β-endorphin is derived from:",["Proenkephalin","Prodynorphin","Pro-opiomelanocortin","Proinsulin"],2,"POMC also gives ACTH, γ-MSH and lipotropins."],
+["Which is a natural opium alkaloid?",["Pethidine","Codeine","Methadone","Fentanyl"],1,"Natural opium alkaloids: morphine and codeine."],
+["Tramadol is classified as a:",["Natural opium alkaloid","Semisynthetic opioid","Synthetic opioid","Agonist-antagonist"],2,"Synthetic: pethidine, methadone, fentanyl, remifentanil, tramadol, tapentadol."],
+["Buprenorphine is classified as a:",["Pure antagonist","Partial μ agonist + κ antagonist","Full μ agonist","κ agonist only"],1,"It is a complex action opioid."]
+],
+morphine:[
+["Morphine relieves best:",["Sharp somatic pain","Dull visceral pain","Trigeminal neuralgia","Neuropathic pain"],1,"Dull, poorly localised visceral pain responds better than sharp or neuritic pain."],
+["Death in acute morphine poisoning is due to:",["Cardiac arrest","Respiratory failure","Renal failure","Convulsions"],1,"Respiratory centre depression is the cause of death."],
+["Miosis by morphine is due to stimulation of the:",["Ciliary ganglion","Edinger-Westphal nucleus","Superior cervical ganglion","Iris dilator muscle"],1,"It removes GABAergic inhibition of the III nerve nucleus."],
+["Tolerance does NOT develop to which effect of morphine?",["Euphoria","Analgesia","Constipation","Respiratory depression"],2,"No tolerance to constipation, miosis and convulsant action."],
+["Morphine may cause biliary colic by:",["Gallstone formation","Spasm of sphincter of Oddi","Relaxing the gallbladder","Increasing bile secretion"],1,"Intrabiliary pressure rises several fold; naloxone and nitrates counter it."],
+["Morphine causes bronchoconstriction by:",["β₂ blockade","Histamine release","Cholinergic stimulation","Leukotriene release"],1,"Non-immunological histamine release; dangerous in asthmatics."],
+["The active metabolite of morphine is:",["Normorphine","Morphine-3-glucuronide","Morphine-6-glucuronide","Codeine"],2,"Morphine-6-glucuronide is more potent than morphine at μ."],
+["Gastric lavage in morphine poisoning is done with:",["Sodium bicarbonate","Potassium permanganate","Activated charcoal only","Normal saline only"],1,"Potassium permanganate oxidises unabsorbed morphine; lavage helps even after injection."],
+["A feature NOT typical of morphine withdrawal:",["Mydriasis","Diarrhoea","Convulsions","Lacrimation"],2,"Delirium and convulsions are uncommon, unlike barbiturate withdrawal."],
+["Morphine is contraindicated in:",["Myocardial infarction","Acute left ventricular failure","Head injury","Cancer pain"],2,"It raises intracranial tension and masks neurological signs. MI and LVF are uses."]
+],
+others:[
+["Codeine produces analgesia mainly after conversion by:",["CYP3A4","CYP2D6","CYP2C19","MAO"],1,"CYP2D6 demethylates codeine to morphine; poor metabolisers get little analgesia."],
+["60 mg codeine is roughly equianalgesic to:",["60 mg aspirin","300 mg aspirin","600 mg aspirin","10 mg morphine"],2,"Its analgesia is comparable to aspirin."],
+["Pethidine differs from morphine in that it:",["Is more potent","Causes tachycardia","Suppresses cough strongly","Acts longer"],1,"Antimuscarinic action gives tachycardia; it's 1/10 as potent, shorter acting and doesn't suppress cough."],
+["Convulsions in pethidine overdose are due to:",["Meperidinic acid","Norpethidine","Morphine","Histamine"],1,"Norpethidine is excitatory and accumulates in renal failure."],
+["Pethidine is still used to control:",["Post-anaesthetic shivering","Cough","Diarrhoea","Biliary colic"],0,"It is not useful in cough or diarrhoea."],
+["Fentanyl is about how many times more potent than morphine?",["2–3","10","25","80–100"],3,"For both analgesia and respiratory depression."],
+["A fentanyl transdermal patch is changed every:",["12 hours","24 hours","3 days","7 days"],2,"Analgesia starts after about 12 h, then stays uniform."],
+["Methadone is used in opioid dependence because of its:",["Short action","High oral activity and long action","Strong euphoria","Antagonist action"],1,"Oral, long-acting, little 'kick'; withdrawal is mild and slow."],
+["Tramadol is contraindicated in:",["Hypertension","Epilepsy","Asthma","Diabetes"],1,"It lowers seizure threshold."],
+["Tapentadol mainly acts by inhibiting reuptake of:",["Serotonin","Noradrenaline","Dopamine","GABA"],1,"NET inhibition is more marked than SERT, unlike tramadol."]
+],
+complex:[
+["Pentazocine is a:",["Pure μ agonist","κ agonist and weak μ antagonist","Pure antagonist","Partial μ agonist only"],1,"Marked κ agonist with weak μ antagonism."],
+["Which should be avoided in myocardial infarction?",["Nalbuphine","Pentazocine","Morphine","Buprenorphine"],1,"Pentazocine raises heart rate and BP. Morphine, nalbuphine and buprenorphine are used in MI."],
+["Psychotomimetic effects of pentazocine appear above:",["10 mg","30 mg","60 mg IM","200 mg"],2,"Higher doses are unpleasant and nalorphine-like."],
+["No further analgesia or respiratory depression occurs with nalbuphine above:",["10 mg","30 mg IM","60 mg","100 mg"],1,"It shows a ceiling effect at 30 mg IM."],
+["Buprenorphine is:",["A full μ agonist","A partial μ agonist and κ antagonist","A κ agonist","A pure antagonist"],1,"Partial μ agonist, 25× more potent than morphine, with a ceiling."],
+["Buprenorphine is not used in labour because:",["It stops contractions","Its neonatal respiratory depression isn't reversed well by naloxone","It is teratogenic","It acts too briefly"],1,"Tight receptor binding resists naloxone."],
+["Nalorphine is not used clinically because it causes:",["Severe constipation","Dysphoria and psychotomimetic effects","Hepatotoxicity","Hypertension"],1,"It is a κ agonist; its κ actions are dysphoric and psychotomimetic."],
+["Compared with pentazocine, butorphanol:",["Raises BP more","Is less potent","Is more potent and doesn't raise BP","Is a pure antagonist"],2,"2 mg butorphanol = 30 mg pentazocine; BP isn't raised, but it is still avoided in cardiac ischaemia."],
+["Buprenorphine is effective by which route?",["Sublingual","Inhalational","Topical on the eye","Rectal only"],0,"Good sublingual efficacy; also IM, SC or slow IV."],
+["In a highly morphine-dependent person, buprenorphine:",["Fully substitutes for morphine","Precipitates withdrawal","Has no effect","Causes only euphoria"],1,"As a partial μ agonist it substitutes only at low levels of dependence."]
+],
+antagonists:[
+["Drug of choice for morphine poisoning:",["Nalorphine","Naloxone","Naltrexone","Flumazenil"],1,"Naloxone 0.4–0.8 mg IV, repeated every 2–3 min."],
+["Naloxone is not given orally because:",["It is irritant","Of high first-pass metabolism","It acts too long","It causes vomiting"],1,"Inactive orally; given IV, acts in 2–3 min."],
+["An orally active, long-acting opioid antagonist used for opioid blockade and alcohol relapse:",["Naloxone","Naltrexone","Nalorphine","Methylnaltrexone"],1,"Naltrexone, 50 mg/day oral, lasts 1–2 days."],
+["Methylnaltrexone is used for opioid-induced constipation because it:",["Is a μ agonist","Doesn't cross the blood-brain barrier","Is a laxative","Blocks κ only"],1,"It blocks peripheral μ actions without reversing central analgesia."],
+["Naloxone is a:",["Partial μ agonist","Competitive antagonist at all opioid receptors","κ agonist","Non-competitive μ blocker"],1,"It blocks μ at lower doses than κ or δ, with no agonist action."],
+["Naloxone dose for neonatal opioid depression:",["0.4 mg IM","10 µg/kg into the umbilical cord","1 mg/kg IV","50 mg oral"],1,"Injected into the umbilical cord."],
+["Plasma t½ of naloxone in adults:",["10 minutes","1 hour","12 hours","40 hours"],1,"1 h in adults, 3 h in newborns; action lasts 1–3 h."],
+["Naloxone poorly reverses the effects of:",["Morphine","Pethidine","Buprenorphine","Fentanyl"],2,"Buprenorphine's tight receptor binding resists displacement."],
+["A peripheral μ antagonist used for postoperative ileus:",["Naltrexone","Alvimopan","Nalmefene","Naloxone"],1,"Alvimopan is poorly absorbed and doesn't enter the brain."],
+["Naloxone also blocks analgesia produced by:",["Aspirin","Placebo and acupuncture","Paracetamol","Local anaesthetics"],1,"Placebo, acupuncture and stress-induced analgesia involve endogenous opioids."]
+]};
+
+var FLAGS=[
+["f1","All tabs","Made from KD Tripathi only","You didn't send college notes for opioids, so all five tabs are from KDT chapter 34. If your college notes cover different points or a different order, send them and I'll match them. Is KDT-only fine for this section?"],
+["f3","Morphine and others","Dental lines in the For your clinic boxes","These are my dental framing of KDT's points: toothache → NSAID first, then codeine/tramadol/tapentadol with paracetamol; no morphine in facial fracture with head injury; ask about SSRIs and epilepsy before tramadol; naloxone ready during IV sedation with an opioid. Are these right for BDS?"]
+];
+
+function buildCards(topic){
+  var sec=document.querySelector('[data-topic="'+topic+'"][data-mode="cards"]');
+  var list=CARDS[topic].slice(), i=0, marks=[];
+  sec.innerHTML='<div class="fc-top"><b style="color:var(--ink-strong)">Flashcards</b><span class="count"></span></div><div class="dots"></div>'+
+    '<button class="fc" aria-label="Flip card"><div class="fc-inner"><div class="face front"><span class="lab">Question</span><div class="q"></div><span class="hint">Tap to reveal</span></div><div class="face back"><span class="lab">Answer</span><div class="a"></div><span class="hint">Tap to flip back</span></div></div></button>'+
+    '<div class="fc-btns"><button class="btn" data-a="again">Again</button><button class="btn primary" data-a="got">Got it</button></div>'+
+    '<div style="display:flex;justify-content:space-between"><button class="btn quiet" data-a="prev">Previous</button><button class="btn quiet" data-a="shuffle">Shuffle</button></div>';
+  var fc=sec.querySelector('.fc'),q=sec.querySelector('.q'),a=sec.querySelector('.a'),c=sec.querySelector('.count'),dots=sec.querySelector('.dots');
+  function show(){fc.classList.remove('flip');q.textContent=list[i][0];a.textContent=list[i][1];c.textContent=(i+1)+' / '+list.length;
+    dots.innerHTML='';list.forEach(function(_,k){var d=document.createElement('i');if(marks[k])d.className=marks[k];else if(k===i)d.className='cur';dots.appendChild(d)})}
+  fc.addEventListener('click',function(){fc.classList.toggle('flip')});
+  sec.addEventListener('click',function(e){var b=e.target.closest('[data-a]');if(!b)return;var act=b.dataset.a;
+    if(act==='got'||act==='again'){marks[i]=act;i=(i+1)%list.length}
+    if(act==='prev')i=(i-1+list.length)%list.length;
+    if(act==='shuffle'){list=list.sort(function(){return Math.random()-.5});i=0;marks=[]}
+    show()});
+  show();
+}
+function buildMcq(topic){
+  var sec=document.querySelector('[data-topic="'+topic+'"][data-mode="mcq"]'),qs=MCQ[topic];
+  var head=document.createElement('div');head.className='mcq-head';
+  head.innerHTML='<b class="count">Score 0 / 0</b><button class="btn" data-reset>Start again</button>';sec.appendChild(head);
+  var box=document.createElement('div');sec.appendChild(box);
+  function render(){var answered=0,right=0;box.innerHTML='';head.querySelector('.count').textContent='Score 0 / 0';
+    qs.forEach(function(item,n){var d=document.createElement('div');d.className='q-card';
+      d.innerHTML='<div class="qn">Question '+(n+1)+' of '+qs.length+'</div><div class="qt"></div>';d.querySelector('.qt').textContent=item[0];
+      item[1].forEach(function(o,k){var b=document.createElement('button');b.className='opt';b.textContent=o;
+        b.addEventListener('click',function(){var opts=d.querySelectorAll('.opt');opts.forEach(function(x){x.disabled=true});
+          opts[item[2]].classList.add('right');if(k!==item[2])b.classList.add('wrong');else right++;answered++;
+          var e=document.createElement('div');e.className='expl';e.textContent=(k===item[2]?'Correct. ':'Not quite. ')+item[3];d.appendChild(e);
+          head.querySelector('.count').textContent='Score '+right+' / '+answered});d.appendChild(b)});
+      box.appendChild(d)})}
+  head.querySelector('[data-reset]').addEventListener('click',render);render();
+}
+['basics','morphine','others','complex','antagonists'].forEach(function(t){buildCards(t);buildMcq(t)});
+
+var KEY='pd-s7-opioids-review-v1',state={};
+try{state=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){state={}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+var rl=document.getElementById('reviewList');
+FLAGS.forEach(function(f,n){var s=state[f[0]]||{};
+  var d=document.createElement('div');d.className='ri';d.id=f[0];
+  d.innerHTML='<div class="where">Check '+(n+1)+' · '+f[1]+'</div><b></b><p></p><div class="choice"><button class="ok">Correct</button><button class="fix">Needs change</button></div><textarea placeholder="What should it say?"></textarea>';
+  d.querySelector('b').textContent=f[2];d.querySelector('p').textContent=f[3];
+  var ok=d.querySelector('.ok'),fix=d.querySelector('.fix'),ta=d.querySelector('textarea');ta.id='note-'+f[0];ta.value=s.note||'';
+  function paint(){ok.setAttribute('aria-pressed',s.v==='ok');fix.setAttribute('aria-pressed',s.v==='fix');status()}
+  ok.onclick=function(){s.v='ok';state[f[0]]=s;save();paint()};
+  fix.onclick=function(){s.v='fix';state[f[0]]=s;save();paint();ta.focus()};
+  ta.oninput=function(){s.note=ta.value;state[f[0]]=s;save()};
+  rl.appendChild(d);paint()});
+var gn=document.getElementById('generalNote');gn.value=state.general||'';gn.oninput=function(){state.general=gn.value;save()};
+function status(){var c=FLAGS.filter(function(f){return state[f[0]]&&state[f[0]].v}).length;
+  document.getElementById('copyStatus').textContent=c+' of '+FLAGS.length+' checked';
+  document.getElementById('flagCount').textContent=(FLAGS.length-c)?String(FLAGS.length-c):'✓'}
+document.getElementById('copyBtn').onclick=function(){
+  var lines=['PharmDaily Opioids review (round 1)',''];
+  FLAGS.forEach(function(f,n){var s=state[f[0]]||{};lines.push((n+1)+'. '+f[2]+': '+(s.v==='ok'?'Correct':s.v==='fix'?'Needs change':'Not checked')+(s.note?' — '+s.note:''))});
+  if(state.general)lines.push('','Other notes: '+state.general);
+  var txt=lines.join('\n'),st=document.getElementById('copyStatus'),fb=document.getElementById('copyFallback');
+  function fallback(){fb.hidden=false;fb.textContent=txt;var r=document.createRange();r.selectNodeContents(fb);var sel=getSelection();sel.removeAllRanges();sel.addRange(r);st.textContent='Copy the selected text below'}
+  try{navigator.clipboard.writeText(txt).then(function(){st.textContent='Copied. Paste it in WhatsApp.'},fallback)}catch(e){fallback()}
+};
+
+
+var mode='notes',topic='basics',modes=document.getElementById('modes');
+function apply(){document.querySelectorAll('main section').forEach(function(s){var t=s.dataset.topic,m=s.dataset.mode;
+    s.hidden=topic==='review'?t!=='review':!(t===topic&&m===mode)});
+  modes.hidden=topic==='review';
+  document.querySelectorAll('.pills a').forEach(function(a){a.removeAttribute('aria-current');if(a.dataset.t===topic)a.setAttribute('aria-current','page')});
+  modes.querySelectorAll('button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.m===mode)})}
+function fromHash(){var h=location.hash.slice(1);topic=['basics','morphine','others','complex','antagonists','review'].indexOf(h)>-1?h:'basics';apply()}
+modes.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;mode=b.dataset.m;apply();window.scrollTo(0,0)});
+document.addEventListener('click',function(e){var j=e.target.closest('[data-jump]');if(j){mode=j.dataset.jump;apply();window.scrollTo(0,0);return}
+  var a=e.target.closest('[data-go]');if(!a)return;setTimeout(function(){var t=document.getElementById(a.dataset.go);if(t)t.scrollIntoView({behavior:'smooth'})},60)});
+window.addEventListener('hashchange',function(){fromHash();window.scrollTo(0,0)});
+fromHash();
+})();
+</script>

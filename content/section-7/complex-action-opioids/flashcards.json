@@ -1,0 +1,54 @@
+[
+  {
+    "q": "Pentazocine acts on which receptors?",
+    "a": "Weak μ antagonist and marked κ agonist."
+  },
+  {
+    "q": "Why avoid pentazocine in MI?",
+    "a": "Higher doses cause tachycardia and rise in BP through sympathetic stimulation, increasing cardiac work."
+  },
+  {
+    "q": "Pentazocine effects above 60 mg IM?",
+    "a": "Unpleasant, nalorphine-like dysphoria and psychotomimetic effects (κ, σ mediated)."
+  },
+  {
+    "q": "Which agonist-antagonist is considered safe in MI?",
+    "a": "Nalbuphine: no sympathetic stimulation, no cardiovascular effects."
+  },
+  {
+    "q": "Ceiling dose of nalbuphine?",
+    "a": "30 mg IM: no further analgesia or respiratory depression above it."
+  },
+  {
+    "q": "Butorphanol vs pentazocine potency?",
+    "a": "Butorphanol 2 mg = pentazocine 30 mg."
+  },
+  {
+    "q": "Buprenorphine: receptor action and potency?",
+    "a": "Partial μ agonist and κ antagonist; 25× more potent than morphine but with a ceiling."
+  },
+  {
+    "q": "Why does naloxone poorly reverse buprenorphine?",
+    "a": "Buprenorphine binds opioid receptors very tightly; naloxone can't displace it once bound."
+  },
+  {
+    "q": "Why is buprenorphine avoided in labour?",
+    "a": "Neonatal respiratory depression from it can't be effectively reversed by naloxone."
+  },
+  {
+    "q": "What are complex action opioids?",
+    "a": "Agonist-antagonists (agonist at one opioid receptor, antagonist at another) and partial agonists. Limited efficacy, low-ceiling respiratory depression, less addicting."
+  },
+  {
+    "q": "Why not give an agonist-antagonist to a morphine-dependent patient?",
+    "a": "It can precipitate severe withdrawal. Given after a full μ agonist, it can also reduce analgesia."
+  },
+  {
+    "q": "First opioid antagonist, and why isn't it used?",
+    "a": "Nalorphine (1951). It is a κ agonist that causes dysphoria and psychotomimetic effects."
+  },
+  {
+    "q": "Buprenorphine: useful route and t½?",
+    "a": "Effective sublingually; terminal t½ about 40 h; excreted mostly unchanged in bile."
+  }
+]

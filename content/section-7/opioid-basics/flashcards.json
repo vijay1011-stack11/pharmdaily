@@ -1,0 +1,46 @@
+[
+  {
+    "q": "Define an analgesic.",
+    "a": "A drug that selectively relieves pain by acting in the CNS or on peripheral pain mechanisms, without significantly altering consciousness."
+  },
+  {
+    "q": "Three groups of analgesics?",
+    "a": "Opioid (morphine-like), nonopioid (NSAIDs) and adjuvant analgesics (anticonvulsants like gabapentin, pregabalin; antidepressants like amitriptyline, duloxetine)."
+  },
+  {
+    "q": "Classify opioid agonists.",
+    "a": "Natural: morphine, codeine. Semisynthetic: heroin, pholcodine, ethylmorphine. Synthetic: pethidine, methadone, fentanyl, remifentanil, tramadol, tapentadol."
+  },
+  {
+    "q": "Name the agonist-antagonist (κ) analgesics.",
+    "a": "Nalorphine, pentazocine, butorphanol, nalbuphine."
+  },
+  {
+    "q": "Name three pure opioid antagonists.",
+    "a": "Naloxone, naltrexone, nalmefene."
+  },
+  {
+    "q": "Actions mediated by μ receptors?",
+    "a": "Analgesia, respiratory depression, sedation, euphoria, miosis, muscular rigidity, reduced GI motility, physical dependence (morphine type)."
+  },
+  {
+    "q": "Which receptor causes dysphoria and psychotomimetic effects?",
+    "a": "κ (kappa). Naloxone-resistant dysphoria is put down to σ receptors."
+  },
+  {
+    "q": "Endogenous ligands for μ, κ and δ?",
+    "a": "μ: endomorphins 1 and 2 (β-endorphin binds strongly too). κ: dynorphin A. δ: leu- and met-enkephalins."
+  },
+  {
+    "q": "Opioid receptor transducer mechanism?",
+    "a": "Gi/Go-coupled: ↓ adenylyl cyclase (cAMP), opens K⁺ channels (μ, δ) and closes N-type Ca²⁺ channels (κ) → hyperpolarisation and ↓ transmitter release."
+  },
+  {
+    "q": "Precursor of β-endorphin?",
+    "a": "Pro-opiomelanocortin (POMC), which also gives γ-MSH, ACTH and lipotropins."
+  },
+  {
+    "q": "Which types of analgesia does naloxone block, showing endogenous opioids are involved?",
+    "a": "Placebo, acupuncture and stress-induced analgesia."
+  }
+]

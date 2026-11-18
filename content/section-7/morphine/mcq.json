@@ -1,0 +1,112 @@
+[
+  {
+    "q": "Morphine relieves best:",
+    "options": [
+      "Sharp somatic pain",
+      "Dull visceral pain",
+      "Trigeminal neuralgia",
+      "Neuropathic pain"
+    ],
+    "answer": 1,
+    "explanation": "Dull, poorly localised visceral pain responds better than sharp or neuritic pain."
+  },
+  {
+    "q": "Death in acute morphine poisoning is due to:",
+    "options": [
+      "Cardiac arrest",
+      "Respiratory failure",
+      "Renal failure",
+      "Convulsions"
+    ],
+    "answer": 1,
+    "explanation": "Respiratory centre depression is the cause of death."
+  },
+  {
+    "q": "Miosis by morphine is due to stimulation of the:",
+    "options": [
+      "Ciliary ganglion",
+      "Edinger-Westphal nucleus",
+      "Superior cervical ganglion",
+      "Iris dilator muscle"
+    ],
+    "answer": 1,
+    "explanation": "It removes GABAergic inhibition of the III nerve nucleus."
+  },
+  {
+    "q": "Tolerance does NOT develop to which effect of morphine?",
+    "options": [
+      "Euphoria",
+      "Analgesia",
+      "Constipation",
+      "Respiratory depression"
+    ],
+    "answer": 2,
+    "explanation": "No tolerance to constipation, miosis and convulsant action."
+  },
+  {
+    "q": "Morphine may cause biliary colic by:",
+    "options": [
+      "Gallstone formation",
+      "Spasm of sphincter of Oddi",
+      "Relaxing the gallbladder",
+      "Increasing bile secretion"
+    ],
+    "answer": 1,
+    "explanation": "Intrabiliary pressure rises several fold; naloxone and nitrates counter it."
+  },
+  {
+    "q": "Morphine causes bronchoconstriction by:",
+    "options": [
+      "β₂ blockade",
+      "Histamine release",
+      "Cholinergic stimulation",
+      "Leukotriene release"
+    ],
+    "answer": 1,
+    "explanation": "Non-immunological histamine release; dangerous in asthmatics."
+  },
+  {
+    "q": "The active metabolite of morphine is:",
+    "options": [
+      "Normorphine",
+      "Morphine-3-glucuronide",
+      "Morphine-6-glucuronide",
+      "Codeine"
+    ],
+    "answer": 2,
+    "explanation": "Morphine-6-glucuronide is more potent than morphine at μ."
+  },
+  {
+    "q": "Gastric lavage in morphine poisoning is done with:",
+    "options": [
+      "Sodium bicarbonate",
+      "Potassium permanganate",
+      "Activated charcoal only",
+      "Normal saline only"
+    ],
+    "answer": 1,
+    "explanation": "Potassium permanganate oxidises unabsorbed morphine; lavage helps even after injection."
+  },
+  {
+    "q": "A feature NOT typical of morphine withdrawal:",
+    "options": [
+      "Mydriasis",
+      "Diarrhoea",
+      "Convulsions",
+      "Lacrimation"
+    ],
+    "answer": 2,
+    "explanation": "Delirium and convulsions are uncommon, unlike barbiturate withdrawal."
+  },
+  {
+    "q": "Morphine is contraindicated in:",
+    "options": [
+      "Myocardial infarction",
+      "Acute left ventricular failure",
+      "Head injury",
+      "Cancer pain"
+    ],
+    "answer": 2,
+    "explanation": "It raises intracranial tension and masks neurological signs. MI and LVF are uses."
+  }
+]

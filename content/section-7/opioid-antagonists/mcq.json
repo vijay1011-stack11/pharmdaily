@@ -1,0 +1,112 @@
+[
+  {
+    "q": "Drug of choice for morphine poisoning:",
+    "options": [
+      "Nalorphine",
+      "Naloxone",
+      "Naltrexone",
+      "Flumazenil"
+    ],
+    "answer": 1,
+    "explanation": "Naloxone 0.4–0.8 mg IV, repeated every 2–3 min."
+  },
+  {
+    "q": "Naloxone is not given orally because:",
+    "options": [
+      "It is irritant",
+      "Of high first-pass metabolism",
+      "It acts too long",
+      "It causes vomiting"
+    ],
+    "answer": 1,
+    "explanation": "Inactive orally; given IV, acts in 2–3 min."
+  },
+  {
+    "q": "An orally active, long-acting opioid antagonist used for opioid blockade and alcohol relapse:",
+    "options": [
+      "Naloxone",
+      "Naltrexone",
+      "Nalorphine",
+      "Methylnaltrexone"
+    ],
+    "answer": 1,
+    "explanation": "Naltrexone, 50 mg/day oral, lasts 1–2 days."
+  },
+  {
+    "q": "Methylnaltrexone is used for opioid-induced constipation because it:",
+    "options": [
+      "Is a μ agonist",
+      "Doesn't cross the blood-brain barrier",
+      "Is a laxative",
+      "Blocks κ only"
+    ],
+    "answer": 1,
+    "explanation": "It blocks peripheral μ actions without reversing central analgesia."
+  },
+  {
+    "q": "Naloxone is a:",
+    "options": [
+      "Partial μ agonist",
+      "Competitive antagonist at all opioid receptors",
+      "κ agonist",
+      "Non-competitive μ blocker"
+    ],
+    "answer": 1,
+    "explanation": "It blocks μ at lower doses than κ or δ, with no agonist action."
+  },
+  {
+    "q": "Naloxone dose for neonatal opioid depression:",
+    "options": [
+      "0.4 mg IM",
+      "10 µg/kg into the umbilical cord",
+      "1 mg/kg IV",
+      "50 mg oral"
+    ],
+    "answer": 1,
+    "explanation": "Injected into the umbilical cord."
+  },
+  {
+    "q": "Plasma t½ of naloxone in adults:",
+    "options": [
+      "10 minutes",
+      "1 hour",
+      "12 hours",
+      "40 hours"
+    ],
+    "answer": 1,
+    "explanation": "1 h in adults, 3 h in newborns; action lasts 1–3 h."
+  },
+  {
+    "q": "Naloxone poorly reverses the effects of:",
+    "options": [
+      "Morphine",
+      "Pethidine",
+      "Buprenorphine",
+      "Fentanyl"
+    ],
+    "answer": 2,
+    "explanation": "Buprenorphine's tight receptor binding resists displacement."
+  },
+  {
+    "q": "A peripheral μ antagonist used for postoperative ileus:",
+    "options": [
+      "Naltrexone",
+      "Alvimopan",
+      "Nalmefene",
+      "Naloxone"
+    ],
+    "answer": 1,
+    "explanation": "Alvimopan is poorly absorbed and doesn't enter the brain."
+  },
+  {
+    "q": "Naloxone also blocks analgesia produced by:",
+    "options": [
+      "Aspirin",
+      "Placebo and acupuncture",
+      "Paracetamol",
+      "Local anaesthetics"
+    ],
+    "answer": 1,
+    "explanation": "Placebo, acupuncture and stress-induced analgesia involve endogenous opioids."
+  }
+]
