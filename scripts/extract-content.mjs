@@ -30,6 +30,17 @@ const SOURCES = [
     section: 'section-7',
     topics: { basics: 'sedative-hypnotics', bzd: 'benzodiazepines', others: 'z-compounds' },
   },
+  {
+    file: 'pharmdaily-section7-opioids-final.html',
+    section: 'section-7',
+    topics: {
+      basics: 'opioid-basics',
+      morphine: 'morphine',
+      others: 'other-opioids',
+      complex: 'complex-action-opioids',
+      antagonists: 'opioid-antagonists',
+    },
+  },
 ];
 
 let html = '';
@@ -59,13 +70,17 @@ function readNotes(key) {
 }
 
 const report = [];
+const cleared = new Set(); // a section can have several source files: clear its folder once
 for (const src of SOURCES) {
   html = readFileSync(join(root, 'content-source', src.file), 'utf8');
   const OUT = join(root, 'content', src.section);
   const CARDS = readLiteral('CARDS');
   const MCQ = readLiteral('MCQ');
 
-  if (existsSync(OUT)) rmSync(OUT, { recursive: true });
+  if (!cleared.has(src.section)) {
+    if (existsSync(OUT)) rmSync(OUT, { recursive: true });
+    cleared.add(src.section);
+  }
 
   for (const [key, slug] of Object.entries(src.topics)) {
     const dir = join(OUT, slug);
