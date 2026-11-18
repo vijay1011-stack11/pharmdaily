@@ -372,3 +372,24 @@ a.cloud:active { transform: scale(0.97); }
 .page .credit { font-size: 1.08rem; color: var(--heading); padding: 14px 16px; margin-top: 16px; border-left: 3px solid var(--primary); background: var(--primary-soft); border-radius: 0 var(--radius) var(--radius) 0; }
 .updated { margin: 8px 0 0; font-size: 0.88rem; color: var(--muted); }
 html:not(.js) .tabbar { display: none; }
+
+/* Mind maps from the review copies (.metro): a root, then each branch as a coloured head with its items on a line. */
+.notes .metro { margin-top: 12px; padding: 16px 14px; border-radius: 18px; background: var(--surface); border: 1px solid var(--line); display: flex; flex-direction: column; align-items: center; }
+.notes .metro .root { padding: 8px 18px; border-radius: 999px; background: var(--heading); color: var(--bg); font-weight: 750; text-align: center; }
+.notes .metro .stem { width: 2px; height: 14px; background: var(--line-strong); }
+.notes .metro .bridge { width: 50%; height: 2px; background: var(--line-strong); }
+.notes .metro .lines { width: 100%; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.notes .metro .line { display: flex; flex-direction: column; align-items: center; min-width: 0; --c: var(--primary); }
+.notes .metro .line.amb { --c: var(--clinic); }
+.notes .metro .head { width: 100%; text-align: center; padding: 10px 8px; border-radius: 14px; background: var(--c); color: var(--on-primary); }
+.notes .metro .head b { display: block; color: inherit; font-weight: 750; }
+.notes .metro .head span { font-size: 0.78rem; font-weight: 600; }
+.notes .metro .stops { position: relative; width: 100%; list-style: none; margin: 0; padding: 12px 0 0 24px; display: flex; flex-direction: column; gap: 10px; }
+.notes .metro .stops::before { content: ""; position: absolute; left: 10px; top: 0; bottom: 10px; width: 2px; background: var(--c); }
+.notes .metro .stops li { position: relative; margin: 0; font-size: 0.9rem; font-weight: 650; color: var(--heading); line-height: 1.3; }
+.notes .metro .stops li::before { content: ""; position: absolute; left: -19px; top: 3px; width: 10px; height: 10px; border-radius: 50%; background: var(--surface); border: 2px solid var(--c); }
+.notes .metro .stops small { display: block; font-weight: 500; color: var(--muted); font-size: 0.78rem; }
+
+/* Hand-drawn SVG diagrams from the review copies are drawn for a dark panel: keep them on one so labels stay readable. */
+.notes .chart { margin-top: 12px; background: #10122a; border-radius: 18px; padding: 10px; }
+.notes .chart svg { display: block; width: 100%; height: auto; max-width: 440px; margin: 0 auto; }
