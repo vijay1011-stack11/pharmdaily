@@ -7,7 +7,11 @@
 // a flashcard reveal and an MCQ answer.
 
 import { chromium } from 'playwright';
-import { mkdirSync, readFileSync } from 'node:fs';
+import { mkdirSync, readFileSync, readdirSync } from 'node:fs';
+import { join, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 
 // `astro preview` doesn't apply vercel.json, so add its headers to every response here.
 // That way the Content-Security-Policy is enforced and any violation fails the run.
@@ -16,7 +20,16 @@ const VERCEL_HEADERS = Object.fromEntries(
 );
 
 const BASE = process.env.BASE ?? 'http://localhost:4321';
-const PAGES = ['/', '/section-1/', '/section-1/routes-of-administration/', '/section-1/pharmacokinetics/', '/section-1/pharmacodynamics/', '/section-3/', '/section-3/nsaids/', '/section-7/', '/section-7/sedative-hypnotics/', '/section-7/benzodiazepines/', '/section-7/z-compounds/', '/about/', '/privacy/', '/404'];
+// Every built page: walk dist/ so new sections and topics are covered automatically.
+function builtPages(dir = join(root, 'dist'), base = '') {
+  const out = [];
+  for (const e of readdirSync(dir, { withFileTypes: true })) {
+    if (e.isDirectory()) out.push(...builtPages(join(dir, e.name), `${base}/${e.name}`));
+    else if (e.name === 'index.html') out.push(`${base}/`);
+  }
+  return out;
+}
+const PAGES = [...builtPages().sort(), '/404'];
 const SIZES = [{ name: 'phone', width: 390, height: 844 }, { name: 'desktop', width: 1280, height: 800 }];
 mkdirSync('screenshots', { recursive: true });
 

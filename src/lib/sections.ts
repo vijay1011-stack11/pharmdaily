@@ -68,6 +68,20 @@ export const SECTIONS: Section[] = [
   { n: 14, title: 'Miscellaneous', topics: [] },
 ];
 
+// Exam-important topics, pinned on the homepage so students reach them in one tap.
+// `section` must be a live section; its topics are listed as direct links.
+export interface ExamPick {
+  section: number;
+  title: string;
+  asks: string; // what exams usually ask, one short line
+}
+
+export const EXAM_IMP: ExamPick[] = [
+  { section: 6, title: 'Local anaesthetics', asks: 'Classification, techniques, uses and ADRs of lignocaine' },
+];
+
+export const isExamImp = (n: number) => EXAM_IMP.some((e) => e.section === n);
+
 export const isLive = (s: Section) => s.topics.length > 0;
 export const sectionPath = (s: Section) => `/section-${s.n}/`;
 // '2026-11' -> 'Nov 2026'

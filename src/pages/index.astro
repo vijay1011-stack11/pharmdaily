@@ -1,11 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { SECTIONS, isLive, sectionPath, plural } from '../lib/sections';
+import { SECTIONS, EXAM_IMP, isLive, isExamImp, sectionPath, topicPath, plural } from '../lib/sections';
 import { getFlashcards, getMcqs } from '../lib/content';
 
 const first = SECTIONS.find(isLive)!;
 const live = SECTIONS.filter(isLive);
 const next = SECTIONS.filter((s) => !isLive(s) && s.planned);
+const picks = EXAM_IMP.map((e) => ({ ...e, sec: SECTIONS.find((s) => s.n === e.section)! })).filter((e) => isLive(e.sec));
 const totals = (n: number) =>
   SECTIONS.find((s) => s.n === n)!.topics.reduce(
     (acc, t) => ({ cards: acc.cards + getFlashcards(n, t.slug).length, mcqs: acc.mcqs + getMcqs(n, t.slug).length }),
@@ -36,7 +37,7 @@ const totals = (n: number) =>
             <a class="sec-link press" href={sectionPath(s)}>
               <span class="num tabular">{String(s.n).padStart(2, '0')}</span>
               <span class="body">
-                <span class="name">{s.title}</span>
+                <span class="name">{s.title}{isExamImp(s.n) && <span class="star-tag" aria-label="Exam important"><span aria-hidden="true">★</span> Exam</span>}</span>
                 <span class="meta tabular">{plural(s.topics.length, 'topic')} · {plural(t.cards, 'flashcard')} · {plural(t.mcqs, 'MCQ')}</span>
               </span>
               <svg class="go" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
@@ -66,6 +67,34 @@ const totals = (n: number) =>
       </ol>
     </details>
   </section>
+
+  {picks.length > 0 && (
+    <section id="exam-imp" class="wrap block" aria-labelledby="exam-h">
+      <div class="block-head">
+        <h2 id="exam-h"><span class="star" aria-hidden="true">★</span> Exam IMP</h2>
+        <p>Topics exams ask most. Tap to start reading.</p>
+      </div>
+      <ul class="picks">
+        {picks.map((e) => (
+          <li class="pick">
+            <a class="pick-link press" href={topicPath(e.sec, e.sec.topics[0])}>
+              <span class="star" aria-hidden="true">★</span>
+              <span class="body">
+                <span class="name">{e.title}</span>
+                <span class="meta">Section {e.sec.n} · {e.asks}</span>
+              </span>
+              <svg class="go" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+            </a>
+            <ul class="chips" aria-label={`${e.title} topics`}>
+              {e.sec.topics.map((t) => (
+                <li><a class="chip press" href={topicPath(e.sec, t)}>{t.short}</a></li>
+              ))}
+            </ul>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
 
   <section class="wrap block" aria-labelledby="how-h">
     <div class="block-head">
@@ -126,6 +155,18 @@ const totals = (n: number) =>
   .upcoming a { color: var(--heading); font-weight: 650; display: inline-flex; align-items: center; min-height: 44px; }
   .status { font-size: 0.75rem; font-weight: 600; color: var(--faint); }
   @media (hover: hover) and (pointer: fine) { a.sec-link:hover .name { color: var(--primary-ink); } }
+
+  .star { color: var(--bad); }
+  .star-tag { display: inline-flex; align-items: center; gap: 3px; margin-left: 8px; padding: 0 8px; border-radius: 999px; background: var(--bad); color: #fff; font-size: 0.72rem; font-weight: 700; vertical-align: 2px; white-space: nowrap; }
+  .picks { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; padding-top: 14px; }
+  @media (min-width: 900px) { .picks { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 32px; } }
+  .pick { border: 1.5px solid color-mix(in srgb, var(--bad) 45%, transparent); background: var(--bad-soft); border-radius: var(--radius); padding: 4px 14px 14px; }
+  .pick-link { display: grid; grid-template-columns: 28px minmax(0, 1fr) auto; align-items: center; gap: 10px; min-height: 60px; color: var(--heading); text-decoration: none; }
+  .pick-link .star { font-size: 1.3rem; line-height: 1; }
+  .pick-link .name { font-weight: 750; font-size: 1.05rem; }
+  .chips { list-style: none; margin: 4px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip { display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--line-strong); background: var(--surface); color: var(--heading); font-size: 0.88rem; font-weight: 650; text-decoration: none; }
+  @media (hover: hover) and (pointer: fine) { .pick-link:hover .name, .chip:hover { color: var(--primary-ink); } }
 
   .how { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: minmax(0, 1fr); }
   @media (min-width: 760px) { .how { grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: 32px; } }
