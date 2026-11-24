@@ -1,0 +1,66 @@
+[
+  {
+    "q": "Why is adrenaline combined with an LA?",
+    "a": "Vasoconstriction slows diffusion and absorption: longer and more intense block, less systemic toxicity, bloodless field."
+  },
+  {
+    "q": "Vasoconstrictors used with LAs?",
+    "a": "Adrenaline, phenylephrine, felypressin, levonordefrin."
+  },
+  {
+    "q": "Where is LA + adrenaline contraindicated?",
+    "a": "End organs (fingers, toes, ear, nose, penis, scrotum), cardiovascular disease, hyperthyroidism, IV regional anaesthesia; also patients on β-blockers or tricyclics."
+  },
+  {
+    "q": "In which techniques is adrenaline not used?",
+    "a": "Surface anaesthesia (not effective) and IV regional anaesthesia (contraindicated)."
+  },
+  {
+    "q": "Dental uses of infiltration anaesthesia?",
+    "a": "Tooth extraction, root canal treatment, periodontal procedures, suturing, incision, excision."
+  },
+  {
+    "q": "Name the maxillary dental nerve blocks.",
+    "a": "Infraorbital, nasopalatine, greater palatine, anterior, middle and posterior superior alveolar."
+  },
+  {
+    "q": "Name the mandibular dental nerve blocks.",
+    "a": "Inferior alveolar, buccal, incisive."
+  },
+  {
+    "q": "Field block vs nerve block?",
+    "a": "Field: SC injection blocking all nerves to a field, less drug than infiltration. Nerve block: around a trunk or plexus, largest area per drug, muscles paralysed, lasts longest."
+  },
+  {
+    "q": "Where is a spinal anaesthetic injected and where does it act?",
+    "a": "Subarachnoid space at L2–3 or L3–4; acts on nerve roots of the cauda equina."
+  },
+  {
+    "q": "Sympathetic and motor levels in spinal anaesthesia?",
+    "a": "Sympathetic block ~2 segments above the sensory level; motor paralysis ~2 segments below."
+  },
+  {
+    "q": "Main cause of hypotension in spinal anaesthesia, and its treatment?",
+    "a": "Sympathetic block causing venous pooling and less venous return. Raise the foot end; ephedrine or mephentermine."
+  },
+  {
+    "q": "Cause of post-spinal headache and how to reduce it?",
+    "a": "CSF seepage; use a smaller-bore needle."
+  },
+  {
+    "q": "Contraindications to spinal anaesthesia?",
+    "a": "Hypotension, hypovolaemia, uncooperative patient, infants and children, bleeding diathesis, raised ICP, vertebral deformity, sepsis at the site."
+  },
+  {
+    "q": "Which LAs give the best sensory–motor separation in epidurals?",
+    "a": "0.25% bupivacaine and ropivacaine."
+  },
+  {
+    "q": "Which LA is the gold standard for obstetric epidural analgesia (RCOG)?",
+    "a": "Bupivacaine."
+  },
+  {
+    "q": "Why is bupivacaine never used for Bier's block?",
+    "a": "High cardiotoxicity if it escapes when the tourniquet is released."
+  }
+]

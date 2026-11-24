@@ -1,0 +1,156 @@
+[
+  {
+    "q": "Lignocaine is classified as a(n):",
+    "options": [
+      "Ester, low potency",
+      "Amide, intermediate potency",
+      "Amide, high potency",
+      "Ester, high potency"
+    ],
+    "answer": 1,
+    "explanation": "Intermediate potency, short-to-intermediate duration."
+  },
+  {
+    "q": "The early central effects of lignocaine are:",
+    "options": [
+      "Euphoria and excitement",
+      "Depressant: drowsiness, mental clouding",
+      "Hallucinations",
+      "Hypertension"
+    ],
+    "answer": 1,
+    "explanation": "Unlike cocaine, lignocaine's early CNS effects are depressant."
+  },
+  {
+    "q": "Lignocaine transdermal patch is used for:",
+    "options": [
+      "Angina",
+      "Postherpetic neuralgia",
+      "Motion sickness",
+      "Smoking cessation"
+    ],
+    "answer": 1,
+    "explanation": "5% patch, also for bruises, bites, burns."
+  },
+  {
+    "q": "Bupivacaine is NOT preferred for peripheral nerve block because of its:",
+    "options": [
+      "Short action",
+      "Slow onset",
+      "Low potency",
+      "Allergy"
+    ],
+    "answer": 1,
+    "explanation": "Slow onset; long action makes it good for epidural and spinal."
+  },
+  {
+    "q": "Contraindicated for epidural use in labour:",
+    "options": [
+      "Bupivacaine 0.75%",
+      "Bupivacaine 0.25%",
+      "Ropivacaine 0.2%",
+      "Lidocaine 2%"
+    ],
+    "answer": 0,
+    "explanation": "Caused deaths from cardiac arrest."
+  },
+  {
+    "q": "IV lipid emulsion reverses the cardiotoxicity of:",
+    "options": [
+      "Lidocaine",
+      "Bupivacaine",
+      "Prilocaine",
+      "Procaine"
+    ],
+    "answer": 1,
+    "explanation": "Probably by extracting lipophilic bupivacaine from plasma and heart."
+  },
+  {
+    "q": "Less bupivacaine reaches the foetus during labour because it:",
+    "options": [
+      "Is rapidly hydrolysed",
+      "Distributes more into tissues than blood",
+      "Doesn't cross the placenta at all",
+      "Is given orally"
+    ],
+    "answer": 1,
+    "explanation": "High lipid solubility keeps it in tissues."
+  },
+  {
+    "q": "Benzocaine causes no systemic toxicity on mucosa because it is:",
+    "options": [
+      "Rapidly metabolised",
+      "Poorly water-soluble and barely absorbed",
+      "Given with adrenaline",
+      "An amide"
+    ],
+    "answer": 1,
+    "explanation": "Very low aqueous solubility."
+  },
+  {
+    "q": "Which LA can antagonise sulfonamides locally?",
+    "options": [
+      "Lidocaine",
+      "Benzocaine",
+      "Bupivacaine",
+      "Prilocaine"
+    ],
+    "answer": 1,
+    "explanation": "Benzocaine and butamben are PABA derivatives."
+  },
+  {
+    "q": "Methaemoglobinaemia is caused by a metabolite of:",
+    "options": [
+      "Bupivacaine",
+      "Prilocaine",
+      "Ropivacaine",
+      "Lidocaine"
+    ],
+    "answer": 1,
+    "explanation": "o-Toluidine. Absorbed benzocaine can also cause it."
+  },
+  {
+    "q": "EMLA contains:",
+    "options": [
+      "Lidocaine + bupivacaine",
+      "Lidocaine + prilocaine",
+      "Procaine + tetracaine",
+      "Benzocaine + butamben"
+    ],
+    "answer": 1,
+    "explanation": "2.5% each; anaesthetises intact skin."
+  },
+  {
+    "q": "Preferred for large-volume nerve blocks because of lower cardiotoxicity:",
+    "options": [
+      "Bupivacaine",
+      "Ropivacaine",
+      "Dibucaine",
+      "Tetracaine"
+    ],
+    "answer": 1,
+    "explanation": "Ropivacaine."
+  },
+  {
+    "q": "The most commonly used ophthalmic anaesthetic now:",
+    "options": [
+      "Cocaine",
+      "Tetracaine",
+      "Proparacaine",
+      "Dibucaine"
+    ],
+    "answer": 2,
+    "explanation": "Faster than tetracaine, minimal irritation."
+  },
+  {
+    "q": "Which LA is no longer used medically?",
+    "options": [
+      "Lidocaine",
+      "Cocaine",
+      "Proparacaine",
+      "Bupivacaine"
+    ],
+    "answer": 1,
+    "explanation": "Available only on the illicit market."
+  }
+]

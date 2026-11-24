@@ -1,0 +1,200 @@
+[
+  {
+    "q": "Which is an amide local anaesthetic?",
+    "options": [
+      "Procaine",
+      "Tetracaine",
+      "Bupivacaine",
+      "Benzocaine"
+    ],
+    "answer": 2,
+    "explanation": "Amides: lidocaine, bupivacaine, dibucaine, prilocaine, ropivacaine."
+  },
+  {
+    "q": "Which is an ester local anaesthetic?",
+    "options": [
+      "Lidocaine",
+      "Chloroprocaine",
+      "Ropivacaine",
+      "Prilocaine"
+    ],
+    "answer": 1,
+    "explanation": "Esters: cocaine, procaine, chloroprocaine, tetracaine, benzocaine."
+  },
+  {
+    "q": "Amide LAs are metabolised mainly by:",
+    "options": [
+      "Plasma pseudocholinesterase",
+      "Liver microsomal enzymes",
+      "The kidney",
+      "Red cell esterases"
+    ],
+    "answer": 1,
+    "explanation": "By dealkylation and hydrolysis in liver microsomes only."
+  },
+  {
+    "q": "Amide LAs bind in plasma mainly to:",
+    "options": [
+      "Albumin",
+      "α1-acid glycoprotein",
+      "Globulin",
+      "They are not bound"
+    ],
+    "answer": 1,
+    "explanation": "Procaine is negligibly bound; amides bind α1-acid glycoprotein."
+  },
+  {
+    "q": "Which is an insoluble surface anaesthetic?",
+    "options": [
+      "Cocaine",
+      "Proparacaine",
+      "Benzocaine",
+      "Lidocaine"
+    ],
+    "answer": 2,
+    "explanation": "Insoluble: benzocaine, butylaminobenzoate, oxethazaine."
+  },
+  {
+    "q": "A low-potency, short-acting injectable LA:",
+    "options": [
+      "Bupivacaine",
+      "Procaine",
+      "Dibucaine",
+      "Tetracaine"
+    ],
+    "answer": 1,
+    "explanation": "Low potency, short: procaine, chloroprocaine."
+  },
+  {
+    "q": "Compared with general anaesthesia, local anaesthesia is:",
+    "options": [
+      "Essential for vital-function care",
+      "Preferred for major surgery",
+      "Preferred for minor surgery",
+      "Possible in a non-cooperative patient"
+    ],
+    "answer": 2,
+    "explanation": "LA can't be used for major surgery or in non-cooperative patients."
+  },
+  {
+    "q": "Clinically useful local anaesthetics are:",
+    "options": [
+      "Weak acids",
+      "Weak bases",
+      "Strong bases",
+      "Neutral compounds"
+    ],
+    "answer": 1,
+    "explanation": "Weak bases with amphiphilic property."
+  },
+  {
+    "q": "Local anaesthesia can be produced by:",
+    "options": [
+      "Ethyl chloride spray",
+      "Chlorpromazine infiltration",
+      "Propranolol injection",
+      "Quinine"
+    ],
+    "answer": 0,
+    "explanation": "Cooling with ice, CO₂ snow or ethyl chloride spray. The other drugs have LA activity but aren't used as LAs."
+  },
+  {
+    "q": "Local anaesthetics block:",
+    "options": [
+      "K⁺ channels",
+      "Voltage-sensitive Na⁺ channels",
+      "Ca²⁺ channels",
+      "Cl⁻ channels"
+    ],
+    "answer": 1,
+    "explanation": "They raise the threshold for Na⁺ channel opening."
+  },
+  {
+    "q": "The form of LA that binds the receptor is the:",
+    "options": [
+      "Unionised base",
+      "Cationic form",
+      "Both equally",
+      "Neither"
+    ],
+    "answer": 1,
+    "explanation": "The base crosses the membrane; the cation binds the receptor."
+  },
+  {
+    "q": "The LA receptor is located:",
+    "options": [
+      "At the extracellular mouth",
+      "In the intracellular half (S6 of domain IV)",
+      "In the lipid bilayer",
+      "On the β subunit"
+    ],
+    "answer": 1,
+    "explanation": "Reached through the inner mouth of the channel."
+  },
+  {
+    "q": "Which LA has rapid onset despite a high pKa?",
+    "options": [
+      "Procaine",
+      "Bupivacaine",
+      "Chloroprocaine",
+      "Tetracaine"
+    ],
+    "answer": 2,
+    "explanation": "Chloroprocaine, pKa 9.1."
+  },
+  {
+    "q": "The first sensation lost with a local anaesthetic is:",
+    "options": [
+      "Touch",
+      "Deep pressure",
+      "Pain",
+      "Temperature"
+    ],
+    "answer": 2,
+    "explanation": "Pain → temperature → touch → deep pressure."
+  },
+  {
+    "q": "LAs work poorly in inflamed tissue because:",
+    "options": [
+      "Tissue pH rises",
+      "More drug is in the ionised form",
+      "Blood flow falls",
+      "Adrenaline works better"
+    ],
+    "answer": 1,
+    "explanation": "Low pH ionises more LA, hindering diffusion into the axon."
+  },
+  {
+    "q": "Cocaine was first used clinically for ocular surgery by:",
+    "options": [
+      "Albert Niemann",
+      "Carl Koller",
+      "Sigmund Freud",
+      "Halstead"
+    ],
+    "answer": 1,
+    "explanation": "Koller, 1884. Niemann isolated cocaine in 1860; Halstead introduced infiltration anaesthesia."
+  },
+  {
+    "q": "The last function to be blocked by an LA is:",
+    "options": [
+      "Pain",
+      "Touch",
+      "Deep pressure",
+      "Motor"
+    ],
+    "answer": 3,
+    "explanation": "Pain → cold → warmth → touch → deep pressure → motor."
+  },
+  {
+    "q": "Most susceptible to LA block:",
+    "options": [
+      "Type Aα fibres",
+      "Type Aβ fibres",
+      "Type C fibres",
+      "Type Aγ fibres"
+    ],
+    "answer": 2,
+    "explanation": "C and B > small Aδ > Aα, Aβ, Aγ."
+  }
+]

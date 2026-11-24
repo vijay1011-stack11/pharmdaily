@@ -1,0 +1,134 @@
+[
+  {
+    "q": "Spinal anaesthesia is injected at:",
+    "options": [
+      "T12–L1",
+      "L2–3 or L3–4",
+      "S2–3",
+      "C7–T1"
+    ],
+    "answer": 1,
+    "explanation": "Below the lower end of the spinal cord."
+  },
+  {
+    "q": "The primary site of action in spinal anaesthesia is:",
+    "options": [
+      "Spinal cord",
+      "Nerve roots of the cauda equina",
+      "Brain stem",
+      "Peripheral nerve endings"
+    ],
+    "answer": 1,
+    "explanation": "Not the cord itself."
+  },
+  {
+    "q": "In spinal anaesthesia, sympathetic block extends:",
+    "options": [
+      "~2 segments above the sensory level",
+      "~2 segments below",
+      "To the same level",
+      "~5 segments below"
+    ],
+    "answer": 0,
+    "explanation": "Motor paralysis is ~2 segments below."
+  },
+  {
+    "q": "Hypotension in spinal anaesthesia is mainly due to:",
+    "options": [
+      "Arteriolar dilatation",
+      "Venous pooling and reduced venous return",
+      "Direct myocardial depression",
+      "Histamine release"
+    ],
+    "answer": 1,
+    "explanation": "Raise the foot end; ephedrine or mephentermine."
+  },
+  {
+    "q": "Post-spinal headache is due to:",
+    "options": [
+      "LA toxicity",
+      "Seepage of CSF",
+      "Hypotension",
+      "Adrenaline"
+    ],
+    "answer": 1,
+    "explanation": "Reduced by using a smaller-bore needle."
+  },
+  {
+    "q": "Caudal anaesthesia is given through the:",
+    "options": [
+      "Sacral hiatus",
+      "L2–3 space",
+      "Thoracic epidural space",
+      "Foramen magnum"
+    ],
+    "answer": 0,
+    "explanation": "For pelvic and perineal anaesthesia."
+  },
+  {
+    "q": "Which LA should NOT be used for Bier's block?",
+    "options": [
+      "Lidocaine",
+      "Bupivacaine",
+      "Prilocaine",
+      "None of these"
+    ],
+    "answer": 1,
+    "explanation": "Too cardiotoxic if it escapes on tourniquet release."
+  },
+  {
+    "q": "Best regional technique for a healthy woman in labour:",
+    "options": [
+      "Spinal with 5% lidocaine",
+      "Lumbar epidural with 0.25% bupivacaine",
+      "Bier's block",
+      "Field block"
+    ],
+    "answer": 1,
+    "explanation": "Sensory block without motor block, so she can push."
+  },
+  {
+    "q": "LA + adrenaline is contraindicated for:",
+    "options": [
+      "Infiltration for extraction",
+      "Ring block of a finger",
+      "Epidural",
+      "Field block of scalp"
+    ],
+    "answer": 1,
+    "explanation": "End organs with little collateral circulation risk gangrene."
+  },
+  {
+    "q": "Adrenaline added to a surface anaesthetic:",
+    "options": [
+      "Doubles its duration",
+      "Is not effective",
+      "Causes necrosis",
+      "Speeds onset"
+    ],
+    "answer": 1,
+    "explanation": "Phenylephrine can prolong topical anaesthesia; adrenaline doesn't."
+  },
+  {
+    "q": "Which is a mandibular dental nerve block?",
+    "options": [
+      "Nasopalatine",
+      "Greater palatine",
+      "Inferior alveolar",
+      "Infraorbital"
+    ],
+    "answer": 2,
+    "explanation": "Mandible: inferior alveolar, buccal, incisive."
+  },
+  {
+    "q": "Felypressin is used with LAs as a:",
+    "options": [
+      "Preservative",
+      "Vasoconstrictor",
+      "Antidote",
+      "Buffer"
+    ],
+    "answer": 1,
+    "explanation": "Others: adrenaline, phenylephrine, levonordefrin."
+  }
+]

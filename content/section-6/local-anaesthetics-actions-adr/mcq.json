@@ -1,0 +1,123 @@
+[
+  {
+    "q": "The most cardiotoxic local anaesthetic is:",
+    "options": [
+      "Lidocaine",
+      "Bupivacaine",
+      "Prilocaine",
+      "Procaine"
+    ],
+    "answer": 1,
+    "explanation": "VT, VF and arrest reported."
+  },
+  {
+    "q": "LA-induced convulsions are treated with:",
+    "options": [
+      "Phenytoin",
+      "Diazepam",
+      "Adrenaline",
+      "Atropine"
+    ],
+    "answer": 1,
+    "explanation": "Diazepam or midazolam."
+  },
+  {
+    "q": "The least vasodilatory LA is:",
+    "options": [
+      "Bupivacaine",
+      "Lidocaine",
+      "Prilocaine",
+      "Procaine"
+    ],
+    "answer": 2,
+    "explanation": "Bupivacaine > lidocaine > prilocaine."
+  },
+  {
+    "q": "Ester LAs are hydrolysed mainly by:",
+    "options": [
+      "Liver microsomes",
+      "Plasma pseudocholinesterase",
+      "MAO",
+      "The kidney"
+    ],
+    "answer": 1,
+    "explanation": "The rest by liver esterases."
+  },
+  {
+    "q": "Blood levels of LA are highest after:",
+    "options": [
+      "Sciatic block",
+      "Intercostal block",
+      "Subcutaneous infiltration",
+      "Application to intact skin"
+    ],
+    "answer": 1,
+    "explanation": "Absorption follows blood flow at the site."
+  },
+  {
+    "q": "A vasoconstrictor must NOT be added for:",
+    "options": [
+      "Dental infiltration",
+      "Ring block of a finger",
+      "Scalp field block",
+      "Epidural"
+    ],
+    "answer": 1,
+    "explanation": "Also avoid in toes, penis, pinna, hands, feet."
+  },
+  {
+    "q": "Allergy to an LA solution is often due to:",
+    "options": [
+      "The LA itself",
+      "Methylparaben",
+      "Sodium chloride",
+      "Water"
+    ],
+    "answer": 1,
+    "explanation": "The preservative in some solutions."
+  },
+  {
+    "q": "Adrenaline-containing LA should be avoided in a patient on:",
+    "options": [
+      "Paracetamol",
+      "Propranolol",
+      "Amoxicillin",
+      "Metronidazole"
+    ],
+    "answer": 1,
+    "explanation": "Unopposed α action raises BP."
+  },
+  {
+    "q": "Before injecting an LA you should:",
+    "options": [
+      "Inject rapidly",
+      "Aspirate lightly",
+      "Warm the patient",
+      "Double the dose in children"
+    ],
+    "answer": 1,
+    "explanation": "To avoid intravascular injection."
+  },
+  {
+    "q": "An early symptom of lidocaine overdose:",
+    "options": [
+      "Circumoral numbness",
+      "Convulsions",
+      "Coma",
+      "Respiratory arrest"
+    ],
+    "answer": 0,
+    "explanation": "Followed by drowsiness, then excitation and seizures."
+  },
+  {
+    "q": "Methaemoglobinaemia is most common with:",
+    "options": [
+      "Lidocaine",
+      "Prilocaine",
+      "Bupivacaine",
+      "Procaine"
+    ],
+    "answer": 1,
+    "explanation": "Its aromatic ring is metabolised to o-toluidine."
+  }
+]

@@ -1,0 +1,58 @@
+[
+  {
+    "q": "Early signs of lidocaine overdose?",
+    "a": "Circumoral numbness, abnormal tongue sensation, dizziness, blurred vision, tinnitus, then drowsiness, dysphoria, lethargy."
+  },
+  {
+    "q": "Why does LA toxicity start with CNS stimulation?",
+    "a": "LAs inhibit neurones; inhibitory neurones are inhibited first, so excitation appears."
+  },
+  {
+    "q": "Drugs to prevent or treat LA-induced convulsions?",
+    "a": "Diazepam or midazolam."
+  },
+  {
+    "q": "Most cardiotoxic LA?",
+    "a": "Bupivacaine: ventricular tachycardia, fibrillation, arrest."
+  },
+  {
+    "q": "Which LA is used as an antiarrhythmic?",
+    "a": "Lidocaine. Procainamide, the amide of procaine, is a class IA antiarrhythmic."
+  },
+  {
+    "q": "Rank bupivacaine, lidocaine and prilocaine by vasodilatation.",
+    "a": "Bupivacaine > lidocaine > prilocaine (least)."
+  },
+  {
+    "q": "How are esters and amides metabolised?",
+    "a": "Esters: plasma pseudocholinesterase and liver esterases. Amides: liver microsomes only (dealkylation, hydrolysis)."
+  },
+  {
+    "q": "Why is the max safe dose lower in liver disease and the elderly?",
+    "a": "Amides are metabolised only in the liver; lidocaine metabolism depends on hepatic blood flow."
+  },
+  {
+    "q": "Which LA has the highest local tissue irritancy?",
+    "a": "Bupivacaine."
+  },
+  {
+    "q": "A common cause of allergy to LA solutions?",
+    "a": "Methylparaben, the preservative."
+  },
+  {
+    "q": "How does propranolol interact with lidocaine?",
+    "a": "It reduces hepatic blood flow, so lidocaine and other amides are metabolised more slowly."
+  },
+  {
+    "q": "Which LAs are most toxic after topical or regional use?",
+    "a": "Those absorbed rapidly but metabolised slowly."
+  },
+  {
+    "q": "Two phases of LA CNS toxicity?",
+    "a": "Excitation (restlessness, tremors, convulsions) followed by depression (drowsiness, respiratory failure, coma)."
+  },
+  {
+    "q": "Mechanism of LA-induced hypotension and bradycardia?",
+    "a": "Myocardial depression and peripheral vasodilatation."
+  }
+]

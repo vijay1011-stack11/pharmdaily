@@ -35,7 +35,16 @@ export const SECTIONS: Section[] = [
   },
   { n: 4, title: 'Respiratory system', topics: [], planned: 'Jan' },
   { n: 5, title: 'Hormones', topics: [] },
-  { n: 6, title: 'Peripheral nervous system (local anaesthetics)', topics: [] },
+  {
+    n: 6,
+    title: 'Peripheral nervous system (local anaesthetics)',
+    topics: [
+      { slug: 'local-anaesthetics-basics', title: 'Local anaesthetics: basics and mechanism', short: 'Basics', reviewed: '2026-11' },
+      { slug: 'local-anaesthetic-drugs', title: 'Local anaesthetic drugs', short: 'Drugs', reviewed: '2026-11' },
+      { slug: 'local-anaesthesia-techniques', title: 'Techniques of local anaesthesia', short: 'Techniques', reviewed: '2026-11' },
+      { slug: 'local-anaesthetics-actions-adr', title: 'Actions and adverse drug reactions', short: 'Actions & ADR', reviewed: '2026-11' },
+    ],
+  },
   {
     n: 7,
     title: 'Central nervous system',

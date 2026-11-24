@@ -1,0 +1,1456 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}
+/* exam-importance tag and box */
+.imp{display:inline-flex;align-items:center;font-size:.7rem;font-weight:800;padding:2px 9px;border-radius:999px;background:var(--bad);color:var(--bg);vertical-align:middle;margin-left:6px;white-space:nowrap;letter-spacing:.01em}
+.impbox{margin-top:16px;padding:2px 14px 16px;border-radius:20px;border:1.5px solid rgba(255,155,155,.55);background:var(--bad-soft)}
+.impbox>h3,.impbox>h2{margin-top:14px}
+</style></head><body>
+<title>PharmDaily Local Anaesthetics</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap">
+<style>
+/* Night direction: one dark navy-violet world. Phone-first single column; sticky glass header; diagrams are stacking blocks; indigo = enteral/primary, amber = parenteral/secondary. Deliberately single-theme. */
+:root{
+  color-scheme:dark;
+  --bg:#0B0C1A; --surface:#10122A; --glass:rgba(255,255,255,.045); --glass-2:rgba(255,255,255,.07);
+  --line:rgba(255,255,255,.09); --line-2:rgba(255,255,255,.16);
+  --ink:#E6E8F5; --ink-strong:#FFFFFF; --muted:#A7ABC8; --faint:#8C90AE;
+  --indigo:#6D7CFF; --indigo-ink:#C9CEFF; --indigo-soft:rgba(109,124,255,.14);
+  --amber:#FFB86B; --amber-ink:#FFCF94; --amber-soft:rgba(255,184,107,.12);
+  --good:#7CE2B0; --good-soft:rgba(124,226,176,.09); --bad:#FF9B9B; --bad-soft:rgba(255,155,155,.08);
+  --font:"Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --ease-out:cubic-bezier(.23,1,.32,1); --ease-in-out:cubic-bezier(.77,0,.175,1);
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{-webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:100%;background:var(--bg)}
+body{overflow-x:clip;background:var(--surface);color:var(--ink);font-family:var(--font);font-size:16.5px;line-height:1.6}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+button,a,[role="button"]{touch-action:manipulation}
+button,.pills a,.seg button,.fc,.flag,.src{user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+button{font:inherit;color:inherit}
+input,textarea{font-size:16px}
+:focus-visible{outline:2px solid var(--indigo-ink);outline-offset:3px;border-radius:10px}
+a{color:var(--indigo-ink)}
+.gut{padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.col{max-width:680px;margin:0 auto}
+h1,h2,h3{text-wrap:balance;margin:0;color:var(--ink-strong);letter-spacing:-.02em}
+h2{font-size:1.4rem;font-weight:700;margin-top:2.6rem}
+h3{font-size:1.08rem;font-weight:700;margin-top:1.8rem}
+p{margin:.55rem 0}
+b{color:var(--ink-strong)}
+
+/* header */
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:6;background:rgba(11,12,26,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:12px 4px}
+.brand{font-weight:800;font-size:1.15rem;letter-spacing:-.02em;color:var(--ink-strong)}
+.sec{font-size:.8rem;color:var(--muted)}
+.pills{display:flex;gap:6px;padding-block:8px}
+.pills a{flex:1 1 auto;min-width:0;display:inline-flex;align-items:center;justify-content:center;gap:4px;min-height:42px;padding:0 8px;border-radius:21px;border:1px solid var(--line-2);color:var(--ink);text-decoration:none;font-size:.84rem;font-weight:600;white-space:nowrap}
+.pills a[aria-current="page"]{background:var(--ink-strong);border-color:var(--ink-strong);color:var(--bg);font-weight:800}
+.pills a.rev{color:var(--amber-ink);border-color:rgba(255,184,107,.45)}
+.pills a.rev[aria-current="page"]{background:var(--amber);border-color:var(--amber);color:var(--bg)}
+.seg{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:4px;margin-bottom:10px;border-radius:24px;background:var(--glass-2)}
+.seg button{min-height:40px;border:0;border-radius:20px;background:transparent;color:var(--muted);font-weight:700;font-size:.9rem;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--ink-strong);color:var(--bg)}
+
+/* motion: press feedback only (emil-design-eng) */
+.btn,.opt,.choice button,.seg button,.pills a,.go{transition:transform 140ms var(--ease-out),background-color 150ms ease,border-color 150ms ease,color 150ms ease}
+.btn:active,.opt:not([disabled]):active,.choice button:active,.seg button:active,.pills a:active,.go:active{transform:scale(.97)}
+@media (hover:hover) and (pointer:fine){
+  .btn:hover,.opt:not([disabled]):hover,.choice button:hover{border-color:var(--muted)}
+  .pills a:not([aria-current]):hover{border-color:var(--ink)}
+}
+
+/* topic hero */
+.hero{position:relative;padding-block:30px 6px}
+.hero::before{content:"";position:absolute;left:-20px;top:-40px;width:calc(100% + 40px);height:340px;background:radial-gradient(closest-side,rgba(109,124,255,.22),rgba(16,18,42,0));pointer-events:none;z-index:0}
+.hero>*{position:relative}
+.eyebrow{font-size:.82rem;color:var(--muted)}
+.hero h1{font-size:2.15rem;line-height:1.08;font-weight:700;letter-spacing:-.035em;margin-top:6px}
+.lede{color:#B5B9D3;font-size:1.02rem}
+.legend{margin-top:16px;display:flex;flex-direction:column;gap:8px;padding:14px 16px;border-radius:16px;background:var(--glass);border:1px solid var(--line);font-size:.88rem;color:var(--muted)}
+.legend div{display:flex;gap:10px;align-items:flex-start}
+
+/* tags */
+.src{display:inline-flex;align-items:center;font-size:.7rem;font-weight:800;padding:2px 8px;border-radius:999px;border:1px solid rgba(201,206,255,.4);color:var(--indigo-ink);vertical-align:middle;margin-left:6px;white-space:nowrap;letter-spacing:.01em}
+.flag{position:relative;display:inline-flex;align-items:center;font-size:.72rem;font-weight:800;padding:3px 9px;border-radius:999px;background:var(--amber);color:var(--bg);text-decoration:none;vertical-align:middle;margin-left:6px;white-space:nowrap}
+.flag::after{content:"";position:absolute;inset:-10px -4px}
+.dental{display:inline-flex;font-size:.7rem;font-weight:800;padding:2px 8px;border-radius:999px;border:1px solid rgba(255,207,148,.45);color:var(--amber-ink);vertical-align:middle;margin-left:6px}
+
+/* capsule chips */
+.drugs{display:flex;flex-wrap:wrap;gap:7px;margin:.5rem 0}
+.rx{display:inline-flex;align-items:center;min-height:30px;border-radius:15px;overflow:hidden;border:1px solid var(--line-2);font-size:.82rem;font-weight:600;color:var(--ink);background:rgba(255,255,255,.02)}
+.rx::before{content:"";width:11px;align-self:stretch;background:var(--indigo)}
+.rx span{padding:3px 11px 3px 9px}
+.par .rx::before{background:var(--amber)}
+
+/* surfaces */
+.card{background:var(--glass);border:1px solid var(--line);border-radius:18px;padding:16px;margin-top:12px}
+.card>b:first-child,.card>.ct{display:block;color:var(--ink-strong);font-weight:800;margin-bottom:4px}
+.def{background:var(--indigo-soft);border:1px solid rgba(109,124,255,.35);border-radius:18px;padding:14px 16px;margin-top:12px}
+.split{display:grid;grid-template-columns:1fr;gap:10px;margin-top:12px}
+@media (min-width:560px){.split{grid-template-columns:1fr 1fr}}
+.split>*{min-width:0;margin-top:0}
+.pro,.con{border-radius:18px;padding:14px 16px}
+.pro{background:var(--good-soft);border:1px solid rgba(124,226,176,.28)}
+.con{background:var(--bad-soft);border:1px solid rgba(255,155,155,.26)}
+.pro h4,.con h4{margin:0 0 4px;font-size:.92rem;font-weight:800}
+.pro h4{color:var(--good)} .con h4{color:var(--bad)}
+ul{margin:.3rem 0;padding-left:1.1rem} li{margin:.2rem 0}
+li::marker{color:var(--faint)}
+
+/* stacked label/value list */
+.rows{margin-top:12px;border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.025);overflow:hidden}
+.row{padding:13px 16px;display:flex;flex-direction:column;gap:3px}
+.row+.row{border-top:1px solid rgba(255,255,255,.07)}
+.row>*{min-width:0}
+.row .k{font-size:.82rem;font-weight:800;color:var(--indigo-ink)}
+.par .row .k{color:var(--amber-ink)}
+.row .k small{font-weight:600;color:var(--faint);margin-left:6px}
+.row .drugs{margin:2px 0 0}
+
+/* metro map */
+.metro{margin-top:12px;padding:18px 14px;border-radius:20px;background:var(--glass);border:1px solid var(--line);display:flex;flex-direction:column;align-items:center}
+.metro .root{padding:8px 18px;border-radius:20px;background:var(--ink-strong);color:var(--bg);font-weight:800}
+.metro .stem{width:2px;height:16px;background:rgba(255,255,255,.3)}
+.metro .bridge{width:50%;height:2px;background:rgba(255,255,255,.3)}
+.lines{width:100%;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.line{display:flex;flex-direction:column;align-items:center;--c:var(--indigo)}
+.line.amb{--c:var(--amber)}
+.line .head{width:100%;text-align:center;padding:10px 6px;border-radius:14px;background:var(--c);color:var(--bg)}
+.line .head b{display:block;color:var(--bg);font-weight:800}
+.line .head span{font-size:.75rem;font-weight:700}
+.stops{position:relative;width:100%;list-style:none;margin:0;padding:14px 0 0 24px;display:flex;flex-direction:column;gap:14px}
+.stops::before{content:"";position:absolute;left:10px;top:0;bottom:12px;width:2px;background:var(--c)}
+.stops li{position:relative;margin:0;font-size:.88rem;font-weight:700;color:var(--ink-strong);line-height:1.3}
+.stops li::before{content:"";position:absolute;left:-19px;top:3px;width:10px;height:10px;border-radius:50%;background:var(--surface);border:2px solid var(--c)}
+.stops small{display:block;font-weight:500;color:var(--muted);font-size:.75rem}
+
+/* vertical flow */
+.flow{display:flex;flex-direction:column;align-items:stretch;margin-top:12px}
+.step{background:var(--glass);border:1px solid var(--line);border-radius:14px;padding:11px 14px}
+.step b{color:var(--ink-strong)}
+.arrow{align-self:center;color:var(--faint);font-size:1rem;line-height:1;padding:5px 0;text-align:center}
+.arrow small{display:block;font-size:.75rem;margin-top:2px}
+.step.hit{background:var(--bad-soft);border:1px dashed rgba(255,155,155,.55);color:var(--bad)}
+.step.ok{background:var(--good-soft);border-color:rgba(124,226,176,.4);color:var(--good)}
+
+/* side-by-side paths */
+.paths{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}
+.path{padding:14px 10px;border-radius:18px;background:var(--glass);border:1px solid var(--line);display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;font-size:.86rem;font-weight:700;color:var(--ink-strong)}
+.path.win{background:var(--indigo-soft);border-color:rgba(109,124,255,.4)}
+.path .t{font-size:.75rem;color:var(--muted)} .path.win .t{color:var(--indigo-ink)}
+.path .ar{color:var(--faint);font-weight:400}
+.path .hit{color:var(--bad);border:1px dashed rgba(255,155,155,.6);border-radius:10px;padding:3px 9px}
+.path .ok{color:var(--good);border:1px solid rgba(124,226,176,.5);border-radius:10px;padding:3px 9px}
+.path .note{font-size:.75rem;font-weight:500;color:var(--muted)}
+
+/* patch layers */
+.layers{margin-top:12px;display:flex;flex-direction:column;gap:4px}
+.layer{display:flex;justify-content:space-between;gap:10px;padding:11px 14px;border-radius:4px;font-size:.88rem;font-weight:700}
+.layer span{font-weight:500;opacity:.85;text-align:right}
+.l1{background:#2B2F55;color:#fff;border-radius:12px 12px 4px 4px}
+.l2{background:var(--indigo);color:var(--bg);padding-block:15px}
+.l3{border:1px dashed var(--indigo-ink);color:var(--indigo-ink)}
+.l4{background:var(--amber-soft);color:var(--amber-ink)}
+.l5{background:rgba(255,155,155,.13);color:#FFB3B3;border-radius:4px 4px 12px 12px}
+
+/* cause → effect */
+.cause{display:grid;grid-template-columns:1fr auto;align-items:center;gap:10px;padding:10px 0;font-size:.92rem}
+.cause+.cause{border-top:1px solid rgba(255,255,255,.07)}
+.up{color:var(--good);font-weight:800;white-space:nowrap} .down{color:var(--bad);font-weight:800;white-space:nowrap}
+
+/* IA scale */
+.scale{margin-top:16px;padding:0 6px}
+.track{height:10px;border-radius:999px;background:linear-gradient(90deg,var(--bad),rgba(255,255,255,.2) 50%,var(--good))}
+.ticks{position:relative;height:74px}
+.tick{position:absolute;top:6px;transform:translateX(-50%);text-align:center;font-size:.72rem;line-height:1.25;width:78px;color:var(--muted)}
+.tick b{display:block;font-size:.95rem}
+.tick::before{content:"";display:block;width:2px;height:10px;background:var(--ink-strong);margin:-16px auto 8px}
+
+.rgrid{display:grid;grid-template-columns:1fr;gap:10px;margin-top:12px}
+@media (min-width:560px){.rgrid{grid-template-columns:1fr 1fr}}
+.rcard{background:var(--glass);border:1px solid var(--line);border-radius:18px;padding:14px 16px;display:flex;flex-direction:column;gap:4px}
+.rcard h4{margin:0;font-size:1rem;color:var(--ink-strong)}
+.speed{font-size:.78rem;font-weight:800;color:var(--amber-ink)}
+.rcard p{margin:0;font-size:.9rem}
+
+.chart{margin-top:12px;background:var(--glass);border:1px solid var(--line);border-radius:18px;padding:10px}
+.chart svg{display:block;width:100%;height:auto}
+.legend2{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.82rem;padding:6px 4px 2px;color:var(--muted)}
+.legend2 i{display:inline-block;width:14px;height:3px;vertical-align:middle;margin-right:6px;border-radius:2px}
+
+.clinic{margin-top:14px;display:flex;gap:12px;padding:14px 16px;border-radius:18px;background:var(--amber-soft);border:1px solid rgba(255,184,107,.35)}
+.clinic svg{flex:none}
+.clinic b{display:block;color:var(--amber-ink)}
+
+.next{display:flex;gap:10px;margin-top:36px}
+.go{flex:1;min-height:52px;border-radius:26px;border:1px solid var(--line-2);background:var(--glass-2);color:var(--ink-strong);font-weight:700;cursor:pointer}
+.go.main{background:var(--ink-strong);color:var(--bg);border-color:var(--ink-strong);font-weight:800}
+
+/* flashcards */
+.fc-top{display:flex;justify-content:space-between;align-items:center;margin-top:22px}
+.count{font-variant-numeric:tabular-nums;color:var(--indigo-ink);font-weight:800}
+.dots{display:flex;gap:4px;margin-top:10px}
+.dots i{flex:1;height:4px;border-radius:2px;background:rgba(255,255,255,.16)}
+.dots i.cur{background:#fff} .dots i.got{background:var(--good)} .dots i.again{background:var(--amber)}
+.fc{perspective:1200px;height:380px;margin-top:20px;cursor:pointer;display:block;width:100%;border:0;background:none;padding:0;text-align:left}
+.fc-inner{position:relative;width:100%;height:100%;transition:transform 280ms var(--ease-in-out);transform-style:preserve-3d}
+.fc.flip .fc-inner{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:28px;padding:26px 24px;display:flex;flex-direction:column;gap:14px;overflow:auto}
+.front{background:rgba(26,29,58,.85);border:1px solid var(--line-2);box-shadow:0 30px 60px rgba(20,24,80,.45)}
+.back{background:var(--indigo);color:var(--bg);transform:rotateY(180deg)}
+.face .lab{font-size:.8rem;font-weight:800;color:var(--muted)}
+.back .lab{color:rgba(11,12,26,.7)}
+.face .q{font-size:1.55rem;line-height:1.22;font-weight:700;letter-spacing:-.02em;color:var(--ink-strong)}
+.face .a{font-size:1.2rem;line-height:1.45;font-weight:600}
+.face .hint{margin-top:auto;font-size:.8rem;color:var(--muted)}
+.back .hint{color:rgba(11,12,26,.7)}
+.fc-btns{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+.btn{min-height:52px;border-radius:26px;border:1px solid var(--line-2);background:var(--glass-2);color:var(--ink-strong);font-weight:700;cursor:pointer;padding:0 18px}
+.btn.primary{background:var(--ink-strong);color:var(--bg);border-color:var(--ink-strong);font-weight:800}
+.btn.quiet{min-height:44px;background:none;border:0;color:var(--indigo-ink);margin-top:6px}
+@media (prefers-reduced-motion:reduce){.fc-inner{transition:none}.btn:active,.opt:active,.choice button:active,.seg button:active,.pills a:active,.go:active{transform:none}}
+
+/* mcq */
+.mcq-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:22px}
+.q-card{background:var(--glass);border:1px solid var(--line);border-radius:20px;padding:16px;margin-top:12px}
+.qn{font-size:.78rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.qt{font-weight:700;color:var(--ink-strong);margin:3px 0 10px;font-size:1.02rem;line-height:1.4}
+.opt{display:block;width:100%;min-height:48px;text-align:left;border:1px solid var(--line-2);background:rgba(255,255,255,.03);border-radius:14px;padding:11px 14px;margin-top:7px;cursor:pointer;font-size:.95rem}
+.opt[disabled]{cursor:default}
+.opt.right{background:var(--good-soft);border-color:var(--good);color:var(--good);font-weight:800}
+.opt.wrong{background:var(--bad-soft);border-color:var(--bad);color:var(--bad)}
+.expl{margin-top:10px;font-size:.9rem;color:var(--muted);transition:opacity 200ms var(--ease-out),transform 200ms var(--ease-out)}
+@starting-style{.expl{opacity:0;transform:translateY(4px)}}
+
+/* review */
+.ri{background:var(--glass);border:1px solid var(--line);border-radius:20px;padding:16px;margin-top:12px;scroll-margin-top:190px}
+.ri .where{font-size:.78rem;color:var(--amber-ink);font-weight:800}
+.ri b{display:block;margin-top:2px}
+.ri p{margin:.3rem 0 .7rem;color:var(--muted);font-size:.93rem}
+.choice{display:flex;gap:8px;flex-wrap:wrap}
+.choice button{min-height:44px;border:1px solid var(--line-2);background:rgba(255,255,255,.03);border-radius:22px;padding:0 18px;cursor:pointer;font-size:.92rem;font-weight:700}
+.choice button[aria-pressed="true"].ok{background:var(--good);border-color:var(--good);color:var(--bg)}
+.choice button[aria-pressed="true"].fix{background:var(--bad);border-color:var(--bad);color:var(--bg)}
+textarea{width:100%;margin-top:10px;font-family:inherit;border:1px solid var(--line-2);border-radius:14px;padding:12px;background:rgba(255,255,255,.03);color:var(--ink);min-height:76px}
+textarea::placeholder{color:var(--faint)}
+.copybox{position:sticky;bottom:0;background:var(--bg);border-top:1px solid var(--line);padding-block:12px calc(12px + env(safe-area-inset-bottom,0px));margin-top:18px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.copybox .status{font-size:.85rem;color:var(--muted)}
+pre.fallback{white-space:pre-wrap;font-family:inherit;font-size:.85rem;background:var(--glass);border:1px solid var(--line);border-radius:14px;padding:12px;margin-top:12px}
+
+main{padding-block:0 72px}
+footer{color:var(--faint);font-size:.82rem;border-top:1px solid var(--line);padding-block:20px 30px;background:var(--bg)}
+
+/* topic pills wrap instead of truncating; segmented labels never clip */
+.pills{flex-wrap:wrap}
+.pills a{flex:1 1 auto;white-space:normal;text-align:center;line-height:1.15;padding:6px 12px}
+.seg button{white-space:normal;line-height:1.15;padding:4px 6px;min-width:0}
+.hero h1{font-size:clamp(1.6rem,8.5vw,2.15rem);overflow-wrap:break-word}
+</style>
+
+<header>
+  <div class="gut"><div class="col">
+    <div class="bar"><span class="brand">PharmDaily</span><span class="sec">Section 6 · Local anaesthetics</span></div>
+    <nav class="pills" aria-label="Topics">
+      <a href="#basics" data-t="basics">Basics</a>
+      <a href="#drugs" data-t="drugs">Drugs</a>
+      <a href="#uses" data-t="uses">Techniques</a>
+      <a href="#actions" data-t="actions">Actions &amp; ADR</a>
+      <a href="#review" data-t="review" class="rev">Review <span id="flagCount" style="font-variant-numeric:tabular-nums"></span></a>
+    </nav>
+    <div class="seg" id="modes" role="group" aria-label="Study mode">
+      <button data-m="notes" aria-pressed="true">Notes</button>
+      <button data-m="cards" aria-pressed="false">Flashcards</button>
+      <button data-m="mcq" aria-pressed="false">MCQs</button>
+    </div>
+  </div></div>
+</header>
+
+<main class="gut"><div class="col">
+
+<!-- ===================== BASICS ===================== -->
+<section data-topic="basics" data-mode="notes">
+  <div class="hero">
+    <div class="eyebrow">Chapter 27 &middot; Local anaesthetics</div>
+    <h1>What a local anaesthetic is</h1>
+    <p class="lede">Definition, history, classification, LA vs GA, and how LAs block a nerve.</p>
+  </div>
+
+  <div class="card"><b>Common essay question <span class="imp">&#9733; Exam</span></b><ul><li>Classify local anaesthetics</li><li>Routes / techniques of administration &rarr; <b>Techniques</b> tab</li><li>Uses &rarr; <b>Drugs</b> and <b>Techniques</b> tabs</li><li>Adverse drug reactions of lidocaine / LAs &rarr; <b>Actions &amp; ADR</b> tab</li></ul></div>
+
+  <h2>Definition</h2>
+  <div class="def"><b>Local anaesthetic (LA)</b>
+    <ul>
+      <li>Applied topically or injected locally</li>
+      <li>Causes <b>reversible</b> loss of sensation, especially <b>pain</b></li>
+      <li>Only in a <b>restricted area</b>, near the site of application</li>
+      <li>Blocks generation and conduction of nerve impulses at any part of the neurone it touches</li>
+      <li><b>No loss of consciousness</b> &middot; <b>no structural damage</b></li>
+    </ul>
+  </div>
+  <div class="flow">
+    <div class="step">LA on a <b>mixed nerve</b></div><div class="arrow">&darr;</div>
+    <div class="step">Sensory <b>and</b> motor impulses both blocked</div><div class="arrow">&darr;</div>
+    <div class="step hit">Muscle paralysis + loss of autonomic control</div>
+  </div>
+
+  <h2>History</h2>
+  <div class="flow">
+    <div class="step"><b>Coca leaves</b> &mdash; chewed by South American natives for stimulant, euphoric effect</div><div class="arrow">&darr;<small>1860</small></div>
+    <div class="step"><b>Albert Niemann</b> isolates <b>cocaine</b>, the first LA; notices it numbs the tongue</div><div class="arrow">&darr;</div>
+    <div class="step"><b>Sigmund Freud</b> tries it as a psychic energiser &mdash; unsuccessful</div><div class="arrow">&darr;<small>1884</small></div>
+    <div class="step"><b>Carl Koller</b> uses cocaine for <b>ocular surgery</b> &mdash; first clinical LA use</div><div class="arrow">&darr;</div>
+    <div class="step"><b>Halstead</b> &mdash; infiltration anaesthesia</div><div class="arrow">&darr;<small>1905</small></div>
+    <div class="step"><b>Procaine</b> &mdash; first synthetic LA</div><div class="arrow">&darr;<small>1948</small></div>
+    <div class="step ok"><b>Lidocaine</b> &mdash; now the most widely used LA</div>
+  </div>
+
+  <h2>Classification <span class="imp">&#9733; Exam</span></h2>
+  <h3>I. By route of administration</h3>
+  <div class="metro" role="img" aria-label="Local anaesthetics split into injectable and surface anaesthetics">
+    <div class="root">Local anaesthetics</div><div class="stem"></div><div class="bridge"></div>
+    <div class="lines">
+      <div class="line"><div class="stem"></div><div class="head"><b>Injectable</b><span>by potency (KDT)</span></div>
+        <ul class="stops"><li>Low potency, short<small>procaine, chloroprocaine</small></li><li>Intermediate<small>lidocaine (lignocaine), prilocaine</small></li><li>High potency, long<small>tetracaine, bupivacaine, ropivacaine, dibucaine</small></li><li>Also<small>mepivacaine, articaine, etidocaine</small></li></ul></div>
+      <div class="line amb"><div class="stem"></div><div class="head"><b>Surface</b><span>topical</span></div>
+        <ul class="stops"><li>Soluble<small>cocaine, lidocaine, tetracaine, proparacaine</small></li><li>Insoluble<small>benzocaine, butamben (butylaminobenzoate), oxethazaine</small></li><li>Also<small>dibucaine, benoxinate, dyclonine</small></li></ul></div>
+    </div>
+  </div>
+  <div class="rows">
+    <div class="row"><div class="k">Have LA activity, not used as LA<small>irritant or systemic effects</small></div><div class="drugs">Propranolol, Chlorpromazine, H1 antihistamines, Quinine</div></div>
+    <div class="row"><div class="k">Anaesthesia by cooling</div><div class="drugs">Ice, CO2 snow, Ethyl chloride spray</div></div>
+  </div>
+
+  <h3>II. By chemical structure</h3>
+  <ul><li>Weak bases &middot; amphiphilic: one end fat-loving, one end water-loving</li></ul>
+  <div class="flow">
+    <div class="step"><b>Lipophilic aromatic ring</b><br><span style="color:var(--muted)">lets the drug enter the nerve</span></div><div class="arrow">&darr;</div>
+    <div class="step"><b>Intermediate alkyl chain</b> &mdash; joined by an <b>ester</b> or <b>amide</b> link<br><span style="color:var(--muted)">this link names the class</span></div><div class="arrow">&darr;</div>
+    <div class="step"><b>Hydrophilic amine</b> (secondary or tertiary)</div>
+  </div>
+  <div class="paths">
+    <div class="path"><span class="t">Esters</span>Cocaine<br>Procaine<br>Chloroprocaine<br>Tetracaine<br>Benzocaine<br>Butamben</div>
+    <div class="path win"><span class="t">Amides</span>Lidocaine<br>Bupivacaine<br>Prilocaine<br>Ropivacaine<br>Dibucaine<br>Mepivacaine<br>Articaine<br>Etidocaine<br>Oxethazaine</div>
+  </div>
+  <div class="def"><b>Trick:</b> amides have <b>two i's</b> in the name; esters have one.<ul><li>Amides: l<b style="color:var(--amber)">I</b>doca<b style="color:var(--amber)">I</b>ne, bup<b style="color:var(--amber)">I</b>vaca<b style="color:var(--amber)">I</b>ne, pr<b style="color:var(--amber)">I</b>loca<b style="color:var(--amber)">I</b>ne, rop<b style="color:var(--amber)">I</b>vaca<b style="color:var(--amber)">I</b>ne, d<b style="color:var(--amber)">I</b>buca<b style="color:var(--amber)">I</b>ne, mep<b style="color:var(--amber)">I</b>vaca<b style="color:var(--amber)">I</b>ne</li><li>Esters: proca<b style="color:var(--amber)">I</b>ne, coca<b style="color:var(--amber)">I</b>ne, benzoca<b style="color:var(--amber)">I</b>ne, tetraca<b style="color:var(--amber)">I</b>ne</li><li>Exception: oxethazaine is an amide with one i</li></ul></div>
+  <div class="split">
+    <div class="pro"><h4>Amides (vs esters)</h4><ul><li>More intense, longer anaesthesia</li><li>Bind <b>&alpha;1-acid glycoprotein</b> in plasma</li><li><b>Not</b> hydrolysed by plasma esterases &rarr; liver</li><li>Hypersensitivity rare</li><li>No cross-sensitivity with esters</li></ul></div>
+    <div class="con"><h4>Esters</h4><ul><li>Short action, weaker analgesia</li><li>Higher risk of hypersensitivity</li><li>Rarely used for infiltration or nerve block</li><li>Still used <b>topically on mucous membranes</b></li></ul></div>
+  </div>
+  <div class="clinic">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFCF94" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3c-2 0-3 2-3 4 0 3 1 5 2 8 .6 2 1 5 2.5 5 1.4 0 1.5-3 2.2-5 .3-.9.6-1.3 1.3-1.3s1 .4 1.3 1.3c.7 2 .8 5 2.2 5 1.5 0 1.9-3 2.5-5 1-3 2-5 2-8 0-2-1-4-3-4-1.8 0-2.6 1-5 1S8.8 3 7 3z"/></svg>
+    <div><b>For your clinic</b>Your injection (lidocaine) is an amide; your topical gel (benzocaine) is an ester. A patient allergic to one class can usually get the other: no cross-sensitivity between them.</div>
+  </div>
+
+  <h2>General vs local anaesthesia</h2>
+  <div class="paths">
+    <div class="path"><span class="t">General</span>Acts on CNS<span class="ar">&middot;</span>Whole body<span class="ar">&middot;</span><span class="hit">Consciousness lost</span><span class="ar">&middot;</span>Vital-function care essential<span class="ar">&middot;</span>High physiological trespass<span class="ar">&middot;</span>Risky in poor-health patient<span class="ar">&middot;</span>Possible in non-cooperative patient<span class="note">preferred for major surgery</span></div>
+    <div class="path win"><span class="t">Local</span>Acts on peripheral nerves<span class="ar">&middot;</span>Restricted area<span class="ar">&middot;</span><span class="ok">Consciousness unaltered</span><span class="ar">&middot;</span>Vital-function care usually not needed<span class="ar">&middot;</span>Low physiological trespass<span class="ar">&middot;</span>Safer in poor-health patient<span class="ar">&middot;</span>Not possible in non-cooperative patient<span class="note">preferred for minor surgery; can't be used for major</span></div>
+  </div>
+
+  <h2>Mechanism of action <span class="imp">&#9733; Exam</span></h2>
+  <h3>The block, step by step</h3>
+  <div class="flow">
+    <div class="step">LA reaches the nerve fibre</div><div class="arrow">&darr;</div>
+    <div class="step">&darr; Na&#8314; entry during the <b>upstroke</b> of the action potential</div><div class="arrow">&darr;<small>as concentration rises</small></div>
+    <div class="step">&darr; Rate of rise and maximum depolarisation</div><div class="arrow">&darr;</div>
+    <div class="step">Conduction slows</div><div class="arrow">&darr;</div>
+    <div class="step hit">Depolarisation fails to reach threshold &rarr; <b>conduction block</b></div>
+  </div>
+
+  <h2>Route to the receptor</h2>
+  <div class="chart">
+    <svg viewBox="0 0 340 300" role="img" aria-label="Unionised base form crosses the axonal membrane, reionises inside, and the cation binds the LA receptor at the inner mouth of the sodium channel">
+      <defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#C9CEFF"/></marker>
+      <marker id="ah2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#FFB86B"/></marker></defs>
+      <text x="12" y="22" font-size="11.5" font-weight="700" fill="#A7ABC8">Outside &middot; tissue fluid, pH 7.4</text>
+      <rect x="20" y="40" width="130" height="34" rx="12" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.16)"/>
+      <text x="85" y="62" text-anchor="middle" font-size="14" font-weight="800" fill="#FFFFFF">BH&#8314; &#8652; B</text>
+      <rect x="0" y="118" width="340" height="52" fill="rgba(255,184,107,.12)"/>
+      <text x="12" y="149" font-size="11" font-weight="700" fill="#FFCF94">Membrane</text>
+      <rect x="230" y="104" width="26" height="80" rx="9" fill="#6D7CFF"/>
+      <rect x="290" y="104" width="26" height="80" rx="9" fill="#6D7CFF"/>
+      <line x1="256" y1="108" x2="290" y2="108" stroke="#C9CEFF" stroke-width="2" stroke-dasharray="4 3"/>
+      <text x="273" y="96" text-anchor="middle" font-size="11" font-weight="700" fill="#C9CEFF">Na&#8314; channel</text>
+      <circle cx="273" cy="172" r="8" fill="#FFB86B"/>
+      <text x="273" y="206" text-anchor="middle" font-size="11" font-weight="700" fill="#FFCF94">LA receptor</text>
+      <text x="273" y="220" text-anchor="middle" font-size="10.5" fill="#A7ABC8">inner half, S6 of domain IV</text>
+      <line x1="120" y1="76" x2="120" y2="194" stroke="#C9CEFF" stroke-width="2" marker-end="url(#ah)"/>
+      <text x="128" y="102" font-size="11" font-weight="700" fill="#C9CEFF">B crosses</text>
+      <text x="128" y="114" font-size="10.5" fill="#A7ABC8">unionised</text>
+      <rect x="20" y="200" width="130" height="34" rx="12" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.16)"/>
+      <text x="85" y="222" text-anchor="middle" font-size="14" font-weight="800" fill="#FFFFFF">B &#8652; BH&#8314;</text>
+      <path d="M150 214 C 200 214, 230 196, 262 178" fill="none" stroke="#FFB86B" stroke-width="2" marker-end="url(#ah2)"/>
+      <text x="12" y="262" font-size="11" font-weight="700" fill="#FFCF94">Cation (BH&#8314;) binds from inside,</text>
+      <text x="12" y="277" font-size="11" font-weight="700" fill="#FFCF94">through the channel's inner mouth</text>
+      <text x="12" y="294" font-size="11.5" font-weight="700" fill="#A7ABC8">Inside &middot; axoplasm</text>
+    </svg>
+  </div>
+  <div class="rows">
+    <div class="row"><div class="k">Base form (B)</div><div>Penetrates the axon &rarr; <b>potency follows lipid solubility of B</b></div></div>
+    <div class="row"><div class="k">Cationic form (BH&#8314;)</div><div>The main <b>active</b> species &rarr; binds the receptor</div></div>
+    <div class="row"><div class="k">Ratio of B : BH&#8314;</div><div>Set by the drug's <b>pKa</b></div></div>
+  </div>
+
+  <h2>Na&#8314; channel states</h2>
+  <div class="flow">
+    <div class="step"><b>Resting</b> &mdash; activation (m) gate closed</div><div class="arrow">&darr;<small>threshold depolarisation</small></div>
+    <div class="step"><b>Activated</b> &mdash; m gate opens, Na&#8314; rushes in</div><div class="arrow">&darr;<small>within a few ms</small></div>
+    <div class="step"><b>Inactivated</b> &mdash; inactivation (h) gate closes</div><div class="arrow">&darr;<small>K&#8314; efflux repolarises</small></div>
+    <div class="step ok">Back to resting, time-dependent</div>
+  </div>
+  <div class="rows">
+    <div class="row"><div class="k">m gate</div><div>Activation gate, <b>extracellular</b> mouth</div></div>
+    <div class="row"><div class="k">h gate</div><div>Inactivation gate, <b>intracellular</b> mouth</div></div>
+    <div class="row"><div class="k">LA prefers</div><div><b>Activated</b> and <b>inactivated</b> states over resting</div></div>
+    <div class="row"><div class="k">LA does</div><div>Stabilises the inactivated state &rarr; slower recovery &rarr; <b>&uarr; refractory period</b></div></div>
+  </div>
+  <div class="card"><b>Channel structure</b><ul>
+    <li>300 kD glycoprotein: one large <b>&alpha;</b> + two small <b>&beta;1, &beta;2</b> subunits</li>
+    <li>&alpha; subunit: 4 domains (I&ndash;IV), each with 6 helical segments (S1&ndash;S6)</li>
+    <li>Pore wall: the four S5&ndash;S6 segments</li>
+    <li><b>S4</b> = voltage sensors &rarr; open the activation gate</li>
+    <li>Loop between domains <b>III and IV</b> = inactivation gate</li>
+    <li><b>LA receptor: S6 of domain IV</b></li></ul></div>
+
+  <h2>Key facts about the block</h2>
+  <div class="rows">
+    <div class="row"><div class="k">Critical length</div><div>Block needs channels blocked over <b>2&ndash;3 nodes of Ranvier</b> (myelinated fibres)</div></div>
+    <div class="row"><div class="k">Frequency-dependent</div><div>More block at higher stimulation frequency &middot; resting nerve resists block &middot; repeated stimulation speeds it up</div></div>
+    <div class="row"><div class="k">Calcium</div><div>&uarr; Ca&#8314;&#8314; around the fibre &rarr; <b>less</b> block</div></div>
+    <div class="row"><div class="k">Not hyperpolarisation</div><div>Resting membrane potential unchanged &middot; K&#8314; channels blocked only at high concentration</div></div>
+  </div>
+
+  <h2>pKa decides onset</h2>
+  <div class="paths">
+    <div class="path win"><span class="t">Low pKa 7.6&ndash;7.8</span>30&ndash;40% base at pH 7.4<span class="ar">&darr;</span><span class="ok">Fast onset</span><span class="note">lidocaine, mepivacaine</span></div>
+    <div class="path"><span class="t">High pKa 8.1&ndash;8.9</span>&le;15% base at pH 7.4<span class="ar">&darr;</span><span class="hit">Slow onset</span><span class="note">procaine, tetracaine, bupivacaine</span></div>
+  </div>
+  <div class="def"><b>Exception:</b> chloroprocaine &mdash; rapid onset despite pKa 9.1</div>
+
+  <h2>Which fibres go first <span class="imp">&#9733; Exam</span></h2>
+  <h3>Order of block</h3>
+  <div class="layers" role="img" aria-label="Order of blockade: pain, cold, warmth, touch, deep pressure, motor">
+    <div class="layer l1">1 &middot; Pain <span>first lost</span></div>
+    <div class="layer l2">2 &middot; Cold</div>
+    <div class="layer l2">3 &middot; Warmth</div>
+    <div class="layer l3">4 &middot; Touch</div>
+    <div class="layer l4">5 &middot; Deep pressure</div>
+    <div class="layer l5">6 &middot; Motor <span>last lost</span></div>
+  </div>
+  <ul><li><b>Recovery: in reverse order</b> &mdash; first blocked, last to recover</li><li>Tongue: <b>bitter</b> &rarr; sweet and sour &rarr; <b>salty</b> last</li><li><b>Autonomic</b> fibres are more sensitive than somatic</li></ul>
+  <h3>Fibre types</h3>
+  <div class="layers" role="img" aria-label="Fibre susceptibility: C and B most, then small A delta, then A alpha beta gamma">
+    <div class="layer l1">Type C and B <span>most susceptible</span></div>
+    <div class="layer l3">Small A&delta;</div>
+    <div class="layer l5">Type A&alpha;, A&beta;, A&gamma; <span>least</span></div>
+  </div>
+  <div class="rows">
+    <div class="row"><div class="k">Myelination</div><div>Same diameter: <b>myelinated</b> blocked before non-myelinated</div></div>
+    <div class="row"><div class="k">Diameter</div><div>Smaller usually more sensitive, but not always:<ul><li>shorter critical length</li><li>shorter internodes; LA enters at nodes</li><li>high Na&#8314; channel density at nodes</li><li>small sensory fibres fire at high frequency &rarr; frequency-dependent block</li></ul></div></div>
+    <div class="row"><div class="k">Position in the trunk</div><div>Outer fibres blocked before core &rarr; <b>proximal areas numb first</b> &middot; motor fibres often lie outside, so may block before core sensory fibres</div></div>
+    <div class="row"><div class="k">Differential block</div><div>Epidural <b>bupivacaine</b>: sensory block at a lower concentration than motor<ul><li>Labour: mother can still push</li><li>Post-op (knee replacement): early walking and exercises</li></ul></div></div>
+  </div>
+
+  <h2>Why LA fails in inflamed tissue</h2>
+  <div class="flow">
+    <div class="step">Inflamed tissue, e.g. <b>infected tooth</b></div><div class="arrow">&darr;</div>
+    <div class="step">a. &darr; Tissue pH &rarr; more LA ionised &rarr; less diffuses into the axon</div><div class="arrow">&darr;</div>
+    <div class="step">b. &uarr; Blood flow &rarr; LA washed away faster</div><div class="arrow">&darr;</div>
+    <div class="step">c. Adrenaline in the LA works less well</div><div class="arrow">&darr;</div>
+    <div class="step">d. Inflammatory products oppose LA action</div><div class="arrow">&darr;</div>
+    <div class="step hit">Poor pain control</div>
+  </div>
+  <div class="clinic">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFCF94" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3c-2 0-3 2-3 4 0 3 1 5 2 8 .6 2 1 5 2.5 5 1.4 0 1.5-3 2.2-5 .3-.9.6-1.3 1.3-1.3s1 .4 1.3 1.3c.7 2 .8 5 2.2 5 1.5 0 1.9-3 2.5-5 1-3 2-5 2-8 0-2-1-4-3-4-1.8 0-2.6 1-5 1S8.8 3 7 3z"/></svg>
+    <div><b>For your clinic</b>An abscessed tooth often stays sore after an infiltration: acid pus keeps the LA ionised. That's why a block away from the inflamed site works better than injecting into it.</div>
+  </div>
+
+  <div class="next"><button class="go main" data-jump="cards">Flip 22 flashcards</button><button class="go" data-jump="mcq">18 MCQs</button></div>
+</section>
+<section data-topic="basics" data-mode="cards" hidden></section>
+<section data-topic="basics" data-mode="mcq" hidden></section>
+
+<!-- ===================== DRUGS ===================== -->
+<section data-topic="drugs" data-mode="notes" hidden>
+  <div class="hero">
+    <div class="eyebrow">Chapter 27 &middot; Individual compounds</div>
+    <h1>The drugs, one by one</h1>
+    <p class="lede">Lignocaine, bupivacaine and benzocaine in full, then every other LA by how it differs.</p>
+  </div>
+
+  <h2>All the drugs at a glance</h2>
+  <div class="metro" role="img" aria-label="Every local anaesthetic on this page grouped by type">
+    <div class="root">Drugs on this page</div><div class="stem"></div><div class="bridge"></div>
+    <div class="lines">
+      <div class="line"><div class="stem"></div><div class="head"><b>Amides</b><span>injected</span></div>
+        <ul class="stops"><li>Lignocaine<small>full profile</small></li><li>Bupivacaine<small>full profile</small></li><li>Levobupivacaine</li><li>Ropivacaine</li><li>Prilocaine<small>+ EMLA</small></li><li>Mepivacaine, articaine, etidocaine<small>college notes</small></li></ul></div>
+      <div class="line amb"><div class="stem"></div><div class="head"><b>Esters + surface</b><span>topical mostly</span></div>
+        <ul class="stops"><li>Benzocaine<small>full profile</small></li><li>Cocaine, procaine, chloroprocaine</li><li>Tetracaine, proparacaine</li><li>Butamben, benoxinate</li><li>Dibucaine, oxethazaine, dyclonine</li></ul></div>
+    </div>
+  </div>
+
+  <h2>The three you inject most <span class="imp">&#9733; Exam</span></h2>
+  <div class="rgrid">
+    <div class="rcard"><h4>Lidocaine</h4><span class="speed">Fast onset &middot; cardiotoxicity +</span>
+      <p>Potency 1 &middot; 0.5&ndash;2%</p>
+      <p style="color:var(--muted)">Lasts 60&ndash;120 min &middot; surface use: yes</p></div>
+    <div class="rcard"><h4>Bupivacaine</h4><span class="speed">Intermediate onset &middot; cardiotoxicity +++</span>
+      <p>Potency 4&ndash;5 &middot; 0.25&ndash;0.5%</p>
+      <p style="color:var(--muted)">Lasts 120&ndash;360 min &middot; surface use: no</p></div>
+    <div class="rcard"><h4>Ropivacaine</h4><span class="speed">Slow onset &middot; cardiotoxicity ++</span>
+      <p>Potency 3&ndash;4 &middot; 0.25&ndash;0.75%</p>
+      <p style="color:var(--muted)">Lasts 120&ndash;300 min &middot; surface use: no</p></div>
+  </div>
+
+  <!-- ========== LIGNOCAINE ========== -->
+  <div class="impbox">
+  <h2>Lignocaine (lidocaine) <span class="imp">&#9733; Exam</span></h2>
+  <div class="def"><b>Amide &middot; intermediate potency &middot; introduced 1948</b><ul><li><b>Most widely used LA</b></li><li>Versatile: good both on the <b>surface</b> and by <b>injection</b></li><li>Available in a variety of forms</li></ul></div>
+
+  <h3>Profile</h3>
+  <div class="metro" role="img" aria-label="Lignocaine profile: kinetics, actions, uses, adverse effects">
+    <div class="root">Lignocaine</div><div class="stem"></div><div class="bridge"></div>
+    <div class="lines">
+      <div class="line"><div class="stem"></div><div class="head"><b>Kinetics</b><span>how it moves</span></div>
+        <ul class="stops"><li>pKa 7.6&ndash;7.8<small>30&ndash;40% base &rarr; fast</small></li><li>Nerve block in 3 min</li><li>Lasts 60&ndash;120 min</li><li>Liver microsomes<small>depends on hepatic blood flow</small></li><li>High first pass<small>useless orally</small></li></ul></div>
+      <div class="line"><div class="stem"></div><div class="head"><b>Actions</b><span>at the site</span></div>
+        <ul class="stops"><li>More intense, longer than procaine</li><li>Vasodilatation<small>where injected</small></li><li>No cross-sensitivity<small>with ester LAs</small></li><li>Heart: shortens ERP<small>minimal proarrhythmia</small></li></ul></div>
+      <div class="line amb"><div class="stem"></div><div class="head"><b>Uses</b><span>every technique</span></div>
+        <ul class="stops"><li>Surface, infiltration</li><li>Nerve block</li><li>Epidural, spinal</li><li>IV regional (Bier's)</li><li>Dental anaesthesia<small>most popular</small></li><li>Antiarrhythmic<small>Ch 38</small></li><li>Patch<small>postherpetic neuralgia</small></li></ul></div>
+      <div class="line amb"><div class="stem"></div><div class="head"><b>ADR</b><span>dose-related</span></div>
+        <ul class="stops"><li>Early CNS: depressant<small>drowsiness, mental clouding</small></li><li>Altered taste, tinnitus</li><li>Overdose: twitching, convulsions</li><li>Arrhythmia, fall in BP</li><li>Coma, respiratory arrest</li></ul></div>
+    </div>
+  </div>
+
+  <h3>Lignocaine vs procaine</h3>
+  <div class="paths">
+    <div class="path win"><span class="t">Lignocaine &middot; amide</span>Nerve block in <b>3 min</b><span class="ar">&middot;</span>More intense, longer<span class="ar">&middot;</span><span class="ok">Surface + injection</span><span class="ar">&middot;</span>Allergy rare<span class="note">most widely used today</span></div>
+    <div class="path"><span class="t">Procaine &middot; ester</span>Up to <b>15 min</b><span class="ar">&middot;</span>Weaker, shorter<span class="ar">&middot;</span><span class="hit">Not a surface anaesthetic</span><span class="ar">&middot;</span>More allergy<span class="note">not used now</span></div>
+  </div>
+
+  <h3>Central effects: depression first, then excitation</h3>
+  <div class="flow">
+    <div class="step"><b>Early, at usual doses:</b> drowsiness, mental clouding, dysphoria, altered taste, tinnitus<br><span style="color:var(--muted)">depressant &mdash; unlike cocaine</span></div><div class="arrow">&darr;<small>overdose</small></div>
+    <div class="step">Muscle twitching &rarr; convulsions</div><div class="arrow">&darr;</div>
+    <div class="step hit">Cardiac arrhythmias, fall in BP &rarr; coma, respiratory arrest</div>
+  </div>
+
+  <h3>Dose by technique</h3>
+  <div class="rows par">
+    <div class="row"><div class="k">Surface</div><div>2&ndash;4% solution &middot; 2% jelly &middot; 10% throat spray (onset 2&ndash;5 min, lasts 30&ndash;45 min)</div></div>
+    <div class="row"><div class="k">Infiltration</div><div>Lasts 30&ndash;60 min</div></div>
+    <div class="row"><div class="k">Nerve, field block</div><div>1&ndash;2% &middot; intercostal block in 3 min</div></div>
+    <div class="row"><div class="k">Spinal</div><div>1.5&ndash;5% heavy &middot; 25&ndash;75 mg &middot; 60&ndash;90 min</div></div>
+    <div class="row"><div class="k">Epidural</div><div>1&ndash;2% &middot; 200&ndash;300 mg</div></div>
+    <div class="row"><div class="k">Bier's block</div><div>0.5% &middot; 20&ndash;40 ml IV</div></div>
+  </div>
+
+  <h3>Preparations</h3>
+  <div class="metro" role="img" aria-label="Lignocaine preparations: injection, surface forms, patch and combinations">
+    <div class="root">Lignocaine forms</div><div class="stem"></div><div class="bridge"></div>
+    <div class="lines">
+      <div class="line"><div class="stem"></div><div class="head"><b>Injection</b><span>1%, 2%</span></div>
+        <ul class="stops"><li>Plain or with adrenaline</li><li>5% heavy<small>spinal</small></li><li>Dental cartridge<small>2% + adrenaline 1:80,000, 1.5 ml</small></li></ul></div>
+      <div class="line amb"><div class="stem"></div><div class="head"><b>Surface</b><span>topical</span></div>
+        <ul class="stops"><li>4% topical solution</li><li>2% jelly, 2% viscous</li><li>5% ointment, cream</li><li>Spray<small>100 mg/ml, 10 mg per puff</small></li><li>Lozenges, oral patch</li><li>Eye drops, rectal</li></ul></div>
+    </div>
+  </div>
+  <div class="rows">
+    <div class="row"><div class="k">Transdermal patch 5%</div><div>Over the painful skin, 3&ndash;4 times a day &middot; burning pain of <b>postherpetic neuralgia</b>; pain of bruises, bites, burns</div></div>
+    <div class="row"><div class="k">Combinations</div><div>EMLA: lignocaine + prilocaine &middot; haemorrhoid cream: lignocaine 2.5% + beclomethasone + phenylephrine &middot; college notes: lignocaine + hydrocortisone</div></div>
+    <div class="row"><div class="k">Cardiac use</div><div>Antiarrhythmic (KDT Ch 38) &middot; <b>prophylaxis of ventricular arrhythmias in acute MI</b></div></div>
+  </div>
+  <div class="clinic">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFCF94" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3c-2 0-3 2-3 4 0 3 1 5 2 8 .6 2 1 5 2.5 5 1.4 0 1.5-3 2.2-5 .3-.9.6-1.3 1.3-1.3s1 .4 1.3 1.3c.7 2 .8 5 2.2 5 1.5 0 1.9-3 2.5-5 1-3 2-5 2-8 0-2-1-4-3-4-1.8 0-2.6 1-5 1S8.8 3 7 3z"/></svg>
+    <div><b>For your clinic</b><b style="display:inline;color:var(--ink-strong)">2% lignocaine with adrenaline 1:80,000</b> is the most popular dental anaesthetic. KDT lists it in a 1.5 ml cartridge. Aspirate first, and switch to a plain cartridge for cardiac, thyrotoxic or &beta;-blocker patients.</div>
+  </div>
+  </div>
+
+  <!-- ========== BUPIVACAINE ========== -->
+  <div class="impbox">
+  <h2>Bupivacaine <span class="imp">&#9733; Exam</span></h2>
+  <div class="def"><b>Amide &middot; more lipophilic &middot; more potent &middot; long-acting</b><ul><li>4&ndash;5&times; as potent as lignocaine</li><li>Lasts 120&ndash;360 min</li><li><b>Most cardiotoxic</b> LA in use</li></ul></div>
+
+  <h3>Profile</h3>
+  <div class="metro" role="img" aria-label="Bupivacaine profile: kinetics, uses, adverse effects, special points">
+    <div class="root">Bupivacaine</div><div class="stem"></div><div class="bridge"></div>
+    <div class="lines">
+      <div class="line"><div class="stem"></div><div class="head"><b>Kinetics</b><span>slow in, long stay</span></div>
+        <ul class="stops"><li>High pKa<small>&le;15% base &rarr; slow onset</small></li><li>High lipid solubility<small>more in tissues than blood</small></li><li>Long action<small>2&ndash;6 h</small></li></ul></div>
+      <div class="line"><div class="stem"></div><div class="head"><b>Uses</b><span>long procedures</span></div>
+        <ul class="stops"><li>Infiltration</li><li>Nerve block</li><li>Epidural<small>obstetrics, post-op</small></li><li>Spinal<small>long duration</small></li></ul></div>
+      <div class="line amb"><div class="stem"></div><div class="head"><b>ADR</b><span>the heart</span></div>
+        <ul class="stops"><li>Prolongs QTc</li><li>Ventricular tachycardia, fibrillation</li><li>Cardiac depression, arrest</li><li>Most vasodilatory</li><li>Most local irritancy</li></ul></div>
+      <div class="line amb"><div class="stem"></div><div class="head"><b>Special</b><span>remember</span></div>
+        <ul class="stops"><li>Antidote: IV lipid emulsion</li><li>Very low risk of TNS<small>in spinal</small></li><li>Not for peripheral nerve block<small>slow onset</small></li><li>Never in Bier's block</li><li>RCOG: gold standard<small>obstetric epidural</small></li></ul></div>
+    </div>
+  </div>
+
+  <h3>Why it's popular in labour</h3>
+  <div class="flow">
+    <div class="step"><b>0.25%</b> bupivacaine, epidural</div><div class="arrow">&darr;</div>
+    <div class="step">Good analgesia <b>without significant motor block</b></div><div class="arrow">&darr;</div>
+    <div class="step ok">Mother can actively <b>bear down</b> during vaginal delivery</div>
+  </div>
+  <div class="flow">
+    <div class="step">High lipid solubility</div><div class="arrow">&darr;</div>
+    <div class="step">Distributes into tissues more than blood after spinal or epidural</div><div class="arrow">&darr;</div>
+    <div class="step ok">Less reaches the foetus &rarr; less neonatal depression</div>
+  </div>
+  <p style="color:var(--muted);font-size:.9rem">Same reason it is used for post-operative pain by continuous epidural infusion.</p>
+
+  <h3>Cardiotoxicity <span class="imp">&#9733; Exam</span></h3>
+  <div class="flow">
+    <div class="step">Bupivacaine reaches the heart</div><div class="arrow">&darr;</div>
+    <div class="step">&uarr; QTc &rarr; ventricular tachycardia &middot; cardiac depression</div><div class="arrow">&darr;</div>
+    <div class="step hit"><b>0.75% epidural in labour</b> &rarr; deaths from cardiac arrest &rarr; <b>contraindicated</b></div><div class="arrow">&darr;<small>treatment</small></div>
+    <div class="step ok"><b>IV lipid emulsion</b> &mdash; probably pulls bupivacaine out of plasma and heart</div>
+  </div>
+  <p style="color:var(--muted);font-size:.9rem">Cardiotoxicity is what limits its total dose.</p>
+
+  <h3>Strength by block</h3>
+  <div class="layers" role="img" aria-label="Bupivacaine strength for each type of block">
+    <div class="layer l2">0.25&ndash;0.5% <span>peripheral nerve block</span></div>
+    <div class="layer l3">0.5% hyperbaric <span>spinal &middot; 10&ndash;20 mg, 90&ndash;150 min</span></div>
+    <div class="layer l4">0.25&ndash;0.5% <span>epidural &middot; 75&ndash;150 mg</span></div>
+    <div class="layer l5">0.125% <span>continuous epidural analgesia (max 400 mg/day)</span></div>
+  </div>
+
+  <h3>Levobupivacaine</h3>
+  <div class="paths">
+    <div class="path"><span class="t">Racemic bupivacaine</span>Same potency<span class="ar">&middot;</span><span class="hit">More cardiotoxic</span><span class="ar">&middot;</span><span class="hit">More seizures</span><span class="note">after accidental IV</span></div>
+    <div class="path win"><span class="t">Levobupivacaine</span>S(&minus;) enantiomer<span class="ar">&middot;</span><span class="ok">Less cardiotoxic</span><span class="ar">&middot;</span><span class="ok">Fewer seizures</span><span class="note">single-enantiomer preparation</span></div>
+  </div>
+  </div>
+
+  <!-- ========== BENZOCAINE ========== -->
+  <div class="impbox">
+  <h2>Benzocaine <span class="imp">&#9733; Exam</span> <span class="dental">Dental</span></h2>
+  <div class="def"><b>Ester &middot; PABA derivative &middot; insoluble surface anaesthetic</b><ul><li>Topical only &mdash; never injected</li><li>Gel, lozenges, suppository, dusting powder, ointment</li></ul></div>
+
+  <h3>Why it's safe on the surface</h3>
+  <div class="flow">
+    <div class="step"><b>Very low water solubility</b></div><div class="arrow">&darr;</div>
+    <div class="step">Not significantly absorbed from mucous membranes or abraded skin</div><div class="arrow">&darr;</div>
+    <div class="step ok"><b>Long-lasting numbness without systemic toxicity</b></div>
+  </div>
+
+  <h3>Profile</h3>
+  <div class="metro" role="img" aria-label="Benzocaine uses by site and its adverse effects">
+    <div class="root">Benzocaine</div><div class="stem"></div><div class="bridge"></div>
+    <div class="lines">
+      <div class="line"><div class="stem"></div><div class="head"><b>Mouth, throat</b><span>dental</span></div>
+        <ul class="stops"><li>Painful mouth ulcers<small>aphthous stomatitis</small></li><li>Sore gums</li><li>Sore throat<small>lozenges</small></li><li>Before intraoral injection</li></ul></div>
+      <div class="line"><div class="stem"></div><div class="head"><b>Anorectal, other</b><span>mucosa</span></div>
+        <ul class="stops"><li>Piles, fissure<small>5% ointment, suppository</small></li><li>Before inserting instruments<small>anal canal, vagina</small></li><li>Wounds, ulcers, burns<small>1&ndash;2% powder, ointment</small></li></ul></div>
+      <div class="line amb"><div class="stem"></div><div class="head"><b>ADR</b><span>if absorbed</span></div>
+        <ul class="stops"><li>Methaemoglobinaemia</li><li>Hypersensitivity<small>ester: cross-reacts with esters</small></li></ul></div>
+      <div class="line amb"><div class="stem"></div><div class="head"><b>Interaction</b><span>PABA</span></div>
+        <ul class="stops"><li>Antagonises sulfonamides<small>locally</small></li></ul></div>
+    </div>
+  </div>
+  <div class="rows par">
+    <div class="row"><div class="k">Forms</div><div><b>20% gel</b> (mouth ulcers, sore gums, anal canal, vagina) &middot; 5% ointment (anal canal) &middot; 1&ndash;2% cream, dusting powder (abraded skin) &middot; lozenges &middot; suppository</div></div>
+    <div class="row"><div class="k">Sister drug: butamben</div><div>Butylaminobenzoate &mdash; also insoluble PABA ester, same uses; 1% ointment with framycetin and hydrocortisone for piles</div></div>
+  </div>
+  <div class="clinic">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFCF94" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3c-2 0-3 2-3 4 0 3 1 5 2 8 .6 2 1 5 2.5 5 1.4 0 1.5-3 2.2-5 .3-.9.6-1.3 1.3-1.3s1 .4 1.3 1.3c.7 2 .8 5 2.2 5 1.5 0 1.9-3 2.5-5 1-3 2-5 2-8 0-2-1-4-3-4-1.8 0-2.6 1-5 1S8.8 3 7 3z"/></svg>
+    <div><b>For your clinic</b>20% benzocaine gel on the mucosa before an injection, or on aphthous ulcers and sore gums. It numbs without systemic toxicity. Avoid it over an area being treated with a sulfonamide, and remember it's an ester: a patient allergic to esters may react.</div>
+  </div>
+  </div>
+
+  <!-- ========== OTHER AMIDES ========== -->
+  <h2>Prilocaine</h2>
+  <ul>
+    <li>Like lignocaine, but <b>no vasodilatation</b> at the site</li>
+    <li>Lower CNS toxicity: larger volume of distribution, faster clearance</li>
+    <li><b>Methaemoglobinaemia</b>: aromatic ring metabolised to <b>o-toluidine</b></li>
+    <li>Infiltration, nerve block, spinal, IV regional</li>
+  </ul>
+
+  <h3>EMLA: lignocaine + prilocaine</h3>
+  <div class="flow">
+    <div class="step">Lignocaine 2.5% + prilocaine 2.5%, equal parts, 25&deg;C</div><div class="arrow">&darr;<small>eutectic: melting point drops</small></div>
+    <div class="step">Oil &rarr; emulsified into a cream</div><div class="arrow">&darr;</div>
+    <div class="step">Apply under occlusive dressing for <b>1 h</b></div><div class="arrow">&darr;</div>
+    <div class="step ok">Numb to <b>5 mm</b> depth &middot; lasts 1&ndash;2 h after removal</div>
+  </div>
+  <ul><li>The <b>only</b> LA that anaesthetises <b>intact skin</b></li><li>Before IV cannulation, split-skin graft harvesting, superficial procedures</li><li>Alternative to lignocaine infiltration</li></ul>
+
+  <h2>Ropivacaine</h2>
+  <ul>
+    <li>Newer bupivacaine congener: nearly as long-acting, <b>less cardiotoxic</b></li>
+    <li>Blocks <b>A&delta; and C</b> (pain) more than <b>A&beta;</b> (motor)</li>
+    <li>Lower lipid solubility &rarr; enters large motor fibres less &rarr; lower CNS and cardiac toxicity</li>
+    <li>S(&minus;) enantiomer &middot; needs slightly higher concentrations than bupivacaine</li>
+    <li>Best sensory&ndash;motor separation in epidurals &rarr; post-op and labour pain</li>
+    <li>Less cardiotoxic &rarr; <b>preferred for large-volume nerve blocks</b> &middot; 0.2% injection</li>
+  </ul>
+
+  <!-- ========== ESTERS ========== -->
+  <h2>Cocaine</h2>
+  <div class="rows">
+    <div class="row"><div class="k">Source</div><div>Natural alkaloid, leaves of <i>Erythroxylon coca</i>, a South American plant &middot; chewed as a stimulant in Peru and Bolivia</div></div>
+    <div class="row"><div class="k">History</div><div><b>First LA</b>: ocular anaesthesia, 1884</div></div>
+    <div class="row"><div class="k">Actions</div><div>Surface anaesthetic + strong CNS stimulant</div></div>
+    <div class="row"><div class="k">Status now</div><div><b>No longer used medically</b> &middot; illicit market only &middot; never injected: protoplasmic poison, tissue necrosis</div></div>
+  </div>
+  <h3>CNS: dose-dependent sequence</h3>
+  <div class="flow">
+    <div class="step">Euphoria &rarr; excitement &rarr; mental confusion</div><div class="arrow">&darr;</div>
+    <div class="step">Restlessness &rarr; tremor, twitching</div><div class="arrow">&darr;</div>
+    <div class="step">Convulsions &rarr; unconsciousness</div><div class="arrow">&darr;</div>
+    <div class="step hit">Respiratory depression &rarr; death</div>
+  </div>
+  <h3>Periphery: why it's sympathomimetic</h3>
+  <div class="flow">
+    <div class="step">Blocks <b>uptake of NA and adrenaline</b> into nerve endings</div><div class="arrow">&darr;</div>
+    <div class="step">More transmitter around receptors</div><div class="arrow">&darr;</div>
+    <div class="step hit">Vasoconstriction, tachycardia, &uarr; BP, mydriasis</div>
+  </div>
+
+  <h2>Procaine and chloroprocaine</h2>
+  <div class="paths">
+    <div class="path"><span class="t">Procaine</span>First synthetic LA, <b>1905</b><span class="ar">&middot;</span>Not a surface anaesthetic<span class="ar">&middot;</span>Onset up to 15 min<span class="ar">&middot;</span>Not used now<span class="note">procaine penicillin: IM, acts 24 h (slow absorption)</span></div>
+    <div class="path"><span class="t">Chloroprocaine</span>Close congener of procaine<span class="ar">&middot;</span>Similar potency<span class="ar">&middot;</span><span class="ok">Faster onset</span><span class="note">despite pKa 9.1 &middot; now disused, no longer marketed</span></div>
+  </div>
+
+  <h2>Surface-only drugs</h2>
+  <div class="rgrid">
+    <div class="rcard"><h4>Tetracaine</h4><span class="speed">PABA ester &middot; amethocaine</span><p>Highly lipid-soluble, more potent and toxic: slow hydrolysis by pseudocholinesterase. Topical use limited to eye, nose, throat.</p><p style="color:var(--muted)"><b>Not for bronchoscopy</b>: tracheobronchial spray absorbs almost like IV.</p></div>
+    <div class="rcard"><h4>Proparacaine</h4><span class="speed">Commonest eye anaesthetic</span><p>Meta-aminobenzoic acid derivative. Faster than tetracaine, equally effective. Tonometry 30 s after one 0.5% drop. Cornea numb 10&ndash;20 min.</p><p style="color:var(--muted)">Cataract: 1&ndash;2 drops every 5&ndash;10 min, max 5. Foreign body or suture removal: 2&ndash;3 applications. Minimal irritation, few allergies.</p></div>
+    <div class="rcard"><h4>Dibucaine</h4><span class="speed">Most potent, toxic, longest</span><p>Cinchocaine. Surface use on less delicate mucosa or skin: <b>ear canal, anal canal</b> (1.1% ear drops). Spinal use abandoned.</p></div>
+    <div class="rcard"><h4>Oxethazaine</h4><span class="speed">Works in stomach acid</span><p>Ionises very little even at low pH &rarr; anaesthetises gastric mucosa. With antacids for gastritis, drug-induced gastric irritation, reflux, heartburn of pregnancy.</p><p style="color:var(--muted)">0.2% suspension, 5&ndash;10 ml orally &middot; &gt;100 mg/day: dizziness, drowsiness</p></div>
+  </div>
+
+  <h2>More LAs from college notes</h2>
+    <div class="rgrid">
+    <div class="rcard"><h4>Mepivacaine</h4><span class="speed">Amide &middot; injectable</span><p>Similar to lignocaine in onset and duration, but less vasodilatation, so it can be used <b>without a vasoconstrictor</b> (3% plain in dentistry). Nerve blocks.</p></div>
+    <div class="rcard"><h4>Articaine</h4><span class="speed">Amide &middot; dental</span><p>Amide with a thiophene ring and an <b>ester side chain</b>, so it is partly broken down in plasma and has a short half-life. Dental 4% with adrenaline.</p></div>
+    <div class="rcard"><h4>Etidocaine</h4><span class="speed">Amide &middot; long-acting</span><p>Long-acting, highly lipid-soluble amide. Produces marked <b>motor</b> block relative to sensory block.</p></div>
+    <div class="rcard"><h4>Benoxinate</h4><span class="speed">Ester &middot; surface, eye</span><p>Oxybuprocaine. Eye drops (0.4%) for tonometry and minor eye procedures.</p></div>
+    <div class="rcard"><h4>Dyclonine</h4><span class="speed">Surface &middot; mucosa</span><p>Topical anaesthetic for mouth and throat: lozenges, sprays. Chemically a ketone, not an ester or amide.</p></div>
+  </div>
+
+  <div class="next"><button class="go main" data-jump="cards">Flip 24 flashcards</button><button class="go" data-jump="mcq">14 MCQs</button></div>
+</section>
+<section data-topic="drugs" data-mode="cards" hidden></section>
+<section data-topic="drugs" data-mode="mcq" hidden></section>
+
+<!-- ===================== TECHNIQUES ===================== -->
+<section data-topic="uses" data-mode="notes" hidden>
+  <div class="hero">
+    <div class="eyebrow">Chapter 27 &middot; Uses and techniques <span class="imp">&#9733; Exam</span></div>
+    <h1>Techniques of administration</h1>
+    <p class="lede">Six techniques, from a drop on the cornea to a spinal, and when adrenaline goes in.</p>
+  </div>
+  <div class="metro" role="img" aria-label="Six techniques of local anaesthesia">
+    <div class="root">Techniques</div><div class="stem"></div><div class="bridge"></div>
+    <div class="lines">
+      <div class="line"><div class="stem"></div><div class="head"><b>Peripheral</b><span>at or near the site</span></div>
+        <ul class="stops"><li>1. Surface</li><li>2. Infiltration</li><li>3. Conduction block<small>field, nerve</small></li></ul></div>
+      <div class="line amb"><div class="stem"></div><div class="head"><b>Central / regional</b><span>roots or a whole limb</span></div>
+        <ul class="stops"><li>4. Spinal</li><li>5. Epidural<small>thoracic, lumbar, caudal</small></li><li>6. IV regional<small>Bier's block</small></li></ul></div>
+    </div>
+  </div>
+
+  <h2>Where each injection goes</h2>
+  <div class="chart">
+    <svg viewBox="0 0 340 318" role="img" aria-label="Nerve trunk branching to the skin, showing where surface, infiltration, field block and nerve block are given">
+      <line x1="170" y1="12" x2="170" y2="100" stroke="#6D7CFF" stroke-width="7" stroke-linecap="round"/>
+      <text x="182" y="24" font-size="11" fill="#A7ABC8">Nerve trunk</text>
+      <path d="M170 100 L80 165 M170 100 L170 165 M170 100 L260 165" stroke="#6D7CFF" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+      <path d="M80 165 L52 250 M80 165 L108 250 M170 165 L148 250 M170 165 L192 250 M260 165 L238 250 M260 165 L282 250" stroke="#C9CEFF" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+      <rect x="0" y="250" width="340" height="24" fill="rgba(255,155,155,.13)"/>
+      <text x="6" y="266" font-size="10.5" font-weight="700" fill="#FFB3B3">Skin / mucosa</text>
+      <!-- 4 nerve block -->
+      <circle cx="170" cy="62" r="15" fill="rgba(255,184,107,.18)" stroke="#FFB86B" stroke-width="2" stroke-dasharray="4 3"/>
+      <rect x="238" y="54" width="66" height="16" rx="4" fill="rgba(255,255,255,.08)" stroke="#A7ABC8"/>
+      <line x1="304" y1="62" x2="324" y2="62" stroke="#A7ABC8" stroke-width="3"/>
+      <line x1="238" y1="62" x2="186" y2="62" stroke="#E6E8F5" stroke-width="2"/>
+      <text x="236" y="92" font-size="12" font-weight="800" fill="#FFCF94">&#9315; Nerve block</text>
+      <text x="236" y="106" font-size="10.5" fill="#A7ABC8">around the trunk:</text>
+      <text x="236" y="119" font-size="10.5" fill="#A7ABC8">all below goes numb</text>
+      <!-- 3 field block -->
+      <line x1="34" y1="208" x2="124" y2="208" stroke="#FFB86B" stroke-width="3" stroke-dasharray="6 4"/>
+      <text x="6" y="112" font-size="12" font-weight="800" fill="#FFCF94">&#9314; Field block</text>
+      <text x="6" y="126" font-size="10.5" fill="#A7ABC8">LA wall across</text>
+      <text x="6" y="139" font-size="10.5" fill="#A7ABC8">the branches</text>
+      <line x1="40" y1="146" x2="52" y2="204" stroke="#A7ABC8" stroke-width="1" stroke-dasharray="2 2"/>
+      <!-- 2 infiltration -->
+      <ellipse cx="170" cy="251" rx="44" ry="15" fill="rgba(255,184,107,.2)" stroke="#FFB86B" stroke-width="2" stroke-dasharray="4 3"/>
+      <text x="170" y="294" text-anchor="middle" font-size="12" font-weight="800" fill="#FFCF94">&#9313; Infiltration</text>
+      <text x="170" y="308" text-anchor="middle" font-size="10.5" fill="#A7ABC8">LA around the endings</text>
+      <!-- 1 surface -->
+      <circle cx="306" cy="245" r="4" fill="#FFB86B"/><circle cx="320" cy="241" r="4" fill="#FFB86B"/><circle cx="333" cy="246" r="3.5" fill="#FFB86B"/>
+      <text x="336" y="294" text-anchor="end" font-size="12" font-weight="800" fill="#FFCF94">&#9312; Surface</text>
+      <text x="336" y="308" text-anchor="end" font-size="10.5" fill="#A7ABC8">gel, drops, spray</text>
+    </svg>
+    <div class="legend2"><span><i style="background:#6D7CFF"></i>Nerve</span><span><i style="background:#FFB86B"></i>Where the LA goes</span></div>
+  </div>
+  <ul><li>Higher up the nerve = <b>bigger area per drop of drug</b>, longer block</li><li>Only surface leaves motor function and deeper tissue alone</li></ul>
+
+  <h2>LA + adrenaline <span class="imp">&#9733; Exam</span></h2>
+  <div class="flow">
+    <div class="step">Adrenaline &rarr; <b>vasoconstriction</b> at the site</div><div class="arrow">&darr;</div>
+    <div class="step">Slows diffusion, limits absorption of the LA</div><div class="arrow">&darr;</div>
+    <div class="step ok">LA stays longer at the nerve</div>
+  </div>
+  <div class="rows">
+    <div class="row"><div class="k">Concentration</div><div>1:50,000 to 1:200,000</div></div>
+    <div class="row"><div class="k">LAs combined</div><div class="drugs">Lidocaine, Bupivacaine, Procaine</div></div>
+    <div class="row"><div class="k">Vasoconstrictors</div><div class="drugs">Adrenaline, Phenylephrine, Felypressin, Levonordefrin</div></div>
+  </div>
+  <div class="split">
+    <div class="pro"><h4>Benefits</h4><ul><li>Prolongs action: slower removal, longer contact with nerve</li><li>Intensifies the block</li><li>&darr; Systemic toxicity: slow absorption, metabolism keeps up</li><li>Bloodless surgical field</li></ul></div>
+    <div class="con"><h4>Drawbacks</h4><ul><li>Local oedema and necrosis</li><li>Delayed wound healing: &darr; O&#8322; supply, &uarr; O&#8322; use</li><li>May raise BP</li><li>May trigger arrhythmia in susceptible people</li></ul></div>
+  </div>
+  <h3>Contraindicated in</h3>
+  <div class="flow">
+    <div class="step hit"><b>1. End organs</b> &mdash; little collateral circulation &rarr; hypoxia, gangrene<div class="drugs par">Fingers, Toes, Ear (pinna), Nose, Penis, Scrotum, Hands, Feet</div><span style="color:var(--muted)">KDT: no vasoconstrictor in ring blocks</span></div><div class="arrow">&middot;</div>
+    <div class="step hit"><b>2. Cardiovascular disease</b> &mdash; ischaemic heart disease, arrhythmia, uncontrolled hypertension</div><div class="arrow">&middot;</div>
+    <div class="step hit"><b>3. Hyperthyroidism</b></div><div class="arrow">&middot;</div>
+    <div class="step hit"><b>4. IV regional anaesthesia</b> (Bier's block)</div><div class="arrow">&middot;</div>
+    <div class="step hit"><b>5. Patients on &beta;-blockers or tricyclics</b> (KDT)</div>
+  </div>
+  <h3>Is adrenaline added? Technique by technique</h3>
+  <div class="card">
+    <div class="cause"><span>1. Surface</span><span class="down">not effective</span></div>
+    <div class="cause"><span>2. Infiltration</span><span class="up">used</span></div>
+    <div class="cause"><span>3. Field block</span><span class="up">used</span></div>
+    <div class="cause"><span>3. Nerve block</span><span class="up">used</span></div>
+    <div class="cause"><span>4. Spinal</span><span class="up">used</span></div>
+    <div class="cause"><span>5. Epidural</span><span class="up">used</span></div>
+    <div class="cause"><span>6. IV regional</span><span class="down">contraindicated</span></div>
+  </div>
+
+  <h2>1. Surface anaesthesia</h2>
+  <ul>
+    <li>Topical, on mucous membranes or abraded skin</li>
+    <li>Only the superficial layer &middot; <b>no motor loss</b></li>
+    <li>Lidocaine 10% throat spray: onset 2&ndash;5 min, lasts 30&ndash;45 min</li>
+    <li><b>Adrenaline doesn't prolong it</b>; phenylephrine does (mucosal vasoconstriction)</li>
+    <li>Soluble LAs absorb fast from mucosa &middot; tetracaine throat spray &asymp; IV blood levels</li>
+    <li>Only EMLA works on intact skin</li>
+  </ul>
+  <div class="card"><b>Oral cavity uses <span class="dental">Dental</span></b><ul><li>Before an intraoral LA injection</li><li>Recurrent aphthous stomatitis</li><li>Oral mucositis pain after radiation or chemotherapy</li><li>Postherpetic neuralgia, cold sores</li><li>Sore throat</li></ul></div>
+  <div class="rows">
+    <div class="row"><div class="k">Eye</div><div>Proparacaine 0.5% drops, tetracaine 1&ndash;2% &middot; tonometry, cataract</div></div>
+    <div class="row"><div class="k">Nose, ear</div><div>Lidocaine 2&ndash;4%, tetracaine 1&ndash;2% drops &middot; painful lesions, polyps</div></div>
+    <div class="row"><div class="k">Mouth, throat <span class="dental">Dental</span></div><div>Benzocaine lozenges, lidocaine 2% rinse &middot; stomatitis, sore throat, painful ulcers</div></div>
+    <div class="row"><div class="k">Pharynx to bronchi</div><div>Lidocaine 4&ndash;10% spray, 2% jelly &middot; tonsillectomy, intubation, endoscopy</div></div>
+    <div class="row"><div class="k">Oesophagus, stomach</div><div>Oxethazaine 0.2% suspension &middot; gastritis, oesophagitis, heartburn</div></div>
+    <div class="row"><div class="k">Abraded skin</div><div>Tetracaine 1%, benzocaine 1&ndash;2%, butamben 1&ndash;2% &middot; ulcers, burns, itchy dermatoses</div></div>
+    <div class="row"><div class="k">Intact skin</div><div>EMLA 5% under occlusion &middot; IV cannulation, venipuncture, skin graft harvesting, excision, electrodesiccation, shave biopsy</div></div>
+    <div class="row"><div class="k">Urethra</div><div>Lidocaine 2% jelly &middot; dilatation, catheterisation</div></div>
+    <div class="row"><div class="k">Anal canal, rectum</div><div>Lidocaine 2&ndash;4%, dibucaine 1%, benzocaine 5% &middot; fissure, piles, proctoscopy</div></div>
+  </div>
+
+  <h2>2. Infiltration anaesthesia</h2>
+  <ul>
+    <li><b>Dilute</b> LA injected into and around the operation site &rarr; nerve endings blocked</li>
+    <li><b>No individual nerves identified</b></li>
+    <li>Onset almost <b>immediate</b></li>
+    <li>Shorter than nerve block: lidocaine 30&ndash;60 min, bupivacaine 90&ndash;180 min</li>
+    <li>Minor operations: incisions, excisions, suturing, hydrocele, herniorrhaphy</li>
+    <li><span class="dental" style="margin:0">Dental</span> tooth extraction, root canal treatment, periodontal procedures</li>
+    <li>Drugs: lidocaine, bupivacaine, procaine &middot; <b>with adrenaline</b></li>
+    <li>Needs a lot of drug for the area covered &middot; motor function spared</li>
+  </ul>
+
+  <h2>3. Conduction block</h2>
+  <ul><li>LA around nerve trunks &rarr; area <b>distal</b> to the injection is anaesthetised and paralysed</li><li>Lidocaine 1&ndash;2% usual &middot; bupivacaine for longer blocks</li></ul>
+  <div class="paths">
+    <div class="path"><span class="t">(a) Field block</span>SC injection so all nerves to a field are blocked<span class="ar">&darr;</span>Near the larger terminal nerve branches<span class="ar">&darr;</span>Numb area starts 2&ndash;3 cm distal<span class="ar">&darr;</span>Less drug than infiltration<span class="note">same concentration as infiltration</span></div>
+    <div class="path win"><span class="t">(b) Nerve block</span>Into or around a peripheral nerve or plexus<span class="ar">&darr;</span>Largest area per amount of drug<span class="ar">&darr;</span>Muscles supplied are paralysed<span class="note">lasts longer than field or infiltration</span></div>
+  </div>
+  <div class="rows">
+    <div class="row"><div class="k">Field block uses</div><div><b>Root canal treatment</b>, dental procedures, herniorrhaphy, appendicectomy, scalp stitching, forearm and leg operations &middot; lidocaine, bupivacaine, procaine</div></div>
+    <div class="row"><div class="k">Nerve block latency</div><div>Intercostal: 3 min (lidocaine) &middot; brachial plexus: 15 min &middot; plexus: "flooding" with large volumes</div></div>
+    <div class="row"><div class="k">Common nerve blocks</div><div class="drugs">Lingual, Intercostal, Ulnar, Sciatic, Femoral, Brachial plexus, Cervical plexus, Pudendal, Trigeminal, Facial, Phrenic</div></div>
+    <div class="row"><div class="k">Nerve block drugs</div><div class="drugs">Lidocaine, Prilocaine, Bupivacaine, Ropivacaine, Mepivacaine</div></div>
+    <div class="row"><div class="k">Nerve block uses</div><div><b>Tooth extraction</b>, eye operations, limbs, abdominal wall, fracture setting, rib trauma, neuralgias, persistent hiccup</div></div>
+    <div class="row"><div class="k">Motor paralysis</div><div>Good: muscle relaxation for surgery &middot; bad: affects breathing, walking, labour; postural hypotension</div></div>
+  </div>
+  <div class="clinic">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFCF94" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3c-2 0-3 2-3 4 0 3 1 5 2 8 .6 2 1 5 2.5 5 1.4 0 1.5-3 2.2-5 .3-.9.6-1.3 1.3-1.3s1 .4 1.3 1.3c.7 2 .8 5 2.2 5 1.5 0 1.9-3 2.5-5 1-3 2-5 2-8 0-2-1-4-3-4-1.8 0-2.6 1-5 1S8.8 3 7 3z"/></svg>
+    <div><b>For your clinic</b>Dental anaesthesia is field and nerve block: lingual and trigeminal branch blocks for extractions. A nerve block numbs a larger area with less drug and lasts longer than infiltration.</div>
+  </div>
+
+  <h3>Dental nerve blocks <span class="dental">Dental</span></h3>
+  <div class="paths">
+    <div class="path win"><span class="t">Maxilla</span>Infraorbital<br>Nasopalatine<br>Greater palatine<br>Anterior superior alveolar<br>Middle superior alveolar<br>Posterior superior alveolar</div>
+    <div class="path"><span class="t">Mandible</span>Inferior alveolar<br>Buccal<br>Incisive</div>
+  </div>
+
+  <h2>4. Spinal anaesthesia</h2>
+  <p style="color:var(--muted);font-size:.9rem">Also called subarachnoid or intrathecal anaesthesia &middot; drugs: lidocaine, bupivacaine, with adrenaline</p>
+  <h3>Spinal vs epidural: where the needle stops</h3>
+  <div class="chart">
+    <svg viewBox="0 0 340 360" role="img" aria-label="Side view of the lower spine: spinal needle enters the subarachnoid space at L3-4 below the end of the cord; epidural needle stops in the epidural space; caudal needle enters through the sacral hiatus">
+      <rect x="22" y="20" width="58" height="36" rx="6" fill="rgba(255,255,255,.07)" stroke="rgba(255,255,255,.18)"/><text x="51" y="43" text-anchor="middle" font-size="11" font-weight="800" fill="#A7ABC8">T12</text><rect x="174" y="28" width="24" height="20" rx="6" fill="rgba(255,255,255,.07)" stroke="rgba(255,255,255,.18)"/><rect x="22" y="60" width="58" height="36" rx="6" fill="rgba(255,255,255,.07)" stroke="rgba(255,255,255,.18)"/><text x="51" y="83" text-anchor="middle" font-size="11" font-weight="800" fill="#A7ABC8">L1</text><rect x="174" y="68" width="24" height="20" rx="6" fill="rgba(255,255,255,.07)" stroke="rgba(255,255,255,.18)"/><rect x="22" y="100" width="58" height="36" rx="6" fill="rgba(255,255,255,.07)" stroke="rgba(255,255,255,.18)"/><text x="51" y="123" text-anchor="middle" font-size="11" font-weight="800" fill="#A7ABC8">L2</text><rect x="174" y="108" width="24" height="20" rx="6" fill="rgba(255,255,255,.07)" stroke="rgba(255,255,255,.18)"/><rect x="22" y="140" width="58" height="36" rx="6" fill="rgba(255,255,255,.07)" stroke="rgba(255,255,255,.18)"/><text x="51" y="163" text-anchor="middle" font-size="11" font-weight="800" fill="#A7ABC8">L3</text><rect x="174" y="148" width="24" height="20" rx="6" fill="rgba(255,255,255,.07)" stroke="rgba(255,255,255,.18)"/><rect x="22" y="180" width="58" height="36" rx="6" fill="rgba(255,255,255,.07)" stroke="rgba(255,255,255,.18)"/><text x="51" y="203" text-anchor="middle" font-size="11" font-weight="800" fill="#A7ABC8">L4</text><rect x="174" y="188" width="24" height="20" rx="6" fill="rgba(255,255,255,.07)" stroke="rgba(255,255,255,.18)"/><rect x="22" y="220" width="58" height="36" rx="6" fill="rgba(255,255,255,.07)" stroke="rgba(255,255,255,.18)"/><text x="51" y="243" text-anchor="middle" font-size="11" font-weight="800" fill="#A7ABC8">L5</text><rect x="174" y="228" width="24" height="20" rx="6" fill="rgba(255,255,255,.07)" stroke="rgba(255,255,255,.18)"/>
+      <path d="M22 260 H80 L70 330 H34 Z" fill="rgba(255,255,255,.07)" stroke="rgba(255,255,255,.18)"/>
+      <text x="51" y="298" text-anchor="middle" font-size="11" font-weight="800" fill="#A7ABC8">Sacrum</text>
+      <rect x="90" y="12" width="80" height="318" rx="6" fill="rgba(255,184,107,.16)"/>
+      <rect x="104" y="12" width="52" height="300" rx="20" fill="rgba(109,124,255,.2)" stroke="#C9CEFF" stroke-width="1.5"/>
+      <path d="M118 12 V92 Q130 112 142 92 V12 Z" fill="#6D7CFF"/>
+      <path d="M124 104 L120 300 M128 106 L127 302 M132 106 L133 302 M136 104 L140 300" stroke="#C9CEFF" stroke-width="1.2" fill="none"/>
+      <!-- epidural needle L2-3 -->
+      <line x1="336" y1="138" x2="162" y2="138" stroke="#FFB86B" stroke-width="2.5"/>
+      <circle cx="162" cy="138" r="4" fill="#FFB86B"/>
+      <!-- spinal needle L3-4 -->
+      <line x1="336" y1="178" x2="130" y2="178" stroke="#7CE2B0" stroke-width="2.5"/>
+      <circle cx="130" cy="178" r="4" fill="#7CE2B0"/>
+      <!-- caudal -->
+      <line x1="230" y1="350" x2="104" y2="318" stroke="#FF9B9B" stroke-width="2.5"/>
+      <circle cx="104" cy="318" r="4" fill="#FF9B9B"/>
+      <g font-size="10.5">
+        <text x="214" y="22" font-weight="800" fill="#C9CEFF">Spinal cord</text>
+        <text x="214" y="35" fill="#A7ABC8">ends at L1&ndash;L2</text>
+        <line x1="212" y1="40" x2="146" y2="90" stroke="#A7ABC8" stroke-width="1" stroke-dasharray="2 2"/>
+        <text x="214" y="62" font-weight="800" fill="#C9CEFF">Subarachnoid space</text>
+        <text x="214" y="75" fill="#A7ABC8">CSF, inside the dura</text>
+        <text x="214" y="98" font-weight="800" fill="#FFCF94">Epidural space</text>
+        <text x="214" y="111" fill="#A7ABC8">fat, outside the dura</text>
+        <text x="214" y="153" font-weight="800" fill="#FFB86B">Epidural needle</text>
+        <text x="214" y="166" fill="#A7ABC8">stops before the dura</text>
+        <text x="214" y="194" font-weight="800" fill="#7CE2B0">Spinal needle, L3&ndash;4</text>
+        <text x="214" y="207" fill="#A7ABC8">through dura into CSF,</text>
+        <text x="214" y="220" fill="#A7ABC8">below the cord: nerve</text>
+        <text x="214" y="233" fill="#A7ABC8">roots of cauda equina</text>
+        <text x="166" y="276" font-weight="800" fill="#FF9B9B">Caudal epidural</text>
+        <text x="166" y="289" fill="#A7ABC8">through the sacral hiatus</text>
+      </g>
+    </svg>
+    <div class="legend2"><span><i style="background:#7CE2B0"></i>Spinal</span><span><i style="background:#FFB86B"></i>Epidural</span><span><i style="background:#FF9B9B"></i>Caudal</span></div>
+  </div>
+  <div class="flow">
+    <div class="step">Inject into <b>subarachnoid space</b> at <b>L2&ndash;3 or L3&ndash;4</b><br><span style="color:var(--muted)">below the end of the spinal cord</span></div><div class="arrow">&darr;</div>
+    <div class="step">Acts on <b>nerve roots of the cauda equina</b>, not the cord</div><div class="arrow">&darr;</div>
+    <div class="step">Roots take up LA fast &rarr; CSF level falls quickly</div><div class="arrow">&darr;<small>after 10 min</small></div>
+    <div class="step ok">Level <b>fixed</b>: posture no longer changes it</div>
+  </div>
+  <div class="rows">
+    <div class="row"><div class="k">Level depends on</div><div>Volume, speed of injection, specific gravity, posture</div></div>
+    <div class="row"><div class="k">Solution</div><div><b>Hyperbaric</b> (in 10% glucose) or isobaric with CSF</div></div>
+  </div>
+  <h3>Three levels of block</h3>
+  <div class="layers" role="img" aria-label="Sympathetic block about two segments above sensory level; motor paralysis about two segments below">
+    <div class="layer l1">Sympathetic block <span>~2 segments higher</span></div>
+    <div class="layer l2">Cutaneous analgesia <span>reference level</span></div>
+    <div class="layer l5">Motor paralysis <span>~2 segments lower</span></div>
+  </div>
+  <ul><li>Preganglionic autonomic fibres: most sensitive</li><li>Somatic motor fibres: less sensitive than sensory</li></ul>
+
+  <h3>Doses and duration</h3>
+  <div class="rgrid">
+    <div class="rcard"><h4>Lidocaine</h4><span class="speed">60&ndash;90 min</span><p>1.5&ndash;5% heavy &middot; 25&ndash;75 mg</p></div>
+    <div class="rcard"><h4>Bupivacaine</h4><span class="speed">90&ndash;150 min</span><p>0.5% heavy &middot; 10&ndash;20 mg</p></div>
+    <div class="rcard"><h4>Ropivacaine</h4><span class="speed">90&ndash;120 min</span><p>0.75% &middot; 25 mg</p></div>
+  </div>
+  <div class="rows">
+    <div class="row"><div class="k">Adrenaline 0.2&ndash;0.4 mg</div><div>Prolongs spinal by ~&#8531;: &darr; cord blood flow or &alpha;2-mediated analgesia (intrathecal clonidine works alone)</div></div>
+    <div class="row"><div class="k">Late pregnancy</div><div><b>Less drug needed</b>: IVC compression &rarr; vertebral veins engorged &rarr; smaller subarachnoid space</div></div>
+    <div class="row"><div class="k">Uses</div><div>Lower limbs, pelvis, lower abdomen: prostatectomy, fracture setting, obstetric procedures, caesarean</div></div>
+  </div>
+  <div class="split">
+    <div class="pro"><h4>Advantages over GA</h4><ul><li>Safer</li><li>Analgesia + muscle relaxation, patient conscious</li><li>Fewer problems in cardiac, lung, kidney disease and diabetes</li></ul></div>
+    <div class="con"><h4>Contraindications</h4><ul><li>Hypotension, hypovolaemia</li><li>Uncooperative or mentally ill</li><li>Infants and children</li><li>Bleeding diathesis</li><li>Raised intracranial pressure</li><li>Vertebral deformity (kyphosis, lordosis)</li><li>Sepsis at injection site</li></ul></div>
+  </div>
+  <h3>Complications</h3>
+  <div class="rows">
+    <div class="row"><div class="k">1. Respiratory paralysis</div><div>Rare; diaphragm (phrenic) keeps breathing &middot; hypotension and respiratory-centre ischaemia cause failure more often &middot; weak cough &rarr; lung complications</div></div>
+    <div class="row"><div class="k">2. Hypotension</div><div>Sympathetic block &rarr; <b>venodilatation, venous pooling, &darr; venous return &rarr; &darr; cardiac output</b> (more than arteriolar dilatation) &middot; leg paralysis adds<br>Fix: <b>raise foot end</b>; ephedrine, mephentermine</div></div>
+    <div class="row"><div class="k">Bradycardia, heart block</div><div>&darr; Sympathetic flow to the heart + low venous return</div></div>
+    <div class="row"><div class="k">3. Neurological symptoms</div><div>Brief back and leg pain or paraesthesia, more with <b>lidocaine</b> &middot; no deficit</div></div>
+    <div class="row"><div class="k">4. Headache</div><div><b>CSF leakage</b> &rarr; use a smaller-bore needle</div></div>
+    <div class="row"><div class="k">Backache</div><div>College notes</div></div>
+    <div class="row"><div class="k">5. Cauda equina syndrome</div><div>Very rare: urinary retention and incontinence, faecal incontinence, impotence &middot; root trauma, antiseptic arachnoiditis, LA neurotoxicity</div></div>
+    <div class="row"><div class="k">Septic meningitis</div><div>College notes</div></div>
+    <div class="row"><div class="k">6. Nausea, vomiting</div><div>Traction on abdominal viscera &middot; prevent with ondansetron or metoclopramide</div></div>
+  </div>
+
+  <h2>5. Epidural anaesthesia</h2>
+  <ul>
+    <li>Injected into the epidural space: lumbar, sacral (caudal), thoracic or cervical</li>
+    <li>Obstetric and surgical procedures &middot; bupivacaine, lidocaine, ropivacaine, with adrenaline</li>
+    <li><b>RCOG: bupivacaine is the gold standard for obstetric epidural analgesia</b></li>
+    <li>Epidural space: semiliquid fat, nerve roots pass through</li>
+    <li>Acts on nerve roots (epidural + diffuses subarachnoid); some leaks out for paravertebral blocks</li>
+  </ul>
+  <div class="rgrid">
+    <div class="rcard"><h4>(i) Thoracic</h4><span class="speed">Narrow space, small volume</span><p>Wide band of mid and lower thoracic analgesia. Pain after thoracic or upper abdominal surgery; catheter for days.</p></div>
+    <div class="rcard"><h4>(ii) Lumbar</h4><span class="speed">Wide space, large volume</span><p>Lower abdomen, pelvis, legs. Uses like spinal.</p></div>
+    <div class="rcard"><h4>(iii) Caudal</h4><span class="speed">Through the sacral hiatus</span><p>Pelvis and perineum. Vaginal delivery, anorectal and genitourinary operations.</p></div>
+  </div>
+  <div class="rows par">
+    <div class="row"><div class="k">Lidocaine</div><div>1&ndash;2% &middot; 200&ndash;300 mg</div></div>
+    <div class="row"><div class="k">Bupivacaine</div><div>0.25&ndash;0.5% &middot; 75&ndash;150 mg &middot; continuous 0.125% (max 400 mg/day) &middot; slower onset, longer</div></div>
+    <div class="row"><div class="k">Ropivacaine</div><div>0.75% &middot; 100&ndash;200 mg &middot; continuous 0.2% (12&ndash;24 mg/h)</div></div>
+  </div>
+  <div class="paths">
+    <div class="path"><span class="t">Spinal</span>Small dose<span class="ar">&middot;</span>Technically easier<span class="ar">&middot;</span><span class="hit">Headache, neuro symptoms</span><span class="ar">&middot;</span>Sympathetic zone 2 segments up<span class="note">motor 2 segments below</span></div>
+    <div class="path win"><span class="t">Epidural</span>Larger volume, higher blood levels<span class="ar">&middot;</span>Technically harder<span class="ar">&middot;</span><span class="ok">Headache, neuro less likely</span><span class="ar">&middot;</span>No differential sympathetic zone<span class="note">motor 4&ndash;5 segments below</span></div>
+  </div>
+  <ul>
+    <li>Spread follows <b>volume</b> injected</li>
+    <li>Adrenaline prolongs both lidocaine and bupivacaine</li>
+    <li>CV complications similar to spinal</li>
+    <li><b>Best sensory&ndash;motor separation: 0.25% bupivacaine or ropivacaine</b> &rarr; labour, post-op pain</li>
+  </ul>
+
+  <h2>6. IV regional anaesthesia (Bier's block)</h2>
+  <h3>The set-up</h3>
+  <div class="chart">
+    <svg viewBox="0 0 340 210" role="img" aria-label="Arm with a tourniquet above the elbow; local anaesthetic injected into a vein below it numbs the limb distal to the tourniquet">
+      <rect x="92" y="72" width="200" height="50" fill="rgba(255,184,107,.14)"/>
+      <rect x="14" y="72" width="270" height="50" rx="25" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.2)"/>
+      <ellipse cx="296" cy="97" rx="32" ry="29" fill="rgba(255,184,107,.14)" stroke="rgba(255,255,255,.2)"/>
+      <path d="M100 100 C150 92, 200 108, 300 96" stroke="#6D7CFF" stroke-width="3" fill="none"/>
+      <rect x="68" y="62" width="24" height="70" rx="5" fill="#FF9B9B"/>
+      <text x="80" y="38" text-anchor="middle" font-size="11.5" font-weight="800" fill="#FF9B9B">Tourniquet</text>
+      <text x="80" y="52" text-anchor="middle" font-size="10.5" fill="#A7ABC8">above arterial BP</text>
+      <line x1="200" y1="40" x2="190" y2="98" stroke="#E6E8F5" stroke-width="2"/>
+      <rect x="193" y="18" width="14" height="24" rx="3" fill="rgba(255,255,255,.1)" stroke="#A7ABC8"/>
+      <text x="214" y="26" font-size="11.5" font-weight="800" fill="#FFCF94">0.5% lignocaine</text>
+      <text x="214" y="40" font-size="10.5" fill="#A7ABC8">20&ndash;40 ml IV</text>
+      <text x="190" y="146" text-anchor="middle" font-size="11.5" font-weight="800" fill="#FFCF94">Numb in 2&ndash;5 min</text>
+      <text x="190" y="160" text-anchor="middle" font-size="10.5" fill="#A7ABC8">LA spreads back from veins into tissues</text>
+      <text x="40" y="146" text-anchor="middle" font-size="10.5" fill="#A7ABC8">blood stays</text>
+      <text x="40" y="158" text-anchor="middle" font-size="10.5" fill="#A7ABC8">out</text>
+      <rect x="20" y="176" width="300" height="26" rx="10" fill="rgba(255,155,155,.08)" stroke="rgba(255,155,155,.4)"/>
+      <text x="170" y="193" text-anchor="middle" font-size="11" font-weight="700" fill="#FF9B9B">Keep inflated &ge;15 min &middot; never bupivacaine</text>
+    </svg>
+    <div class="legend2"><span><i style="background:#FF9B9B"></i>Tourniquet</span><span><i style="background:#6D7CFF"></i>Vein</span><span><i style="background:#FFB86B"></i>Anaesthetised zone</span></div>
+  </div>
+  <div class="flow">
+    <div class="step">Elevate the limb &rarr; venous drainage</div><div class="arrow">&darr;</div>
+    <div class="step">Elastic bandage &rarr; exsanguinate</div><div class="arrow">&darr;</div>
+    <div class="step">Proximal tourniquet, inflated <b>above arterial BP</b></div><div class="arrow">&darr;</div>
+    <div class="step">Remove bandage &rarr; inject <b>20&ndash;40 ml of 0.5% lidocaine</b> IV, distal</div><div class="arrow">&darr;<small>drug diffuses back into tissues</small></div>
+    <div class="step ok">Analgesia in 2&ndash;5 min &middot; lasts until 5&ndash;10 min after deflation</div>
+  </div>
+  <div class="rows">
+    <div class="row"><div class="k">Tourniquet time</div><div>Max 15&ndash;60 min (ischaemia) &middot; <b>deflating before 15 min</b> &rarr; toxic dose reaches circulation</div></div>
+    <div class="row"><div class="k">Safety</div><div>Tissues take up LA fast &middot; only &frac14; enters circulation on release &middot; bradycardia can occur</div></div>
+    <div class="row"><div class="k">Uses</div><div>Upper limb, orthopaedic procedures &middot; rarely lower limb (except foot)</div></div>
+    <div class="row"><div class="k">Drugs</div><div>Lidocaine, prilocaine &middot; <b>no adrenaline</b></div></div>
+    <div class="row"><div class="k">Never</div><div><b>Bupivacaine</b>: too cardiotoxic</div></div>
+  </div>
+
+  <div class="card"><b>Exam case &middot; KDT problem-directed study</b><ul><li>Healthy primigravida, 26, in labour, no contraindication, wants pain relief</li><li>Answer: <b>lumbar epidural</b> with <b>0.25% bupivacaine</b> (or ropivacaine)</li><li>Why: sensory block without motor block, so she can push; less drug reaches the foetus</li></ul></div>
+
+  <div class="next"><button class="go main" data-jump="cards">Flip 16 flashcards</button><button class="go" data-jump="mcq">12 MCQs</button></div>
+</section>
+<section data-topic="uses" data-mode="cards" hidden></section>
+<section data-topic="uses" data-mode="mcq" hidden></section>
+
+<!-- ===================== ACTIONS & ADR ===================== -->
+<section data-topic="actions" data-mode="notes" hidden>
+  <div class="hero">
+    <div class="eyebrow">Chapter 27 &middot; Actions and adverse drug reactions</div>
+    <h1>Actions and ADRs</h1>
+    <p class="lede">Every LA is eventually absorbed. Blood level decides the CNS and heart effects.</p>
+  </div>
+
+  <h2>Local actions</h2>
+  <ul>
+    <li>Little or no local irritation (clinical LAs)</li>
+    <li>Block non-selectively: sensory endings, nerve trunks, neuromuscular junction, ganglionic synapse, receptors</li>
+    <li>Myelinated fibres more susceptible &middot; small fibres &gt; large</li>
+    <li>&darr; ACh release from motor nerve endings</li>
+    <li>Around a mixed nerve: skin anaesthesia + paralysis of the muscles it supplies</li>
+  </ul>
+
+  <h2>Systemic actions: CNS</h2>
+  <div class="rows">
+    <div class="row"><div class="k">Basic action</div><div>All LAs = <b>neuronal inhibition</b></div></div>
+    <div class="row"><div class="k">Why stimulation first</div><div>Inhibitory neurones are inhibited first</div></div>
+    <div class="row"><div class="k">High dose</div><div>All neurones inhibited &rarr; flat EEG</div></div>
+    <div class="row"><div class="k">Synthetic LAs</div><div>Much less CNS-active than cocaine &middot; little effect at safe doses &middot; symptoms of overdose: see <b>ADRs</b> below</div></div>
+  </div>
+
+  <h2>Systemic actions: CVS</h2>
+  <div class="impbox">
+  <h3>Heart <span class="imp">&#9733; Important for exams</span></h3>
+  <ul>
+    <li>Cardiac depressants, but no effect at usual doses</li>
+    <li>At 2&ndash;3&times; the CNS-toxic dose, or accidental IV:</li>
+  </ul>
+  <div class="card">
+    <div class="cause"><span>Automaticity, excitability</span><span class="down">&darr;</span></div>
+    <div class="cause"><span>Contractility, conductivity</span><span class="down">&darr;</span></div>
+    <div class="cause"><span>Effective refractory period</span><span class="up">&uarr;</span></div>
+    <div class="cause"><span>QTc interval &mdash; arrhythmias</span><span class="up">&uarr;</span></div>
+  </div>
+  <div class="rgrid">
+    <div class="rcard"><h4>Bupivacaine</h4><span class="speed">Most cardiotoxic</span><p>Ventricular tachycardia, fibrillation, arrest</p></div>
+    <div class="rcard"><h4>Lidocaine</h4><span class="speed">Antiarrhythmic</span><p>Little effect on contractility and conduction &middot; shortens ERP &middot; minimal proarrhythmia</p></div>
+    <div class="rcard"><h4>Procaine</h4><span class="speed">Quinidine-like, not used</span><p>Short action, CNS effects &middot; its amide <b>procainamide</b> is a class IA antiarrhythmic</p></div>
+  </div>
+  </div>
+  <h3>Blood vessels</h3>
+  <div class="rows">
+    <div class="row"><div class="k">Fall in BP</div><div>Mainly sympathetic block &middot; high local levels relax arterioles directly</div></div>
+    <div class="row"><div class="k">Vasodilatation</div><div><b>Bupivacaine &gt; lidocaine &gt; prilocaine</b> (least)</div></div>
+    <div class="row"><div class="k">Toxic doses</div><div>Cardiovascular collapse</div></div>
+    <div class="row"><div class="k">Cocaine, the odd one</div><div>Sympathomimetic: vasoconstriction, &uarr; BP, tachycardia</div></div>
+  </div>
+
+  <h2>Pharmacokinetics</h2>
+  <ul><li>LAs act where they are put, so kinetics don't decide efficacy</li><li>Kinetics decide <b>systemic toxicity</b></li></ul>
+  <div class="flow">
+    <div class="step"><b>Absorption</b><ul><li>Soluble surface LAs (lidocaine, tetracaine): fast from mucosa and abraded skin; minimal from intact skin</li><li>Procaine: doesn't cross mucous membranes</li><li>More blood flow, more absorption: <b>intercostal &gt; sciatic block</b></li></ul></div><div class="arrow">&darr;</div>
+    <div class="step"><b>Distribution</b><ul><li>Lipophilic &rarr; brain, heart, liver, kidney first, then muscle</li><li>Procaine: negligible protein binding &middot; amides: &alpha;1-acid glycoprotein</li><li>Briefly bound to nerves at the injection site</li></ul></div><div class="arrow">&darr;</div>
+    <div class="step"><b>Metabolism</b> &mdash; see below</div>
+  </div>
+  <div class="paths">
+    <div class="path"><span class="t">Esters</span>Procaine etc.<span class="ar">&darr;</span>Plasma <b>pseudocholinesterase</b><span class="ar">+</span>Liver esterases<span class="note">rapid</span></div>
+    <div class="path win"><span class="t">Amides</span>Lidocaine etc.<span class="ar">&darr;</span><b>Liver microsomes only</b><span class="ar">&darr;</span>Dealkylation, hydrolysis<span class="note">lidocaine: depends on hepatic blood flow</span></div>
+  </div>
+  <ul>
+    <li>Max safe dose is <b>lower</b> in liver disease and the elderly</li>
+    <li>Oral procaine and lidocaine: high first-pass &rarr; useless orally as antiarrhythmics</li>
+  </ul>
+
+  <h2>Adverse drug reactions <span class="imp">&#9733; Exam</span></h2>
+  <div class="metro" role="img" aria-label="Map of adverse drug reactions of local anaesthetics by system">
+    <div class="root">ADRs of LAs</div><div class="stem"></div><div class="bridge"></div>
+    <div class="lines">
+      <div class="line"><div class="stem"></div><div class="head"><b>CNS</b><span>dose-related</span></div>
+        <ul class="stops"><li>Excitation first<small>restlessness, tremor, convulsions</small></li><li>Then depression<small>drowsiness, respiratory failure, coma</small></li></ul></div>
+      <div class="line"><div class="stem"></div><div class="head"><b>CVS</b><span>high dose, IV</span></div>
+        <ul class="stops"><li>Hypotension</li><li>Bradycardia</li><li>Arrhythmia, asystole<small>bupivacaine worst</small></li></ul></div>
+      <div class="line amb"><div class="stem"></div><div class="head"><b>Blood</b><span>prilocaine</span></div>
+        <ul class="stops"><li>Methaemo&shy;globinaemia<small>o-toluidine; also benzocaine</small></li></ul></div>
+      <div class="line amb"><div class="stem"></div><div class="head"><b>Allergy</b><span>esters &gt; amides</span></div>
+        <ul class="stops"><li>Rash, angioedema</li><li>Dermatitis, asthma</li><li>Rarely anaphylaxis</li></ul></div>
+      <div class="line amb"><div class="stem"></div><div class="head"><b>Local</b><span>at the site</span></div>
+        <ul class="stops"><li>Painful injection</li><li>Delayed healing</li><li>Necrosis<small>with vasoconstrictor</small></li></ul></div>
+      <div class="line"><div class="stem"></div><div class="head"><b>Who gets it</b><span>toxicity depends on</span></div>
+        <ul class="stops"><li>Rapid IV<small>potency</small></li><li>Topical, regional<small>fast absorbed + slowly metabolised = worst</small></li></ul></div>
+    </div>
+  </div>
+
+  <h3>1. CNS: excitation, then depression</h3>
+  <div class="paths">
+    <div class="path"><span class="t">Phase 1 &middot; Excitation</span>Circumoral numbness, tongue paraesthesia<span class="ar">&darr;</span>Restlessness, excitement, nervousness<span class="ar">&darr;</span>Dizziness, light-headedness<span class="ar">&darr;</span>Blurred vision, tinnitus<span class="ar">&darr;</span>Muscle twitching, tremors<span class="ar">&darr;</span><span class="hit">Convulsions</span><span class="note">inhibitory neurones blocked first</span></div>
+    <div class="path win"><span class="t">Phase 2 &middot; Depression</span>Drowsiness, dysphoria, lethargy<span class="ar">&darr;</span>Unconsciousness<span class="ar">&darr;</span><span class="hit">Respiratory failure</span><span class="ar">&darr;</span><span class="hit">Coma</span><span class="note">all neurones inhibited</span></div>
+  </div>
+  <div class="def"><b>Prevent and treat convulsions:</b> diazepam or midazolam</div>
+
+  <h3>2. CVS</h3>
+  <div class="flow">
+    <div class="step">High plasma level or accidental IV injection</div><div class="arrow">&darr;</div>
+    <div class="paths" style="margin-top:0"><div class="path">Myocardial depression</div><div class="path">Peripheral vasodilatation</div></div><div class="arrow">&darr;</div>
+    <div class="step">Hypotension + bradycardia</div><div class="arrow">&darr;</div>
+    <div class="step hit">Arrhythmias &rarr; asystole &rarr; cardiovascular collapse</div>
+  </div>
+
+  <h3>3. Blood</h3>
+  <div class="flow">
+    <div class="step"><b>Prilocaine</b></div><div class="arrow">&darr;<small>aromatic ring metabolised</small></div>
+    <div class="step"><b>o-Toluidine</b></div><div class="arrow">&darr;</div>
+    <div class="step hit"><b>Methaemoglobinaemia</b><br><span style="color:var(--muted)">absorbed benzocaine can do it too</span></div>
+  </div>
+
+  <h3>4. Hypersensitivity</h3>
+  <div class="paths">
+    <div class="path"><span class="t">Esters</span><span class="hit">More common</span><span class="ar">&darr;</span>Cross-react with each other</div>
+    <div class="path win"><span class="t">Amides</span><span class="ok">Rare</span><span class="ar">&darr;</span>No cross-reaction</div>
+  </div>
+  <ul><li>Rash, angioedema, dermatitis, contact sensitisation, asthma, rarely anaphylaxis</li><li>Often caused by <b>methylparaben</b>, the preservative</li></ul>
+
+  <h3>5. Local</h3>
+  <div class="flow">
+    <div class="step">Injection may be painful &middot; tissue toxicity is low</div><div class="arrow">&darr;</div>
+    <div class="step">Wound healing sometimes delayed</div><div class="arrow">&darr;<small>vasoconstrictor adds damage</small></div>
+    <div class="step hit">Rarely necrosis &middot; <b>bupivacaine most irritant</b></div>
+  </div>
+
+  <h2>Precautions and interactions</h2>
+  <div class="flow">
+    <div class="step"><b>1.</b> Aspirate lightly before injecting &rarr; avoid intravascular injection</div><div class="arrow">&darr;</div>
+    <div class="step"><b>2.</b> Inject slowly; don't exceed the max safe dose, especially in <b>children</b></div><div class="arrow">&darr;</div>
+    <div class="step"><b>3.</b> Propranolol (likely other &beta;-blockers) &darr; hepatic blood flow &rarr; &darr; metabolism of lidocaine and other amides</div><div class="arrow">&darr;</div>
+    <div class="step hit"><b>4.</b> Avoid adrenaline-containing LA in the patients below</div>
+  </div>
+  <div class="drugs par">Ischaemic heart disease, Cardiac arrhythmia, Thyrotoxicosis, Uncontrolled hypertension, On β-blockers, On tricyclic antidepressants</div>
+  <ul>
+    <li>&beta;-blockers: unopposed &alpha; action &rarr; rise in BP</li>
+    <li>Tricyclics: block adrenaline uptake &rarr; potentiate it</li>
+  </ul>
+  <div class="clinic">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFCF94" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3c-2 0-3 2-3 4 0 3 1 5 2 8 .6 2 1 5 2.5 5 1.4 0 1.5-3 2.2-5 .3-.9.6-1.3 1.3-1.3s1 .4 1.3 1.3c.7 2 .8 5 2.2 5 1.5 0 1.9-3 2.5-5 1-3 2-5 2-8 0-2-1-4-3-4-1.8 0-2.6 1-5 1S8.8 3 7 3z"/></svg>
+    <div><b>For your clinic</b>Aspirate before every block. For a patient with heart disease, uncontrolled hypertension, thyrotoxicosis, or on propranolol or amitriptyline, use a cartridge without adrenaline.</div>
+  </div>
+
+  <div class="next"><button class="go main" data-jump="cards">Flip 14 flashcards</button><button class="go" data-jump="mcq">11 MCQs</button></div>
+</section>
+<section data-topic="actions" data-mode="cards" hidden></section>
+<section data-topic="actions" data-mode="mcq" hidden></section>
+
+<!-- ===================== REVIEW ===================== -->
+<section data-topic="review" hidden>
+  <div class="hero">
+    <div class="eyebrow">For the reviewer</div>
+    <h1>Your review</h1>
+    <p class="lede">Round 4. All 8 points from your review are done: dyclonine removed from amides, max doses removed, EMLA and cartridge kept as KDT, MI prophylaxis kept as your notes, adrenaline–hypersensitivity line removed. Anything else? Add it below and tap Copy feedback.</p>
+  </div>
+  <div id="reviewList"></div>
+  <h3>Anything else?</h3>
+  <textarea id="generalNote" placeholder="Wrong facts, missing topics, anything hard to read on your phone"></textarea>
+  <div class="copybox"><span class="status" id="copyStatus">No open questions</span><button class="btn primary" id="copyBtn">Copy feedback</button></div>
+  <pre class="fallback" id="copyFallback" hidden></pre>
+</section>
+
+</div></main>
+<footer class="gut"><div class="col">PharmDaily · Section 4 · Local anaesthetics review copy. Written from KD Tripathi's <i>Essentials of Medical Pharmacology</i> (chapter 27) and SRM Dental College lecture notes, rewritten for revision. For BDS and MBBS students.</div></footer>
+
+<script>
+(function(){
+[['(prefers-color-scheme: light)','#0B0C1A'],['(prefers-color-scheme: dark)','#0B0C1A']].forEach(function(t){
+  var m=document.createElement('meta');m.name='theme-color';m.media=t[0];m.content=t[1];document.head.appendChild(m)});
+
+document.querySelectorAll('.drugs').forEach(function(el){
+  if(el.children.length) return;
+  var items=el.textContent.split(',').map(function(s){return s.trim()}).filter(Boolean);
+  el.textContent='';
+  items.forEach(function(t){var s=document.createElement('span');s.className='rx';var i=document.createElement('span');i.textContent=t;s.appendChild(i);el.appendChild(s)});
+});
+
+var CARDS={
+basics:[
+["Define a local anaesthetic.","A drug that, applied topically or injected locally, causes reversible loss of sensation (especially pain) in a restricted area by blocking nerve conduction, without loss of consciousness or structural damage."],
+["Who isolated cocaine, and who first used it clinically?","Albert Niemann isolated it in 1860. Carl Koller used it for ocular surgery in 1884. Halstead introduced infiltration anaesthesia."],
+["Classify injectable LAs by potency.","Low potency, short: procaine, chloroprocaine. Intermediate: lidocaine, prilocaine. High potency, long: tetracaine, bupivacaine, ropivacaine, dibucaine."],
+["Soluble vs insoluble surface anaesthetics?","Soluble: cocaine, lidocaine, tetracaine, proparacaine. Insoluble: benzocaine, butylaminobenzoate, oxethazaine."],
+["Name the ester-linked LAs.","Cocaine, procaine, chloroprocaine, tetracaine, benzocaine."],
+["Name the amide-linked LAs.","Lidocaine, bupivacaine, dibucaine, prilocaine, ropivacaine."],
+["Four features of amides compared with esters?","More intense and longer action; bind α1-acid glycoprotein; not hydrolysed by plasma esterases; hypersensitivity rare, no cross-sensitivity with esters."],
+["Why are esters rarely used for infiltration or nerve block?","Short action, less intense analgesia, higher risk of hypersensitivity. Still used topically on mucous membranes."],
+["Name amide LAs besides lidocaine.","Bupivacaine, prilocaine, ropivacaine, dibucaine, mepivacaine, articaine, etidocaine, oxethazaine."],
+["Quick trick to tell an amide from an ester?","Amides have two i's in the name (lidocaine, bupivacaine); esters have one (procaine, cocaine)."],
+["Basic mechanism of LAs?","Block voltage-sensitive Na⁺ channels, reducing Na⁺ entry during the action potential upstroke until depolarisation fails to reach threshold: conduction block."],
+["Which LA form crosses the membrane, and which binds the receptor?","The unionised base (B) crosses; inside it reionises and the cation (BH⁺) binds the receptor."],
+["Where is the LA receptor?","Inside the Na⁺ channel, in its intracellular half: S6 segment of domain IV of the α subunit."],
+["Which channel states do LAs bind best, and with what result?","Activated and inactivated states. They stabilise the inactivated state, so the refractory period increases."],
+["What is frequency-dependent block?","Greater block at higher stimulation frequency. A resting nerve resists block."],
+["How does pKa affect onset?","Lower pKa means more base form at pH 7.4, so faster onset. Lidocaine (7.6–7.8) is fast; procaine, tetracaine, bupivacaine (8.1–8.9) are slow."],
+["Which LA is fast despite a high pKa?","Chloroprocaine (pKa 9.1)."],
+["LA potency corresponds to what property?","Lipid solubility of the base form."],
+["Order of block with an LA, and order of recovery?","Pain → cold → warmth → touch → deep pressure → motor. Recovery in the reverse order."],
+["Which fibre types are most and least susceptible to LAs?","Type C and B most, then small Aδ, then Aα, Aβ, Aγ least."],
+["Order of taste loss on the tongue?","Bitter first, then sweet and sour, salty last."],
+["Four reasons an LA fails in an infected tooth?","Low pH ionises more drug; more blood flow removes it; adrenaline works less; inflammatory products oppose it."]
+],
+drugs:[
+["Lignocaine: chemical class, potency group and year introduced?","Amide; intermediate potency; introduced 1948. The most widely used LA."],
+["Why is lignocaine called versatile?","It works both on the surface and by injection, and comes in many forms."],
+["Lignocaine vs procaine: onset of nerve block?","Lignocaine about 3 min; procaine up to 15 min. Lignocaine is also more intense and longer."],
+["Early central effects of lignocaine?","Depressant: drowsiness, mental clouding, dysphoria, altered taste, tinnitus."],
+["Effects of lignocaine overdose?","Muscle twitching, convulsions, cardiac arrhythmias, fall in BP, coma, respiratory arrest."],
+["Uses of lignocaine?","Surface, infiltration, nerve block, epidural, spinal, IV regional anaesthesia; dental anaesthesia; antiarrhythmic; patch for postherpetic neuralgia."],
+["Standard dental formulation of lignocaine?","2% lignocaine with adrenaline 1:80,000 in a cartridge (KDT: 1.5 ml)."],
+["What is the lignocaine transdermal patch used for?","5% patch, 3–4 times a day, for burning pain of postherpetic neuralgia and pain of bruises, bites, burns."],
+["Bupivacaine: class, potency and duration?","Amide; more lipophilic and 4–5× as potent as lignocaine; lasts 120–360 min."],
+["Why is 0.25% epidural bupivacaine popular in labour?","Analgesia without significant motor block, so the mother can bear down; distributes into tissues, so less reaches the foetus."],
+["Why isn't bupivacaine preferred for peripheral nerve block?","Slow onset of action."],
+["Which bupivacaine concentration is contraindicated for labour epidurals?","0.75%: it caused deaths from cardiac arrest."],
+["Antidote for bupivacaine cardiotoxicity?","IV lipid emulsion, which probably extracts bupivacaine from plasma and heart."],
+["Advantage of levobupivacaine?","S(−) enantiomer: equally potent but less cardiotoxic and less likely to cause seizures."],
+["Why does benzocaine cause no systemic toxicity on the surface?","Very low water solubility: it isn't significantly absorbed from mucosa or abraded skin."],
+["Dental and other uses of benzocaine?","20% gel on mouth ulcers and sore gums, lozenges for sore throat, before inserting instruments in anal canal or vagina, piles, wounds and burns."],
+["Adverse effect and interaction of benzocaine?","Methaemoglobinaemia if absorbed; as a PABA derivative it antagonises sulfonamides locally."],
+["Why does prilocaine cause methaemoglobinaemia?","Its aromatic ring is metabolised to o-toluidine."],
+["What is EMLA and how is it used?","Lignocaine 2.5% + prilocaine 2.5% eutectic cream under occlusion for 1 h; numbs intact skin to 5 mm for 1–2 h."],
+["Advantage of ropivacaine over bupivacaine?","Nearly as long-acting, less cardiotoxic; blocks Aδ and C more than Aβ; preferred for large-volume nerve blocks."],
+["Current status of cocaine?","First LA (ocular, 1884); no longer used medically, available only on the illicit market."],
+["Chloroprocaine compared with procaine?","Close congener with similar potency but faster onset; now disused and no longer marketed."],
+["Most potent, toxic and longest-acting LA, and its current use?","Dibucaine (cinchocaine): surface anaesthetic for ear canal and anal canal."],
+["Which LA works on the gastric mucosa, and why?","Oxethazaine: it ionises very little even at low pH."]
+],
+uses:[
+["Why is adrenaline combined with an LA?","Vasoconstriction slows diffusion and absorption: longer and more intense block, less systemic toxicity, bloodless field."],
+["Vasoconstrictors used with LAs?","Adrenaline, phenylephrine, felypressin, levonordefrin."],
+["Where is LA + adrenaline contraindicated?","End organs (fingers, toes, ear, nose, penis, scrotum), cardiovascular disease, hyperthyroidism, IV regional anaesthesia; also patients on β-blockers or tricyclics."],
+["In which techniques is adrenaline not used?","Surface anaesthesia (not effective) and IV regional anaesthesia (contraindicated)."],
+["Dental uses of infiltration anaesthesia?","Tooth extraction, root canal treatment, periodontal procedures, suturing, incision, excision."],
+["Name the maxillary dental nerve blocks.","Infraorbital, nasopalatine, greater palatine, anterior, middle and posterior superior alveolar."],
+["Name the mandibular dental nerve blocks.","Inferior alveolar, buccal, incisive."],
+["Field block vs nerve block?","Field: SC injection blocking all nerves to a field, less drug than infiltration. Nerve block: around a trunk or plexus, largest area per drug, muscles paralysed, lasts longest."],
+["Where is a spinal anaesthetic injected and where does it act?","Subarachnoid space at L2–3 or L3–4; acts on nerve roots of the cauda equina."],
+["Sympathetic and motor levels in spinal anaesthesia?","Sympathetic block ~2 segments above the sensory level; motor paralysis ~2 segments below."],
+["Main cause of hypotension in spinal anaesthesia, and its treatment?","Sympathetic block causing venous pooling and less venous return. Raise the foot end; ephedrine or mephentermine."],
+["Cause of post-spinal headache and how to reduce it?","CSF seepage; use a smaller-bore needle."],
+["Contraindications to spinal anaesthesia?","Hypotension, hypovolaemia, uncooperative patient, infants and children, bleeding diathesis, raised ICP, vertebral deformity, sepsis at the site."],
+["Which LAs give the best sensory–motor separation in epidurals?","0.25% bupivacaine and ropivacaine."],
+["Which LA is the gold standard for obstetric epidural analgesia (RCOG)?","Bupivacaine."],
+["Why is bupivacaine never used for Bier's block?","High cardiotoxicity if it escapes when the tourniquet is released."]
+],
+actions:[
+["Early signs of lidocaine overdose?","Circumoral numbness, abnormal tongue sensation, dizziness, blurred vision, tinnitus, then drowsiness, dysphoria, lethargy."],
+["Why does LA toxicity start with CNS stimulation?","LAs inhibit neurones; inhibitory neurones are inhibited first, so excitation appears."],
+["Drugs to prevent or treat LA-induced convulsions?","Diazepam or midazolam."],
+["Most cardiotoxic LA?","Bupivacaine: ventricular tachycardia, fibrillation, arrest."],
+["Which LA is used as an antiarrhythmic?","Lidocaine. Procainamide, the amide of procaine, is a class IA antiarrhythmic."],
+["Rank bupivacaine, lidocaine and prilocaine by vasodilatation.","Bupivacaine > lidocaine > prilocaine (least)."],
+["How are esters and amides metabolised?","Esters: plasma pseudocholinesterase and liver esterases. Amides: liver microsomes only (dealkylation, hydrolysis)."],
+["Why is the max safe dose lower in liver disease and the elderly?","Amides are metabolised only in the liver; lidocaine metabolism depends on hepatic blood flow."],
+["Which LA has the highest local tissue irritancy?","Bupivacaine."],
+["A common cause of allergy to LA solutions?","Methylparaben, the preservative."],
+["How does propranolol interact with lidocaine?","It reduces hepatic blood flow, so lidocaine and other amides are metabolised more slowly."],
+["Which LAs are most toxic after topical or regional use?","Those absorbed rapidly but metabolised slowly."],
+["Two phases of LA CNS toxicity?","Excitation (restlessness, tremors, convulsions) followed by depression (drowsiness, respiratory failure, coma)."],
+["Mechanism of LA-induced hypotension and bradycardia?","Myocardial depression and peripheral vasodilatation."]
+]};
+
+var MCQ={
+basics:[
+["Which is an amide local anaesthetic?",["Procaine","Tetracaine","Bupivacaine","Benzocaine"],2,"Amides: lidocaine, bupivacaine, dibucaine, prilocaine, ropivacaine."],
+["Which is an ester local anaesthetic?",["Lidocaine","Chloroprocaine","Ropivacaine","Prilocaine"],1,"Esters: cocaine, procaine, chloroprocaine, tetracaine, benzocaine."],
+["Amide LAs are metabolised mainly by:",["Plasma pseudocholinesterase","Liver microsomal enzymes","The kidney","Red cell esterases"],1,"By dealkylation and hydrolysis in liver microsomes only."],
+["Amide LAs bind in plasma mainly to:",["Albumin","α1-acid glycoprotein","Globulin","They are not bound"],1,"Procaine is negligibly bound; amides bind α1-acid glycoprotein."],
+["Which is an insoluble surface anaesthetic?",["Cocaine","Proparacaine","Benzocaine","Lidocaine"],2,"Insoluble: benzocaine, butylaminobenzoate, oxethazaine."],
+["A low-potency, short-acting injectable LA:",["Bupivacaine","Procaine","Dibucaine","Tetracaine"],1,"Low potency, short: procaine, chloroprocaine."],
+["Compared with general anaesthesia, local anaesthesia is:",["Essential for vital-function care","Preferred for major surgery","Preferred for minor surgery","Possible in a non-cooperative patient"],2,"LA can't be used for major surgery or in non-cooperative patients."],
+["Clinically useful local anaesthetics are:",["Weak acids","Weak bases","Strong bases","Neutral compounds"],1,"Weak bases with amphiphilic property."],
+["Local anaesthesia can be produced by:",["Ethyl chloride spray","Chlorpromazine infiltration","Propranolol injection","Quinine"],0,"Cooling with ice, CO₂ snow or ethyl chloride spray. The other drugs have LA activity but aren't used as LAs."],
+["Local anaesthetics block:",["K⁺ channels","Voltage-sensitive Na⁺ channels","Ca²⁺ channels","Cl⁻ channels"],1,"They raise the threshold for Na⁺ channel opening."],
+["The form of LA that binds the receptor is the:",["Unionised base","Cationic form","Both equally","Neither"],1,"The base crosses the membrane; the cation binds the receptor."],
+["The LA receptor is located:",["At the extracellular mouth","In the intracellular half (S6 of domain IV)","In the lipid bilayer","On the β subunit"],1,"Reached through the inner mouth of the channel."],
+["Which LA has rapid onset despite a high pKa?",["Procaine","Bupivacaine","Chloroprocaine","Tetracaine"],2,"Chloroprocaine, pKa 9.1."],
+["The first sensation lost with a local anaesthetic is:",["Touch","Deep pressure","Pain","Temperature"],2,"Pain → temperature → touch → deep pressure."],
+["LAs work poorly in inflamed tissue because:",["Tissue pH rises","More drug is in the ionised form","Blood flow falls","Adrenaline works better"],1,"Low pH ionises more LA, hindering diffusion into the axon."],
+["Cocaine was first used clinically for ocular surgery by:",["Albert Niemann","Carl Koller","Sigmund Freud","Halstead"],1,"Koller, 1884. Niemann isolated cocaine in 1860; Halstead introduced infiltration anaesthesia."],
+["The last function to be blocked by an LA is:",["Pain","Touch","Deep pressure","Motor"],3,"Pain → cold → warmth → touch → deep pressure → motor."],
+["Most susceptible to LA block:",["Type Aα fibres","Type Aβ fibres","Type C fibres","Type Aγ fibres"],2,"C and B > small Aδ > Aα, Aβ, Aγ."]
+],
+drugs:[
+["Lignocaine is classified as a(n):",["Ester, low potency","Amide, intermediate potency","Amide, high potency","Ester, high potency"],1,"Intermediate potency, short-to-intermediate duration."],
+["The early central effects of lignocaine are:",["Euphoria and excitement","Depressant: drowsiness, mental clouding","Hallucinations","Hypertension"],1,"Unlike cocaine, lignocaine's early CNS effects are depressant."],
+["Lignocaine transdermal patch is used for:",["Angina","Postherpetic neuralgia","Motion sickness","Smoking cessation"],1,"5% patch, also for bruises, bites, burns."],
+["Bupivacaine is NOT preferred for peripheral nerve block because of its:",["Short action","Slow onset","Low potency","Allergy"],1,"Slow onset; long action makes it good for epidural and spinal."],
+["Contraindicated for epidural use in labour:",["Bupivacaine 0.75%","Bupivacaine 0.25%","Ropivacaine 0.2%","Lidocaine 2%"],0,"Caused deaths from cardiac arrest."],
+["IV lipid emulsion reverses the cardiotoxicity of:",["Lidocaine","Bupivacaine","Prilocaine","Procaine"],1,"Probably by extracting lipophilic bupivacaine from plasma and heart."],
+["Less bupivacaine reaches the foetus during labour because it:",["Is rapidly hydrolysed","Distributes more into tissues than blood","Doesn't cross the placenta at all","Is given orally"],1,"High lipid solubility keeps it in tissues."],
+["Benzocaine causes no systemic toxicity on mucosa because it is:",["Rapidly metabolised","Poorly water-soluble and barely absorbed","Given with adrenaline","An amide"],1,"Very low aqueous solubility."],
+["Which LA can antagonise sulfonamides locally?",["Lidocaine","Benzocaine","Bupivacaine","Prilocaine"],1,"Benzocaine and butamben are PABA derivatives."],
+["Methaemoglobinaemia is caused by a metabolite of:",["Bupivacaine","Prilocaine","Ropivacaine","Lidocaine"],1,"o-Toluidine. Absorbed benzocaine can also cause it."],
+["EMLA contains:",["Lidocaine + bupivacaine","Lidocaine + prilocaine","Procaine + tetracaine","Benzocaine + butamben"],1,"2.5% each; anaesthetises intact skin."],
+["Preferred for large-volume nerve blocks because of lower cardiotoxicity:",["Bupivacaine","Ropivacaine","Dibucaine","Tetracaine"],1,"Ropivacaine."],
+["The most commonly used ophthalmic anaesthetic now:",["Cocaine","Tetracaine","Proparacaine","Dibucaine"],2,"Faster than tetracaine, minimal irritation."],
+["Which LA is no longer used medically?",["Lidocaine","Cocaine","Proparacaine","Bupivacaine"],1,"Available only on the illicit market."]
+],
+uses:[
+["Spinal anaesthesia is injected at:",["T12–L1","L2–3 or L3–4","S2–3","C7–T1"],1,"Below the lower end of the spinal cord."],
+["The primary site of action in spinal anaesthesia is:",["Spinal cord","Nerve roots of the cauda equina","Brain stem","Peripheral nerve endings"],1,"Not the cord itself."],
+["In spinal anaesthesia, sympathetic block extends:",["~2 segments above the sensory level","~2 segments below","To the same level","~5 segments below"],0,"Motor paralysis is ~2 segments below."],
+["Hypotension in spinal anaesthesia is mainly due to:",["Arteriolar dilatation","Venous pooling and reduced venous return","Direct myocardial depression","Histamine release"],1,"Raise the foot end; ephedrine or mephentermine."],
+["Post-spinal headache is due to:",["LA toxicity","Seepage of CSF","Hypotension","Adrenaline"],1,"Reduced by using a smaller-bore needle."],
+["Caudal anaesthesia is given through the:",["Sacral hiatus","L2–3 space","Thoracic epidural space","Foramen magnum"],0,"For pelvic and perineal anaesthesia."],
+["Which LA should NOT be used for Bier's block?",["Lidocaine","Bupivacaine","Prilocaine","None of these"],1,"Too cardiotoxic if it escapes on tourniquet release."],
+["Best regional technique for a healthy woman in labour:",["Spinal with 5% lidocaine","Lumbar epidural with 0.25% bupivacaine","Bier's block","Field block"],1,"Sensory block without motor block, so she can push."],
+["LA + adrenaline is contraindicated for:",["Infiltration for extraction","Ring block of a finger","Epidural","Field block of scalp"],1,"End organs with little collateral circulation risk gangrene."],
+["Adrenaline added to a surface anaesthetic:",["Doubles its duration","Is not effective","Causes necrosis","Speeds onset"],1,"Phenylephrine can prolong topical anaesthesia; adrenaline doesn't."],
+["Which is a mandibular dental nerve block?",["Nasopalatine","Greater palatine","Inferior alveolar","Infraorbital"],2,"Mandible: inferior alveolar, buccal, incisive."],
+["Felypressin is used with LAs as a:",["Preservative","Vasoconstrictor","Antidote","Buffer"],1,"Others: adrenaline, phenylephrine, levonordefrin."]
+],
+actions:[
+["The most cardiotoxic local anaesthetic is:",["Lidocaine","Bupivacaine","Prilocaine","Procaine"],1,"VT, VF and arrest reported."],
+["LA-induced convulsions are treated with:",["Phenytoin","Diazepam","Adrenaline","Atropine"],1,"Diazepam or midazolam."],
+["The least vasodilatory LA is:",["Bupivacaine","Lidocaine","Prilocaine","Procaine"],2,"Bupivacaine > lidocaine > prilocaine."],
+["Ester LAs are hydrolysed mainly by:",["Liver microsomes","Plasma pseudocholinesterase","MAO","The kidney"],1,"The rest by liver esterases."],
+["Blood levels of LA are highest after:",["Sciatic block","Intercostal block","Subcutaneous infiltration","Application to intact skin"],1,"Absorption follows blood flow at the site."],
+["A vasoconstrictor must NOT be added for:",["Dental infiltration","Ring block of a finger","Scalp field block","Epidural"],1,"Also avoid in toes, penis, pinna, hands, feet."],
+["Allergy to an LA solution is often due to:",["The LA itself","Methylparaben","Sodium chloride","Water"],1,"The preservative in some solutions."],
+["Adrenaline-containing LA should be avoided in a patient on:",["Paracetamol","Propranolol","Amoxicillin","Metronidazole"],1,"Unopposed α action raises BP."],
+["Before injecting an LA you should:",["Inject rapidly","Aspirate lightly","Warm the patient","Double the dose in children"],1,"To avoid intravascular injection."],
+["An early symptom of lidocaine overdose:",["Circumoral numbness","Convulsions","Coma","Respiratory arrest"],0,"Followed by drowsiness, then excitation and seizures."],
+["Methaemoglobinaemia is most common with:",["Lidocaine","Prilocaine","Bupivacaine","Procaine"],1,"Its aromatic ring is metabolised to o-toluidine."]
+]};
+
+var FLAGS=[];
+
+function buildCards(topic){
+  var sec=document.querySelector('[data-topic="'+topic+'"][data-mode="cards"]');
+  var list=CARDS[topic].slice(), i=0, marks=[];
+  sec.innerHTML='<div class="fc-top"><b style="color:var(--ink-strong)">Flashcards</b><span class="count"></span></div><div class="dots"></div>'+
+    '<button class="fc" aria-label="Flip card"><div class="fc-inner"><div class="face front"><span class="lab">Question</span><div class="q"></div><span class="hint">Tap to reveal</span></div><div class="face back"><span class="lab">Answer</span><div class="a"></div><span class="hint">Tap to flip back</span></div></div></button>'+
+    '<div class="fc-btns"><button class="btn" data-a="again">Again</button><button class="btn primary" data-a="got">Got it</button></div>'+
+    '<div style="display:flex;justify-content:space-between"><button class="btn quiet" data-a="prev">Previous</button><button class="btn quiet" data-a="shuffle">Shuffle</button></div>';
+  var fc=sec.querySelector('.fc'),q=sec.querySelector('.q'),a=sec.querySelector('.a'),c=sec.querySelector('.count'),dots=sec.querySelector('.dots');
+  function show(){fc.classList.remove('flip');q.textContent=list[i][0];a.textContent=list[i][1];c.textContent=(i+1)+' / '+list.length;
+    dots.innerHTML='';list.forEach(function(_,k){var d=document.createElement('i');if(marks[k])d.className=marks[k];else if(k===i)d.className='cur';dots.appendChild(d)})}
+  fc.addEventListener('click',function(){fc.classList.toggle('flip')});
+  sec.addEventListener('click',function(e){var b=e.target.closest('[data-a]');if(!b)return;var act=b.dataset.a;
+    if(act==='got'||act==='again'){marks[i]=act;i=(i+1)%list.length}
+    if(act==='prev')i=(i-1+list.length)%list.length;
+    if(act==='shuffle'){list=list.sort(function(){return Math.random()-.5});i=0;marks=[]}
+    show()});
+  show();
+}
+function buildMcq(topic){
+  var sec=document.querySelector('[data-topic="'+topic+'"][data-mode="mcq"]'),qs=MCQ[topic];
+  var head=document.createElement('div');head.className='mcq-head';
+  head.innerHTML='<b class="count">Score 0 / 0</b><button class="btn" data-reset>Start again</button>';sec.appendChild(head);
+  var box=document.createElement('div');sec.appendChild(box);
+  function render(){var answered=0,right=0;box.innerHTML='';head.querySelector('.count').textContent='Score 0 / 0';
+    qs.forEach(function(item,n){var d=document.createElement('div');d.className='q-card';
+      d.innerHTML='<div class="qn">Question '+(n+1)+' of '+qs.length+'</div><div class="qt"></div>';d.querySelector('.qt').textContent=item[0];
+      item[1].forEach(function(o,k){var b=document.createElement('button');b.className='opt';b.textContent=o;
+        b.addEventListener('click',function(){var opts=d.querySelectorAll('.opt');opts.forEach(function(x){x.disabled=true});
+          opts[item[2]].classList.add('right');if(k!==item[2])b.classList.add('wrong');else right++;answered++;
+          var e=document.createElement('div');e.className='expl';e.textContent=(k===item[2]?'Correct. ':'Not quite. ')+item[3];d.appendChild(e);
+          head.querySelector('.count').textContent='Score '+right+' / '+answered});d.appendChild(b)});
+      box.appendChild(d)})}
+  head.querySelector('[data-reset]').addEventListener('click',render);render();
+}
+['basics','drugs','uses','actions'].forEach(function(t){buildCards(t);buildMcq(t)});
+
+var KEY='pd-s4-la-review-v4',state={};
+try{state=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){state={}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+var rl=document.getElementById('reviewList');
+FLAGS.forEach(function(f,n){var s=state[f[0]]||{};
+  var d=document.createElement('div');d.className='ri';d.id=f[0];
+  d.innerHTML='<div class="where">Check '+(n+1)+' · '+f[1]+'</div><b></b><p></p><div class="choice"><button class="ok">Correct</button><button class="fix">Needs change</button></div><textarea placeholder="What should it say?"></textarea>';
+  d.querySelector('b').textContent=f[2];d.querySelector('p').textContent=f[3];
+  var ok=d.querySelector('.ok'),fix=d.querySelector('.fix'),ta=d.querySelector('textarea');ta.id='note-'+f[0];ta.value=s.note||'';
+  function paint(){ok.setAttribute('aria-pressed',s.v==='ok');fix.setAttribute('aria-pressed',s.v==='fix');status()}
+  ok.onclick=function(){s.v='ok';state[f[0]]=s;save();paint()};
+  fix.onclick=function(){s.v='fix';state[f[0]]=s;save();paint();ta.focus()};
+  ta.oninput=function(){s.note=ta.value;state[f[0]]=s;save()};
+  rl.appendChild(d);paint()});
+var gn=document.getElementById('generalNote');gn.value=state.general||'';gn.oninput=function(){state.general=gn.value;save()};
+function status(){var c=FLAGS.filter(function(f){return state[f[0]]&&state[f[0]].v}).length;
+  document.getElementById('copyStatus').textContent=c+' of '+FLAGS.length+' checked';
+  document.getElementById('flagCount').textContent=(FLAGS.length-c)?String(FLAGS.length-c):'✓'}
+document.getElementById('copyBtn').onclick=function(){
+  var lines=['PharmDaily Local Anaesthetics review (round 4)',''];
+  FLAGS.forEach(function(f,n){var s=state[f[0]]||{};lines.push((n+1)+'. '+f[2]+': '+(s.v==='ok'?'Correct':s.v==='fix'?'Needs change':'Not checked')+(s.note?' — '+s.note:''))});
+  if(state.general)lines.push('','Other notes: '+state.general);
+  var txt=lines.join('\n'),st=document.getElementById('copyStatus'),fb=document.getElementById('copyFallback');
+  function fallback(){fb.hidden=false;fb.textContent=txt;var r=document.createRange();r.selectNodeContents(fb);var sel=getSelection();sel.removeAllRanges();sel.addRange(r);st.textContent='Copy the selected text below'}
+  try{navigator.clipboard.writeText(txt).then(function(){st.textContent='Copied. Paste it in WhatsApp.'},fallback)}catch(e){fallback()}
+};
+
+
+var mode='notes',topic='basics',modes=document.getElementById('modes');
+function apply(){document.querySelectorAll('main section').forEach(function(s){var t=s.dataset.topic,m=s.dataset.mode;
+    s.hidden=topic==='review'?t!=='review':!(t===topic&&m===mode)});
+  modes.hidden=topic==='review';
+  document.querySelectorAll('.pills a').forEach(function(a){a.removeAttribute('aria-current');if(a.dataset.t===topic)a.setAttribute('aria-current','page')});
+  modes.querySelectorAll('button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.m===mode)})}
+function fromHash(){var h=location.hash.slice(1);topic=['basics','drugs','uses','actions','review'].indexOf(h)>-1?h:'basics';apply()}
+modes.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;mode=b.dataset.m;apply();window.scrollTo(0,0)});
+document.addEventListener('click',function(e){var j=e.target.closest('[data-jump]');if(j){mode=j.dataset.jump;apply();window.scrollTo(0,0);return}
+  var a=e.target.closest('[data-go]');if(!a)return;setTimeout(function(){var t=document.getElementById(a.dataset.go);if(t)t.scrollIntoView({behavior:'smooth'})},60)});
+window.addEventListener('hashchange',function(){fromHash();window.scrollTo(0,0)});
+fromHash();
+})();
+</script>

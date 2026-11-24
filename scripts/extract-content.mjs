@@ -26,6 +26,16 @@ const SOURCES = [
     topics: { nsaids: 'nsaids' },
   },
   {
+    file: 'pharmdaily-section6-local-anaesthetics-final.html',
+    section: 'section-6',
+    topics: {
+      basics: 'local-anaesthetics-basics',
+      drugs: 'local-anaesthetic-drugs',
+      uses: 'local-anaesthesia-techniques',
+      actions: 'local-anaesthetics-actions-adr',
+    },
+  },
+  {
     file: 'pharmdaily-section7-sedative-hypnotics-final.html',
     section: 'section-7',
     topics: { basics: 'sedative-hypnotics', bzd: 'benzodiazepines', others: 'z-compounds' },

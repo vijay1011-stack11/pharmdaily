@@ -1,0 +1,90 @@
+[
+  {
+    "q": "Define a local anaesthetic.",
+    "a": "A drug that, applied topically or injected locally, causes reversible loss of sensation (especially pain) in a restricted area by blocking nerve conduction, without loss of consciousness or structural damage."
+  },
+  {
+    "q": "Who isolated cocaine, and who first used it clinically?",
+    "a": "Albert Niemann isolated it in 1860. Carl Koller used it for ocular surgery in 1884. Halstead introduced infiltration anaesthesia."
+  },
+  {
+    "q": "Classify injectable LAs by potency.",
+    "a": "Low potency, short: procaine, chloroprocaine. Intermediate: lidocaine, prilocaine. High potency, long: tetracaine, bupivacaine, ropivacaine, dibucaine."
+  },
+  {
+    "q": "Soluble vs insoluble surface anaesthetics?",
+    "a": "Soluble: cocaine, lidocaine, tetracaine, proparacaine. Insoluble: benzocaine, butylaminobenzoate, oxethazaine."
+  },
+  {
+    "q": "Name the ester-linked LAs.",
+    "a": "Cocaine, procaine, chloroprocaine, tetracaine, benzocaine."
+  },
+  {
+    "q": "Name the amide-linked LAs.",
+    "a": "Lidocaine, bupivacaine, dibucaine, prilocaine, ropivacaine."
+  },
+  {
+    "q": "Four features of amides compared with esters?",
+    "a": "More intense and longer action; bind α1-acid glycoprotein; not hydrolysed by plasma esterases; hypersensitivity rare, no cross-sensitivity with esters."
+  },
+  {
+    "q": "Why are esters rarely used for infiltration or nerve block?",
+    "a": "Short action, less intense analgesia, higher risk of hypersensitivity. Still used topically on mucous membranes."
+  },
+  {
+    "q": "Name amide LAs besides lidocaine.",
+    "a": "Bupivacaine, prilocaine, ropivacaine, dibucaine, mepivacaine, articaine, etidocaine, oxethazaine."
+  },
+  {
+    "q": "Quick trick to tell an amide from an ester?",
+    "a": "Amides have two i's in the name (lidocaine, bupivacaine); esters have one (procaine, cocaine)."
+  },
+  {
+    "q": "Basic mechanism of LAs?",
+    "a": "Block voltage-sensitive Na⁺ channels, reducing Na⁺ entry during the action potential upstroke until depolarisation fails to reach threshold: conduction block."
+  },
+  {
+    "q": "Which LA form crosses the membrane, and which binds the receptor?",
+    "a": "The unionised base (B) crosses; inside it reionises and the cation (BH⁺) binds the receptor."
+  },
+  {
+    "q": "Where is the LA receptor?",
+    "a": "Inside the Na⁺ channel, in its intracellular half: S6 segment of domain IV of the α subunit."
+  },
+  {
+    "q": "Which channel states do LAs bind best, and with what result?",
+    "a": "Activated and inactivated states. They stabilise the inactivated state, so the refractory period increases."
+  },
+  {
+    "q": "What is frequency-dependent block?",
+    "a": "Greater block at higher stimulation frequency. A resting nerve resists block."
+  },
+  {
+    "q": "How does pKa affect onset?",
+    "a": "Lower pKa means more base form at pH 7.4, so faster onset. Lidocaine (7.6–7.8) is fast; procaine, tetracaine, bupivacaine (8.1–8.9) are slow."
+  },
+  {
+    "q": "Which LA is fast despite a high pKa?",
+    "a": "Chloroprocaine (pKa 9.1)."
+  },
+  {
+    "q": "LA potency corresponds to what property?",
+    "a": "Lipid solubility of the base form."
+  },
+  {
+    "q": "Order of block with an LA, and order of recovery?",
+    "a": "Pain → cold → warmth → touch → deep pressure → motor. Recovery in the reverse order."
+  },
+  {
+    "q": "Which fibre types are most and least susceptible to LAs?",
+    "a": "Type C and B most, then small Aδ, then Aα, Aβ, Aγ least."
+  },
+  {
+    "q": "Order of taste loss on the tongue?",
+    "a": "Bitter first, then sweet and sour, salty last."
+  },
+  {
+    "q": "Four reasons an LA fails in an infected tooth?",
+    "a": "Low pH ionises more drug; more blood flow removes it; adrenaline works less; inflammatory products oppose it."
+  }
+]
